@@ -1,0 +1,108 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Wed Oct 09 17:04:33 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000698
+                   .cinit    romdata   0x00034c    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/ALPCRBT       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00034d      
+                            0x002007    0x002007      
+            847 out of 1158 program addresses used, program memory utilization is 73%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x0000a4    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                Big_delay   0x0000a2    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                      LED   0x000050    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 Mainloop   0x00003b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               Send0_Loop   0x0002ef    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              Send0_Loopp   0x00030c    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             Send0_Loopp1   0x000328    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               Send1_Loop   0x0002d2    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                   Send_0   0x0002ed    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                   Send_1   0x0002d0    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 UMessen1   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_004C   0x00004c    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_004E   0x00004e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_0348   0x000348    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_034A   0x00034a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                  cmpower   0x000151    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                  cmqizil   0x0000e1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+            cmstrelkachap   0x0000a9    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              cmstrelkaon   0x000269    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             cmstrelkapas   0x000189    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+            cmstrelkatepa   0x0001c1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               cmvolumpas   0x0001f9    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              cmvolumtepa   0x000231    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 cmyashil   0x000119    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              delayy4.5ms   0x000343    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                delayy9ms   0x00030a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                     loop   0x00003f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                    power   0x000084    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                    qizil   0x00007a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              strelkachap   0x000089    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                strelkaon   0x00008e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               strelkapas   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              strelkatepa   0x00009d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 volumpas   0x000093    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                volumtepa   0x000098    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                    yarmi   0x0002a1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                   yashil   0x00007f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 Mainloop   0x00003b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 UMessen1   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                     loop   0x00003f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_004C   0x00004c    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_004E   0x00004e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                      LED   0x000050    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               strelkapas   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                    qizil   0x00007a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                   yashil   0x00007f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                    power   0x000084    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              strelkachap   0x000089    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                strelkaon   0x00008e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 volumpas   0x000093    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                volumtepa   0x000098    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              strelkatepa   0x00009d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                Big_delay   0x0000a2    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                BD_Loop94   0x0000a4    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+            cmstrelkachap   0x0000a9    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                  cmqizil   0x0000e1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                 cmyashil   0x000119    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                  cmpower   0x000151    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             cmstrelkapas   0x000189    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+            cmstrelkatepa   0x0001c1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               cmvolumpas   0x0001f9    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              cmvolumtepa   0x000231    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              cmstrelkaon   0x000269    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                    yarmi   0x0002a1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                   Send_1   0x0002d0    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               Send1_Loop   0x0002d2    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                   Send_0   0x0002ed    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+               Send0_Loop   0x0002ef    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+                delayy9ms   0x00030a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              Send0_Loopp   0x00030c    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             Send0_Loopp1   0x000328    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+              delayy4.5ms   0x000343    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_0348   0x000348    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+             _.org_0_034A   0x00034a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpCrBt.X\AlpCrBt.asm
+
+

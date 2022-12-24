@@ -1,0 +1,804 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V2.00 build -1524193055 
+                                                                                               Wed Aug 03 23:29:18 2022
+
+Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 20180527130849
+     1  0000                     
+      + 0000                     
+     2                           ; Version 2.00
+     3                           ; Generated 27/05/2018 GMT
+     4                           
+     5                           ; 
+     6                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+     7                           ; All rights reserved.
+     8                           ; 
+     9                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+                                 ip").
+    10                           ; 
+    11                           ; Redistribution and use in source and binary forms, with or without modification, are
+    12                           ; permitted provided that the following conditions are met:
+    13                           ; 
+    14                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+                                 t of
+    15                           ;        conditions and the following disclaimer.
+    16                           ; 
+    17                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+                                 list
+    18                           ;        of conditions and the following disclaimer in the documentation and/or other
+    19                           ;        materials provided with the distribution.
+    20                           ; 
+    21                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+                                 is
+    22                           ;        software without specific prior written permission.
+    23                           ; 
+    24                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+
+    25                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+                                 OR
+    26                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+                                 T,
+    27                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+                                 
+    28                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+                                 
+    29                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+                                 RICT
+    30                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+                                 SE OF
+    31                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    32                           ; 
+    33                           
+    34                           
+    35                           ; 
+    36                           ; Code-generator required, PIC12F675 Definitions
+    37                           ; 
+    38  0004                     fsr0 equ 04h
+    39  0004                     indf equ 00h
+    40  0000                     indf0 equ 00h
+    41  0000                     pc equ 02h
+    42  0002                     pcl equ 02h
+    43  0002                     pclath equ 0Ah
+    44  000A                     status equ 03h
+    45  0003                     
+     2                           opt pagewidth 120
+     3  0000                     byte0	macro	val
+     4                           	(getbyte(val,0))
+     5                           endm
+     6  0000                     byte1	macro	val
+     7                           	(getbyte(val,1))
+     8                           endm
+     9  0000                     byte2	macro	val
+    10                           	(getbyte(val,2))
+    11                           endm
+    12  0000                     byte3	macro	val
+    13                           	(getbyte(val,3))
+    14                           endm
+    15  0000                     byte4	macro	val
+    16                           	(getbyte(val,4))
+    17                           endm
+    18  0000                     byte5	macro	val
+    19                           	(getbyte(val,5))
+    20                           endm
+    21  0000                     byte6	macro	val
+    22                           	(getbyte(val,6))
+    23                           endm
+    24  0000                     byte7	macro	val
+    25                           	(getbyte(val,7))
+    26                           endm
+    27  0000                     getword	macro	val,pos
+    28                           	(((val) >> (8 * pos)) and 0xffff)
+    29                           endm
+    30  0000                     word0	macro	val
+    31                           	(getword(val,0))
+    32                           endm
+    33  0000                     word1	macro	val
+    34                           	(getword(val,2))
+    35                           endm
+    36  0000                     word2	macro	val
+    37                           	(getword(val,4))
+    38                           endm
+    39  0000                     word3	macro	val
+    40                           	(getword(val,6))
+    41                           endm
+    42  0000                     gettword	macro	val,pos
+    43                           	(((val) >> (8 * pos)) and 0xffffff)
+    44                           endm
+    45  0000                     tword0	macro	val
+    46                           	(gettword(val,0))
+    47                           endm
+    48  0000                     tword1	macro	val
+    49                           	(gettword(val,3))
+    50                           endm
+    51  0000                     tword2	macro	val
+    52                           	(gettword(val,6))
+    53                           endm
+    54  0000                     getdword	macro	val,pos
+    55                           	(((val) >> (8 * pos)) and 0xffffffff)
+    56                           endm
+    57  0000                     dword0	macro	val
+    58                           	(getdword(val,0))
+    59                           endm
+    60  0000                     dword1	macro	val
+    61                           	(getdword(val,4))
+    62                           endm
+    63  0000                     clrc	macro
+    64                           	bcf	3,0
+    65                           	endm
+    66  0000                     clrz	macro
+    67                           	bcf	3,2
+    68                           	endm
+    69  0000                     setc	macro
+    70                           	bsf	3,0
+    71                           	endm
+    72  0000                     setz	macro
+    73                           	bsf	3,2
+    74                           	endm
+    75  0000                     skipc	macro
+    76                           	btfss	3,0
+    77                           	endm
+    78  0000                     skipz	macro
+    79                           	btfss	3,2
+    80                           	endm
+    81  0000                     skipnc	macro
+    82                           	btfsc	3,0
+    83                           	endm
+    84  0000                     skipnz	macro
+    85                           	btfsc	3,2
+    86                           	endm
+    87  0000                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    88                           INDF equ 00h ;# 
+    89  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    90                           TMR0 equ 01h ;# 
+    91  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    92                           PCL equ 02h ;# 
+    93  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    94                           STATUS equ 03h ;# 
+    95  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    96                           FSR equ 04h ;# 
+    97  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    98                           GPIO equ 05h ;# 
+    99  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   100                           PCLATH equ 0Ah ;# 
+   101  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   102                           INTCON equ 0Bh ;# 
+   103  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   104                           PIR1 equ 0Ch ;# 
+   105  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   106                           TMR1 equ 0Eh ;# 
+   107  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   108                           TMR1L equ 0Eh ;# 
+   109  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   110                           TMR1H equ 0Fh ;# 
+   111  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   112                           T1CON equ 010h ;# 
+   113  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   114                           CMCON equ 019h ;# 
+   115  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   116                           ADRESH equ 01Eh ;# 
+   117  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   118                           ADCON0 equ 01Fh ;# 
+   119  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   120                           OPTION_REG equ 081h ;# 
+   121  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   122                           TRISIO equ 085h ;# 
+   123  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   124                           PIE1 equ 08Ch ;# 
+   125  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   126                           PCON equ 08Eh ;# 
+   127  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   128                           OSCCAL equ 090h ;# 
+   129  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   130                           WPU equ 095h ;# 
+   131  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   132                           IOC equ 096h ;# 
+   133  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   134                           IOCB equ 096h ;# 
+   135  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   136                           VRCON equ 099h ;# 
+   137  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   138                           EEDATA equ 09Ah ;# 
+   139  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   140                           EEDAT equ 09Ah ;# 
+   141  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   142                           EEADR equ 09Bh ;# 
+   143  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   144                           EECON1 equ 09Ch ;# 
+   145  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   146                           EECON2 equ 09Dh ;# 
+   147  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   148                           ADRESL equ 09Eh ;# 
+   149  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   150                           ANSEL equ 09Fh ;# 
+   151  009F                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   152                           INDF equ 00h ;# 
+   153  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   154                           TMR0 equ 01h ;# 
+   155  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   156                           PCL equ 02h ;# 
+   157  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   158                           STATUS equ 03h ;# 
+   159  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   160                           FSR equ 04h ;# 
+   161  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   162                           GPIO equ 05h ;# 
+   163  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   164                           PCLATH equ 0Ah ;# 
+   165  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   166                           INTCON equ 0Bh ;# 
+   167  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   168                           PIR1 equ 0Ch ;# 
+   169  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   170                           TMR1 equ 0Eh ;# 
+   171  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   172                           TMR1L equ 0Eh ;# 
+   173  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   174                           TMR1H equ 0Fh ;# 
+   175  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   176                           T1CON equ 010h ;# 
+   177  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   178                           CMCON equ 019h ;# 
+   179  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   180                           ADRESH equ 01Eh ;# 
+   181  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   182                           ADCON0 equ 01Fh ;# 
+   183  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   184                           OPTION_REG equ 081h ;# 
+   185  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   186                           TRISIO equ 085h ;# 
+   187  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   188                           PIE1 equ 08Ch ;# 
+   189  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   190                           PCON equ 08Eh ;# 
+   191  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   192                           OSCCAL equ 090h ;# 
+   193  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   194                           WPU equ 095h ;# 
+   195  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   196                           IOC equ 096h ;# 
+   197  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   198                           IOCB equ 096h ;# 
+   199  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   200                           VRCON equ 099h ;# 
+   201  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   202                           EEDATA equ 09Ah ;# 
+   203  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   204                           EEDAT equ 09Ah ;# 
+   205  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   206                           EEADR equ 09Bh ;# 
+   207  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   208                           EECON1 equ 09Ch ;# 
+   209  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   210                           EECON2 equ 09Dh ;# 
+   211  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   212                           ADRESL equ 09Eh ;# 
+   213  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   214                           ANSEL equ 09Fh ;# 
+   215  009F                     	FNROOT	_main
+   216                           	global	_y
+   217                           psect	idataBANK0,class=CODE,space=0,delta=2,noexec
+   218                           global __pidataBANK0
+   219                           __pidataBANK0:
+   220  0394                     	file	"Bakavoy.c"
+   221                           	line	16
+   222                           
+   223                           ;initializer for _y
+   224                           	retlw	01h
+   225  0394  3401               	global	_x
+   226                           	global	_GPIO
+   227                           _GPIO	set	0x5
+   228  0005                     	global	_GPIO3
+   229                           _GPIO3	set	0x2B
+   230  002B                     	global	_TRISIO
+   231                           _TRISIO	set	0x85
+   232  0085                     ; #config settings
+   233                           global __CFG_FOSC$INTRCIO
+   234                           __CFG_FOSC$INTRCIO equ 0x0
+   235  0000                     global __CFG_WDTE$OFF
+   236                           __CFG_WDTE$OFF equ 0x0
+   237  0000                     global __CFG_PWRTE$OFF
+   238                           __CFG_PWRTE$OFF equ 0x0
+   239  0000                     global __CFG_MCLRE$OFF
+   240                           __CFG_MCLRE$OFF equ 0x0
+   241  0000                     global __CFG_BOREN$OFF
+   242                           __CFG_BOREN$OFF equ 0x0
+   243  0000                     global __CFG_CP$ON
+   244                           __CFG_CP$ON equ 0x0
+   245  0000                     global __CFG_CPD$ON
+   246                           __CFG_CPD$ON equ 0x0
+   247  0000                     	file	"C:\Users\User\AppData\Local\Temp\si28."
+   248                           	line	#
+   249                           psect cinit,class=CODE,delta=2
+   250                           global start_initialization
+   251                           start_initialization:
+   252  03FA                     
+   253                           global __initialization
+   254                           __initialization:
+   255  03FA                     psect	bssBANK0,class=BANK0,space=1,noexec
+   256                           global __pbssBANK0
+   257                           __pbssBANK0:
+   258  0023                     _x:
+   259  0023                            ds      1
+   260  0023                     
+   261                           psect	dataBANK0,class=BANK0,space=1,noexec
+   262                           global __pdataBANK0
+   263                           __pdataBANK0:
+   264  0024                     	file	"Bakavoy.c"
+   265                           	line	16
+   266                           _y:
+   267  0024                            ds      1
+   268  0024                     
+   269                           	file	"C:\Users\User\AppData\Local\Temp\si28."
+   270                           	line	#
+   271                           ; Initialize objects allocated to BANK0
+   272                           	global __pidataBANK0
+   273                           psect cinit,class=CODE,delta=2,merge=1
+   274                           	fcall	__pidataBANK0+0		;fetch initializer
+   275  03FA  2394               	movwf	__pdataBANK0+0&07fh		
+   276  03FB  00A4               	line	#
+   277                           ; Clear objects allocated to BANK0
+   278                           psect cinit,class=CODE,delta=2,merge=1
+   279                           	clrf	((__pbssBANK0)+0)&07Fh
+   280  03FC  01A3               psect cinit,class=CODE,delta=2,merge=1
+   281                           global end_of_initialization,__end_of__initialization
+   282                           
+   283                           ;End of C runtime variable initialization code
+   284                           
+   285                           end_of_initialization:
+   286  03FD                     __end_of__initialization:
+   287  03FD                     clrf status
+   288  03FD  0183               ljmp _main	;jump to C main() function
+   289  03FE  2B95               psect	cstackBANK0,class=BANK0,space=1,noexec
+   290                           global __pcstackBANK0
+   291                           __pcstackBANK0:
+   292  0020                     ?_main:	; 1 bytes @ 0x0
+   293  0020                     ??_main:	; 1 bytes @ 0x0
+   294  0020                     	ds	3
+   295  0020                     ;!
+   296                           ;!Data Sizes:
+   297                           ;!    Strings     0
+   298                           ;!    Constant    0
+   299                           ;!    Data        1
+   300                           ;!    BSS         1
+   301                           ;!    Persistent  0
+   302                           ;!    Stack       0
+   303                           ;!
+   304                           ;!Auto Spaces:
+   305                           ;!    Space          Size  Autos    Used
+   306                           ;!    COMMON            0      0       0
+   307                           ;!    BANK0            62      3       5
+   308                           
+   309                           ;!
+   310                           ;!Pointer List with Targets:
+   311                           ;!
+   312                           ;!    None.
+   313                           
+   314                           
+   315                           ;!
+   316                           ;!Critical Paths under _main in COMMON
+   317                           ;!
+   318                           ;!    None.
+   319                           ;!
+   320                           ;!Critical Paths under _main in BANK0
+   321                           ;!
+   322                           ;!    None.
+   323                           
+   324 ;;
+   325 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   326 ;;
+   327                           
+   328                           ;!
+   329                           ;!Call Graph Tables:
+   330                           ;!
+   331                           ;! ---------------------------------------------------------------------------------
+   332                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   333                           ;! ---------------------------------------------------------------------------------
+   334                           ;! (0) _main                                                 3     3      0       0
+   335                           ;!                                              0 BANK0      3     3      0
+   336                           ;! ---------------------------------------------------------------------------------
+   337                           ;! Estimated maximum stack depth 0
+   338                           ;! ---------------------------------------------------------------------------------
+   339                           ;!
+   340                           ;! Call Graph Graphs:
+   341                           ;!
+   342                           ;! _main (ROOT)
+   343                           ;!
+   344                           
+   345                           ;! Address spaces:
+   346                           
+   347                           ;!Name               Size   Autos  Total    Cost      Usage
+   348                           ;!SFR1                 0      0       0       2        0.0%
+   349                           ;!BITSFR1              0      0       0       2        0.0%
+   350                           ;!BANK0               3E      3       5       4        8.1%
+   351                           ;!BITBANK0            3E      0       0       3        0.0%
+   352                           ;!SFR0                 0      0       0       1        0.0%
+   353                           ;!BITSFR0              0      0       0       1        0.0%
+   354                           ;!COMMON               0      0       0       1        0.0%
+   355                           ;!BITCOMMON            0      0       0       0        0.0%
+   356                           ;!CODE                 0      0       0       0        0.0%
+   357                           ;!DATA                 0      0       5       6        0.0%
+   358                           ;!ABS                  0      0       5       5        0.0%
+   359                           ;!NULL                 0      0       0       0        0.0%
+   360                           ;!STACK                0      0       0       2        0.0%
+   361                           ;!EEDATA              80      0       0       0        0.0%
+   362                           
+   363                           	global	_main
+   364                           
+   365 ;; *************** function _main *****************
+   366 ;; Defined at:
+   367 ;;		line 19 in file "Bakavoy.c"
+   368 ;; Parameters:    Size  Location     Type
+   369 ;;		None
+   370 ;; Auto vars:     Size  Location     Type
+   371 ;;		None
+   372 ;; Return value:  Size  Location     Type
+   373 ;;                  1    wreg      void 
+   374 ;; Registers used:
+   375 ;;		wreg, status,2, status,0
+   376 ;; Tracked objects:
+   377 ;;		On entry : B00/0
+   378 ;;		On exit  : 0/0
+   379 ;;		Unchanged: 0/0
+   380 ;; Data sizes:     COMMON   BANK0
+   381 ;;      Params:         0       0
+   382 ;;      Locals:         0       0
+   383 ;;      Temps:          0       3
+   384 ;;      Totals:         0       3
+   385 ;;Total ram usage:        3 bytes
+   386 ;; This function calls:
+   387 ;;		Nothing
+   388 ;; This function is called by:
+   389 ;;		Startup code after reset
+   390 ;; This function uses a non-reentrant model
+   391 ;;
+   392                           psect	maintext,global,class=CODE,delta=2,split=1,group=0
+   393                           	file	"Bakavoy.c"
+   394                           	line	19
+   395                           global __pmaintext
+   396                           __pmaintext:	;psect for function _main
+   397  0395                     psect	maintext
+   398                           	file	"Bakavoy.c"
+   399                           	line	19
+   400                           	global	__size_of_main
+   401                           	__size_of_main	equ	__end_of_main-_main
+   402  0065                     	
+   403                           _main:	
+   404  0395                     ;incstack = 0
+   405                           	opt	stack 8
+   406                           ; Regs used in _main: [wreg+status,2+status,0]
+   407                           	line	20
+   408                           	
+   409                           l633:	
+   410  0395                     ;Bakavoy.c: 20: 
+   411                           	movlw	low(08h)
+   412  0395  3008               	bsf	status, 5	;RP0=1, select bank1
+   413  0396  1683               	movwf	(133)^080h	;volatile
+   414  0397  0085               	line	21
+   415                           	
+   416                           l635:	
+   417  0398                     ;Bakavoy.c: 21:             }
+   418                           	bcf	status, 5	;RP0=0, select bank0
+   419  0398  1283               	clrf	(5)	;volatile
+   420  0399  0185               	goto	l637
+   421  039A  2B9B               	line	23
+   422                           ;Bakavoy.c: 23: 
+   423                           	
+   424                           l17:	
+   425  039B                     	line	25
+   426                           	
+   427                           l637:	
+   428  039B                     ;Bakavoy.c: 24:         };Bakavoy.c: 25:         else{
+   429                           	btfss	(43/8),(43)&7	;volatile
+   430  039B  1D85               	goto	u61
+   431  039C  2B9E               	goto	u60
+   432  039D  2B9F               u61:
+   433  039E                     	goto	l653
+   434  039E  2BCD               u60:
+   435  039F                     	line	26
+   436                           	
+   437                           l639:	
+   438  039F                     ;Bakavoy.c: 26:             _delay((unsigned long)((10)*(4000000/4000.0)));
+   439                           	opt asmopt_push
+   440                           opt asmopt_off
+   441                           movlw  12
+   442  039F  300C               movwf	((??_main+0)+0+2),f
+   443  03A0  00A2               movlw	120
+   444  03A1  3078               movwf	((??_main+0)+0+1),f
+   445  03A2  00A1               	movlw	6
+   446  03A3  3006               movwf	((??_main+0)+0),f
+   447  03A4  00A0               	u117:
+   448  03A5                     decfsz	((??_main+0)+0),f
+   449  03A5  0BA0               	goto	u117
+   450  03A6  2BA5               	decfsz	((??_main+0)+0+1),f
+   451  03A7  0BA1               	goto	u117
+   452  03A8  2BA5               	decfsz	((??_main+0)+0+2),f
+   453  03A9  0BA2               	goto	u117
+   454  03AA  2BA5               	nop
+   455  03AB  0000               opt asmopt_pop
+   456                           
+   457                           	line	27
+   458                           	
+   459                           l641:	
+   460  03AC                     ;Bakavoy.c: 27:             if(y==0){
+   461                           	bcf	status, 5	;RP0=0, select bank0
+   462  03AC  1283               	movf	((_x)),w
+   463  03AD  0823               	btfss	status,2
+   464  03AE  1D03               	goto	u71
+   465  03AF  2BB1               	goto	u70
+   466  03B0  2BB2               u71:
+   467  03B1                     	goto	l637
+   468  03B1  2B9B               u70:
+   469  03B2                     	line	28
+   470                           	
+   471                           l643:	
+   472  03B2                     ;Bakavoy.c: 28:                 if(GPIO3 == 0){
+   473                           	btfss	(43/8),(43)&7	;volatile
+   474  03B2  1D85               	goto	u81
+   475  03B3  2BB5               	goto	u80
+   476  03B4  2BB6               u81:
+   477  03B5                     	goto	l637
+   478  03B5  2B9B               u80:
+   479  03B6                     	line	29
+   480                           	
+   481                           l645:	
+   482  03B6                     ;Bakavoy.c: 29:                     GPIO = (1<<0);
+   483                           	movlw	low(02h)
+   484  03B6  3002               	movwf	(5)	;volatile
+   485  03B7  0085               	line	30
+   486                           ;Bakavoy.c: 30:                     _delay((unsigned long)((2220)*(4000000/4000.0)));
+   487                           	opt asmopt_push
+   488                           opt asmopt_off
+   489                           movlw  12
+   490  03B8  300C               movwf	((??_main+0)+0+2),f
+   491  03B9  00A2               movlw	68
+   492  03BA  3044               movwf	((??_main+0)+0+1),f
+   493  03BB  00A1               	movlw	19
+   494  03BC  3013               movwf	((??_main+0)+0),f
+   495  03BD  00A0               	u127:
+   496  03BE                     decfsz	((??_main+0)+0),f
+   497  03BE  0BA0               	goto	u127
+   498  03BF  2BBE               	decfsz	((??_main+0)+0+1),f
+   499  03C0  0BA1               	goto	u127
+   500  03C1  2BBE               	decfsz	((??_main+0)+0+2),f
+   501  03C2  0BA2               	goto	u127
+   502  03C3  2BBE               	nop2
+   503  03C4  2BC5               opt asmopt_pop
+   504                           
+   505                           	line	31
+   506                           	
+   507                           l647:	
+   508  03C5                     ;Bakavoy.c: 31:                     GPIO = (0<<0);
+   509                           	bcf	status, 5	;RP0=0, select bank0
+   510  03C5  1283               	clrf	(5)	;volatile
+   511  03C6  0185               	line	32
+   512                           	
+   513                           l649:	
+   514  03C7                     ;Bakavoy.c: 32:                     y=1;
+   515                           	clrf	(_x)
+   516  03C7  01A3               	incf	(_x),f
+   517  03C8  0AA3               	line	33
+   518                           	
+   519                           l651:	
+   520  03C9                     ;Bakavoy.c: 33:                     x=0;
+   521                           	clrf	(_y)
+   522  03C9  01A4               	goto	l637
+   523  03CA  2B9B               	line	34
+   524                           ;Bakavoy.c: 34:             }
+   525                           	
+   526                           l20:	
+   527  03CB                     	goto	l637
+   528  03CB  2B9B               	line	36
+   529                           ;Bakavoy.c: 36:             }
+   530                           	
+   531                           l19:	
+   532  03CC                     	line	39
+   533                           ;Bakavoy.c: 39: 
+   534                           	goto	l637
+   535  03CC  2B9B               	line	40
+   536                           ;Bakavoy.c: 40: 
+   537                           	
+   538                           l18:	
+   539  03CD                     	line	41
+   540                           	
+   541                           l653:	
+   542  03CD                     ;Bakavoy.c: 41: 
+   543                           	opt asmopt_push
+   544                           opt asmopt_off
+   545                           movlw	13
+   546  03CD  300D               movwf	((??_main+0)+0+1),f
+   547  03CE  00A1               	movlw	251
+   548  03CF  30FB               movwf	((??_main+0)+0),f
+   549  03D0  00A0               	u137:
+   550  03D1                     decfsz	((??_main+0)+0),f
+   551  03D1  0BA0               	goto	u137
+   552  03D2  2BD1               	decfsz	((??_main+0)+0+1),f
+   553  03D3  0BA1               	goto	u137
+   554  03D4  2BD1               	nop2
+   555  03D5  2BD6               opt asmopt_pop
+   556                           
+   557                           	line	42
+   558                           	
+   559                           l655:	
+   560  03D6                     ;Bakavoy.c: 42: 
+   561                           	bcf	status, 5	;RP0=0, select bank0
+   562  03D6  1283               	movf	((_y)),w
+   563  03D7  0824               	btfss	status,2
+   564  03D8  1D03               	goto	u91
+   565  03D9  2BDB               	goto	u90
+   566  03DA  2BDC               u91:
+   567  03DB                     	goto	l637
+   568  03DB  2B9B               u90:
+   569  03DC                     	line	43
+   570                           	
+   571                           l657:	
+   572  03DC                     ;Bakavoy.c: 43:     }
+   573                           	btfsc	(43/8),(43)&7	;volatile
+   574  03DC  1985               	goto	u101
+   575  03DD  2BDF               	goto	u100
+   576  03DE  2BE0               u101:
+   577  03DF                     	goto	l637
+   578  03DF  2B9B               u100:
+   579  03E0                     	line	44
+   580                           	
+   581                           l659:	
+   582  03E0                     ;Bakavoy.c: 44:     return;
+   583                           	movlw	low(01h)
+   584  03E0  3001               	movwf	(5)	;volatile
+   585  03E1  0085               	line	45
+   586                           ;Bakavoy.c: 45: }
+   587                           	opt asmopt_push
+   588                           opt asmopt_off
+   589                           movlw  12
+   590  03E2  300C               movwf	((??_main+0)+0+2),f
+   591  03E3  00A2               movlw	68
+   592  03E4  3044               movwf	((??_main+0)+0+1),f
+   593  03E5  00A1               	movlw	19
+   594  03E6  3013               movwf	((??_main+0)+0),f
+   595  03E7  00A0               	u147:
+   596  03E8                     decfsz	((??_main+0)+0),f
+   597  03E8  0BA0               	goto	u147
+   598  03E9  2BE8               	decfsz	((??_main+0)+0+1),f
+   599  03EA  0BA1               	goto	u147
+   600  03EB  2BE8               	decfsz	((??_main+0)+0+2),f
+   601  03EC  0BA2               	goto	u147
+   602  03ED  2BE8               	nop2
+   603  03EE  2BEF               opt asmopt_pop
+   604                           
+   605                           	line	46
+   606                           	
+   607                           l661:	
+   608  03EF                     	bcf	status, 5	;RP0=0, select bank0
+   609  03EF  1283               	clrf	(5)	;volatile
+   610  03F0  0185               	line	47
+   611                           	
+   612                           l663:	
+   613  03F1                     	clrf	(_y)
+   614  03F1  01A4               	incf	(_y),f
+   615  03F2  0AA4               	line	48
+   616                           	
+   617                           l665:	
+   618  03F3                     	clrf	(_x)
+   619  03F3  01A3               	goto	l637
+   620  03F4  2B9B               	line	49
+   621                           	
+   622                           l23:	
+   623  03F5                     	goto	l637
+   624  03F5  2B9B               	line	51
+   625                           	
+   626                           l22:	
+   627  03F6                     	goto	l637
+   628  03F6  2B9B               	line	53
+   629                           	
+   630                           l21:	
+   631  03F7                     	goto	l637
+   632  03F7  2B9B               	line	58
+   633                           	
+   634                           l24:	
+   635  03F8                     	goto	l637
+   636  03F8  2B9B               	
+   637                           l25:	
+   638  03F9                     	line	60
+   639                           	
+   640                           l26:	
+   641  03F9                     	global	start
+   642                           	ljmp	start
+   643  03F9  2800               	opt stack 0
+   644                           GLOBAL	__end_of_main
+   645                           	__end_of_main:
+   646  03FA                     	signat	_main,89
+   647                           global	___latbits
+   648                           ___latbits	equ	0
+   649  0000                     	global	btemp
+   650                           	btemp set 05Eh
+   651  005E                     
+   652                           	DABS	1,94,2	;btemp
+   653                           	global	wtemp0
+   654                           	wtemp0 set btemp+0
+   655  005E                     	end
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        1
+    BSS         1
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62      3       5
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 3     3      0       0
+                                              0 BANK0      3     3      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 0
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               3E      3       5       4        8.1%
+BITBANK0            3E      0       0       3        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITCOMMON            0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0       5       6        0.0%
+ABS                  0      0       5       5        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA              80      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.00 build -1524193055 
+Symbol Table                                                                                   Wed Aug 03 23:29:18 2022
+
+             __CFG_CP$ON 0000                        _x 0023                        _y 0024  
+                     l20 03CB                       l21 03F7                       l22 03F6  
+                     l23 03F5                       l24 03F8                       l25 03F9  
+                     l17 039B                       l26 03F9                       l18 03CD  
+                     l19 03CC              __CFG_CPD$ON 0000                       u60 039F  
+                     u61 039E                       u70 03B2                       u71 03B1  
+                     u80 03B6                       u81 03B5                       u90 03DC  
+                     u91 03DB                      l641 03AC                      l633 0395  
+                    l651 03C9                      l643 03B2                      l635 0398  
+                    l661 03EF                      l645 03B6                      l653 03CD  
+                    l637 039B                      l663 03F1                      l655 03D6  
+                    l647 03C5                      l639 039F                      l665 03F3  
+                    l657 03DC                      l649 03C7                      l659 03E0  
+                    u100 03E0                      u101 03DF                      u117 03A5  
+                    u127 03BE                      u137 03D1                      u147 03E8  
+                   _GPIO 0005                     _main 0395                     btemp 005E  
+                   start 0000                    ?_main 0020            __CFG_WDTE$OFF 0000  
+                  _GPIO3 002B           __CFG_BOREN$OFF 0000                    status 0003  
+                  wtemp0 005E           __CFG_MCLRE$OFF 0000          __initialization 03FA  
+           __end_of_main 03FA                   ??_main 0020                   _TRISIO 0085  
+         __CFG_PWRTE$OFF 0000  __end_of__initialization 03FD             __pidataBANK0 0394  
+             __pbssBANK0 0023               __pmaintext 0395     end_of_initialization 03FD  
+    start_initialization 03FA              __pdataBANK0 0024                ___latbits 0000  
+          __pcstackBANK0 0020            __size_of_main 0065        __CFG_FOSC$INTRCIO 0000  

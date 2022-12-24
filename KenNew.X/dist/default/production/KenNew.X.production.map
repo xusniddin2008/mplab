@@ -1,0 +1,146 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Wed Sep 25 17:57:42 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x0004b8
+                   .cinit    romdata   0x00025c    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/KENNEW.       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00025d      
+                            0x002007    0x002007      
+            607 out of 1158 program addresses used, program memory utilization is 52%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x000070    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                Big_delay   0x00006e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                      LED   0x000040    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 Mainloop   0x00002b    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               Send0_Loop   0x0001f1    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              Send0_Loopp   0x00020e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             Send0_Loopp1   0x00022a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               Send1_Loop   0x0001d4    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   Send_0   0x0001ef    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   Send_1   0x0001d2    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 UMessen1   0x00002e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_003C   0x00003c    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_003E   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_024A   0x00024a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_024C   0x00024c    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_0255   0x000255    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_0257   0x000257    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_0259   0x000259    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                       bt   0x00019d    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              cmequalizer   0x00010a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   cmmute   0x0000c1    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmmute1   0x0001af    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmpause   0x0000ea    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmpower   0x0000fa    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmqizil   0x0000af    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            cmstrelkachap   0x000144    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              cmstrelkaon   0x000154    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             cmstrelkapas   0x00009f    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            cmstrelkatepa   0x000184    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               cmvolumpas   0x000164    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              cmvolumtepa   0x000174    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 cmyashil   0x0000d8    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               delay250ms   0x00024e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              delayy4.5ms   0x000245    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                delayy9ms   0x00020c    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                     krug   0x00007d    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    krug1   0x00008b    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    krug2   0x000099    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                     loop   0x00002f    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                metka1000   0x0001cd    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              metka101000   0x0001cb    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            metka10101000   0x0001c9    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+          metka1010101000   0x0001c7    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+        metka101010101000   0x0001c5    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+      metka10101010101000   0x0001c3    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+    metka1010101010101000   0x0001c1    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+  metka101010101010101000   0x0001bf    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    power   0x000055    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             poweruderjat   0x000091    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    qizil   0x00005f    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             qiziluderjat   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 volumpas   0x000069    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                volumtepa   0x000064    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    yarmi   0x000194    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   yashil   0x00005a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            yashiluderjat   0x000083    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 Mainloop   0x00002b    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 UMessen1   0x00002e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                     loop   0x00002f    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_003C   0x00003c    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_003E   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                      LED   0x000040    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    power   0x000055    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   yashil   0x00005a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    qizil   0x00005f    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                volumtepa   0x000064    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 volumpas   0x000069    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                Big_delay   0x00006e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                BD_Loop94   0x000070    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             qiziluderjat   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                     krug   0x00007d    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            yashiluderjat   0x000083    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    krug1   0x00008b    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             poweruderjat   0x000091    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    krug2   0x000099    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             cmstrelkapas   0x00009f    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmqizil   0x0000af    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   cmmute   0x0000c1    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                 cmyashil   0x0000d8    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmpause   0x0000ea    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmpower   0x0000fa    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              cmequalizer   0x00010a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            cmstrelkachap   0x000144    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              cmstrelkaon   0x000154    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               cmvolumpas   0x000164    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              cmvolumtepa   0x000174    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            cmstrelkatepa   0x000184    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                    yarmi   0x000194    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                       bt   0x00019d    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                  cmmute1   0x0001af    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+  metka101010101010101000   0x0001bf    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+    metka1010101010101000   0x0001c1    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+      metka10101010101000   0x0001c3    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+        metka101010101000   0x0001c5    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+          metka1010101000   0x0001c7    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+            metka10101000   0x0001c9    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              metka101000   0x0001cb    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                metka1000   0x0001cd    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   Send_1   0x0001d2    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               Send1_Loop   0x0001d4    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                   Send_0   0x0001ef    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               Send0_Loop   0x0001f1    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+                delayy9ms   0x00020c    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              Send0_Loopp   0x00020e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             Send0_Loopp1   0x00022a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+              delayy4.5ms   0x000245    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_024A   0x00024a    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_024C   0x00024c    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+               delay250ms   0x00024e    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_0255   0x000255    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_0257   0x000257    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+             _.org_0_0259   0x000259    program     static C:\Users\Xusniddin\Desktop\mplab\KenNew.X\KenNew.asm
+
+

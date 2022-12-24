@@ -1,0 +1,638 @@
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001             LIST        p=16F628A
+                      00002             ;__CONFIG   02170H
+2007   0010           00003             __CONFIG    00010H
+                      00004             #include <P16f628A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC16F628A processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00386         LIST
+                      00005         ERRORLEVEL      -302
+  00000020            00006 Reg_1           equ         0x20                
+  00000021            00007 Reg_2           equ         0x21
+  00000022            00008 Reg_3           equ         0x22
+  00000023            00009 Reg_info        equ         0x23                
+  00000003            00010 STATUS          equ         0x03
+  00000005            00011 PORTA           equ         0x05
+  00000006            00012 PORTB           equ         0x06                
+  00000007            00013 PORTC           equ         0x07                
+  00000085            00014 TRISA           equ         0x85
+  00000086            00015 TRISB           equ         0x86
+  00000087            00016 TRISC           equ         0x87        
+                      00017 ;*******************************************************************************                
+                      00018                 org         0x000
+                      00019 ;*******************************************************************************
+0000   1283           00020                 bcf         STATUS,5            
+0001   0185           00021                 clrf        PORTA
+0002   0186           00022                 clrf        PORTB
+0003   1683           00023                 bsf         STATUS,5
+0004   158E           00024                 bsf             PCON,3
+0005   108E           00025                 bcf             PCON,1
+0006   140E           00026                 bsf             PCON,0      
+0007   3080           00027                 MOVLW       b'10000000'
+0008   0081           00028                 MOVWF       OPTION_REG
+0009   3000           00029                 MOVLW       b'00000000'
+000A   008B           00030                 MOVWF       INTCON
+000B   0185           00031                 clrf        TRISA               
+000C   0186           00032                 clrf        TRISB
+                      00033                 
+                      00034                 ;bcf        TRISC,0
+000D   1105           00035                 bcf         TRISA,2
+                      00036                 
+                      00037                 ;bcf        TRISC,1
+000E   1186           00038                 bcf         TRISB,3
+                      00039                 
+                      00040                 ;bsf        TRISC,5
+000F   1485           00041                 bsf         TRISA,1
+                      00042                 
+                      00043                 ;bsf        TRISA,2
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0010   1585           00044                 bsf         TRISA,3
+                      00045                 
+                      00046                 ;bsf        TRISA,1
+0011   1605           00047                 bsf         TRISA,4
+                      00048                 
+0012   1283           00049                 bcf         STATUS,5
+0013   3007           00050                 MOVLW   7           
+0014   009F           00051                 MOVWF   CMCON         ; Comparators off, all pins digital I/O   
+0015   3000           00052                 movlw       b'00000000'
+0016   00A3           00053                 movwf       Reg_info
+                      00054 ;*******************************************************************************
+0017   2???           00055 prog            call        blok
+                      00056                 
+                      00057                 ;btfss      PORTA,1
+0018   1E05           00058                 btfss       PORTA,4
+                      00059                 
+0019   2???           00060                 call        aux
+001A   2???           00061                 goto        prog
+                      00062 ;*******************************************************************************
+001B                  00063 blok            ;btfsc      PORTA,2
+001B   1985           00064                 btfsc       PORTA,3
+                      00065                 
+001C   0008           00066                 return  
+001D   2???           00067                 call        delay50ms
+                      00068                 
+                      00069                 ;btfsc      PORTA,2
+001E   1985           00070                 btfsc       PORTA,3
+                      00071                 
+001F   0008           00072                 return
+                      00073                 
+                      00074                 ;btfsc      PORTC,5
+0020   1885           00075                 btfsc       PORTA,1
+                      00076                 
+0021   0008           00077                 return
+0022   2???           00078                 call        sekund_3.5
+                      00079                 
+                      00080                 ;btfsc      PORTC,5
+0023   1885           00081                 btfsc       PORTA,1
+                      00082                 
+0024   0008           00083                 return
+0025   2???           00084                 call        delay_20msekund
+0026   2???           00085                 call        sekund_10.5info
+                      00086                 
+                      00087                 ;bcf        PORTC,0
+0027   1105           00088                 bcf         PORTA,2
+                      00089                 
+0028   0008           00090                 return          
+                      00091 ;*******************************************************************************
+0029   2???           00092 aux             call        delay50ms
+                      00093                 
+                      00094                 ;btfsc      PORTA,1
+002A   1A05           00095                 btfsc       PORTA,4
+                      00096                 
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002B   0008           00097                 return
+002C   1C23           00098                 btfss       Reg_info,0
+002D   2???           00099                 call        sekund_10.5aux              
+002E   1823           00100                 btfsc       Reg_info,0
+002F   2???           00101                 call        sekund_3.5aux
+                      00102                 
+0030   0008           00103                 return          
+                      00104 ;*******************************************************************************                
+0031                  00105 sekund_3.5      ;bsf        PORTC,1
+0031   1606           00106                 bsf         PORTB,4
+                      00107                 
+0032   2???           00108                 call        delay_3.5
+                      00109                 
+                      00110                 ;bcf        PORTC,1
+0033   1206           00111                 bcf         PORTB,4
+                      00112                 
+0034   0008           00113                 return
+                      00114 ;*******************************************************************************                
+0035                  00115 sekund_3.5aux   ;bsf        PORTC,1
+0035   1606           00116                 bsf         PORTB,4
+                      00117                 
+0036   2???           00118                 call        aux_3.5
+                      00119                 
+                      00120                 ;bcf        PORTC,1
+0037   1206           00121                 bcf         PORTB,4
+                      00122                 
+0038   0008           00123                 return          
+                      00124 ;*******************************************************************************
+0039                  00125 sekund_10.5info ;bsf        PORTC,0
+0039   1505           00126                 bsf         PORTA,2
+                      00127                 
+003A   2???           00128                 call        delay_1             
+                      00129                 ;btfsc      PORTC,5
+                      00130                 ;return         
+003B   2???           00131                 call        delay_1             
+                      00132                 ;btfsc      PORTC,5
+                      00133                 ;return 
+003C   2???           00134                 call        delay_1             
+                      00135                 ;btfsc      PORTC,5
+                      00136                 ;return         
+003D   2???           00137                 call        delay_1             
+                      00138                 ;btfsc      PORTC,5
+                      00139                 ;return 
+003E   2???           00140                 call        delay_1             
+                      00141                 ;btfsc      PORTC,5
+                      00142                 ;return 
+003F   2???           00143                 call        delay_1             
+                      00144                 ;btfsc      PORTC,5
+                      00145                 ;return 
+0040   2???           00146                 call        delay_1             
+                      00147                 ;btfsc      PORTC,5
+                      00148                 ;return
+0041   2???           00149                 call        delay_1             
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00150                 ;btfsc      PORTC,5
+                      00151                 ;return 
+0042   2???           00152                 call        delay_1             
+                      00153                 ;btfsc      PORTC,5
+                      00154                 ;return 
+0043   2???           00155                 call        delay_1             
+                      00156                 ;btfsc      PORTC,5
+                      00157                 ;return 
+0044   2???           00158                 call        delay_1             
+                      00159                 ;btfsc      PORTC,5
+                      00160                 ;return 
+0045   2???           00161                 call        delay_1             
+0046   0008           00162                 return  
+                      00163 ;*******************************************************************************                
+0047                  00164 sekund_10.5aux  ;bsf        PORTC,0
+0047   1505           00165                 bsf         PORTA,2
+                      00166                 
+0048   2???           00167                 call        aux_10.5
+                      00168                 
+                      00169                 ;bcf        PORTC,0
+0049   1105           00170                 bcf         PORTA,2
+                      00171                 
+004A   0008           00172                 return
+                      00173 ;*******************************************************************************                
+004B   3000           00174 delay_3.5       movlw       b'00000000'
+004C   00A3           00175                 movwf       Reg_info
+004D   3066           00176                 movlw       .102
+004E   00A0           00177                 movwf       Reg_1
+004F   30C2           00178                 movlw       .194
+0050   00A1           00179                 movwf       Reg_2
+0051   3012           00180                 movlw       .18
+0052   00A2           00181                 movwf       Reg_3
+0053   0BA0           00182                 decfsz      Reg_1,F
+0054   2???           00183                 goto        $-1
+0055   0BA1           00184                 decfsz      Reg_2,F
+0056   2???           00185                 goto        $-3
+0057   0BA2           00186                 decfsz      Reg_3,F
+0058   2???           00187                 goto        $-5
+0059   0000           00188                 nop                                     
+005A   0008           00189                 return
+                      00190 ;*******************************************************************************
+005B   3001           00191 aux_10.5        movlw       b'00000001'
+                      00192                 ;movwf      Reg_info
+                      00193                 ;movlw       .55
+                      00194                 ;movwf       Reg_1
+                      00195                 ;movlw       .1
+                      00196                 ;movwf       Reg_2
+                      00197                 ;movlw       .63
+                      00198                 ;movwf       Reg_3
+                      00199                 ;decfsz      Reg_1,F
+                      00200                 ;goto        $-1
+                      00201                 ;decfsz      Reg_2,F
+                      00202                 ;goto        $-3
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00203                 ;decfsz      Reg_3,F
+                      00204                 ;goto        $-5        
+005C   00A3           00205                 movwf       Reg_info
+005D   3066           00206                 movlw       .102
+005E   00A0           00207                 movwf       Reg_1
+005F   30C2           00208                 movlw       .194
+0060   00A1           00209                 movwf       Reg_2
+0061   3015           00210                 movlw       .21
+0062   00A2           00211                 movwf       Reg_3
+0063   0BA0           00212                 decfsz      Reg_1,F
+0064   2???           00213                 goto        $-1
+0065   0BA1           00214                 decfsz      Reg_2,F
+0066   2???           00215                 goto        $-3
+0067   0BA2           00216                 decfsz      Reg_3,F
+0068   2???           00217                 goto        $-5
+0069   0000           00218                 nop
+                      00219                 
+                      00220                 ;bcf        PORTC,0
+006A   1105           00221                 bcf         PORTA,2
+                      00222                 
+006B   2???           00223                 goto        prog
+                      00224 ;*******************************************************************************
+006C   3000           00225 aux_3.5         movlw       b'00000000'
+006D   00A3           00226                 movwf       Reg_info
+006E   3066           00227                 movlw       .102
+006F   00A0           00228                 movwf       Reg_1
+0070   30C2           00229                 movlw       .194
+0071   00A1           00230                 movwf       Reg_2
+0072   3015           00231                 movlw       .21
+0073   00A2           00232                 movwf       Reg_3
+0074   0BA0           00233                 decfsz      Reg_1,F
+0075   2???           00234                 goto        $-1
+0076   0BA1           00235                 decfsz      Reg_2,F
+0077   2???           00236                 goto        $-3
+0078   0BA2           00237                 decfsz      Reg_3,F
+0079   2???           00238                 goto        $-5
+007A   0000           00239                 nop
+                      00240                 
+                      00241                 ;bcf        PORTC,1
+007B   1206           00242                 bcf         PORTB,4
+                      00243                 
+007C   2???           00244                 goto        prog
+                      00245 ;*******************************************************************************
+007D                  00246 delay_1         ;movlw      b'00000001'
+                      00247                 ;movwf      Reg_info            
+007D   30C8           00248                 movlw       .200
+007E   00A0           00249                 movwf       Reg_1
+007F   303C           00250                 movlw       .60
+0080   00A1           00251                 movwf       Reg_2
+0081   3006           00252                 movlw       .6
+0082   00A2           00253                 movwf       Reg_3
+0083   0BA0           00254                 decfsz      Reg_1,F
+0084   2???           00255                 goto        $-1
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0085   0BA1           00256                 decfsz      Reg_2,F
+0086   2???           00257                 goto        $-3
+0087   0BA2           00258                 decfsz      Reg_3,F
+0088   2???           00259                 goto        $-5 
+0089   0008           00260                 return          
+                      00261 ;*******************************************************************************
+008A                  00262 delay_20msekund ;movlw       .238
+                      00263                 ;movwf       Reg_1
+                      00264                 ;movlw       .65
+                      00265                 ;movwf       Reg_2
+                      00266                 ;decfsz      Reg_1,F
+                      00267                 ;goto        $-1
+                      00268                 ;decfsz      Reg_2,F
+                      00269                 ;goto        $-3
+                      00270                 ;nop
+                      00271                 
+008A   30AD           00272                 movlw       .173
+008B   00A0           00273                 movwf       Reg_1
+008C   3013           00274                 movlw       .19
+008D   00A1           00275                 movwf       Reg_2
+008E   3006           00276                 movlw       .6
+008F   00A2           00277                 movwf       Reg_3
+0090   0BA0           00278                 decfsz      Reg_1,F
+0091   2???           00279                 goto        $-1
+0092   0BA1           00280                 decfsz      Reg_2,F
+0093   2???           00281                 goto        $-3
+0094   0BA2           00282                 decfsz      Reg_3,F
+0095   2???           00283                 goto        $-5
+0096   0000           00284                 nop
+0097   0000           00285                 nop
+                      00286 
+0098   0008           00287                 return
+                      00288                 
+0099   30EE           00289 delay50ms   movlw       .238
+009A   00A0           00290             movwf       Reg_1
+009B   3041           00291             movlw       .65
+009C   00A1           00292             movwf       Reg_2
+009D   0BA0           00293             decfsz      Reg_1,F
+009E   2???           00294             goto        $-1
+009F   0BA1           00295             decfsz      Reg_2,F
+00A0   2???           00296             goto        $-3
+00A1   0000           00297             nop
+                      00298 
+00A2   0008           00299             return                      
+                      00300                 
+                      00301 ;*******************************************************************************                
+                      00302         
+0010                  00303                 end
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADDEN                             00000003
+ADEN                              00000003
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000001F
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+DATA_CP_OFF                       00003FFF
+DATA_CP_ON                        00003EFF
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+NOT_BO                            00000000
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_RBPU                          00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OERR                              00000001
+OPTION_REG                        00000081
+OSCF                              00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+Reg_1                             00000020
+Reg_2                             00000021
+Reg_3                             00000022
+Reg_info                          00000023
+SPBRG                             00000099
+SPEN                              00000007
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SREN                              00000005
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRMT                              00000001
+TX9                               00000006
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             0000009F
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_0_0054                      00000054
+_.org_0_0056                      00000056
+_.org_0_0058                      00000058
+_.org_0_0064                      00000064
+_.org_0_0066                      00000066
+_.org_0_0068                      00000068
+_.org_0_0075                      00000075
+_.org_0_0077                      00000077
+_.org_0_0079                      00000079
+_.org_0_0084                      00000084
+_.org_0_0086                      00000086
+_.org_0_0088                      00000088
+_.org_0_0091                      00000091
+_.org_0_0093                      00000093
+_.org_0_0095                      00000095
+_.org_0_009E                      0000009E
+_.org_0_00A0                      000000A0
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEVID1                           00002006
+_ER_OSC_CLKOUT                    00003FFF
+_ER_OSC_NOCLKOUT                  00003FFE
+_EXTCLK_OSC                       00003FEF
+_FOSC_ECIO                        00003FEF
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FEE
+MPASM 5.87                 LYUK_BOTIR628.ASM   5-18-2020  1:30:26         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FEC
+_FOSC_XT                          00003FED
+_HS_OSC                           00003FEE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTOSC_OSC_CLKOUT                00003FFD
+_INTOSC_OSC_NOCLKOUT              00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC_CLKOUT                    00003FFF
+_RC_OSC_NOCLKOUT                  00003FFE
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FED
+__16F628A                         00000001
+aux                               00000029
+aux_10.5                          0000005B
+aux_3.5                           0000006C
+blok                              0000001B
+delay50ms                         00000099
+delay_1                           0000007D
+delay_20msekund                   0000008A
+delay_3.5                         0000004B
+prog                              00000017
+sekund_10.5aux                    00000047
+sekund_10.5info                   00000039
+sekund_3.5                        00000031
+sekund_3.5aux                     00000035
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,    11 suppressed
+
+

@@ -1,0 +1,2168 @@
+
+
+Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
+                                                                                               Sun Jan 02 21:17:02 2022
+
+Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
+     1                           	processor	12F675
+     2                           	pagewidth 120
+     3                           	opt	flic
+     4                           	psect	idataBANK0,global,class=CODE,delta=2,noexec
+     5                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     6                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1,noexec
+     7                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1,noexec
+     8                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+     9                           	psect	maintext,global,class=CODE,split=1,delta=2
+    10                           	psect	text1,local,class=CODE,merge=1,delta=2
+    11                           	psect	text2,local,class=CODE,merge=1,delta=2
+    12                           	psect	text3,local,class=CODE,merge=1,delta=2
+    13                           	psect	text4,local,class=CODE,merge=1,delta=2
+    14                           	psect	text5,local,class=CODE,merge=1,delta=2
+    15                           	psect	text6,local,class=CODE,merge=1,delta=2
+    16                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=2,noexec
+    17                           	dabs	1,0x5E,2
+    18  0000                     
+    19                           ; Version 2.20
+    20                           ; Generated 12/02/2020 GMT
+    21                           ; 
+    22                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    23                           ; All rights reserved.
+    24                           ; 
+    25                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    26                           ; 
+    27                           ; Redistribution and use in source and binary forms, with or without modification, are
+    28                           ; permitted provided that the following conditions are met:
+    29                           ; 
+    30                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    31                           ;        conditions and the following disclaimer.
+    32                           ; 
+    33                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    34                           ;        of conditions and the following disclaimer in the documentation and/or other
+    35                           ;        materials provided with the distribution.
+    36                           ; 
+    37                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    38                           ;        software without specific prior written permission.
+    39                           ; 
+    40                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    41                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    42                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    43                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    44                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    45                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    46                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    47                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    48                           ; 
+    49                           ; 
+    50                           ; Code-generator required, PIC12F675 Definitions
+    51                           ; 
+    52                           ; SFR Addresses
+    53  0000                     	;# 
+    54  0001                     	;# 
+    55  0002                     	;# 
+    56  0003                     	;# 
+    57  0004                     	;# 
+    58  0005                     	;# 
+    59  000A                     	;# 
+    60  000B                     	;# 
+    61  000C                     	;# 
+    62  000E                     	;# 
+    63  000E                     	;# 
+    64  000F                     	;# 
+    65  0010                     	;# 
+    66  0019                     	;# 
+    67  001E                     	;# 
+    68  001F                     	;# 
+    69  0081                     	;# 
+    70  0085                     	;# 
+    71  008C                     	;# 
+    72  008E                     	;# 
+    73  0090                     	;# 
+    74  0095                     	;# 
+    75  0096                     	;# 
+    76  0096                     	;# 
+    77  0099                     	;# 
+    78  009A                     	;# 
+    79  009A                     	;# 
+    80  009B                     	;# 
+    81  009C                     	;# 
+    82  009D                     	;# 
+    83  009E                     	;# 
+    84  009F                     	;# 
+    85  0000                     	;# 
+    86  0001                     	;# 
+    87  0002                     	;# 
+    88  0003                     	;# 
+    89  0004                     	;# 
+    90  0005                     	;# 
+    91  000A                     	;# 
+    92  000B                     	;# 
+    93  000C                     	;# 
+    94  000E                     	;# 
+    95  000E                     	;# 
+    96  000F                     	;# 
+    97  0010                     	;# 
+    98  0019                     	;# 
+    99  001E                     	;# 
+   100  001F                     	;# 
+   101  0081                     	;# 
+   102  0085                     	;# 
+   103  008C                     	;# 
+   104  008E                     	;# 
+   105  0090                     	;# 
+   106  0095                     	;# 
+   107  0096                     	;# 
+   108  0096                     	;# 
+   109  0099                     	;# 
+   110  009A                     	;# 
+   111  009A                     	;# 
+   112  009B                     	;# 
+   113  009C                     	;# 
+   114  009D                     	;# 
+   115  009E                     	;# 
+   116  009F                     	;# 
+   117                           
+   118                           	psect	idataBANK0
+   119  0099                     __pidataBANK0:
+   120                           
+   121                           ;initializer for _codeCommandPlus
+   122  0099  3450               	retlw	80
+   123                           
+   124                           ;initializer for _codeCommand
+   125  009A  3450               	retlw	80
+   126                           
+   127                           ;initializer for _codeAddress
+   128  009B  34B5               	retlw	181
+   129  000B                     _INTCON	set	11
+   130  001F                     _ADCON0	set	31
+   131  0019                     _CMCON	set	25
+   132  001E                     _ADRESH	set	30
+   133  00F9                     _GO_DONE	set	249
+   134  00F8                     _ADON	set	248
+   135  002A                     _GP2	set	42
+   136  008C                     _PIE1bits	set	140
+   137  0081                     _OPTION_REG	set	129
+   138  009F                     _ANSEL	set	159
+   139  0085                     _TRISIO	set	133
+   140                           
+   141                           	psect	cinit
+   142  03F1                     start_initialization:	
+   143                           ; #config settings
+   144                           
+   145  03F1                     __initialization:
+   146                           
+   147                           ; Initialize objects allocated to BANK0
+   148  03F1  2099               	fcall	__pidataBANK0	;fetch initializer
+   149  03F2  00AB               	movwf	__pdataBANK0& (0+127)
+   150  03F3  209A               	fcall	__pidataBANK0+1	;fetch initializer
+   151  03F4  00AC               	movwf	(__pdataBANK0+1)& (0+127)
+   152  03F5  209B               	fcall	__pidataBANK0+2	;fetch initializer
+   153  03F6  00AD               	movwf	(__pdataBANK0+2)& (0+127)
+   154                           
+   155                           ; Clear objects allocated to BANK0
+   156  03F7  01A0               	clrf	__pbssBANK0& (0+127)
+   157  03F8  01A1               	clrf	(__pbssBANK0+1)& (0+127)
+   158  03F9  01A2               	clrf	(__pbssBANK0+2)& (0+127)
+   159  03FA  01A3               	clrf	(__pbssBANK0+3)& (0+127)
+   160  03FB  01A4               	clrf	(__pbssBANK0+4)& (0+127)
+   161  03FC  01A5               	clrf	(__pbssBANK0+5)& (0+127)
+   162  03FD                     end_of_initialization:	
+   163                           ;End of C runtime variable initialization code
+   164                           
+   165  03FD                     __end_of__initialization:
+   166  03FD  0183               	clrf	3
+   167  03FE  2A1A               	ljmp	_main	;jump to C main() function
+   168                           
+   169                           	psect	bssBANK0
+   170  0020                     __pbssBANK0:
+   171  0020                     _volt:
+   172  0020                     	ds	2
+   173  0022                     _i:
+   174  0022                     	ds	2
+   175  0024                     _loopBit:
+   176  0024                     	ds	1
+   177  0025                     _Reg_1:
+   178  0025                     	ds	1
+   179                           
+   180                           	psect	dataBANK0
+   181  002B                     __pdataBANK0:
+   182  002B                     _codeCommandPlus:
+   183  002B                     	ds	1
+   184  002C                     _codeCommand:
+   185  002C                     	ds	1
+   186  002D                     _codeAddress:
+   187  002D                     	ds	1
+   188                           
+   189                           	psect	cstackBANK0
+   190  0026                     __pcstackBANK0:
+   191  0026                     ?_ms9And4ms:
+   192  0026                     ??_ms9And4ms:	
+   193                           ; 1 bytes @ 0x0
+   194                           
+   195  0026                     ?_bit1:	
+   196                           ; 1 bytes @ 0x0
+   197                           
+   198  0026                     ??_bit1:	
+   199                           ; 1 bytes @ 0x0
+   200                           
+   201  0026                     ?_bit0:	
+   202                           ; 1 bytes @ 0x0
+   203                           
+   204  0026                     ??_bit0:	
+   205                           ; 1 bytes @ 0x0
+   206                           
+   207  0026                     ?_commandd:	
+   208                           ; 1 bytes @ 0x0
+   209                           
+   210  0026                     ?_ADC:	
+   211                           ; 1 bytes @ 0x0
+   212                           
+   213  0026                     ??_ADC:	
+   214                           ; 1 bytes @ 0x0
+   215                           
+   216  0026                     ?_ADC1:	
+   217                           ; 1 bytes @ 0x0
+   218                           
+   219  0026                     ??_ADC1:	
+   220                           ; 1 bytes @ 0x0
+   221                           
+   222  0026                     ?_main:	
+   223                           ; 1 bytes @ 0x0
+   224                           
+   225                           
+   226                           ; 1 bytes @ 0x0
+   227  0026                     	ds	2
+   228  0028                     ??_commandd:
+   229                           
+   230                           ; 1 bytes @ 0x2
+   231  0028                     	ds	1
+   232  0029                     ??_main:
+   233                           
+   234                           ; 1 bytes @ 0x3
+   235  0029                     	ds	2
+   236                           
+   237                           	psect	maintext
+   238  021A                     __pmaintext:	
+   239 ;;
+   240 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   241 ;;
+   242 ;; *************** function _main *****************
+   243 ;; Defined at:
+   244 ;;		line 138 in file "PiCr-02.01.22.c"
+   245 ;; Parameters:    Size  Location     Type
+   246 ;;		None
+   247 ;; Auto vars:     Size  Location     Type
+   248 ;;		None
+   249 ;; Return value:  Size  Location     Type
+   250 ;;                  1    wreg      void 
+   251 ;; Registers used:
+   252 ;;		wreg, status,2, status,0, pclath, cstack
+   253 ;; Tracked objects:
+   254 ;;		On entry : B00/0
+   255 ;;		On exit  : 0/0
+   256 ;;		Unchanged: 0/0
+   257 ;; Data sizes:     COMMON   BANK0
+   258 ;;      Params:         0       0
+   259 ;;      Locals:         0       0
+   260 ;;      Temps:          0       2
+   261 ;;      Totals:         0       2
+   262 ;;Total ram usage:        2 bytes
+   263 ;; Hardware stack levels required when called:    2
+   264 ;; This function calls:
+   265 ;;		_ADC
+   266 ;;		_ADC1
+   267 ;;		_commandd
+   268 ;; This function is called by:
+   269 ;;		Startup code after reset
+   270 ;; This function uses a non-reentrant model
+   271 ;;
+   272                           
+   273                           
+   274                           ;psect for function _main
+   275  021A                     _main:
+   276  021A                     l1068:	
+   277                           ;incstack = 0
+   278                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   279                           
+   280                           
+   281                           ;PiCr-02.01.22.c: 139:     TRISIO = 0b00010000;
+   282  021A  3010               	movlw	16
+   283  021B  1683               	bsf	3,5	;RP0=1, select bank1
+   284  021C  0085               	movwf	5	;volatile
+   285                           
+   286                           ;PiCr-02.01.22.c: 140:     CMCON = 0b00000111;
+   287  021D  3007               	movlw	7
+   288  021E  1283               	bcf	3,5	;RP0=0, select bank0
+   289  021F  0099               	movwf	25	;volatile
+   290                           
+   291                           ;PiCr-02.01.22.c: 141:     ADCON0 = 0b00001100;
+   292  0220  300C               	movlw	12
+   293  0221  009F               	movwf	31	;volatile
+   294                           
+   295                           ;PiCr-02.01.22.c: 142:     ANSEL = 0b01111000;
+   296  0222  3078               	movlw	120
+   297  0223  1683               	bsf	3,5	;RP0=1, select bank1
+   298  0224  009F               	movwf	31	;volatile
+   299                           
+   300                           ;PiCr-02.01.22.c: 143:     OPTION_REG = 0b10000011;
+   301  0225  3083               	movlw	131
+   302  0226  0081               	movwf	1	;volatile
+   303                           
+   304                           ;PiCr-02.01.22.c: 144:     INTCON = 0b1000000;
+   305  0227  3040               	movlw	64
+   306  0228  008B               	movwf	11	;volatile
+   307  0229                     l1070:
+   308                           
+   309                           ;PiCr-02.01.22.c: 145:     PIE1bits.ADIE = 1;
+   310  0229  170C               	bsf	12,6	;volatile
+   311  022A                     l1072:
+   312                           
+   313                           ;PiCr-02.01.22.c: 148:         ADC1();
+   314  022A  209C               	fcall	_ADC1
+   315  022B                     l1074:
+   316                           
+   317                           ;PiCr-02.01.22.c: 149:         if (volt < 252 && volt > 235) {
+   318  022B  3000               	movlw	0
+   319  022C  1283               	bcf	3,5	;RP0=0, select bank0
+   320  022D  0221               	subwf	_volt+1,w
+   321  022E  30FC               	movlw	252
+   322  022F  1903               	skipnz
+   323  0230  0220               	subwf	_volt,w
+   324  0231  1803               	skipnc
+   325  0232  2A34               	goto	u931
+   326  0233  2A35               	goto	u930
+   327  0234                     u931:
+   328  0234  2A5B               	goto	l1088
+   329  0235                     u930:
+   330  0235                     l1076:
+   331  0235  3000               	movlw	0
+   332  0236  0221               	subwf	_volt+1,w
+   333  0237  30EC               	movlw	236
+   334  0238  1903               	skipnz
+   335  0239  0220               	subwf	_volt,w
+   336  023A  1C03               	skipc
+   337  023B  2A3D               	goto	u941
+   338  023C  2A3E               	goto	u940
+   339  023D                     u941:
+   340  023D  2A5B               	goto	l1088
+   341  023E                     u940:
+   342  023E                     l1078:
+   343                           
+   344                           ;PiCr-02.01.22.c: 150:             ADC();
+   345  023E  20B5               	fcall	_ADC
+   346  023F                     l1080:
+   347                           
+   348                           ;PiCr-02.01.22.c: 151:             if (volt < 252 && volt > 235) {
+   349  023F  3000               	movlw	0
+   350  0240  1283               	bcf	3,5	;RP0=0, select bank0
+   351  0241  0221               	subwf	_volt+1,w
+   352  0242  30FC               	movlw	252
+   353  0243  1903               	skipnz
+   354  0244  0220               	subwf	_volt,w
+   355  0245  1803               	skipnc
+   356  0246  2A48               	goto	u951
+   357  0247  2A49               	goto	u950
+   358  0248                     u951:
+   359  0248  2A5B               	goto	l1088
+   360  0249                     u950:
+   361  0249                     l1082:
+   362  0249  3000               	movlw	0
+   363  024A  0221               	subwf	_volt+1,w
+   364  024B  30EC               	movlw	236
+   365  024C  1903               	skipnz
+   366  024D  0220               	subwf	_volt,w
+   367  024E  1C03               	skipc
+   368  024F  2A51               	goto	u961
+   369  0250  2A52               	goto	u960
+   370  0251                     u961:
+   371  0251  2A5B               	goto	l1088
+   372  0252                     u960:
+   373  0252                     l1084:
+   374                           
+   375                           ;PiCr-02.01.22.c: 152:                 codeAddress = 0b10110101;
+   376  0252  30B5               	movlw	181
+   377  0253  00A9               	movwf	??_main
+   378  0254  0829               	movf	??_main,w
+   379  0255  00AD               	movwf	_codeAddress
+   380                           
+   381                           ;PiCr-02.01.22.c: 153:                 codeCommand = 0b10000010;
+   382  0256  3082               	movlw	130
+   383  0257  00A9               	movwf	??_main
+   384  0258  0829               	movf	??_main,w
+   385  0259  00AC               	movwf	_codeCommand
+   386  025A                     l1086:
+   387                           
+   388                           ;PiCr-02.01.22.c: 154:                 commandd();
+   389  025A  2159               	fcall	_commandd
+   390  025B                     l1088:
+   391                           
+   392                           ;PiCr-02.01.22.c: 158:         if (volt < 235 && volt > 210) {
+   393  025B  3000               	movlw	0
+   394  025C  1283               	bcf	3,5	;RP0=0, select bank0
+   395  025D  0221               	subwf	_volt+1,w
+   396  025E  30EB               	movlw	235
+   397  025F  1903               	skipnz
+   398  0260  0220               	subwf	_volt,w
+   399  0261  1803               	skipnc
+   400  0262  2A64               	goto	u971
+   401  0263  2A65               	goto	u970
+   402  0264                     u971:
+   403  0264  2A9F               	goto	l1108
+   404  0265                     u970:
+   405  0265                     l1090:
+   406  0265  3000               	movlw	0
+   407  0266  0221               	subwf	_volt+1,w
+   408  0267  30D3               	movlw	211
+   409  0268  1903               	skipnz
+   410  0269  0220               	subwf	_volt,w
+   411  026A  1C03               	skipc
+   412  026B  2A6D               	goto	u981
+   413  026C  2A6E               	goto	u980
+   414  026D                     u981:
+   415  026D  2A9F               	goto	l1108
+   416  026E                     u980:
+   417  026E                     l1092:
+   418                           
+   419                           ;PiCr-02.01.22.c: 159:             ADC();
+   420  026E  20B5               	fcall	_ADC
+   421  026F                     l1094:
+   422                           
+   423                           ;PiCr-02.01.22.c: 160:             if (volt < 235 && volt > 210) {
+   424  026F  3000               	movlw	0
+   425  0270  1283               	bcf	3,5	;RP0=0, select bank0
+   426  0271  0221               	subwf	_volt+1,w
+   427  0272  30EB               	movlw	235
+   428  0273  1903               	skipnz
+   429  0274  0220               	subwf	_volt,w
+   430  0275  1803               	skipnc
+   431  0276  2A78               	goto	u991
+   432  0277  2A79               	goto	u990
+   433  0278                     u991:
+   434  0278  2A9F               	goto	l1108
+   435  0279                     u990:
+   436  0279                     l1096:
+   437  0279  3000               	movlw	0
+   438  027A  0221               	subwf	_volt+1,w
+   439  027B  30D3               	movlw	211
+   440  027C  1903               	skipnz
+   441  027D  0220               	subwf	_volt,w
+   442  027E  1C03               	skipc
+   443  027F  2A81               	goto	u1001
+   444  0280  2A82               	goto	u1000
+   445  0281                     u1001:
+   446  0281  2A9F               	goto	l1108
+   447  0282                     u1000:
+   448  0282                     l1098:
+   449                           
+   450                           ;PiCr-02.01.22.c: 161:                 codeAddress = 0b10110101;
+   451  0282  30B5               	movlw	181
+   452  0283  00A9               	movwf	??_main
+   453  0284  0829               	movf	??_main,w
+   454  0285  00AD               	movwf	_codeAddress
+   455                           
+   456                           ;PiCr-02.01.22.c: 162:                 codeCommand = 0b10011000;
+   457  0286  3098               	movlw	152
+   458  0287  00A9               	movwf	??_main
+   459  0288  0829               	movf	??_main,w
+   460  0289  00AC               	movwf	_codeCommand
+   461  028A                     l1100:
+   462                           
+   463                           ;PiCr-02.01.22.c: 163:                 commandd();
+   464  028A  2159               	fcall	_commandd
+   465  028B                     l1102:
+   466                           
+   467                           ;PiCr-02.01.22.c: 164:                 _delay((unsigned long)((29)*(4000000/4000.0)));
+   468  028B  3026               	movlw	38
+   469  028C  1283               	bcf	3,5	;RP0=0, select bank0
+   470  028D  00AA               	movwf	??_main+1
+   471  028E  30A8               	movlw	168
+   472  028F  00A9               	movwf	??_main
+   473  0290                     u1297:
+   474  0290  0BA9               	decfsz	??_main,f
+   475  0291  2A90               	goto	u1297
+   476  0292  0BAA               	decfsz	??_main+1,f
+   477  0293  2A90               	goto	u1297
+   478  0294  0000               	nop
+   479  0295                     l1104:
+   480                           
+   481                           ;PiCr-02.01.22.c: 165:                 codeAddress = 0b11110101;
+   482  0295  30F5               	movlw	245
+   483  0296  1283               	bcf	3,5	;RP0=0, select bank0
+   484  0297  00A9               	movwf	??_main
+   485  0298  0829               	movf	??_main,w
+   486  0299  00AD               	movwf	_codeAddress
+   487  029A                     l1106:
+   488                           
+   489                           ;PiCr-02.01.22.c: 166:                 codeCommand = 0b00001100;
+   490  029A  300C               	movlw	12
+   491  029B  00A9               	movwf	??_main
+   492  029C  0829               	movf	??_main,w
+   493  029D  00AC               	movwf	_codeCommand
+   494                           
+   495                           ;PiCr-02.01.22.c: 167:                 commandd();
+   496  029E  2159               	fcall	_commandd
+   497  029F                     l1108:
+   498                           
+   499                           ;PiCr-02.01.22.c: 171:         if (volt < 210 && volt > 200) {
+   500  029F  3000               	movlw	0
+   501  02A0  1283               	bcf	3,5	;RP0=0, select bank0
+   502  02A1  0221               	subwf	_volt+1,w
+   503  02A2  30D2               	movlw	210
+   504  02A3  1903               	skipnz
+   505  02A4  0220               	subwf	_volt,w
+   506  02A5  1803               	skipnc
+   507  02A6  2AA8               	goto	u1011
+   508  02A7  2AA9               	goto	u1010
+   509  02A8                     u1011:
+   510  02A8  2ACF               	goto	l1122
+   511  02A9                     u1010:
+   512  02A9                     l1110:
+   513  02A9  3000               	movlw	0
+   514  02AA  0221               	subwf	_volt+1,w
+   515  02AB  30C9               	movlw	201
+   516  02AC  1903               	skipnz
+   517  02AD  0220               	subwf	_volt,w
+   518  02AE  1C03               	skipc
+   519  02AF  2AB1               	goto	u1021
+   520  02B0  2AB2               	goto	u1020
+   521  02B1                     u1021:
+   522  02B1  2ACF               	goto	l1122
+   523  02B2                     u1020:
+   524  02B2                     l1112:
+   525                           
+   526                           ;PiCr-02.01.22.c: 172:             ADC();
+   527  02B2  20B5               	fcall	_ADC
+   528  02B3                     l1114:
+   529                           
+   530                           ;PiCr-02.01.22.c: 173:             if (volt < 210 && volt > 200) {
+   531  02B3  3000               	movlw	0
+   532  02B4  1283               	bcf	3,5	;RP0=0, select bank0
+   533  02B5  0221               	subwf	_volt+1,w
+   534  02B6  30D2               	movlw	210
+   535  02B7  1903               	skipnz
+   536  02B8  0220               	subwf	_volt,w
+   537  02B9  1803               	skipnc
+   538  02BA  2ABC               	goto	u1031
+   539  02BB  2ABD               	goto	u1030
+   540  02BC                     u1031:
+   541  02BC  2ACF               	goto	l1122
+   542  02BD                     u1030:
+   543  02BD                     l1116:
+   544  02BD  3000               	movlw	0
+   545  02BE  0221               	subwf	_volt+1,w
+   546  02BF  30C9               	movlw	201
+   547  02C0  1903               	skipnz
+   548  02C1  0220               	subwf	_volt,w
+   549  02C2  1C03               	skipc
+   550  02C3  2AC5               	goto	u1041
+   551  02C4  2AC6               	goto	u1040
+   552  02C5                     u1041:
+   553  02C5  2ACF               	goto	l1122
+   554  02C6                     u1040:
+   555  02C6                     l1118:
+   556                           
+   557                           ;PiCr-02.01.22.c: 174:                 codeAddress = 0b10110101;
+   558  02C6  30B5               	movlw	181
+   559  02C7  00A9               	movwf	??_main
+   560  02C8  0829               	movf	??_main,w
+   561  02C9  00AD               	movwf	_codeAddress
+   562                           
+   563                           ;PiCr-02.01.22.c: 175:                 codeCommand = 0b00011010;
+   564  02CA  301A               	movlw	26
+   565  02CB  00A9               	movwf	??_main
+   566  02CC  0829               	movf	??_main,w
+   567  02CD  00AC               	movwf	_codeCommand
+   568  02CE                     l1120:
+   569                           
+   570                           ;PiCr-02.01.22.c: 176:                 commandd();
+   571  02CE  2159               	fcall	_commandd
+   572  02CF                     l1122:
+   573                           
+   574                           ;PiCr-02.01.22.c: 180:         if (volt < 200 && volt > 189) {
+   575  02CF  3000               	movlw	0
+   576  02D0  1283               	bcf	3,5	;RP0=0, select bank0
+   577  02D1  0221               	subwf	_volt+1,w
+   578  02D2  30C8               	movlw	200
+   579  02D3  1903               	skipnz
+   580  02D4  0220               	subwf	_volt,w
+   581  02D5  1803               	skipnc
+   582  02D6  2AD8               	goto	u1051
+   583  02D7  2AD9               	goto	u1050
+   584  02D8                     u1051:
+   585  02D8  2AFF               	goto	l1136
+   586  02D9                     u1050:
+   587  02D9                     l1124:
+   588  02D9  3000               	movlw	0
+   589  02DA  0221               	subwf	_volt+1,w
+   590  02DB  30BE               	movlw	190
+   591  02DC  1903               	skipnz
+   592  02DD  0220               	subwf	_volt,w
+   593  02DE  1C03               	skipc
+   594  02DF  2AE1               	goto	u1061
+   595  02E0  2AE2               	goto	u1060
+   596  02E1                     u1061:
+   597  02E1  2AFF               	goto	l1136
+   598  02E2                     u1060:
+   599  02E2                     l1126:
+   600                           
+   601                           ;PiCr-02.01.22.c: 181:             ADC();
+   602  02E2  20B5               	fcall	_ADC
+   603  02E3                     l1128:
+   604                           
+   605                           ;PiCr-02.01.22.c: 182:             if (volt < 200 && volt > 189) {
+   606  02E3  3000               	movlw	0
+   607  02E4  1283               	bcf	3,5	;RP0=0, select bank0
+   608  02E5  0221               	subwf	_volt+1,w
+   609  02E6  30C8               	movlw	200
+   610  02E7  1903               	skipnz
+   611  02E8  0220               	subwf	_volt,w
+   612  02E9  1803               	skipnc
+   613  02EA  2AEC               	goto	u1071
+   614  02EB  2AED               	goto	u1070
+   615  02EC                     u1071:
+   616  02EC  2AFF               	goto	l1136
+   617  02ED                     u1070:
+   618  02ED                     l1130:
+   619  02ED  3000               	movlw	0
+   620  02EE  0221               	subwf	_volt+1,w
+   621  02EF  30BE               	movlw	190
+   622  02F0  1903               	skipnz
+   623  02F1  0220               	subwf	_volt,w
+   624  02F2  1C03               	skipc
+   625  02F3  2AF5               	goto	u1081
+   626  02F4  2AF6               	goto	u1080
+   627  02F5                     u1081:
+   628  02F5  2AFF               	goto	l1136
+   629  02F6                     u1080:
+   630  02F6                     l1132:
+   631                           
+   632                           ;PiCr-02.01.22.c: 183:                 codeAddress = 0b10110101;
+   633  02F6  30B5               	movlw	181
+   634  02F7  00A9               	movwf	??_main
+   635  02F8  0829               	movf	??_main,w
+   636  02F9  00AD               	movwf	_codeAddress
+   637                           
+   638                           ;PiCr-02.01.22.c: 184:                 codeCommand = 0b01011000;
+   639  02FA  3058               	movlw	88
+   640  02FB  00A9               	movwf	??_main
+   641  02FC  0829               	movf	??_main,w
+   642  02FD  00AC               	movwf	_codeCommand
+   643  02FE                     l1134:
+   644                           
+   645                           ;PiCr-02.01.22.c: 185:                 commandd();
+   646  02FE  2159               	fcall	_commandd
+   647  02FF                     l1136:
+   648                           
+   649                           ;PiCr-02.01.22.c: 189:         if (volt < 189 && volt > 175) {
+   650  02FF  3000               	movlw	0
+   651  0300  1283               	bcf	3,5	;RP0=0, select bank0
+   652  0301  0221               	subwf	_volt+1,w
+   653  0302  30BD               	movlw	189
+   654  0303  1903               	skipnz
+   655  0304  0220               	subwf	_volt,w
+   656  0305  1803               	skipnc
+   657  0306  2B08               	goto	u1091
+   658  0307  2B09               	goto	u1090
+   659  0308                     u1091:
+   660  0308  2B2F               	goto	l1150
+   661  0309                     u1090:
+   662  0309                     l1138:
+   663  0309  3000               	movlw	0
+   664  030A  0221               	subwf	_volt+1,w
+   665  030B  30B0               	movlw	176
+   666  030C  1903               	skipnz
+   667  030D  0220               	subwf	_volt,w
+   668  030E  1C03               	skipc
+   669  030F  2B11               	goto	u1101
+   670  0310  2B12               	goto	u1100
+   671  0311                     u1101:
+   672  0311  2B2F               	goto	l1150
+   673  0312                     u1100:
+   674  0312                     l1140:
+   675                           
+   676                           ;PiCr-02.01.22.c: 190:             ADC();
+   677  0312  20B5               	fcall	_ADC
+   678  0313                     l1142:
+   679                           
+   680                           ;PiCr-02.01.22.c: 191:             if (volt < 189 && volt > 175) {
+   681  0313  3000               	movlw	0
+   682  0314  1283               	bcf	3,5	;RP0=0, select bank0
+   683  0315  0221               	subwf	_volt+1,w
+   684  0316  30BD               	movlw	189
+   685  0317  1903               	skipnz
+   686  0318  0220               	subwf	_volt,w
+   687  0319  1803               	skipnc
+   688  031A  2B1C               	goto	u1111
+   689  031B  2B1D               	goto	u1110
+   690  031C                     u1111:
+   691  031C  2B2F               	goto	l1150
+   692  031D                     u1110:
+   693  031D                     l1144:
+   694  031D  3000               	movlw	0
+   695  031E  0221               	subwf	_volt+1,w
+   696  031F  30B0               	movlw	176
+   697  0320  1903               	skipnz
+   698  0321  0220               	subwf	_volt,w
+   699  0322  1C03               	skipc
+   700  0323  2B25               	goto	u1121
+   701  0324  2B26               	goto	u1120
+   702  0325                     u1121:
+   703  0325  2B2F               	goto	l1150
+   704  0326                     u1120:
+   705  0326                     l1146:
+   706                           
+   707                           ;PiCr-02.01.22.c: 192:                 codeAddress = 0b10110101;
+   708  0326  30B5               	movlw	181
+   709  0327  00A9               	movwf	??_main
+   710  0328  0829               	movf	??_main,w
+   711  0329  00AD               	movwf	_codeAddress
+   712                           
+   713                           ;PiCr-02.01.22.c: 193:                 codeCommand = 0b01000010;
+   714  032A  3042               	movlw	66
+   715  032B  00A9               	movwf	??_main
+   716  032C  0829               	movf	??_main,w
+   717  032D  00AC               	movwf	_codeCommand
+   718  032E                     l1148:
+   719                           
+   720                           ;PiCr-02.01.22.c: 194:                 commandd();
+   721  032E  2159               	fcall	_commandd
+   722  032F                     l1150:
+   723                           
+   724                           ;PiCr-02.01.22.c: 198:         if (volt < 175 && volt > 163) {
+   725  032F  3000               	movlw	0
+   726  0330  1283               	bcf	3,5	;RP0=0, select bank0
+   727  0331  0221               	subwf	_volt+1,w
+   728  0332  30AF               	movlw	175
+   729  0333  1903               	skipnz
+   730  0334  0220               	subwf	_volt,w
+   731  0335  1803               	skipnc
+   732  0336  2B38               	goto	u1131
+   733  0337  2B39               	goto	u1130
+   734  0338                     u1131:
+   735  0338  2B5F               	goto	l1164
+   736  0339                     u1130:
+   737  0339                     l1152:
+   738  0339  3000               	movlw	0
+   739  033A  0221               	subwf	_volt+1,w
+   740  033B  30A4               	movlw	164
+   741  033C  1903               	skipnz
+   742  033D  0220               	subwf	_volt,w
+   743  033E  1C03               	skipc
+   744  033F  2B41               	goto	u1141
+   745  0340  2B42               	goto	u1140
+   746  0341                     u1141:
+   747  0341  2B5F               	goto	l1164
+   748  0342                     u1140:
+   749  0342                     l1154:
+   750                           
+   751                           ;PiCr-02.01.22.c: 199:             ADC();
+   752  0342  20B5               	fcall	_ADC
+   753  0343                     l1156:
+   754                           
+   755                           ;PiCr-02.01.22.c: 200:             if (volt < 175 && volt > 163) {
+   756  0343  3000               	movlw	0
+   757  0344  1283               	bcf	3,5	;RP0=0, select bank0
+   758  0345  0221               	subwf	_volt+1,w
+   759  0346  30AF               	movlw	175
+   760  0347  1903               	skipnz
+   761  0348  0220               	subwf	_volt,w
+   762  0349  1803               	skipnc
+   763  034A  2B4C               	goto	u1151
+   764  034B  2B4D               	goto	u1150
+   765  034C                     u1151:
+   766  034C  2B5F               	goto	l1164
+   767  034D                     u1150:
+   768  034D                     l1158:
+   769  034D  3000               	movlw	0
+   770  034E  0221               	subwf	_volt+1,w
+   771  034F  30A4               	movlw	164
+   772  0350  1903               	skipnz
+   773  0351  0220               	subwf	_volt,w
+   774  0352  1C03               	skipc
+   775  0353  2B55               	goto	u1161
+   776  0354  2B56               	goto	u1160
+   777  0355                     u1161:
+   778  0355  2B5F               	goto	l1164
+   779  0356                     u1160:
+   780  0356                     l1160:
+   781                           
+   782                           ;PiCr-02.01.22.c: 201:                 codeAddress = 0b10110101;
+   783  0356  30B5               	movlw	181
+   784  0357  00A9               	movwf	??_main
+   785  0358  0829               	movf	??_main,w
+   786  0359  00AD               	movwf	_codeAddress
+   787                           
+   788                           ;PiCr-02.01.22.c: 202:                 codeCommand = 0b11000010;
+   789  035A  30C2               	movlw	194
+   790  035B  00A9               	movwf	??_main
+   791  035C  0829               	movf	??_main,w
+   792  035D  00AC               	movwf	_codeCommand
+   793  035E                     l1162:
+   794                           
+   795                           ;PiCr-02.01.22.c: 203:                 commandd();
+   796  035E  2159               	fcall	_commandd
+   797  035F                     l1164:
+   798                           
+   799                           ;PiCr-02.01.22.c: 207:         if (volt < 163 && volt > 148) {
+   800  035F  3000               	movlw	0
+   801  0360  1283               	bcf	3,5	;RP0=0, select bank0
+   802  0361  0221               	subwf	_volt+1,w
+   803  0362  30A3               	movlw	163
+   804  0363  1903               	skipnz
+   805  0364  0220               	subwf	_volt,w
+   806  0365  1803               	skipnc
+   807  0366  2B68               	goto	u1171
+   808  0367  2B69               	goto	u1170
+   809  0368                     u1171:
+   810  0368  2B8F               	goto	l1178
+   811  0369                     u1170:
+   812  0369                     l1166:
+   813  0369  3000               	movlw	0
+   814  036A  0221               	subwf	_volt+1,w
+   815  036B  3095               	movlw	149
+   816  036C  1903               	skipnz
+   817  036D  0220               	subwf	_volt,w
+   818  036E  1C03               	skipc
+   819  036F  2B71               	goto	u1181
+   820  0370  2B72               	goto	u1180
+   821  0371                     u1181:
+   822  0371  2B8F               	goto	l1178
+   823  0372                     u1180:
+   824  0372                     l1168:
+   825                           
+   826                           ;PiCr-02.01.22.c: 208:             ADC();
+   827  0372  20B5               	fcall	_ADC
+   828  0373                     l1170:
+   829                           
+   830                           ;PiCr-02.01.22.c: 209:             if (volt < 163 && volt > 148) {
+   831  0373  3000               	movlw	0
+   832  0374  1283               	bcf	3,5	;RP0=0, select bank0
+   833  0375  0221               	subwf	_volt+1,w
+   834  0376  30A3               	movlw	163
+   835  0377  1903               	skipnz
+   836  0378  0220               	subwf	_volt,w
+   837  0379  1803               	skipnc
+   838  037A  2B7C               	goto	u1191
+   839  037B  2B7D               	goto	u1190
+   840  037C                     u1191:
+   841  037C  2B8F               	goto	l1178
+   842  037D                     u1190:
+   843  037D                     l1172:
+   844  037D  3000               	movlw	0
+   845  037E  0221               	subwf	_volt+1,w
+   846  037F  3095               	movlw	149
+   847  0380  1903               	skipnz
+   848  0381  0220               	subwf	_volt,w
+   849  0382  1C03               	skipc
+   850  0383  2B85               	goto	u1201
+   851  0384  2B86               	goto	u1200
+   852  0385                     u1201:
+   853  0385  2B8F               	goto	l1178
+   854  0386                     u1200:
+   855  0386                     l1174:
+   856                           
+   857                           ;PiCr-02.01.22.c: 210:                 codeAddress = 0b10110101;
+   858  0386  30B5               	movlw	181
+   859  0387  00A9               	movwf	??_main
+   860  0388  0829               	movf	??_main,w
+   861  0389  00AD               	movwf	_codeAddress
+   862                           
+   863                           ;PiCr-02.01.22.c: 211:                 codeCommand = 0b11010000;
+   864  038A  30D0               	movlw	208
+   865  038B  00A9               	movwf	??_main
+   866  038C  0829               	movf	??_main,w
+   867  038D  00AC               	movwf	_codeCommand
+   868  038E                     l1176:
+   869                           
+   870                           ;PiCr-02.01.22.c: 212:                 commandd();
+   871  038E  2159               	fcall	_commandd
+   872  038F                     l1178:
+   873                           
+   874                           ;PiCr-02.01.22.c: 216:         if (volt < 148 && volt > 70) {
+   875  038F  3000               	movlw	0
+   876  0390  1283               	bcf	3,5	;RP0=0, select bank0
+   877  0391  0221               	subwf	_volt+1,w
+   878  0392  3094               	movlw	148
+   879  0393  1903               	skipnz
+   880  0394  0220               	subwf	_volt,w
+   881  0395  1803               	skipnc
+   882  0396  2B98               	goto	u1211
+   883  0397  2B99               	goto	u1210
+   884  0398                     u1211:
+   885  0398  2BBF               	goto	l1192
+   886  0399                     u1210:
+   887  0399                     l1180:
+   888  0399  3000               	movlw	0
+   889  039A  0221               	subwf	_volt+1,w
+   890  039B  3047               	movlw	71
+   891  039C  1903               	skipnz
+   892  039D  0220               	subwf	_volt,w
+   893  039E  1C03               	skipc
+   894  039F  2BA1               	goto	u1221
+   895  03A0  2BA2               	goto	u1220
+   896  03A1                     u1221:
+   897  03A1  2BBF               	goto	l1192
+   898  03A2                     u1220:
+   899  03A2                     l1182:
+   900                           
+   901                           ;PiCr-02.01.22.c: 217:             ADC();
+   902  03A2  20B5               	fcall	_ADC
+   903  03A3                     l1184:
+   904                           
+   905                           ;PiCr-02.01.22.c: 218:             if (volt < 148 && volt > 70) {
+   906  03A3  3000               	movlw	0
+   907  03A4  1283               	bcf	3,5	;RP0=0, select bank0
+   908  03A5  0221               	subwf	_volt+1,w
+   909  03A6  3094               	movlw	148
+   910  03A7  1903               	skipnz
+   911  03A8  0220               	subwf	_volt,w
+   912  03A9  1803               	skipnc
+   913  03AA  2BAC               	goto	u1231
+   914  03AB  2BAD               	goto	u1230
+   915  03AC                     u1231:
+   916  03AC  2BBF               	goto	l1192
+   917  03AD                     u1230:
+   918  03AD                     l1186:
+   919  03AD  3000               	movlw	0
+   920  03AE  0221               	subwf	_volt+1,w
+   921  03AF  3047               	movlw	71
+   922  03B0  1903               	skipnz
+   923  03B1  0220               	subwf	_volt,w
+   924  03B2  1C03               	skipc
+   925  03B3  2BB5               	goto	u1241
+   926  03B4  2BB6               	goto	u1240
+   927  03B5                     u1241:
+   928  03B5  2BBF               	goto	l1192
+   929  03B6                     u1240:
+   930  03B6                     l1188:
+   931                           
+   932                           ;PiCr-02.01.22.c: 219:                 codeAddress = 0b10110101;
+   933  03B6  30B5               	movlw	181
+   934  03B7  00A9               	movwf	??_main
+   935  03B8  0829               	movf	??_main,w
+   936  03B9  00AD               	movwf	_codeAddress
+   937                           
+   938                           ;PiCr-02.01.22.c: 220:                 codeCommand = 0b01010000;
+   939  03BA  3050               	movlw	80
+   940  03BB  00A9               	movwf	??_main
+   941  03BC  0829               	movf	??_main,w
+   942  03BD  00AC               	movwf	_codeCommand
+   943  03BE                     l1190:
+   944                           
+   945                           ;PiCr-02.01.22.c: 221:                 commandd();
+   946  03BE  2159               	fcall	_commandd
+   947  03BF                     l1192:
+   948                           
+   949                           ;PiCr-02.01.22.c: 225:         if (volt < 70 && volt > 1) {
+   950  03BF  3000               	movlw	0
+   951  03C0  1283               	bcf	3,5	;RP0=0, select bank0
+   952  03C1  0221               	subwf	_volt+1,w
+   953  03C2  3046               	movlw	70
+   954  03C3  1903               	skipnz
+   955  03C4  0220               	subwf	_volt,w
+   956  03C5  1803               	skipnc
+   957  03C6  2BC8               	goto	u1251
+   958  03C7  2BC9               	goto	u1250
+   959  03C8                     u1251:
+   960  03C8  2A2A               	goto	l1072
+   961  03C9                     u1250:
+   962  03C9                     l1194:
+   963  03C9  3000               	movlw	0
+   964  03CA  0221               	subwf	_volt+1,w
+   965  03CB  3002               	movlw	2
+   966  03CC  1903               	skipnz
+   967  03CD  0220               	subwf	_volt,w
+   968  03CE  1C03               	skipc
+   969  03CF  2BD1               	goto	u1261
+   970  03D0  2BD2               	goto	u1260
+   971  03D1                     u1261:
+   972  03D1  2A2A               	goto	l1072
+   973  03D2                     u1260:
+   974  03D2                     l1196:
+   975                           
+   976                           ;PiCr-02.01.22.c: 226:             ADC();
+   977  03D2  20B5               	fcall	_ADC
+   978  03D3                     l1198:
+   979                           
+   980                           ;PiCr-02.01.22.c: 227:             if (volt < 70 && volt > 1) {
+   981  03D3  3000               	movlw	0
+   982  03D4  1283               	bcf	3,5	;RP0=0, select bank0
+   983  03D5  0221               	subwf	_volt+1,w
+   984  03D6  3046               	movlw	70
+   985  03D7  1903               	skipnz
+   986  03D8  0220               	subwf	_volt,w
+   987  03D9  1803               	skipnc
+   988  03DA  2BDC               	goto	u1271
+   989  03DB  2BDD               	goto	u1270
+   990  03DC                     u1271:
+   991  03DC  2A2A               	goto	l1072
+   992  03DD                     u1270:
+   993  03DD                     l1200:
+   994  03DD  3000               	movlw	0
+   995  03DE  0221               	subwf	_volt+1,w
+   996  03DF  3002               	movlw	2
+   997  03E0  1903               	skipnz
+   998  03E1  0220               	subwf	_volt,w
+   999  03E2  1C03               	skipc
+  1000  03E3  2BE5               	goto	u1281
+  1001  03E4  2BE6               	goto	u1280
+  1002  03E5                     u1281:
+  1003  03E5  2A2A               	goto	l1072
+  1004  03E6                     u1280:
+  1005  03E6                     l1202:
+  1006                           
+  1007                           ;PiCr-02.01.22.c: 228:                 codeAddress = 0b10110101;
+  1008  03E6  30B5               	movlw	181
+  1009  03E7  00A9               	movwf	??_main
+  1010  03E8  0829               	movf	??_main,w
+  1011  03E9  00AD               	movwf	_codeAddress
+  1012                           
+  1013                           ;PiCr-02.01.22.c: 229:                 codeCommand = 0b00000010;
+  1014  03EA  3002               	movlw	2
+  1015  03EB  00A9               	movwf	??_main
+  1016  03EC  0829               	movf	??_main,w
+  1017  03ED  00AC               	movwf	_codeCommand
+  1018  03EE                     l1204:
+  1019                           
+  1020                           ;PiCr-02.01.22.c: 230:                 commandd();
+  1021  03EE  2159               	fcall	_commandd
+  1022  03EF  2A2A               	goto	l1072
+  1023  03F0  2800               	ljmp	start
+  1024  03F1                     __end_of_main:
+  1025                           
+  1026                           	psect	text1
+  1027  0159                     __ptext1:	
+  1028 ;; *************** function _commandd *****************
+  1029 ;; Defined at:
+  1030 ;;		line 74 in file "PiCr-02.01.22.c"
+  1031 ;; Parameters:    Size  Location     Type
+  1032 ;;		None
+  1033 ;; Auto vars:     Size  Location     Type
+  1034 ;;		None
+  1035 ;; Return value:  Size  Location     Type
+  1036 ;;                  1    wreg      void 
+  1037 ;; Registers used:
+  1038 ;;		wreg, status,2, status,0, pclath, cstack
+  1039 ;; Tracked objects:
+  1040 ;;		On entry : 0/0
+  1041 ;;		On exit  : 0/0
+  1042 ;;		Unchanged: 0/0
+  1043 ;; Data sizes:     COMMON   BANK0
+  1044 ;;      Params:         0       0
+  1045 ;;      Locals:         0       0
+  1046 ;;      Temps:          0       1
+  1047 ;;      Totals:         0       1
+  1048 ;;Total ram usage:        1 bytes
+  1049 ;; Hardware stack levels used:    1
+  1050 ;; Hardware stack levels required when called:    1
+  1051 ;; This function calls:
+  1052 ;;		_bit0
+  1053 ;;		_bit1
+  1054 ;;		_ms9And4ms
+  1055 ;; This function is called by:
+  1056 ;;		_main
+  1057 ;; This function uses a non-reentrant model
+  1058 ;;
+  1059                           
+  1060                           
+  1061                           ;psect for function _commandd
+  1062  0159                     _commandd:
+  1063  0159                     l994:	
+  1064                           ;incstack = 0
+  1065                           ; Regs used in _commandd: [wreg+status,2+status,0+pclath+cstack]
+  1066                           
+  1067                           
+  1068                           ;PiCr-02.01.22.c: 75:     ms9And4ms();
+  1069  0159  212C               	fcall	_ms9And4ms
+  1070  015A                     l996:
+  1071                           
+  1072                           ;PiCr-02.01.22.c: 76:     loopBit = 8;
+  1073  015A  3008               	movlw	8
+  1074  015B  1283               	bcf	3,5	;RP0=0, select bank0
+  1075  015C  00A8               	movwf	??_commandd
+  1076  015D  0828               	movf	??_commandd,w
+  1077  015E  00A4               	movwf	_loopBit
+  1078                           
+  1079                           ;PiCr-02.01.22.c: 77:     while (loopBit > 0) {
+  1080  015F  2983               	goto	l1006
+  1081  0160                     l998:
+  1082                           
+  1083                           ;PiCr-02.01.22.c: 78:         loopBit--;
+  1084  0160  3001               	movlw	1
+  1085  0161  02A4               	subwf	_loopBit,f
+  1086                           
+  1087                           ;PiCr-02.01.22.c: 79:         if (!(codeAddress & (1 << loopBit))) {
+  1088  0162  3001               	movlw	1
+  1089  0163  00A8               	movwf	??_commandd
+  1090  0164  0A24               	incf	_loopBit,w
+  1091  0165  2968               	goto	u714
+  1092  0166                     u715:
+  1093  0166  1003               	clrc
+  1094  0167  0DA8               	rlf	??_commandd,f
+  1095  0168                     u714:
+  1096  0168  3EFF               	addlw	-1
+  1097  0169  1D03               	skipz
+  1098  016A  2966               	goto	u715
+  1099  016B  0828               	movf	??_commandd,w
+  1100  016C  052D               	andwf	_codeAddress,w
+  1101  016D  1D03               	btfss	3,2
+  1102  016E  2970               	goto	u721
+  1103  016F  2971               	goto	u720
+  1104  0170                     u721:
+  1105  0170  2973               	goto	l1002
+  1106  0171                     u720:
+  1107  0171                     l1000:
+  1108                           
+  1109                           ;PiCr-02.01.22.c: 80:             bit0();
+  1110  0171  20D5               	fcall	_bit0
+  1111                           
+  1112                           ;PiCr-02.01.22.c: 81:         } else if (codeAddress & (1 << loopBit)) {
+  1113  0172  2983               	goto	l1006
+  1114  0173                     l1002:
+  1115  0173  3001               	movlw	1
+  1116  0174  00A8               	movwf	??_commandd
+  1117  0175  0A24               	incf	_loopBit,w
+  1118  0176  2979               	goto	u734
+  1119  0177                     u735:
+  1120  0177  1003               	clrc
+  1121  0178  0DA8               	rlf	??_commandd,f
+  1122  0179                     u734:
+  1123  0179  3EFF               	addlw	-1
+  1124  017A  1D03               	skipz
+  1125  017B  2977               	goto	u735
+  1126  017C  0828               	movf	??_commandd,w
+  1127  017D  052D               	andwf	_codeAddress,w
+  1128  017E  1903               	btfsc	3,2
+  1129  017F  2981               	goto	u741
+  1130  0180  2982               	goto	u740
+  1131  0181                     u741:
+  1132  0181  2983               	goto	l1006
+  1133  0182                     u740:
+  1134  0182                     l1004:
+  1135                           
+  1136                           ;PiCr-02.01.22.c: 82:             bit1();
+  1137  0182  20FF               	fcall	_bit1
+  1138  0183                     l1006:
+  1139                           
+  1140                           ;PiCr-02.01.22.c: 77:     while (loopBit > 0) {
+  1141  0183  1283               	bcf	3,5	;RP0=0, select bank0
+  1142  0184  0824               	movf	_loopBit,w
+  1143  0185  1D03               	btfss	3,2
+  1144  0186  2988               	goto	u751
+  1145  0187  2989               	goto	u750
+  1146  0188                     u751:
+  1147  0188  2960               	goto	l998
+  1148  0189                     u750:
+  1149  0189                     l61:
+  1150                           
+  1151                           ;PiCr-02.01.22.c: 85:     codeAddress = ~codeAddress;
+  1152  0189  09AD               	comf	_codeAddress,f
+  1153  018A                     l1008:
+  1154                           
+  1155                           ;PiCr-02.01.22.c: 86:     loopBit = 8;
+  1156  018A  3008               	movlw	8
+  1157  018B  00A8               	movwf	??_commandd
+  1158  018C  0828               	movf	??_commandd,w
+  1159  018D  00A4               	movwf	_loopBit
+  1160                           
+  1161                           ;PiCr-02.01.22.c: 87:     while (loopBit > 0) {
+  1162  018E  29B2               	goto	l1018
+  1163  018F                     l1010:
+  1164                           
+  1165                           ;PiCr-02.01.22.c: 88:         loopBit--;
+  1166  018F  3001               	movlw	1
+  1167  0190  02A4               	subwf	_loopBit,f
+  1168                           
+  1169                           ;PiCr-02.01.22.c: 89:         if (!(codeAddress & (1 << loopBit))) {
+  1170  0191  3001               	movlw	1
+  1171  0192  00A8               	movwf	??_commandd
+  1172  0193  0A24               	incf	_loopBit,w
+  1173  0194  2997               	goto	u764
+  1174  0195                     u765:
+  1175  0195  1003               	clrc
+  1176  0196  0DA8               	rlf	??_commandd,f
+  1177  0197                     u764:
+  1178  0197  3EFF               	addlw	-1
+  1179  0198  1D03               	skipz
+  1180  0199  2995               	goto	u765
+  1181  019A  0828               	movf	??_commandd,w
+  1182  019B  052D               	andwf	_codeAddress,w
+  1183  019C  1D03               	btfss	3,2
+  1184  019D  299F               	goto	u771
+  1185  019E  29A0               	goto	u770
+  1186  019F                     u771:
+  1187  019F  29A2               	goto	l1014
+  1188  01A0                     u770:
+  1189  01A0                     l1012:
+  1190                           
+  1191                           ;PiCr-02.01.22.c: 90:             bit0();
+  1192  01A0  20D5               	fcall	_bit0
+  1193                           
+  1194                           ;PiCr-02.01.22.c: 91:         } else if (codeAddress & (1 << loopBit)) {
+  1195  01A1  29B2               	goto	l1018
+  1196  01A2                     l1014:
+  1197  01A2  3001               	movlw	1
+  1198  01A3  00A8               	movwf	??_commandd
+  1199  01A4  0A24               	incf	_loopBit,w
+  1200  01A5  29A8               	goto	u784
+  1201  01A6                     u785:
+  1202  01A6  1003               	clrc
+  1203  01A7  0DA8               	rlf	??_commandd,f
+  1204  01A8                     u784:
+  1205  01A8  3EFF               	addlw	-1
+  1206  01A9  1D03               	skipz
+  1207  01AA  29A6               	goto	u785
+  1208  01AB  0828               	movf	??_commandd,w
+  1209  01AC  052D               	andwf	_codeAddress,w
+  1210  01AD  1903               	btfsc	3,2
+  1211  01AE  29B0               	goto	u791
+  1212  01AF  29B1               	goto	u790
+  1213  01B0                     u791:
+  1214  01B0  29B2               	goto	l1018
+  1215  01B1                     u790:
+  1216  01B1                     l1016:
+  1217                           
+  1218                           ;PiCr-02.01.22.c: 92:             bit1();
+  1219  01B1  20FF               	fcall	_bit1
+  1220  01B2                     l1018:
+  1221                           
+  1222                           ;PiCr-02.01.22.c: 87:     while (loopBit > 0) {
+  1223  01B2  1283               	bcf	3,5	;RP0=0, select bank0
+  1224  01B3  0824               	movf	_loopBit,w
+  1225  01B4  1D03               	btfss	3,2
+  1226  01B5  29B7               	goto	u801
+  1227  01B6  29B8               	goto	u800
+  1228  01B7                     u801:
+  1229  01B7  298F               	goto	l1010
+  1230  01B8                     u800:
+  1231  01B8                     l67:
+  1232                           
+  1233                           ;PiCr-02.01.22.c: 95:     codeAddress = ~codeAddress;
+  1234  01B8  09AD               	comf	_codeAddress,f
+  1235  01B9                     l1020:
+  1236                           
+  1237                           ;PiCr-02.01.22.c: 96:     loopBit = 8;
+  1238  01B9  3008               	movlw	8
+  1239  01BA  00A8               	movwf	??_commandd
+  1240  01BB  0828               	movf	??_commandd,w
+  1241  01BC  00A4               	movwf	_loopBit
+  1242                           
+  1243                           ;PiCr-02.01.22.c: 97:     while (loopBit > 0) {
+  1244  01BD  29E1               	goto	l1030
+  1245  01BE                     l1022:
+  1246                           
+  1247                           ;PiCr-02.01.22.c: 98:         loopBit--;
+  1248  01BE  3001               	movlw	1
+  1249  01BF  02A4               	subwf	_loopBit,f
+  1250                           
+  1251                           ;PiCr-02.01.22.c: 99:         if (!(codeCommand & (1 << loopBit))) {
+  1252  01C0  3001               	movlw	1
+  1253  01C1  00A8               	movwf	??_commandd
+  1254  01C2  0A24               	incf	_loopBit,w
+  1255  01C3  29C6               	goto	u814
+  1256  01C4                     u815:
+  1257  01C4  1003               	clrc
+  1258  01C5  0DA8               	rlf	??_commandd,f
+  1259  01C6                     u814:
+  1260  01C6  3EFF               	addlw	-1
+  1261  01C7  1D03               	skipz
+  1262  01C8  29C4               	goto	u815
+  1263  01C9  0828               	movf	??_commandd,w
+  1264  01CA  052C               	andwf	_codeCommand,w
+  1265  01CB  1D03               	btfss	3,2
+  1266  01CC  29CE               	goto	u821
+  1267  01CD  29CF               	goto	u820
+  1268  01CE                     u821:
+  1269  01CE  29D1               	goto	l1026
+  1270  01CF                     u820:
+  1271  01CF                     l1024:
+  1272                           
+  1273                           ;PiCr-02.01.22.c: 100:             bit0();
+  1274  01CF  20D5               	fcall	_bit0
+  1275                           
+  1276                           ;PiCr-02.01.22.c: 101:         } else if (codeCommand & (1 << loopBit)) {
+  1277  01D0  29E1               	goto	l1030
+  1278  01D1                     l1026:
+  1279  01D1  3001               	movlw	1
+  1280  01D2  00A8               	movwf	??_commandd
+  1281  01D3  0A24               	incf	_loopBit,w
+  1282  01D4  29D7               	goto	u834
+  1283  01D5                     u835:
+  1284  01D5  1003               	clrc
+  1285  01D6  0DA8               	rlf	??_commandd,f
+  1286  01D7                     u834:
+  1287  01D7  3EFF               	addlw	-1
+  1288  01D8  1D03               	skipz
+  1289  01D9  29D5               	goto	u835
+  1290  01DA  0828               	movf	??_commandd,w
+  1291  01DB  052C               	andwf	_codeCommand,w
+  1292  01DC  1903               	btfsc	3,2
+  1293  01DD  29DF               	goto	u841
+  1294  01DE  29E0               	goto	u840
+  1295  01DF                     u841:
+  1296  01DF  29E1               	goto	l1030
+  1297  01E0                     u840:
+  1298  01E0                     l1028:
+  1299                           
+  1300                           ;PiCr-02.01.22.c: 102:             bit1();
+  1301  01E0  20FF               	fcall	_bit1
+  1302  01E1                     l1030:
+  1303                           
+  1304                           ;PiCr-02.01.22.c: 97:     while (loopBit > 0) {
+  1305  01E1  1283               	bcf	3,5	;RP0=0, select bank0
+  1306  01E2  0824               	movf	_loopBit,w
+  1307  01E3  1D03               	btfss	3,2
+  1308  01E4  29E6               	goto	u851
+  1309  01E5  29E7               	goto	u850
+  1310  01E6                     u851:
+  1311  01E6  29BE               	goto	l1022
+  1312  01E7                     u850:
+  1313  01E7                     l73:
+  1314                           
+  1315                           ;PiCr-02.01.22.c: 105:     codeCommand = ~codeCommand;
+  1316  01E7  09AC               	comf	_codeCommand,f
+  1317  01E8                     l1032:
+  1318                           
+  1319                           ;PiCr-02.01.22.c: 106:     loopBit = 8;
+  1320  01E8  3008               	movlw	8
+  1321  01E9  00A8               	movwf	??_commandd
+  1322  01EA  0828               	movf	??_commandd,w
+  1323  01EB  00A4               	movwf	_loopBit
+  1324                           
+  1325                           ;PiCr-02.01.22.c: 107:     while (loopBit > 0) {
+  1326  01EC  2A10               	goto	l1042
+  1327  01ED                     l1034:
+  1328                           
+  1329                           ;PiCr-02.01.22.c: 108:         loopBit--;
+  1330  01ED  3001               	movlw	1
+  1331  01EE  02A4               	subwf	_loopBit,f
+  1332                           
+  1333                           ;PiCr-02.01.22.c: 109:         if (!(codeCommand & (1 << loopBit))) {
+  1334  01EF  3001               	movlw	1
+  1335  01F0  00A8               	movwf	??_commandd
+  1336  01F1  0A24               	incf	_loopBit,w
+  1337  01F2  29F5               	goto	u864
+  1338  01F3                     u865:
+  1339  01F3  1003               	clrc
+  1340  01F4  0DA8               	rlf	??_commandd,f
+  1341  01F5                     u864:
+  1342  01F5  3EFF               	addlw	-1
+  1343  01F6  1D03               	skipz
+  1344  01F7  29F3               	goto	u865
+  1345  01F8  0828               	movf	??_commandd,w
+  1346  01F9  052C               	andwf	_codeCommand,w
+  1347  01FA  1D03               	btfss	3,2
+  1348  01FB  29FD               	goto	u871
+  1349  01FC  29FE               	goto	u870
+  1350  01FD                     u871:
+  1351  01FD  2A00               	goto	l1038
+  1352  01FE                     u870:
+  1353  01FE                     l1036:
+  1354                           
+  1355                           ;PiCr-02.01.22.c: 110:             bit0();
+  1356  01FE  20D5               	fcall	_bit0
+  1357                           
+  1358                           ;PiCr-02.01.22.c: 111:         } else if (codeCommand & (1 << loopBit)) {
+  1359  01FF  2A10               	goto	l1042
+  1360  0200                     l1038:
+  1361  0200  3001               	movlw	1
+  1362  0201  00A8               	movwf	??_commandd
+  1363  0202  0A24               	incf	_loopBit,w
+  1364  0203  2A06               	goto	u884
+  1365  0204                     u885:
+  1366  0204  1003               	clrc
+  1367  0205  0DA8               	rlf	??_commandd,f
+  1368  0206                     u884:
+  1369  0206  3EFF               	addlw	-1
+  1370  0207  1D03               	skipz
+  1371  0208  2A04               	goto	u885
+  1372  0209  0828               	movf	??_commandd,w
+  1373  020A  052C               	andwf	_codeCommand,w
+  1374  020B  1903               	btfsc	3,2
+  1375  020C  2A0E               	goto	u891
+  1376  020D  2A0F               	goto	u890
+  1377  020E                     u891:
+  1378  020E  2A10               	goto	l1042
+  1379  020F                     u890:
+  1380  020F                     l1040:
+  1381                           
+  1382                           ;PiCr-02.01.22.c: 112:             bit1();
+  1383  020F  20FF               	fcall	_bit1
+  1384  0210                     l1042:
+  1385                           
+  1386                           ;PiCr-02.01.22.c: 107:     while (loopBit > 0) {
+  1387  0210  1283               	bcf	3,5	;RP0=0, select bank0
+  1388  0211  0824               	movf	_loopBit,w
+  1389  0212  1D03               	btfss	3,2
+  1390  0213  2A15               	goto	u901
+  1391  0214  2A16               	goto	u900
+  1392  0215                     u901:
+  1393  0215  29ED               	goto	l1034
+  1394  0216                     u900:
+  1395  0216                     l1044:
+  1396                           
+  1397                           ;PiCr-02.01.22.c: 115:     bit0();
+  1398  0216  20D5               	fcall	_bit0
+  1399  0217                     l1046:
+  1400                           
+  1401                           ;PiCr-02.01.22.c: 116:     codeCommand = ~codeCommand;
+  1402  0217  1283               	bcf	3,5	;RP0=0, select bank0
+  1403  0218  09AC               	comf	_codeCommand,f
+  1404  0219                     l80:
+  1405  0219  0008               	return
+  1406  021A                     __end_of_commandd:
+  1407                           
+  1408                           	psect	text2
+  1409  012C                     __ptext2:	
+  1410 ;; *************** function _ms9And4ms *****************
+  1411 ;; Defined at:
+  1412 ;;		line 44 in file "PiCr-02.01.22.c"
+  1413 ;; Parameters:    Size  Location     Type
+  1414 ;;		None
+  1415 ;; Auto vars:     Size  Location     Type
+  1416 ;;		None
+  1417 ;; Return value:  Size  Location     Type
+  1418 ;;                  1    wreg      void 
+  1419 ;; Registers used:
+  1420 ;;		wreg, status,2
+  1421 ;; Tracked objects:
+  1422 ;;		On entry : 0/0
+  1423 ;;		On exit  : 0/0
+  1424 ;;		Unchanged: 0/0
+  1425 ;; Data sizes:     COMMON   BANK0
+  1426 ;;      Params:         0       0
+  1427 ;;      Locals:         0       0
+  1428 ;;      Temps:          0       2
+  1429 ;;      Totals:         0       2
+  1430 ;;Total ram usage:        2 bytes
+  1431 ;; Hardware stack levels used:    1
+  1432 ;; This function calls:
+  1433 ;;		Nothing
+  1434 ;; This function is called by:
+  1435 ;;		_commandd
+  1436 ;; This function uses a non-reentrant model
+  1437 ;;
+  1438                           
+  1439                           
+  1440                           ;psect for function _ms9And4ms
+  1441  012C                     _ms9And4ms:
+  1442  012C                     l958:	
+  1443                           ;incstack = 0
+  1444                           ; Regs used in _ms9And4ms: [wreg+status,2]
+  1445                           
+  1446                           
+  1447                           ;PiCr-02.01.22.c: 45:     for (i = 0; i < 300; i++) {
+  1448  012C  1283               	bcf	3,5	;RP0=0, select bank0
+  1449  012D  01A2               	clrf	_i
+  1450  012E  01A3               	clrf	_i+1
+  1451  012F                     l960:
+  1452  012F  3001               	movlw	1
+  1453  0130  0223               	subwf	_i+1,w
+  1454  0131  302C               	movlw	44
+  1455  0132  1903               	skipnz
+  1456  0133  0222               	subwf	_i,w
+  1457  0134  1C03               	skipc
+  1458  0135  2937               	goto	u651
+  1459  0136  2938               	goto	u650
+  1460  0137                     u651:
+  1461  0137  2939               	goto	l41
+  1462  0138                     u650:
+  1463  0138  294F               	goto	l42
+  1464  0139                     l41:
+  1465                           
+  1466                           ;PiCr-02.01.22.c: 46:         GP2 = 1;
+  1467  0139  1505               	bsf	5,2	;volatile
+  1468  013A                     l964:
+  1469                           
+  1470                           ;PiCr-02.01.22.c: 47:         _delay((unsigned long)((10)*(4000000/4000000.0)));
+  1471  013A  3003               	movlw	3
+  1472  013B  00A6               	movwf	??_ms9And4ms
+  1473  013C                     u1307:
+  1474  013C  0BA6               	decfsz	??_ms9And4ms,f
+  1475  013D  293C               	goto	u1307
+  1476  013E                     l966:
+  1477                           
+  1478                           ;PiCr-02.01.22.c: 48:         GP2 = 0;
+  1479  013E  1283               	bcf	3,5	;RP0=0, select bank0
+  1480  013F  1105               	bcf	5,2	;volatile
+  1481                           
+  1482                           ;PiCr-02.01.22.c: 49:     }
+  1483  0140  3001               	movlw	1
+  1484  0141  07A2               	addwf	_i,f
+  1485  0142  1803               	skipnc
+  1486  0143  0AA3               	incf	_i+1,f
+  1487  0144  3000               	movlw	0
+  1488  0145  07A3               	addwf	_i+1,f
+  1489  0146  3001               	movlw	1
+  1490  0147  0223               	subwf	_i+1,w
+  1491  0148  302C               	movlw	44
+  1492  0149  1903               	skipnz
+  1493  014A  0222               	subwf	_i,w
+  1494  014B  1C03               	skipc
+  1495  014C  294E               	goto	u661
+  1496  014D  294F               	goto	u660
+  1497  014E                     u661:
+  1498  014E  2939               	goto	l41
+  1499  014F                     u660:
+  1500  014F                     l42:
+  1501                           
+  1502                           ;PiCr-02.01.22.c: 50:     GP2 = 0;
+  1503  014F  1105               	bcf	5,2	;volatile
+  1504  0150                     l968:
+  1505                           
+  1506                           ;PiCr-02.01.22.c: 51:     _delay((unsigned long)((4500)*(4000000/4000000.0)));
+  1507  0150  3006               	movlw	6
+  1508  0151  00A7               	movwf	??_ms9And4ms+1
+  1509  0152  30D7               	movlw	215
+  1510  0153  00A6               	movwf	??_ms9And4ms
+  1511  0154                     u1317:
+  1512  0154  0BA6               	decfsz	??_ms9And4ms,f
+  1513  0155  2954               	goto	u1317
+  1514  0156  0BA7               	decfsz	??_ms9And4ms+1,f
+  1515  0157  2954               	goto	u1317
+  1516  0158                     l43:
+  1517  0158  0008               	return
+  1518  0159                     __end_of_ms9And4ms:
+  1519                           
+  1520                           	psect	text3
+  1521  00FF                     __ptext3:	
+  1522 ;; *************** function _bit1 *****************
+  1523 ;; Defined at:
+  1524 ;;		line 54 in file "PiCr-02.01.22.c"
+  1525 ;; Parameters:    Size  Location     Type
+  1526 ;;		None
+  1527 ;; Auto vars:     Size  Location     Type
+  1528 ;;		None
+  1529 ;; Return value:  Size  Location     Type
+  1530 ;;                  1    wreg      void 
+  1531 ;; Registers used:
+  1532 ;;		wreg, status,2
+  1533 ;; Tracked objects:
+  1534 ;;		On entry : 0/0
+  1535 ;;		On exit  : 0/0
+  1536 ;;		Unchanged: 0/0
+  1537 ;; Data sizes:     COMMON   BANK0
+  1538 ;;      Params:         0       0
+  1539 ;;      Locals:         0       0
+  1540 ;;      Temps:          0       1
+  1541 ;;      Totals:         0       1
+  1542 ;;Total ram usage:        1 bytes
+  1543 ;; Hardware stack levels used:    1
+  1544 ;; This function calls:
+  1545 ;;		Nothing
+  1546 ;; This function is called by:
+  1547 ;;		_commandd
+  1548 ;; This function uses a non-reentrant model
+  1549 ;;
+  1550                           
+  1551                           
+  1552                           ;psect for function _bit1
+  1553  00FF                     _bit1:
+  1554  00FF                     l970:	
+  1555                           ;incstack = 0
+  1556                           ; Regs used in _bit1: [wreg+status,2]
+  1557                           
+  1558                           
+  1559                           ;PiCr-02.01.22.c: 55:     for (i = 0; i < 19; i++) {
+  1560  00FF  1283               	bcf	3,5	;RP0=0, select bank0
+  1561  0100  01A2               	clrf	_i
+  1562  0101  01A3               	clrf	_i+1
+  1563  0102                     l972:
+  1564  0102  3000               	movlw	0
+  1565  0103  0223               	subwf	_i+1,w
+  1566  0104  3013               	movlw	19
+  1567  0105  1903               	skipnz
+  1568  0106  0222               	subwf	_i,w
+  1569  0107  1C03               	skipc
+  1570  0108  290A               	goto	u671
+  1571  0109  290B               	goto	u670
+  1572  010A                     u671:
+  1573  010A  290C               	goto	l46
+  1574  010B                     u670:
+  1575  010B  2922               	goto	l47
+  1576  010C                     l46:
+  1577                           
+  1578                           ;PiCr-02.01.22.c: 56:         GP2 = 1;
+  1579  010C  1505               	bsf	5,2	;volatile
+  1580  010D                     l976:
+  1581                           
+  1582                           ;PiCr-02.01.22.c: 57:         _delay((unsigned long)((10)*(4000000/4000000.0)));
+  1583  010D  3003               	movlw	3
+  1584  010E  00A6               	movwf	??_bit1
+  1585  010F                     u1327:
+  1586  010F  0BA6               	decfsz	??_bit1,f
+  1587  0110  290F               	goto	u1327
+  1588  0111                     l978:
+  1589                           
+  1590                           ;PiCr-02.01.22.c: 58:         GP2 = 0;
+  1591  0111  1283               	bcf	3,5	;RP0=0, select bank0
+  1592  0112  1105               	bcf	5,2	;volatile
+  1593                           
+  1594                           ;PiCr-02.01.22.c: 59:     }
+  1595  0113  3001               	movlw	1
+  1596  0114  07A2               	addwf	_i,f
+  1597  0115  1803               	skipnc
+  1598  0116  0AA3               	incf	_i+1,f
+  1599  0117  3000               	movlw	0
+  1600  0118  07A3               	addwf	_i+1,f
+  1601  0119  3000               	movlw	0
+  1602  011A  0223               	subwf	_i+1,w
+  1603  011B  3013               	movlw	19
+  1604  011C  1903               	skipnz
+  1605  011D  0222               	subwf	_i,w
+  1606  011E  1C03               	skipc
+  1607  011F  2921               	goto	u681
+  1608  0120  2922               	goto	u680
+  1609  0121                     u681:
+  1610  0121  290C               	goto	l46
+  1611  0122                     u680:
+  1612  0122                     l47:
+  1613                           
+  1614                           ;PiCr-02.01.22.c: 60:     GP2 = 0;
+  1615  0122  1105               	bcf	5,2	;volatile
+  1616  0123                     l980:
+  1617                           
+  1618                           ;PiCr-02.01.22.c: 61:     _delay((unsigned long)((1650)*(4000000/4000000.0)));
+  1619  0123  30EB               	movlw	235
+  1620  0124  00A6               	movwf	??_bit1
+  1621  0125                     u1337:
+  1622  0125  2926               	nop2
+  1623  0126  2927               	nop2
+  1624  0127  0BA6               	decfsz	??_bit1,f
+  1625  0128  2925               	goto	u1337
+  1626  0129  292A               	nop2
+  1627  012A  292B               	nop2
+  1628  012B                     l48:
+  1629  012B  0008               	return
+  1630  012C                     __end_of_bit1:
+  1631                           
+  1632                           	psect	text4
+  1633  00D5                     __ptext4:	
+  1634 ;; *************** function _bit0 *****************
+  1635 ;; Defined at:
+  1636 ;;		line 64 in file "PiCr-02.01.22.c"
+  1637 ;; Parameters:    Size  Location     Type
+  1638 ;;		None
+  1639 ;; Auto vars:     Size  Location     Type
+  1640 ;;		None
+  1641 ;; Return value:  Size  Location     Type
+  1642 ;;                  1    wreg      void 
+  1643 ;; Registers used:
+  1644 ;;		wreg, status,2
+  1645 ;; Tracked objects:
+  1646 ;;		On entry : 0/0
+  1647 ;;		On exit  : 0/0
+  1648 ;;		Unchanged: 0/0
+  1649 ;; Data sizes:     COMMON   BANK0
+  1650 ;;      Params:         0       0
+  1651 ;;      Locals:         0       0
+  1652 ;;      Temps:          0       1
+  1653 ;;      Totals:         0       1
+  1654 ;;Total ram usage:        1 bytes
+  1655 ;; Hardware stack levels used:    1
+  1656 ;; This function calls:
+  1657 ;;		Nothing
+  1658 ;; This function is called by:
+  1659 ;;		_commandd
+  1660 ;; This function uses a non-reentrant model
+  1661 ;;
+  1662                           
+  1663                           
+  1664                           ;psect for function _bit0
+  1665  00D5                     _bit0:
+  1666  00D5                     l982:	
+  1667                           ;incstack = 0
+  1668                           ; Regs used in _bit0: [wreg+status,2]
+  1669                           
+  1670                           
+  1671                           ;PiCr-02.01.22.c: 65:     for (i = 0; i < 19; i++) {
+  1672  00D5  1283               	bcf	3,5	;RP0=0, select bank0
+  1673  00D6  01A2               	clrf	_i
+  1674  00D7  01A3               	clrf	_i+1
+  1675  00D8                     l984:
+  1676  00D8  3000               	movlw	0
+  1677  00D9  0223               	subwf	_i+1,w
+  1678  00DA  3013               	movlw	19
+  1679  00DB  1903               	skipnz
+  1680  00DC  0222               	subwf	_i,w
+  1681  00DD  1C03               	skipc
+  1682  00DE  28E0               	goto	u691
+  1683  00DF  28E1               	goto	u690
+  1684  00E0                     u691:
+  1685  00E0  28E2               	goto	l51
+  1686  00E1                     u690:
+  1687  00E1  28F8               	goto	l52
+  1688  00E2                     l51:
+  1689                           
+  1690                           ;PiCr-02.01.22.c: 66:         GP2 = 1;
+  1691  00E2  1505               	bsf	5,2	;volatile
+  1692  00E3                     l988:
+  1693                           
+  1694                           ;PiCr-02.01.22.c: 67:         _delay((unsigned long)((10)*(4000000/4000000.0)));
+  1695  00E3  3003               	movlw	3
+  1696  00E4  00A6               	movwf	??_bit0
+  1697  00E5                     u1347:
+  1698  00E5  0BA6               	decfsz	??_bit0,f
+  1699  00E6  28E5               	goto	u1347
+  1700  00E7                     l990:
+  1701                           
+  1702                           ;PiCr-02.01.22.c: 68:         GP2 = 0;
+  1703  00E7  1283               	bcf	3,5	;RP0=0, select bank0
+  1704  00E8  1105               	bcf	5,2	;volatile
+  1705                           
+  1706                           ;PiCr-02.01.22.c: 69:     }
+  1707  00E9  3001               	movlw	1
+  1708  00EA  07A2               	addwf	_i,f
+  1709  00EB  1803               	skipnc
+  1710  00EC  0AA3               	incf	_i+1,f
+  1711  00ED  3000               	movlw	0
+  1712  00EE  07A3               	addwf	_i+1,f
+  1713  00EF  3000               	movlw	0
+  1714  00F0  0223               	subwf	_i+1,w
+  1715  00F1  3013               	movlw	19
+  1716  00F2  1903               	skipnz
+  1717  00F3  0222               	subwf	_i,w
+  1718  00F4  1C03               	skipc
+  1719  00F5  28F7               	goto	u701
+  1720  00F6  28F8               	goto	u700
+  1721  00F7                     u701:
+  1722  00F7  28E2               	goto	l51
+  1723  00F8                     u700:
+  1724  00F8                     l52:
+  1725                           
+  1726                           ;PiCr-02.01.22.c: 70:     GP2 = 0;
+  1727  00F8  1105               	bcf	5,2	;volatile
+  1728  00F9                     l992:
+  1729                           
+  1730                           ;PiCr-02.01.22.c: 71:     _delay((unsigned long)((450)*(4000000/4000000.0)));
+  1731  00F9  3095               	movlw	149
+  1732  00FA  00A6               	movwf	??_bit0
+  1733  00FB                     u1357:
+  1734  00FB  0BA6               	decfsz	??_bit0,f
+  1735  00FC  28FB               	goto	u1357
+  1736  00FD  28FE               	nop2
+  1737  00FE                     l53:
+  1738  00FE  0008               	return
+  1739  00FF                     __end_of_bit0:
+  1740                           
+  1741                           	psect	text5
+  1742  009C                     __ptext5:	
+  1743 ;; *************** function _ADC1 *****************
+  1744 ;; Defined at:
+  1745 ;;		line 129 in file "PiCr-02.01.22.c"
+  1746 ;; Parameters:    Size  Location     Type
+  1747 ;;		None
+  1748 ;; Auto vars:     Size  Location     Type
+  1749 ;;		None
+  1750 ;; Return value:  Size  Location     Type
+  1751 ;;                  1    wreg      void 
+  1752 ;; Registers used:
+  1753 ;;		wreg
+  1754 ;; Tracked objects:
+  1755 ;;		On entry : 0/0
+  1756 ;;		On exit  : 0/0
+  1757 ;;		Unchanged: 0/0
+  1758 ;; Data sizes:     COMMON   BANK0
+  1759 ;;      Params:         0       0
+  1760 ;;      Locals:         0       0
+  1761 ;;      Temps:          0       2
+  1762 ;;      Totals:         0       2
+  1763 ;;Total ram usage:        2 bytes
+  1764 ;; Hardware stack levels used:    1
+  1765 ;; This function calls:
+  1766 ;;		Nothing
+  1767 ;; This function is called by:
+  1768 ;;		_main
+  1769 ;; This function uses a non-reentrant model
+  1770 ;;
+  1771                           
+  1772                           
+  1773                           ;psect for function _ADC1
+  1774  009C                     _ADC1:
+  1775  009C                     l1058:	
+  1776                           ;incstack = 0
+  1777                           ; Regs used in _ADC1: [wreg]
+  1778                           
+  1779                           
+  1780                           ;PiCr-02.01.22.c: 130:     ADON = 1;
+  1781  009C  1283               	bcf	3,5	;RP0=0, select bank0
+  1782  009D  141F               	bsf	31,0	;volatile
+  1783  009E                     l1060:
+  1784                           
+  1785                           ;PiCr-02.01.22.c: 131:     _delay((unsigned long)((30)*(4000000/4000.0)));
+  1786  009E  3027               	movlw	39
+  1787  009F  00A7               	movwf	??_ADC1+1
+  1788  00A0  30F5               	movlw	245
+  1789  00A1  00A6               	movwf	??_ADC1
+  1790  00A2                     u1367:
+  1791  00A2  0BA6               	decfsz	??_ADC1,f
+  1792  00A3  28A2               	goto	u1367
+  1793  00A4  0BA7               	decfsz	??_ADC1+1,f
+  1794  00A5  28A2               	goto	u1367
+  1795  00A6                     l1062:
+  1796                           
+  1797                           ;PiCr-02.01.22.c: 132:     GO_DONE = 1;
+  1798  00A6  1283               	bcf	3,5	;RP0=0, select bank0
+  1799  00A7  149F               	bsf	31,1	;volatile
+  1800  00A8                     l89:	
+  1801                           ;PiCr-02.01.22.c: 133:     while (GO_DONE);
+  1802                           
+  1803  00A8  189F               	btfsc	31,1	;volatile
+  1804  00A9  28AB               	goto	u921
+  1805  00AA  28AC               	goto	u920
+  1806  00AB                     u921:
+  1807  00AB  28A8               	goto	l89
+  1808  00AC                     u920:
+  1809  00AC                     l1064:
+  1810                           
+  1811                           ;PiCr-02.01.22.c: 134:     volt = ADRESH;
+  1812  00AC  081E               	movf	30,w	;volatile
+  1813  00AD  00A6               	movwf	??_ADC1
+  1814  00AE  01A7               	clrf	??_ADC1+1
+  1815  00AF  0826               	movf	??_ADC1,w
+  1816  00B0  00A0               	movwf	_volt
+  1817  00B1  0827               	movf	??_ADC1+1,w
+  1818  00B2  00A1               	movwf	_volt+1
+  1819  00B3                     l1066:
+  1820                           
+  1821                           ;PiCr-02.01.22.c: 135:     ADON = 0;
+  1822  00B3  101F               	bcf	31,0	;volatile
+  1823  00B4                     l92:
+  1824  00B4  0008               	return
+  1825  00B5                     __end_of_ADC1:
+  1826                           
+  1827                           	psect	text6
+  1828  00B5                     __ptext6:	
+  1829 ;; *************** function _ADC *****************
+  1830 ;; Defined at:
+  1831 ;;		line 119 in file "PiCr-02.01.22.c"
+  1832 ;; Parameters:    Size  Location     Type
+  1833 ;;		None
+  1834 ;; Auto vars:     Size  Location     Type
+  1835 ;;		None
+  1836 ;; Return value:  Size  Location     Type
+  1837 ;;                  1    wreg      void 
+  1838 ;; Registers used:
+  1839 ;;		wreg
+  1840 ;; Tracked objects:
+  1841 ;;		On entry : 0/0
+  1842 ;;		On exit  : 0/0
+  1843 ;;		Unchanged: 0/0
+  1844 ;; Data sizes:     COMMON   BANK0
+  1845 ;;      Params:         0       0
+  1846 ;;      Locals:         0       0
+  1847 ;;      Temps:          0       2
+  1848 ;;      Totals:         0       2
+  1849 ;;Total ram usage:        2 bytes
+  1850 ;; Hardware stack levels used:    1
+  1851 ;; This function calls:
+  1852 ;;		Nothing
+  1853 ;; This function is called by:
+  1854 ;;		_main
+  1855 ;; This function uses a non-reentrant model
+  1856 ;;
+  1857                           
+  1858                           
+  1859                           ;psect for function _ADC
+  1860  00B5                     _ADC:
+  1861  00B5                     l1048:	
+  1862                           ;incstack = 0
+  1863                           ; Regs used in _ADC: [wreg]
+  1864                           
+  1865                           
+  1866                           ;PiCr-02.01.22.c: 120:     ADON = 1;
+  1867  00B5  1283               	bcf	3,5	;RP0=0, select bank0
+  1868  00B6  141F               	bsf	31,0	;volatile
+  1869  00B7                     l1050:
+  1870                           
+  1871                           ;PiCr-02.01.22.c: 121:     _delay((unsigned long)((3)*(4000000/4000.0)));
+  1872  00B7  3004               	movlw	4
+  1873  00B8  00A7               	movwf	??_ADC+1
+  1874  00B9  30E4               	movlw	228
+  1875  00BA  00A6               	movwf	??_ADC
+  1876  00BB                     u1377:
+  1877  00BB  0BA6               	decfsz	??_ADC,f
+  1878  00BC  28BB               	goto	u1377
+  1879  00BD  0BA7               	decfsz	??_ADC+1,f
+  1880  00BE  28BB               	goto	u1377
+  1881  00BF  0000               	nop
+  1882                           
+  1883                           ;PiCr-02.01.22.c: 122:     _delay((unsigned long)((200)*(4000000/4000000.0)));
+  1884  00C0  3042               	movlw	66
+  1885  00C1  1283               	bcf	3,5	;RP0=0, select bank0
+  1886  00C2  00A6               	movwf	??_ADC
+  1887  00C3                     u1387:
+  1888  00C3  0BA6               	decfsz	??_ADC,f
+  1889  00C4  28C3               	goto	u1387
+  1890  00C5  0000               	nop
+  1891  00C6                     l1052:
+  1892                           
+  1893                           ;PiCr-02.01.22.c: 123:     GO_DONE = 1;
+  1894  00C6  1283               	bcf	3,5	;RP0=0, select bank0
+  1895  00C7  149F               	bsf	31,1	;volatile
+  1896  00C8                     l83:	
+  1897                           ;PiCr-02.01.22.c: 124:     while (GO_DONE);
+  1898                           
+  1899  00C8  189F               	btfsc	31,1	;volatile
+  1900  00C9  28CB               	goto	u911
+  1901  00CA  28CC               	goto	u910
+  1902  00CB                     u911:
+  1903  00CB  28C8               	goto	l83
+  1904  00CC                     u910:
+  1905  00CC                     l1054:
+  1906                           
+  1907                           ;PiCr-02.01.22.c: 125:     volt = ADRESH;
+  1908  00CC  081E               	movf	30,w	;volatile
+  1909  00CD  00A6               	movwf	??_ADC
+  1910  00CE  01A7               	clrf	??_ADC+1
+  1911  00CF  0826               	movf	??_ADC,w
+  1912  00D0  00A0               	movwf	_volt
+  1913  00D1  0827               	movf	??_ADC+1,w
+  1914  00D2  00A1               	movwf	_volt+1
+  1915  00D3                     l1056:
+  1916                           
+  1917                           ;PiCr-02.01.22.c: 126:     ADON = 0;
+  1918  00D3  101F               	bcf	31,0	;volatile
+  1919  00D4                     l86:
+  1920  00D4  0008               	return
+  1921  00D5                     __end_of_ADC:
+  1922  005E                     btemp	set	94	;btemp
+  1923  005E                     wtemp0	set	94
+  1924                           
+  1925                           	psect	config
+  1926                           
+  1927                           ;Config register CONFIG @ 0x2007
+  1928                           ;	Oscillator Selection bits
+  1929                           ;	FOSC = INTRCIO, INTOSC oscillator: I/O function on GP4/OSC2/CLKOUT pin, I/O function o
+      +                          n GP5/OSC1/CLKIN
+  1930                           ;	Watchdog Timer Enable bit
+  1931                           ;	WDTE = OFF, WDT disabled
+  1932                           ;	Power-Up Timer Enable bit
+  1933                           ;	PWRTE = OFF, PWRT disabled
+  1934                           ;	GP3/MCLR pin function select
+  1935                           ;	MCLRE = OFF, GP3/MCLR pin function is digital I/O, MCLR internally tied to VDD
+  1936                           ;	Brown-out Detect Enable bit
+  1937                           ;	BOREN = OFF, BOD disabled
+  1938                           ;	Code Protection bit
+  1939                           ;	CP = ON, Program Memory code protection is enabled
+  1940                           ;	Data Code Protection bit
+  1941                           ;	CPD = ON, Data memory code protection is enabled
+  1942  2007                     	org	8199
+  1943  2007  3014               	dw	12308
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        3
+    BSS         6
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62      5      14
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_commandd
+    _commandd->_ms9And4ms
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0       0
+                                              3 BANK0      2     2      0
+                                _ADC
+                               _ADC1
+                           _commandd
+ ---------------------------------------------------------------------------------
+ (1) _commandd                                             1     1      0       0
+                                              2 BANK0      1     1      0
+                               _bit0
+                               _bit1
+                          _ms9And4ms
+ ---------------------------------------------------------------------------------
+ (2) _ms9And4ms                                            2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (2) _bit1                                                 1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (2) _bit0                                                 1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC1                                                 2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC                                                  2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ADC
+   _ADC1
+   _commandd
+     _bit0
+     _bit1
+     _ms9And4ms
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               3E      5       E       4       22.6%
+BITBANK0            3E      0       0       3        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITCOMMON            0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0       E       6        0.0%
+ABS                  0      0       E       5        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA              80      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
+Symbol Table                                                                                   Sun Jan 02 21:17:02 2022
+
+                      _i 0022                       l41 0139                       l42 014F  
+                     l51 00E2                       l43 0158                       l52 00F8  
+                     l53 00FE                       l61 0189                       l46 010C  
+                     l47 0122                       l48 012B                       l80 0219  
+                     l73 01E7                       l83 00C8                       l67 01B8  
+                     l92 00B4                       l86 00D4                       l89 00A8  
+                    _ADC 00B5                      l960 012F                      l970 00FF  
+                    l980 0123                      l972 0102                      l964 013A  
+                    l990 00E7                      l982 00D5                      l966 013E  
+                    l958 012C                      _GP2 002A                      l992 00F9  
+                    l984 00D8                      l976 010D                      l968 0150  
+                    l978 0111                      l994 0159                      l988 00E3  
+                    l996 015A                      l998 0160                      u700 00F8  
+                    u701 00F7                      u800 01B8                      u720 0171  
+                    u801 01B7                      u721 0170                      u650 0138  
+                    u714 0168                      u651 0137                      u715 0166  
+                    u660 014F                      u900 0216                      u820 01CF  
+                    u740 0182                      u661 014E                      u901 0215  
+                    u821 01CE                      u741 0181                      u910 00CC  
+                    u670 010B                      u814 01C6                      u750 0189  
+                    u734 0179                      u911 00CB                      u671 010A  
+                    u815 01C4                      u751 0188                      u735 0177  
+                    u920 00AC                      u680 0122                      u840 01E0  
+                    u921 00AB                      u681 0121                      u841 01DF  
+                    u690 00E1                      u850 01E7                      u834 01D7  
+                    u770 01A0                      u930 0235                      u691 00E0  
+                    u851 01E6                      u835 01D5                      u771 019F  
+                    u931 0234                      u764 0197                      u940 023E  
+                    u765 0195                      u941 023D                      u870 01FE  
+                    u790 01B1                      u950 0249                      u871 01FD  
+                    u791 01B0                      u951 0248                      u864 01F5  
+                    u784 01A8                      u960 0252                      u865 01F3  
+                    u785 01A6                      u961 0251                      u890 020F  
+                    u970 0265                      u891 020E                      u971 0264  
+                    u884 0206                      u980 026E                      u885 0204  
+                    u981 026D                      u990 0279                      u991 0278  
+                   ?_ADC 0026                     l1000 0171                     l1010 018F  
+                   l1002 0173                     l1020 01B9                     l1012 01A0  
+                   l1004 0182                     l1100 028A                     l1022 01BE  
+                   l1030 01E1                     l1014 01A2                     l1006 0183  
+                   l1110 02A9                     l1102 028B                     l1040 020F  
+                   l1032 01E8                     l1024 01CF                     l1016 01B1  
+                   l1008 018A                     l1200 03DD                     l1120 02CE  
+                   l1112 02B2                     l1104 0295                     l1050 00B7  
+                   l1034 01ED                     l1042 0210                     l1026 01D1  
+                   l1018 01B2                     l1202 03E6                     l1130 02ED  
+                   l1114 02B3                     l1122 02CF                     l1106 029A  
+                   l1052 00C6                     l1060 009E                     l1044 0216  
+                   l1036 01FE                     l1028 01E0                     l1204 03EE  
+                   l1140 0312                     l1132 02F6                     l1124 02D9  
+                   l1116 02BD                     l1108 029F                     l1054 00CC  
+                   l1062 00A6                     l1046 0217                     l1038 0200  
+                   l1142 0313                     l1150 032F                     l1134 02FE  
+                   l1126 02E2                     l1118 02C6                     l1070 0229  
+                   l1056 00D3                     l1048 00B5                     l1064 00AC  
+                   l1160 0356                     l1152 0339                     l1144 031D  
+                   l1128 02E3                     l1136 02FF                     l1080 023F  
+                   l1072 022A                     l1066 00B3                     l1058 009C  
+                   l1170 0373                     l1162 035E                     l1154 0342  
+                   l1146 0326                     l1138 0309                     l1090 0265  
+                   l1082 0249                     l1074 022B                     l1180 0399  
+                   l1172 037D                     l1156 0343                     l1164 035F  
+                   l1148 032E                     l1092 026E                     l1084 0252  
+                   l1076 0235                     l1068 021A                     l1190 03BE  
+                   l1182 03A2                     l1174 0386                     l1166 0369  
+                   l1158 034D                     l1094 026F                     l1086 025A  
+                   l1078 023E                     l1184 03A3                     l1192 03BF  
+                   l1176 038E                     l1168 0372                     l1096 0279  
+                   l1088 025B                     l1194 03C9                     l1186 03AD  
+                   l1178 038F                     l1098 0282                     l1196 03D2  
+                   l1188 03B6                     l1198 03D3                     _ADC1 009C  
+                   _ADON 00F8                     u1000 0282                     u1001 0281  
+                   u1010 02A9                     u1011 02A8                     u1100 0312  
+                   u1020 02B2                     u1101 0311                     u1021 02B1  
+                   u1110 031D                     u1030 02BD                     u1111 031C  
+                   u1031 02BC                     u1200 0386                     u1120 0326  
+                   u1040 02C6                     u1201 0385                     u1121 0325  
+                   u1041 02C5                     u1210 0399                     u1130 0339  
+                   u1050 02D9                     u1211 0398                     u1131 0338  
+                   u1051 02D8                     u1220 03A2                     u1140 0342  
+                   u1060 02E2                     u1221 03A1                     u1141 0341  
+                   u1061 02E1                     u1230 03AD                     u1150 034D  
+                   u1070 02ED                     u1231 03AC                     u1151 034C  
+                   u1071 02EC                     u1240 03B6                     u1160 0356  
+                   u1080 02F6                     u1241 03B5                     u1161 0355  
+                   u1081 02F5                     u1250 03C9                     u1170 0369  
+                   u1090 0309                     u1307 013C                     u1251 03C8  
+                   u1171 0368                     u1091 0308                     u1260 03D2  
+                   u1180 0372                     u1317 0154                     u1261 03D1  
+                   u1181 0371                     u1270 03DD                     u1190 037D  
+                   u1327 010F                     u1271 03DC                     u1191 037C  
+                   u1280 03E6                     u1337 0125                     u1281 03E5  
+                   u1347 00E5                     u1357 00FB                     u1367 00A2  
+                   u1377 00BB                     u1297 0290                     u1387 00C3  
+                   _bit0 00D5                     _bit1 00FF                     _main 021A  
+                   btemp 005E                     _volt 0020                     start 0000  
+                  ??_ADC 0026                    ?_ADC1 0026                    ?_bit0 0026  
+                  ?_bit1 0026                    ?_main 0026                    _CMCON 0019  
+                  _ANSEL 009F                    _Reg_1 0025                    status 0003  
+                  wtemp0 005E             __end_of_ADC1 00B5          __initialization 03F1  
+           __end_of_bit0 00FF             __end_of_bit1 012C             __end_of_main 03F1  
+                 ??_ADC1 0026                   ??_bit0 0026                   ??_bit1 0026  
+                 ??_main 0029                   _ADCON0 001F                   _ADRESH 001E  
+                 _INTCON 000B                   _TRISIO 0085         __end_of_commandd 021A  
+__end_of__initialization 03FD             __pidataBANK0 0099       __size_of_ms9And4ms 002D  
+             __pbssBANK0 0020               __pmaintext 021A                  _GO_DONE 00F9  
+              ?_commandd 0026        __end_of_ms9And4ms 0159                  __ptext1 0159  
+                __ptext2 012C                  __ptext3 00FF                  __ptext4 00D5  
+                __ptext5 009C                  __ptext6 00B5             __size_of_ADC 0020  
+                _loopBit 0024               ??_commandd 0028     end_of_initialization 03FD  
+        _codeCommandPlus 002B      start_initialization 03F1              __end_of_ADC 00D5  
+            __pdataBANK0 002B                ___latbits 0000            __pcstackBANK0 0026  
+            _codeAddress 002D        __size_of_commandd 00C1              _codeCommand 002C  
+              _ms9And4ms 012C               ?_ms9And4ms 0026                 _PIE1bits 008C  
+               _commandd 0159            __size_of_ADC1 0019            __size_of_bit0 002A  
+          __size_of_bit1 002D            __size_of_main 01D7              ??_ms9And4ms 0026  
+             _OPTION_REG 0081  

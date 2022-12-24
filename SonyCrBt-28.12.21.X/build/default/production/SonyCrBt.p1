@@ -1,0 +1,813 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"1591 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1591: extern volatile __bit GP2 __attribute__((address(0x2A)));
+[v _GP2 `Vb ~T0 @X0 0 e@42 ]
+[v F537 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic.h
+[v __delay `JF537 ~T0 @X0 0 e ]
+[p i __delay ]
+"1498 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1498: extern volatile __bit ADON __attribute__((address(0xF8)));
+[v _ADON `Vb ~T0 @X0 0 e@248 ]
+"1579
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1579: extern volatile __bit GO_DONE __attribute__((address(0xF9)));
+[v _GO_DONE `Vb ~T0 @X0 0 e@249 ]
+"623
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 623: extern volatile unsigned char ADRESH __attribute__((address(0x01E)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+[p mainexit ]
+"797
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 797: extern volatile unsigned char TRISIO __attribute__((address(0x085)));
+[v _TRISIO `Vuc ~T0 @X0 0 e@133 ]
+"564
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 564: extern volatile unsigned char CMCON __attribute__((address(0x019)));
+[v _CMCON `Vuc ~T0 @X0 0 e@25 ]
+"643
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 643: extern volatile unsigned char ADCON0 __attribute__((address(0x01F)));
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"1404
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1404: extern volatile unsigned char ANSEL __attribute__((address(0x09F)));
+[v _ANSEL `Vuc ~T0 @X0 0 e@159 ]
+"727
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 727: extern volatile unsigned char OPTION_REG __attribute__((address(0x081)));
+[v _OPTION_REG `Vuc ~T0 @X0 0 e@129 ]
+"326
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 326: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
+[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
+"853
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 853:     struct {
+[s S47 :1 `uc 1 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S47 . TMR1IE . CMIE . ADIE EEIE ]
+"861
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 861:     struct {
+[s S48 :1 `uc 1 ]
+[n S48 . T1IE ]
+"852
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 852: typedef union {
+[u S46 `S47 1 `S48 1 ]
+[n S46 . . . ]
+"865
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 865: extern volatile PIE1bits_t PIE1bits __attribute__((address(0x08C)));
+[v _PIE1bits `VS46 ~T0 @X0 0 e@140 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 54: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"74
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 74: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"94
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 94: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"114
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 114: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"200
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 200: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"220
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 220: __asm("GPIO equ 05h");
+[; <" GPIO equ 05h ;# ">
+"308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 308: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 328: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 406: __asm("PIR1 equ 0Ch");
+[; <" PIR1 equ 0Ch ;# ">
+"454
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 454: __asm("TMR1 equ 0Eh");
+[; <" TMR1 equ 0Eh ;# ">
+"461
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 461: __asm("TMR1L equ 0Eh");
+[; <" TMR1L equ 0Eh ;# ">
+"481
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 481: __asm("TMR1H equ 0Fh");
+[; <" TMR1H equ 0Fh ;# ">
+"501
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 501: __asm("T1CON equ 010h");
+[; <" T1CON equ 010h ;# ">
+"566
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 566: __asm("CMCON equ 019h");
+[; <" CMCON equ 019h ;# ">
+"625
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 625: __asm("ADRESH equ 01Eh");
+[; <" ADRESH equ 01Eh ;# ">
+"645
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 645: __asm("ADCON0 equ 01Fh");
+[; <" ADCON0 equ 01Fh ;# ">
+"729
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 729: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"799
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 799: __asm("TRISIO equ 085h");
+[; <" TRISIO equ 085h ;# ">
+"849
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 849: __asm("PIE1 equ 08Ch");
+[; <" PIE1 equ 08Ch ;# ">
+"897
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 897: __asm("PCON equ 08Eh");
+[; <" PCON equ 08Eh ;# ">
+"931
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 931: __asm("OSCCAL equ 090h");
+[; <" OSCCAL equ 090h ;# ">
+"991
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 991: __asm("WPU equ 095h");
+[; <" WPU equ 095h ;# ">
+"1036
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1036: __asm("IOC equ 096h");
+[; <" IOC equ 096h ;# ">
+"1041
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1041: __asm("IOCB equ 096h");
+[; <" IOCB equ 096h ;# ">
+"1210
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1210: __asm("VRCON equ 099h");
+[; <" VRCON equ 099h ;# ">
+"1270
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1270: __asm("EEDATA equ 09Ah");
+[; <" EEDATA equ 09Ah ;# ">
+"1275
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1275: __asm("EEDAT equ 09Ah");
+[; <" EEDAT equ 09Ah ;# ">
+"1308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1308: __asm("EEADR equ 09Bh");
+[; <" EEADR equ 09Bh ;# ">
+"1328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1328: __asm("EECON1 equ 09Ch");
+[; <" EECON1 equ 09Ch ;# ">
+"1366
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1366: __asm("EECON2 equ 09Dh");
+[; <" EECON2 equ 09Dh ;# ">
+"1386
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1386: __asm("ADRESL equ 09Eh");
+[; <" ADRESL equ 09Eh ;# ">
+"1406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1406: __asm("ANSEL equ 09Fh");
+[; <" ANSEL equ 09Fh ;# ">
+"4 SonyCrBt.c
+[; ;SonyCrBt.c: 4: unsigned char codeAddressPlus = 0b01010000;
+[p x FOSC = INTRCIO ]
+"5
+[; ;SonyCrBt.c: 5: unsigned char loopBit;
+[p x WDTE = OFF ]
+"6
+[; ;SonyCrBt.c: 6: 
+[p x PWRTE = OFF ]
+"7
+[; ;SonyCrBt.c: 7: void ms2_4And0_6ms() {
+[p x MCLRE = OFF ]
+"8
+[; ;SonyCrBt.c: 8:     for (i = 0; i < 80; i++) {
+[p x BOREN = OFF ]
+"9
+[; ;SonyCrBt.c: 9:         GP2 = 1;
+[p x CP = ON ]
+"10
+[; ;SonyCrBt.c: 10:         _delay((unsigned long)((12)*(4000000/4000000.0)));
+[p x CPD = ON ]
+"12
+[; ;SonyCrBt.c: 12:     }
+[v _i `ui ~T0 @X0 1 e ]
+[i _i
+-> -> 0 `i `ui
+]
+"13
+[; ;SonyCrBt.c: 13:     GP2 = 0;
+[v _volt `ui ~T0 @X0 1 e ]
+"14
+[; ;SonyCrBt.c: 14:     _delay((unsigned long)((600)*(4000000/4000000.0)));
+[v _codeCommand `uc ~T0 @X0 1 e ]
+[i _codeCommand
+-> -> 80 `i `uc
+]
+"15
+[; ;SonyCrBt.c: 15: }
+[v _codeAddress `uc ~T0 @X0 1 e ]
+[i _codeAddress
+-> -> 181 `i `uc
+]
+"16
+[; ;SonyCrBt.c: 16: 
+[v _codeAddressPlus `uc ~T0 @X0 1 e ]
+[i _codeAddressPlus
+-> -> 80 `i `uc
+]
+"17
+[; ;SonyCrBt.c: 17: void bit1() {
+[v _loopBit `uc ~T0 @X0 1 e ]
+"19
+[; ;SonyCrBt.c: 19:         GP2 = 1;
+[v _ms2_4And0_6ms `(v ~T0 @X0 1 ef ]
+{
+[e :U _ms2_4And0_6ms ]
+[f ]
+"20
+[; ;SonyCrBt.c: 20:         _delay((unsigned long)((12)*(4000000/4000000.0)));
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ < _i -> -> 80 `i `ui 82  ]
+[e $U 83  ]
+[e :U 82 ]
+{
+"21
+[; ;SonyCrBt.c: 21:         GP2 = 0;
+[e = _GP2 -> -> 1 `i `b ]
+"22
+[; ;SonyCrBt.c: 22:     }
+[e ( __delay (1 -> * -> -> 12 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"23
+[; ;SonyCrBt.c: 23:     GP2 = 0;
+[e = _GP2 -> -> 0 `i `b ]
+"24
+[; ;SonyCrBt.c: 24:     _delay((unsigned long)((600)*(4000000/4000000.0)));
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ < _i -> -> 80 `i `ui 82  ]
+[e :U 83 ]
+}
+"25
+[; ;SonyCrBt.c: 25: }
+[e = _GP2 -> -> 0 `i `b ]
+"26
+[; ;SonyCrBt.c: 26: 
+[e ( __delay (1 -> * -> -> 600 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"27
+[; ;SonyCrBt.c: 27: void bit0() {
+[e :UE 81 ]
+}
+"29
+[; ;SonyCrBt.c: 29:         GP2 = 1;
+[v _bit1 `(v ~T0 @X0 1 ef ]
+{
+[e :U _bit1 ]
+[f ]
+"30
+[; ;SonyCrBt.c: 30:         _delay((unsigned long)((12)*(4000000/4000000.0)));
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ < _i -> -> 40 `i `ui 86  ]
+[e $U 87  ]
+[e :U 86 ]
+{
+"31
+[; ;SonyCrBt.c: 31:         GP2 = 0;
+[e = _GP2 -> -> 1 `i `b ]
+"32
+[; ;SonyCrBt.c: 32:     }
+[e ( __delay (1 -> * -> -> 12 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"33
+[; ;SonyCrBt.c: 33:     GP2 = 0;
+[e = _GP2 -> -> 0 `i `b ]
+"34
+[; ;SonyCrBt.c: 34:     _delay((unsigned long)((600)*(4000000/4000000.0)));
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ < _i -> -> 40 `i `ui 86  ]
+[e :U 87 ]
+}
+"35
+[; ;SonyCrBt.c: 35: }
+[e = _GP2 -> -> 0 `i `b ]
+"36
+[; ;SonyCrBt.c: 36: 
+[e ( __delay (1 -> * -> -> 600 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"37
+[; ;SonyCrBt.c: 37: char commandd(unsigned char loopBit1, unsigned char loopBit2, unsigned char loopBit3) {
+[e :UE 85 ]
+}
+"39
+[; ;SonyCrBt.c: 39:     loopBit = 8;
+[v _bit0 `(v ~T0 @X0 1 ef ]
+{
+[e :U _bit0 ]
+[f ]
+"40
+[; ;SonyCrBt.c: 40:     while (loopBit > loopBit1) {
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ < _i -> -> 20 `i `ui 90  ]
+[e $U 91  ]
+[e :U 90 ]
+{
+"41
+[; ;SonyCrBt.c: 41:         loopBit--;
+[e = _GP2 -> -> 1 `i `b ]
+"42
+[; ;SonyCrBt.c: 42:         if (!(codeCommand & (1 << loopBit))) {
+[e ( __delay (1 -> * -> -> 12 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"43
+[; ;SonyCrBt.c: 43:             bit0();
+[e = _GP2 -> -> 0 `i `b ]
+"44
+[; ;SonyCrBt.c: 44:         } else if (codeCommand & (1 << loopBit)) {
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ < _i -> -> 20 `i `ui 90  ]
+[e :U 91 ]
+}
+"45
+[; ;SonyCrBt.c: 45:             bit1();
+[e = _GP2 -> -> 0 `i `b ]
+"46
+[; ;SonyCrBt.c: 46:         }
+[e ( __delay (1 -> * -> -> 600 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"47
+[; ;SonyCrBt.c: 47:     }
+[e :UE 89 ]
+}
+"49
+[; ;SonyCrBt.c: 49:     loopBit = 8;
+[v _commandd `(uc ~T0 @X0 1 ef3`uc`uc`uc ]
+{
+[e :U _commandd ]
+[v _loopBit1 `uc ~T0 @X0 1 r1 ]
+[v _loopBit2 `uc ~T0 @X0 1 r2 ]
+[v _loopBit3 `uc ~T0 @X0 1 r3 ]
+[f ]
+"50
+[; ;SonyCrBt.c: 50:     while (loopBit > loopBit2) {
+[e ( _ms2_4And0_6ms ..  ]
+"51
+[; ;SonyCrBt.c: 51:         loopBit--;
+[e = _loopBit -> -> 8 `i `uc ]
+"52
+[; ;SonyCrBt.c: 52:         if (!(codeAddress & (1 << loopBit))) {
+[e $U 94  ]
+[e :U 95 ]
+{
+"53
+[; ;SonyCrBt.c: 53:             bit0();
+[e -- _loopBit -> -> 1 `i `uc ]
+"54
+[; ;SonyCrBt.c: 54:         } else if (codeAddress & (1 << loopBit)) {
+[e $ ! ! != & -> _codeCommand `i << -> 1 `i -> _loopBit `i -> 0 `i 97  ]
+{
+"55
+[; ;SonyCrBt.c: 55:             bit1();
+[e ( _bit0 ..  ]
+"56
+[; ;SonyCrBt.c: 56:         }
+}
+[e $U 98  ]
+[e :U 97 ]
+[e $ ! != & -> _codeCommand `i << -> 1 `i -> _loopBit `i -> 0 `i 99  ]
+{
+"57
+[; ;SonyCrBt.c: 57:     }
+[e ( _bit1 ..  ]
+"58
+[; ;SonyCrBt.c: 58: 
+}
+[e :U 99 ]
+[e :U 98 ]
+"59
+[; ;SonyCrBt.c: 59:     loopBit = 8;
+}
+[e :U 94 ]
+"52
+[; ;SonyCrBt.c: 52:         if (!(codeAddress & (1 << loopBit))) {
+[e $ > -> _loopBit `i -> _loopBit1 `i 95  ]
+[e :U 96 ]
+"61
+[; ;SonyCrBt.c: 61:         loopBit--;
+[e = _loopBit -> -> 8 `i `uc ]
+"62
+[; ;SonyCrBt.c: 62:         if (!(codeAddressPlus & (1 << loopBit))) {
+[e $U 100  ]
+[e :U 101 ]
+{
+"63
+[; ;SonyCrBt.c: 63:             bit0();
+[e -- _loopBit -> -> 1 `i `uc ]
+"64
+[; ;SonyCrBt.c: 64:         } else if (codeAddressPlus & (1 << loopBit)) {
+[e $ ! ! != & -> _codeAddress `i << -> 1 `i -> _loopBit `i -> 0 `i 103  ]
+{
+"65
+[; ;SonyCrBt.c: 65:             bit1();
+[e ( _bit0 ..  ]
+"66
+[; ;SonyCrBt.c: 66:         }
+}
+[e $U 104  ]
+[e :U 103 ]
+[e $ ! != & -> _codeAddress `i << -> 1 `i -> _loopBit `i -> 0 `i 105  ]
+{
+"67
+[; ;SonyCrBt.c: 67:     }
+[e ( _bit1 ..  ]
+"68
+[; ;SonyCrBt.c: 68: }
+}
+[e :U 105 ]
+[e :U 104 ]
+"69
+[; ;SonyCrBt.c: 69: 
+}
+[e :U 100 ]
+"62
+[; ;SonyCrBt.c: 62:         if (!(codeAddressPlus & (1 << loopBit))) {
+[e $ > -> _loopBit `i -> _loopBit2 `i 101  ]
+[e :U 102 ]
+"71
+[; ;SonyCrBt.c: 71:     ADON = 1;
+[e = _loopBit -> -> 8 `i `uc ]
+"72
+[; ;SonyCrBt.c: 72:     _delay((unsigned long)((3)*(4000000/4000.0)));
+[e $U 106  ]
+[e :U 107 ]
+{
+"73
+[; ;SonyCrBt.c: 73:     _delay((unsigned long)((200)*(4000000/4000000.0)));
+[e -- _loopBit -> -> 1 `i `uc ]
+"74
+[; ;SonyCrBt.c: 74:     GO_DONE = 1;
+[e $ ! ! != & -> _codeAddressPlus `i << -> 1 `i -> _loopBit `i -> 0 `i 109  ]
+{
+"75
+[; ;SonyCrBt.c: 75:     while (GO_DONE);
+[e ( _bit0 ..  ]
+"76
+[; ;SonyCrBt.c: 76:     volt = ADRESH;
+}
+[e $U 110  ]
+[e :U 109 ]
+[e $ ! != & -> _codeAddressPlus `i << -> 1 `i -> _loopBit `i -> 0 `i 111  ]
+{
+"77
+[; ;SonyCrBt.c: 77:     ADON = 0;
+[e ( _bit1 ..  ]
+"78
+[; ;SonyCrBt.c: 78: }
+}
+[e :U 111 ]
+[e :U 110 ]
+"79
+[; ;SonyCrBt.c: 79: 
+}
+[e :U 106 ]
+"72
+[; ;SonyCrBt.c: 72:     _delay((unsigned long)((3)*(4000000/4000.0)));
+[e $ > -> _loopBit `i -> _loopBit3 `i 107  ]
+[e :U 108 ]
+"80
+[; ;SonyCrBt.c: 80: void ADC1() {
+[e :UE 93 ]
+}
+"82
+[; ;SonyCrBt.c: 82:     _delay((unsigned long)((30)*(4000000/4000.0)));
+[v _ADC `(v ~T0 @X0 1 ef ]
+{
+[e :U _ADC ]
+[f ]
+"83
+[; ;SonyCrBt.c: 83:     GO_DONE = 1;
+[e = _ADON -> -> 1 `i `b ]
+"84
+[; ;SonyCrBt.c: 84:     while (GO_DONE);
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"85
+[; ;SonyCrBt.c: 85:     volt = ADRESH;
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"86
+[; ;SonyCrBt.c: 86:     ADON = 0;
+[e = _GO_DONE -> -> 1 `i `b ]
+"87
+[; ;SonyCrBt.c: 87: }
+[e $U 113  ]
+[e :U 114 ]
+[e :U 113 ]
+[e $ _GO_DONE 114  ]
+[e :U 115 ]
+"88
+[; ;SonyCrBt.c: 88: 
+[e = _volt -> _ADRESH `ui ]
+"89
+[; ;SonyCrBt.c: 89: void main(void) {
+[e = _ADON -> -> 0 `i `b ]
+"90
+[; ;SonyCrBt.c: 90:     TRISIO = 0b00010000;
+[e :UE 112 ]
+}
+"92
+[; ;SonyCrBt.c: 92:     ADCON0 = 0b00001100;
+[v _ADC1 `(v ~T0 @X0 1 ef ]
+{
+[e :U _ADC1 ]
+[f ]
+"93
+[; ;SonyCrBt.c: 93:     ANSEL = 0b01111000;
+[e = _ADON -> -> 1 `i `b ]
+"94
+[; ;SonyCrBt.c: 94:     OPTION_REG = 0b10000011;
+[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"95
+[; ;SonyCrBt.c: 95:     INTCON = 0b1000000;
+[e = _GO_DONE -> -> 1 `i `b ]
+"96
+[; ;SonyCrBt.c: 96:     PIE1bits.ADIE = 1;
+[e $U 117  ]
+[e :U 118 ]
+[e :U 117 ]
+[e $ _GO_DONE 118  ]
+[e :U 119 ]
+"97
+[; ;SonyCrBt.c: 97: 
+[e = _volt -> _ADRESH `ui ]
+"98
+[; ;SonyCrBt.c: 98:     while (1) {
+[e = _ADON -> -> 0 `i `b ]
+"99
+[; ;SonyCrBt.c: 99:         ADC1();
+[e :UE 116 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"101
+[; ;SonyCrBt.c: 101:             ADC();
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"102
+[; ;SonyCrBt.c: 102:             if (volt < 252 && volt > 235) {
+[e = _TRISIO -> -> 16 `i `uc ]
+"103
+[; ;SonyCrBt.c: 103:                 codeCommand = 0b01001100;
+[e = _CMCON -> -> 7 `i `uc ]
+"104
+[; ;SonyCrBt.c: 104:                 codeAddress = 0b01000010;
+[e = _ADCON0 -> -> 12 `i `uc ]
+"105
+[; ;SonyCrBt.c: 105:                 commandd(0, 1, 8);
+[e = _ANSEL -> -> 120 `i `uc ]
+"106
+[; ;SonyCrBt.c: 106:             }
+[e = _OPTION_REG -> -> 131 `i `uc ]
+"107
+[; ;SonyCrBt.c: 107:         }
+[e = _INTCON -> -> 64 `i `uc ]
+"108
+[; ;SonyCrBt.c: 108: 
+[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
+"110
+[; ;SonyCrBt.c: 110:             ADC();
+[e :U 122 ]
+{
+"111
+[; ;SonyCrBt.c: 111:             if (volt < 235 && volt > 210) {
+[e ( _ADC1 ..  ]
+"112
+[; ;SonyCrBt.c: 112:                 codeCommand = 0b00101000;
+[e $ ! && < _volt -> -> 252 `i `ui > _volt -> -> 235 `i `ui 124  ]
+{
+"113
+[; ;SonyCrBt.c: 113:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"114
+[; ;SonyCrBt.c: 114:                 commandd(0, 1, 8);
+[e $ ! && < _volt -> -> 252 `i `ui > _volt -> -> 235 `i `ui 125  ]
+{
+"115
+[; ;SonyCrBt.c: 115:             }
+[e = _codeCommand -> -> 76 `i `uc ]
+"116
+[; ;SonyCrBt.c: 116:         }
+[e = _codeAddress -> -> 66 `i `uc ]
+"117
+[; ;SonyCrBt.c: 117: 
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"118
+[; ;SonyCrBt.c: 118:         if (volt < 210 && volt > 200) {
+}
+[e :U 125 ]
+"119
+[; ;SonyCrBt.c: 119:             ADC();
+}
+[e :U 124 ]
+"121
+[; ;SonyCrBt.c: 121:                 codeCommand = 0b10000010;
+[e $ ! && < _volt -> -> 235 `i `ui > _volt -> -> 210 `i `ui 126  ]
+{
+"122
+[; ;SonyCrBt.c: 122:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"123
+[; ;SonyCrBt.c: 123:                 codeAddressPlus = 0b00000000;
+[e $ ! && < _volt -> -> 235 `i `ui > _volt -> -> 210 `i `ui 127  ]
+{
+"124
+[; ;SonyCrBt.c: 124:                 commandd(0, 0, 4);
+[e = _codeCommand -> -> 40 `i `uc ]
+"125
+[; ;SonyCrBt.c: 125:             }
+[e = _codeAddress -> -> 66 `i `uc ]
+"126
+[; ;SonyCrBt.c: 126:         }
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"127
+[; ;SonyCrBt.c: 127: 
+}
+[e :U 127 ]
+"128
+[; ;SonyCrBt.c: 128:         if (volt < 200 && volt > 189) {
+}
+[e :U 126 ]
+"130
+[; ;SonyCrBt.c: 130:             if (volt < 200 && volt > 189) {
+[e $ ! && < _volt -> -> 210 `i `ui > _volt -> -> 200 `i `ui 128  ]
+{
+"131
+[; ;SonyCrBt.c: 131:                 codeCommand = 0b01100010;
+[e ( _ADC ..  ]
+"132
+[; ;SonyCrBt.c: 132:                 codeAddress = 0b01000010;
+[e $ ! && < _volt -> -> 210 `i `ui > _volt -> -> 200 `i `ui 129  ]
+{
+"133
+[; ;SonyCrBt.c: 133:                 commandd(0, 1, 8);
+[e = _codeCommand -> -> 130 `i `uc ]
+"134
+[; ;SonyCrBt.c: 134:             }
+[e = _codeAddress -> -> 66 `i `uc ]
+"135
+[; ;SonyCrBt.c: 135:         }
+[e = _codeAddressPlus -> -> 0 `i `uc ]
+"136
+[; ;SonyCrBt.c: 136: 
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 0 `i `uc -> -> 4 `i `uc ]
+"137
+[; ;SonyCrBt.c: 137:         if (volt < 189 && volt > 175) {
+}
+[e :U 129 ]
+"138
+[; ;SonyCrBt.c: 138:             ADC();
+}
+[e :U 128 ]
+"140
+[; ;SonyCrBt.c: 140:                 codeCommand = 0b10101100;
+[e $ ! && < _volt -> -> 200 `i `ui > _volt -> -> 189 `i `ui 130  ]
+{
+"141
+[; ;SonyCrBt.c: 141:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"142
+[; ;SonyCrBt.c: 142:                 commandd(0, 1, 8);
+[e $ ! && < _volt -> -> 200 `i `ui > _volt -> -> 189 `i `ui 131  ]
+{
+"143
+[; ;SonyCrBt.c: 143:             }
+[e = _codeCommand -> -> 98 `i `uc ]
+"144
+[; ;SonyCrBt.c: 144:         }
+[e = _codeAddress -> -> 66 `i `uc ]
+"145
+[; ;SonyCrBt.c: 145: 
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"146
+[; ;SonyCrBt.c: 146:         if (volt < 175 && volt > 163) {
+}
+[e :U 131 ]
+"147
+[; ;SonyCrBt.c: 147:             ADC();
+}
+[e :U 130 ]
+"149
+[; ;SonyCrBt.c: 149:                 codeCommand = 0b00101100;
+[e $ ! && < _volt -> -> 189 `i `ui > _volt -> -> 175 `i `ui 132  ]
+{
+"150
+[; ;SonyCrBt.c: 150:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"151
+[; ;SonyCrBt.c: 151:                 commandd(0, 1, 8);
+[e $ ! && < _volt -> -> 189 `i `ui > _volt -> -> 175 `i `ui 133  ]
+{
+"152
+[; ;SonyCrBt.c: 152:             }
+[e = _codeCommand -> -> 172 `i `uc ]
+"153
+[; ;SonyCrBt.c: 153:         }
+[e = _codeAddress -> -> 66 `i `uc ]
+"154
+[; ;SonyCrBt.c: 154: 
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"155
+[; ;SonyCrBt.c: 155:         if (volt < 163 && volt > 148) {
+}
+[e :U 133 ]
+"156
+[; ;SonyCrBt.c: 156:             ADC();
+}
+[e :U 132 ]
+"158
+[; ;SonyCrBt.c: 158:                 codeCommand = 0b11001000;
+[e $ ! && < _volt -> -> 175 `i `ui > _volt -> -> 163 `i `ui 134  ]
+{
+"159
+[; ;SonyCrBt.c: 159:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"160
+[; ;SonyCrBt.c: 160:                 commandd(0, 1, 8);
+[e $ ! && < _volt -> -> 175 `i `ui > _volt -> -> 163 `i `ui 135  ]
+{
+"161
+[; ;SonyCrBt.c: 161:             }
+[e = _codeCommand -> -> 44 `i `uc ]
+"162
+[; ;SonyCrBt.c: 162:         }
+[e = _codeAddress -> -> 66 `i `uc ]
+"163
+[; ;SonyCrBt.c: 163: 
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"164
+[; ;SonyCrBt.c: 164:         if (volt < 148 && volt > 70) {
+}
+[e :U 135 ]
+"165
+[; ;SonyCrBt.c: 165:             ADC();
+}
+[e :U 134 ]
+"167
+[; ;SonyCrBt.c: 167:                 codeCommand = 0b01001000;
+[e $ ! && < _volt -> -> 163 `i `ui > _volt -> -> 148 `i `ui 136  ]
+{
+"168
+[; ;SonyCrBt.c: 168:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"169
+[; ;SonyCrBt.c: 169:                 commandd(0, 1, 8);
+[e $ ! && < _volt -> -> 163 `i `ui > _volt -> -> 148 `i `ui 137  ]
+{
+"170
+[; ;SonyCrBt.c: 170:             }
+[e = _codeCommand -> -> 200 `i `uc ]
+"171
+[; ;SonyCrBt.c: 171:         }
+[e = _codeAddress -> -> 66 `i `uc ]
+"172
+[; ;SonyCrBt.c: 172: 
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"173
+[; ;SonyCrBt.c: 173:         if (volt < 70 && volt > 1) {
+}
+[e :U 137 ]
+"174
+[; ;SonyCrBt.c: 174:             ADC();
+}
+[e :U 136 ]
+"176
+[; ;SonyCrBt.c: 176:                 codeCommand = 0b11001100;
+[e $ ! && < _volt -> -> 148 `i `ui > _volt -> -> 70 `i `ui 138  ]
+{
+"177
+[; ;SonyCrBt.c: 177:                 codeAddress = 0b01000010;
+[e ( _ADC ..  ]
+"178
+[; ;SonyCrBt.c: 178:                 commandd(0, 1, 8);
+[e $ ! && < _volt -> -> 148 `i `ui > _volt -> -> 70 `i `ui 139  ]
+{
+"179
+[; ;SonyCrBt.c: 179:             }
+[e = _codeCommand -> -> 72 `i `uc ]
+"180
+[; ;SonyCrBt.c: 180:         }
+[e = _codeAddress -> -> 66 `i `uc ]
+"181
+[; ;SonyCrBt.c: 181:     }
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"182
+[; ;SonyCrBt.c: 182: }
+}
+[e :U 139 ]
+"183
+}
+[e :U 138 ]
+"185
+[e $ ! && < _volt -> -> 70 `i `ui > _volt -> -> 1 `i `ui 140  ]
+{
+"186
+[e ( _ADC ..  ]
+"187
+[e $ ! && < _volt -> -> 70 `i `ui > _volt -> -> 1 `i `ui 141  ]
+{
+"188
+[e = _codeCommand -> -> 204 `i `uc ]
+"189
+[e = _codeAddress -> -> 66 `i `uc ]
+"190
+[e ( _commandd (3 , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 8 `i `uc ]
+"191
+}
+[e :U 141 ]
+"192
+}
+[e :U 140 ]
+"193
+}
+[e :U 121 ]
+[e $U 122  ]
+[e :U 123 ]
+"194
+[e :UE 120 ]
+}

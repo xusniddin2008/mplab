@@ -1,0 +1,4 @@
+Warning[205] C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\TMR0.X\TMR0.ASM 8 : Found directive in column 1. (List)
+Warning[205] C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\TMR0.X\TMR0.ASM 17 : Found directive in column 1. (CBLOCK)
+Warning[205] C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\TMR0.X\TMR0.ASM 18 : Found directive in column 1. (ENDC)
+Message[302] C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\TMR0.X\TMR0.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.

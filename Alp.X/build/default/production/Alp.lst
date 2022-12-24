@@ -1,0 +1,1181 @@
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list p=12f675
+                      00002 
+                      00003         #include <P12f675.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 21 2019
+                      00005 ;  MPASM PIC12F675 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00367         LIST
+                      00004 
+                      00005         ERRORLEVEL      -302            
+                      00006 
+                      00007 
+2007   0014           00008         __CONFIG  00014H        
+                      00009         #define   IR_LED    GPIO,2 ; ???????????? ?????????
+                      00010 
+                      00011 
+  00000026            00012 count           equ     0x26    
+  00000027            00013 loops           equ     0x27    
+  00000028            00014 loops2          equ     0x28    
+                      00015 
+                      00016 
+  00000029            00017 f0              equ     0x29    
+  0000002A            00018 f1              equ     0x2A     
+                      00019 
+  0000002B            00020 powermax        equ     0x2B    
+  0000002C            00021 powermin        equ     0x2C    
+  0000002D            00022 modemax         equ     0x2D
+  0000002E            00023 modemin         equ     0x2E
+  00000037            00024 seekmax         equ     0x37
+  00000038            00025 seekmin         equ     0x38
+  00000039            00026 volumtepamax    equ     0x39
+  00000030            00027 volumtepamin    equ     0x30
+  0000003A            00028 volumpasmax     equ     0x3A
+  0000003B            00029 volumpasmin     equ     0x3B
+  0000003C            00030 fCOUNTER        equ     0x3C ; ??????? ?????? ??? ?????????? ???????????.
+  0000003D            00031 fCOUNTER2       equ     0x3D ; ???????2.
+  0000003E            00032 Sec1            equ     0x3E    
+  00000031            00033 Reg_1           equ     0x31            
+  00000032            00034 Reg_2           equ     0x32
+  00000033            00035 Reg_3           equ     0x33
+  00000034            00036 Reg_4           equ     0x34
+  00000035            00037 Reg_5           equ     0x35
+  00000036            00038 Reg_6           equ     0x36            
+                      00039                 
+                      00040 
+                      00041 
+                      00042         org     0x00
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00043 
+0000   2???           00044         goto    Init
+                      00045 
+                      00046 ;***********************************************************************
+                      00047 ; Initialisierung
+                      00048 ;
+0001                  00049 Init
+                      00050         ; IO-Pins
+0001   1283           00051             bcf     STATUS, RP0         ; Bank 0
+0002   0185           00052             clrf    GPIO                        ; aus!
+0003   3007           00053             movlw   b'00000111'
+0004   0099           00054             movwf   CMCON                       ; Comparator aus
+0005   1683           00055             bsf     STATUS, RP0         ; Bank 1
+                      00056            
+0006   1485           00057             bsf     TRISIO,1
+0007   1105           00058             bcf     TRISIO,2
+0008   1585           00059             bsf     TRISIO,3
+0009   1285           00060             bcf     TRISIO,5            ; GP5 output f?r Schalttransistor oder LED
+000A   1605           00061             bsf     TRISIO,4
+000B   1781           00062             bsf     OPTION_REG,7          ; podtyaguyushiy rezistor o`chirildi
+000C   1095           00063             bcf     WPU, WPU1           ;podtyaguyeshshiy rezistor gpio1 ga o`rnatilmadi
+000D   1115           00064             bcf     WPU, WPU2
+000E   1015           00065             bcf     WPU, WPU0
+000F   1283           00066             bcf     STATUS, RP0         ; Bank0 ; internen Taktgenerator kalibrieren
+0010   1683           00067             bsf     STATUS, RP0         ; Bank 1
+0011   23FF           00068             call    0x3FF
+0012   0090           00069             movwf   OSCCAL                      ; 4-MHz-Kalibrierung
+0013   1283           00070             bcf     STATUS, RP0         ; Bank 0
+                      00071 
+                      00072         ; Interrupt
+0014   138B           00073             bcf     INTCON, GIE         ; Int deaktiviert
+                      00074 ;******************************************************************************
+                      00075 ; ADC initialisieren
+                      00076         ; ADC einschalten
+0015   141F           00077             BSF     ADCON0, ADON        ; ADON=1
+                      00078         ; ADC-Eingang AN0 ausw?hlen
+0016   159F           00079             BSF     ADCON0, CHS1        ; ADCHS1=0
+0017   151F           00080             BSF     ADCON0, CHS0        ; ADCHS0=0
+                      00081         ; ADC speed f?r 1,25 ... 5 MHz einstellen
+0018   1683           00082             BSF     STATUS,RP0  ; Bank1
+0019   019F           00083             clrf    ANSEL
+001A   161F           00084             BSF     ANSEL, ADCS0        ; ADCS0=1 Fosc/8
+                      00085         ; AN0,1 analog
+                      00086             ;BSF            ANSEL, ANS0 ; AN1=analog
+001B   159F           00087             BSF     ANSEL, ANS3
+001C   1283           00088             BCF     STATUS,RP0  ; Bank0
+                      00089         ; Daten linksb?ndig
+001D   131F           00090             BCF     ADCON0, VCFG        ; RA2=digital
+001E   139F           00091             BCF     ADCON0, ADFM        ; ADFM=1 linksb?ndig
+                      00092 
+                      00093         ;LED-Schaltspannungen festlegen
+                      00094                 
+001F   30FD           00095             movlw   0xFD                ;4.84V
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0020   00AB           00096             movwf   powermax
+                      00097         
+0021   30F4           00098             movlw   0xF4                ;4.69V
+0022   00AC           00099             movwf   powermin
+                      00100 
+                      00101             
+0023   30F4           00102             movlw   0xF4                ; 4.64V
+0024   00AD           00103             movwf   modemax
+                      00104 
+0025   30EC           00105             movlw   0xEC                ; 4.56V
+0026   00AE           00106             movwf   modemin
+                      00107             
+                      00108             
+0027   30EC           00109             movlw   0xEC                ; 4.46V
+0028   00B7           00110             movwf   seekmax
+                      00111             
+0029   30CF           00112             movlw   0xCF                ; 4.38V
+002A   00B8           00113             movwf   seekmin
+                      00114             
+                      00115             
+002B   30CF           00116             movlw   0xCF                ; 3.77V
+002C   00B9           00117             movwf   volumtepamax
+                      00118             
+002D   3055           00119             movlw   0x55                ; 3.69V
+002E   00B0           00120             movwf   volumtepamin
+                      00121             
+                      00122             
+002F   3055           00123             movlw   0x55                ; 0.01V
+0030   00BA           00124             movwf   volumpasmax
+                      00125             
+0031   3002           00126             movlw   0x02                ; 0.06V
+0032   00BB           00127             movwf   volumpasmin
+                      00128 ;***********************************************************************
+                      00129 ;Main 
+0033                  00130 Mainloop
+                      00131         ; Messen
+0033   2???           00132         call    UMessen1        ; AN0 nach f1,f0  (f1 is entscheidend)
+0034   2???           00133         call    LED             ; LED ein-/ausschalten
+0035   2???           00134         goto    Mainloop
+                      00135 
+                      00136 ;***********************************************************************
+0036   149F           00137 UMessen1    BSF     ADCON0, 1   ; ADC starten       
+0037   189F           00138 loop        BTFSC   ADCON0, 1   ; ist der ADC fertig?
+0038   2???           00139             GOTO    loop                ; nein, weiter warten       
+0039   081E           00140             movfw   ADRESH              ; obere  8 Bit auslesen
+003A   00AA           00141             movwf   f1          ; obere  8-Bit nach f1
+003B   1683           00142             bsf     STATUS,RP0  ; Bank1
+003C   081E           00143             movfw   ADRESL              ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+003D   1283           00144             bcf     STATUS,RP0  ; Bank0
+003E   00A9           00145             movwf   f0          ; untere 2-Bit nach f0
+003F   30A5           00146             movlw       .165
+0040   00B1           00147             movwf       Reg_1
+0041   3033           00148             movlw       .51
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0042   00B2           00149             movwf       Reg_2
+0043   0BB1           00150             decfsz      Reg_1,F
+0044   2???           00151             goto        $-1
+0045   0BB2           00152             decfsz      Reg_2,F
+0046   2???           00153             goto        $-3
+0047   0008           00154             return
+                      00155 ;***********************************************************************
+                      00156 ; LED ein/aus-schalten
+0048                  00157 LED
+                      00158         
+0048   082B           00159         MOVFW   powermax
+0049   022A           00160         subwf   f1, w           ; w:=f1-w 
+004A   1C03           00161         btfss   STATUS, C
+004B   2???           00162         call    power           ; LED an
+                      00163         
+                      00164         
+004C   082D           00165         MOVFW   modemax
+004D   022A           00166         subwf   f1, w           ; w:=f1-w 
+004E   1C03           00167         btfss   STATUS, C
+004F   2???           00168         call    mode            ; LED an
+                      00169         
+                      00170         
+0050   0837           00171         MOVFW   seekmax
+0051   022A           00172         subwf   f1, w           ; w:=f1-w 
+0052   1C03           00173         btfss   STATUS, C
+0053   2???           00174         call    seek            ; LED an
+                      00175         
+                      00176         
+0054   0839           00177         MOVFW   volumtepamax
+0055   022A           00178         subwf   f1, w           ; w:=f1-w 
+0056   1C03           00179         btfss   STATUS, C
+0057   2???           00180         call    volumtepa       ; LED an
+                      00181         
+                      00182         
+0058   083A           00183         MOVFW   volumpasmax
+0059   022A           00184         subwf   f1, w           ; w:=f1-w 
+005A   1C03           00185         btfss   STATUS, C
+005B   2???           00186         call    volumpas        ; LED an
+                      00187         
+005C   0008           00188         return
+                      00189 ;***********************************************************************
+                      00190 ; pr?fen ob f1<Uoff
+005D   082C           00191 power   MOVFW   powermin
+005E   022A           00192         subwf   f1, w           ; w:=f1-w 
+005F   1803           00193         btfsc   STATUS, C
+0060   2???           00194         call    cmpower
+0061   301E           00195         movlw   d'30'
+0062   2???           00196         call    Big_delay
+0063   0008           00197         return
+                      00198         
+0064   082E           00199 mode    MOVFW   modemin
+0065   022A           00200         subwf   f1, w           ; w:=f1-w 
+0066   1803           00201         btfsc   STATUS, C
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0067   2???           00202         call    cmmode
+0068   301E           00203         movlw   d'30'
+0069   2???           00204         call    Big_delay
+006A   0008           00205         return
+                      00206         
+006B   0838           00207 seek    MOVFW   seekmin
+006C   022A           00208         subwf   f1, w           ; w:=f1-w 
+006D   1803           00209         btfsc   STATUS, C
+006E   2???           00210         call    cmseek
+006F   301E           00211         movlw   d'30'
+0070   2???           00212         call    Big_delay
+0071   0008           00213         return
+                      00214         
+0072   0830           00215 volumtepa MOVFW volumtepamin
+0073   022A           00216         subwf   f1, w           ; w:=f1-w 
+0074   1803           00217         btfsc   STATUS, C
+0075   2???           00218         call    cmvolumtepa
+0076   301E           00219         movlw   d'30'
+0077   2???           00220         call    Big_delay
+0078   0008           00221         return  
+                      00222         
+0079   083B           00223 volumpas MOVFW  volumpasmin
+007A   022A           00224         subwf   f1, w           ; w:=f1-w 
+007B   1803           00225         btfsc   STATUS, C
+007C   2???           00226         call    cmvolumpas
+007D   301E           00227         movlw   d'30'
+007E   2???           00228         call    Big_delay
+007F   0008           00229         return  
+                      00230         
+                      00231 ;***********************************************************************
+                      00232 
+                      00233 ;-----------------------------------------------------------------------------
+                      00234 
+                      00235 
+0080                  00236 Main_Loop:
+                      00237         ;call    Transmit_CMD1
+0080   301E           00238         movlw   d'30'
+0081   2???           00239         call    Big_delay
+                      00240         ;call    Transmit_CMD1
+0082   301E           00241         movlw   d'30'
+0083   2???           00242         call    Big_delay
+                      00243         ;call    Transmit_CMD2
+0084   3096           00244         movlw   d'150'
+0085   2???           00245         call    Big_delay
+                      00246         ;call    Transmit_CMD2
+0086   3096           00247         movlw   d'150'
+0087   2???           00248         call    Big_delay
+                      00249         ;call    Transmit_CMD2
+0088   3096           00250         movlw   d'150'
+0089   2???           00251         call    Big_delay
+                      00252         ;call    Transmit_CMD2
+008A   3096           00253         movlw   d'150'
+008B   2???           00254         call    Big_delay
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00255         ;call    Transmit_CMD2
+008C   3096           00256         movlw   d'150'
+008D   2???           00257         call    Big_delay
+                      00258         ;call    Transmit_CMD2
+008E   3096           00259         movlw   d'150'
+008F   2???           00260         call    Big_delay
+                      00261         ;call    Transmit_CMD2
+0090   3096           00262         movlw   d'150'
+0091   2???           00263         call    Big_delay
+Warning[207]: Found label after column 1. (c)
+0092                  00264         c;all    Transmit_CMD2
+0092   3096           00265         movlw   d'150'
+0093   2???           00266         call    Big_delay
+                      00267         ;call    Transmit_CMD2
+0094   3096           00268         movlw   d'150'
+0095   2???           00269         call    Big_delay
+                      00270         ;call    Transmit_CMD2
+0096   3000           00271         movlw   0
+0097   2???           00272         call    Big_delay
+0098   2???           00273         call    Big_delay
+0099   2???           00274         call    Big_delay
+009A   2???           00275         call    Big_delay
+009B   2???           00276         call    Big_delay
+009C   2???           00277         call    Big_delay
+009D   2???           00278         goto    Main_Loop
+                      00279 
+                      00280 
+                      00281 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                      00282 ;                  ? ? ? ? ? ? ? ? ?   ? ? ? ? ? ? ?
+                      00283 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                      00284 ;-----------------------------------------------------------------------------
+009E                  00285 Big_delay ;=770*x+1     x=(delay-5)/770 ???????? ?????????? call ? return.
+009E   00BD           00286         movwf   fCOUNTER2
+009F   01BC           00287         clrf    fCOUNTER
+00A0                  00288 BD_Loop94
+00A0   0BBC           00289         decfsz  fCOUNTER,1
+00A1   2???           00290         goto    BD_Loop94
+00A2   0BBD           00291         decfsz  fCOUNTER2,1
+00A3   2???           00292         goto    BD_Loop94
+00A4   0008           00293         return
+                      00294 ;-----------------------------------------------------------------------------
+00A5                  00295 delay
+00A5   00BC           00296         movwf   fCOUNTER
+00A6                  00297 D_Loop36
+00A6   0BBC           00298         decfsz  fCOUNTER,1
+00A7   2???           00299         goto    D_Loop36
+00A8   0008           00300         return
+                      00301 ;-----------------------------------------------------------------------------
+00A9   2???           00302 cmpower         call    delayy9ms
+00AA   2???           00303                 call    delayy4.5ms
+00AB   2???           00304                 call    yarmi
+00AC   2???           00305                 call    Send_1;      // 38
+00AD   2???           00306                 call    Send_0;      // 39
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00AE   2???           00307                 call    Send_0;      // 40
+00AF   2???           00308                 call    Send_0;      // 41
+00B0   2???           00309                 call    Send_1;      // 42
+00B1   2???           00310                 call    Send_0;      // 43
+00B2   2???           00311                 call    Send_1;      // 35
+00B3   2???           00312                 call    Send_0;      // 36
+00B4   2???           00313                 call    Send_1;      // 37
+00B5   2???           00314                 call    Send_0;      // 38
+00B6   2???           00315                 call    Send_0;      // 39
+00B7   2???           00316                 call    Send_0;      // 40
+00B8   2???           00317                 call    Send_1;      // 41
+00B9   2???           00318                 call    Send_0;      // 42
+00BA   2???           00319                 call    Send_1;      // 43
+00BB   2???           00320                 call    Send_0;      // 43
+00BC   2???           00321                 call    Send_1;      // 43
+00BD   2???           00322                 call    Send_0;      // 43
+00BE   2???           00323                 call    Send_1;      // 43
+00BF   2???           00324                 call    Send_0;      // 43
+00C0   2???           00325                 call    Send_1;      // 43
+00C1   2???           00326                 call    Send_0;      // 43
+00C2   2???           00327                 call    Send_1;      // 43
+00C3   2???           00328                 call    Send_0;      // 43
+00C4   2???           00329                 call    Send_0;      // 43
+00C5   2???           00330                 call    Send_0;      // 43
+00C6   2???           00331                 call    Send_1;      // 43
+00C7   2???           00332                 call    Send_0;      // 43
+00C8   2???           00333                 call    Send_0;      // 43
+00C9   2???           00334                 call    Send_0;      // 43
+00CA   2???           00335                 call    Send_1;      // 43
+00CB   2???           00336                 call    Send_0;      // 43
+00CC   2???           00337                 call    Send_1;      // 43
+00CD   2???           00338                 call    Send_0;      // 43
+00CE   2???           00339                 call    Send_0;      // 43
+00CF   2???           00340                 call    Send_0;      // 43
+00D0   2???           00341                 call    Send_1;      // 43
+00D1   2???           00342                 call    Send_0;      // 43
+00D2   2???           00343                 call    Send_0;      // 43
+00D3   2???           00344                 call    Send_0;      // 43
+00D4   2???           00345                 call    Send_1;      // 43
+00D5   2???           00346                 call    Send_0;      // 43
+00D6   2???           00347                 call    Send_0;      // 43
+00D7   2???           00348                 call    Send_0;      // 43
+00D8   2???           00349                 call    Send_1;      // 43
+00D9   2???           00350                 call    Send_0;      // 43
+00DA   2???           00351                 call    Send_0;      // 43
+00DB   2???           00352                 call    Send_0;      // 43
+00DC   2???           00353                 call    Send_1;      // 43
+00DD   2???           00354                 call    Send_0;      // 43
+00DE   3020           00355                 movlw   d'32'
+00DF   2???           00356                 call    Big_delay
+00E0   0008           00357                 return
+                      00358 ;-----------------------------------------------------------------------------
+00E1                  00359 cmmode
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00E1   2???           00360                 call    delayy9ms
+00E2   2???           00361                 call    delayy4.5ms
+00E3   2???           00362                 call    yarmi
+00E4   2???           00363                 call    Send_1;      // 38
+00E5   2???           00364                 call    Send_0;      // 39
+00E6   2???           00365                 call    Send_1;      // 40
+00E7   2???           00366                 call    Send_0;      // 41
+00E8   2???           00367                 call    Send_0;      // 42
+00E9   2???           00368                 call    Send_0;      // 43
+00EA   2???           00369                 call    Send_1;      // 35
+00EB   2???           00370                 call    Send_0;      // 36
+00EC   2???           00371                 call    Send_1;      // 37
+00ED   2???           00372                 call    Send_0;      // 38
+00EE   2???           00373                 call    Send_0;      // 39
+00EF   2???           00374                 call    Send_0;      // 40
+00F0   2???           00375                 call    Send_1;      // 41
+00F1   2???           00376                 call    Send_0;      // 42
+00F2   2???           00377                 call    Send_1;      // 43
+00F3   2???           00378                 call    Send_0;      // 43
+00F4   2???           00379                 call    Send_1;      // 43
+00F5   2???           00380                 call    Send_0;      // 43
+00F6   2???           00381                 call    Send_1;      // 43
+00F7   2???           00382                 call    Send_0;      // 43
+00F8   2???           00383                 call    Send_1;      // 43
+00F9   2???           00384                 call    Send_0;      // 43
+00FA   2???           00385                 call    Send_0;      // 43
+00FB   2???           00386                 call    Send_0;      // 43
+00FC   2???           00387                 call    Send_1;      // 43
+00FD   2???           00388                 call    Send_0;      // 43
+00FE   2???           00389                 call    Send_1;      // 43
+00FF   2???           00390                 call    Send_0;      // 43
+0100   2???           00391                 call    Send_0;      // 43
+0101   2???           00392                 call    Send_0;      // 43
+0102   2???           00393                 call    Send_1;      // 43
+0103   2???           00394                 call    Send_0;      // 43
+0104   2???           00395                 call    Send_1;      // 43
+0105   2???           00396                 call    Send_0;      // 43
+0106   2???           00397                 call    Send_0;      // 43
+0107   2???           00398                 call    Send_0;      // 43
+0108   2???           00399                 call    Send_1;      // 43
+0109   2???           00400                 call    Send_0;      // 43
+010A   2???           00401                 call    Send_0;      // 43
+010B   2???           00402                 call    Send_0;      // 43
+010C   2???           00403                 call    Send_1;      // 43
+010D   2???           00404                 call    Send_0;      // 43
+010E   2???           00405                 call    Send_0;      // 43
+010F   2???           00406                 call    Send_0;      // 43
+0110   2???           00407                 call    Send_1;      // 43
+0111   2???           00408                 call    Send_0;      // 43
+0112   2???           00409                 call    Send_0;      // 43
+0113   2???           00410                 call    Send_0;      // 43
+0114   2???           00411                 call    Send_1;      // 43
+0115   2???           00412                 call    Send_0;      // 43
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0116   3020           00413                 movlw   d'32'
+0117   2???           00414                 call    Big_delay
+0118   0008           00415                 return
+                      00416         
+                      00417 ;-----------------------------------------------------------------------------
+0119                  00418 cmseek
+0119   2???           00419                 call    delayy9ms
+011A   2???           00420                 call    delayy4.5ms
+011B   2???           00421                 call    yarmi
+011C   2???           00422                 call    Send_1;      // 38
+011D   2???           00423                 call    Send_0;      // 39
+011E   2???           00424                 call    Send_1;      // 40
+011F   2???           00425                 call    Send_0;      // 41
+0120   2???           00426                 call    Send_0;      // 42
+0121   2???           00427                 call    Send_0;      // 43
+0122   2???           00428                 call    Send_1;      // 35
+0123   2???           00429                 call    Send_0;      // 36
+0124   2???           00430                 call    Send_1;      // 37
+0125   2???           00431                 call    Send_0;      // 38
+0126   2???           00432                 call    Send_1;      // 39
+0127   2???           00433                 call    Send_0;      // 40
+0128   2???           00434                 call    Send_0;      // 41
+0129   2???           00435                 call    Send_0;      // 42
+012A   2???           00436                 call    Send_1;      // 43
+012B   2???           00437                 call    Send_0;      // 43
+012C   2???           00438                 call    Send_1;      // 43
+012D   2???           00439                 call    Send_0;      // 43
+012E   2???           00440                 call    Send_1;      // 43
+012F   2???           00441                 call    Send_0;      // 43
+0130   2???           00442                 call    Send_1;      // 43
+0131   2???           00443                 call    Send_0;      // 43
+0132   2???           00444                 call    Send_0;      // 43
+0133   2???           00445                 call    Send_0;      // 43
+0134   2???           00446                 call    Send_1;      // 43
+0135   2???           00447                 call    Send_0;      // 43
+0136   2???           00448                 call    Send_1;      // 43
+0137   2???           00449                 call    Send_0;      // 43
+0138   2???           00450                 call    Send_0;      // 43
+0139   2???           00451                 call    Send_0;      // 43
+013A   2???           00452                 call    Send_1;      // 43
+013B   2???           00453                 call    Send_0;      // 43
+013C   2???           00454                 call    Send_0;      // 43
+013D   2???           00455                 call    Send_0;      // 43
+013E   2???           00456                 call    Send_1;      // 43
+013F   2???           00457                 call    Send_0;      // 43
+0140   2???           00458                 call    Send_1;      // 43
+0141   2???           00459                 call    Send_0;      // 43
+0142   2???           00460                 call    Send_0;      // 43
+0143   2???           00461                 call    Send_0;      // 43
+0144   2???           00462                 call    Send_1;      // 43
+0145   2???           00463                 call    Send_0;      // 43
+0146   2???           00464                 call    Send_0;      // 43
+0147   2???           00465                 call    Send_0;      // 43
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0148   2???           00466                 call    Send_1;      // 43
+0149   2???           00467                 call    Send_0;      // 43
+014A   2???           00468                 call    Send_0;      // 43
+014B   2???           00469                 call    Send_0;      // 43
+014C   2???           00470                 call    Send_1;      // 43
+014D   2???           00471                 call    Send_0;      // 43
+014E   3020           00472                 movlw   d'32'
+014F   2???           00473                 call    Big_delay
+0150   0008           00474                 return
+                      00475 ;-----------------------------------------------------------------------------
+                      00476         
+                      00477         
+0151                  00478 cmvolumtepa     
+0151   2???           00479                 call    delayy9ms
+0152   2???           00480                 call    delayy4.5ms
+0153   2???           00481                 call    yarmi
+0154   2???           00482                 call    Send_1;      // 38
+0155   2???           00483                 call    Send_0;      // 39
+0156   2???           00484                 call    Send_1;      // 40
+0157   2???           00485                 call    Send_0;      // 41
+0158   2???           00486                 call    Send_1;      // 42
+0159   2???           00487                 call    Send_0;      // 43
+015A   2???           00488                 call    Send_0;      // 35
+015B   2???           00489                 call    Send_0;      // 36
+015C   2???           00490                 call    Send_1;      // 37
+015D   2???           00491                 call    Send_0;      // 38
+015E   2???           00492                 call    Send_1;      // 39
+015F   2???           00493                 call    Send_0;      // 40
+0160   2???           00494                 call    Send_0;      // 41
+0161   2???           00495                 call    Send_0;      // 42
+0162   2???           00496                 call    Send_1;      // 43
+0163   2???           00497                 call    Send_0;      // 43
+0164   2???           00498                 call    Send_1;      // 43
+0165   2???           00499                 call    Send_0;      // 43
+0166   2???           00500                 call    Send_1;      // 43
+0167   2???           00501                 call    Send_0;      // 43
+0168   2???           00502                 call    Send_1;      // 43
+0169   2???           00503                 call    Send_0;      // 43
+016A   2???           00504                 call    Send_0;      // 43
+016B   2???           00505                 call    Send_0;      // 43
+016C   2???           00506                 call    Send_1;      // 43
+016D   2???           00507                 call    Send_0;      // 43
+016E   2???           00508                 call    Send_0;      // 43
+016F   2???           00509                 call    Send_0;      // 43
+0170   2???           00510                 call    Send_1;      // 43
+0171   2???           00511                 call    Send_0;      // 43
+0172   2???           00512                 call    Send_1;      // 43
+0173   2???           00513                 call    Send_0;      // 43
+0174   2???           00514                 call    Send_0;      // 43
+0175   2???           00515                 call    Send_0;      // 43
+0176   2???           00516                 call    Send_1;      // 43
+0177   2???           00517                 call    Send_0;      // 43
+0178   2???           00518                 call    Send_1;      // 43
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0179   2???           00519                 call    Send_0;      // 43
+017A   2???           00520                 call    Send_0;      // 43
+017B   2???           00521                 call    Send_0;      // 43
+017C   2???           00522                 call    Send_1;      // 43
+017D   2???           00523                 call    Send_0;      // 43
+017E   2???           00524                 call    Send_0;      // 43
+017F   2???           00525                 call    Send_0;      // 43
+0180   2???           00526                 call    Send_1;      // 43
+0181   2???           00527                 call    Send_0;      // 43
+0182   2???           00528                 call    Send_0;      // 43
+0183   2???           00529                 call    Send_0;      // 43
+0184   2???           00530                 call    Send_1;      // 43
+0185   2???           00531                 call    Send_0;      // 43
+0186   3020           00532                 movlw   d'32'
+0187   2???           00533                 call    Big_delay
+0188   0008           00534                 return
+                      00535         
+                      00536 ;-----------------------------------------------------------------------------
+                      00537         
+0189                  00538 cmvolumpas
+0189   2???           00539                 call    delayy9ms
+018A   2???           00540                 call    delayy4.5ms
+018B   2???           00541                 call    yarmi
+018C   2???           00542                 call    Send_1;      // 38
+018D   2???           00543                 call    Send_0;      // 39
+018E   2???           00544                 call    Send_0;      // 40
+018F   2???           00545                 call    Send_0;      // 41
+0190   2???           00546                 call    Send_1;      // 42
+0191   2???           00547                 call    Send_0;      // 43
+0192   2???           00548                 call    Send_1;      // 35
+0193   2???           00549                 call    Send_0;      // 36
+0194   2???           00550                 call    Send_0;      // 37
+0195   2???           00551                 call    Send_0;      // 38
+0196   2???           00552                 call    Send_1;      // 39
+0197   2???           00553                 call    Send_0;      // 40
+0198   2???           00554                 call    Send_1;      // 41
+0199   2???           00555                 call    Send_0;      // 42
+019A   2???           00556                 call    Send_0;      // 43
+019B   2???           00557                 call    Send_0;      // 43
+019C   2???           00558                 call    Send_1;      // 43
+019D   2???           00559                 call    Send_0;      // 43
+019E   2???           00560                 call    Send_1;      // 43
+019F   2???           00561                 call    Send_0;      // 43
+01A0   2???           00562                 call    Send_1;      // 43
+01A1   2???           00563                 call    Send_0;      // 43
+01A2   2???           00564                 call    Send_1;      // 43
+01A3   2???           00565                 call    Send_0;      // 43
+01A4   2???           00566                 call    Send_1;      // 43
+01A5   2???           00567                 call    Send_0;      // 43
+01A6   2???           00568                 call    Send_0;      // 43
+01A7   2???           00569                 call    Send_0;      // 43
+01A8   2???           00570                 call    Send_1;      // 43
+01A9   2???           00571                 call    Send_0;      // 43
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01AA   2???           00572                 call    Send_1;      // 43
+01AB   2???           00573                 call    Send_0;      // 43
+01AC   2???           00574                 call    Send_0;      // 43
+01AD   2???           00575                 call    Send_0;      // 43
+01AE   2???           00576                 call    Send_1;      // 43
+01AF   2???           00577                 call    Send_0;      // 43
+01B0   2???           00578                 call    Send_1;      // 43
+01B1   2???           00579                 call    Send_0;      // 43
+01B2   2???           00580                 call    Send_0;      // 43
+01B3   2???           00581                 call    Send_0;      // 43
+01B4   2???           00582                 call    Send_1;      // 43
+01B5   2???           00583                 call    Send_0;      // 43
+01B6   2???           00584                 call    Send_0;      // 43
+01B7   2???           00585                 call    Send_0;      // 43
+01B8   2???           00586                 call    Send_1;      // 43
+01B9   2???           00587                 call    Send_0;      // 43
+01BA   2???           00588                 call    Send_0;      // 43
+01BB   2???           00589                 call    Send_0;      // 43
+01BC   2???           00590                 call    Send_1;      // 43
+01BD   2???           00591                 call    Send_0;      // 43
+01BE   3020           00592                 movlw   d'32'
+01BF   2???           00593                 call    Big_delay
+01C0   0008           00594                 return
+                      00595         
+                      00596         
+                      00597 ;-----------------------------------------------------------------------------
+01C1   2???           00598 yarmi           call    Send_1;      // 86
+01C2   2???           00599                 call    Send_0;      // 87
+01C3   2???           00600                 call    Send_1;      // 88
+01C4   2???           00601                 call    Send_0;      // 89
+01C5   2???           00602                 call    Send_0;      // 0
+01C6   2???           00603                 call    Send_0;      // 1
+01C7   2???           00604                 call    Send_1;      // 2
+01C8   2???           00605                 call    Send_0;      // 3
+01C9   2???           00606                 call    Send_0;      // 4
+01CA   2???           00607                 call    Send_0;      // 5
+01CB   2???           00608                 call    Send_1;      // 6
+01CC   2???           00609                 call    Send_0;      // 7
+01CD   2???           00610                 call    Send_1;      // 8
+01CE   2???           00611                 call    Send_0;      // 9
+01CF   2???           00612                 call    Send_1;      // 10
+01D0   2???           00613                 call    Send_0;      // 11
+01D1   2???           00614                 call    Send_1;      // 12
+01D2   2???           00615                 call    Send_0;      // 13
+01D3   2???           00616                 call    Send_1;      // 14
+01D4   2???           00617                 call    Send_0;      // 15
+01D5   2???           00618                 call    Send_0;      // 16
+01D6   2???           00619                 call    Send_0;      // 17
+01D7   2???           00620                 call    Send_1;      // 19
+01D8   2???           00621                 call    Send_0;      // 20
+01D9   2???           00622                 call    Send_1;      // 21
+01DA   2???           00623                 call    Send_0;      // 22
+01DB   2???           00624                 call    Send_0;      // 23
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01DC   2???           00625                 call    Send_0;      // 24
+01DD   2???           00626                 call    Send_1;      // 25
+01DE   2???           00627                 call    Send_0;      // 26
+01DF   2???           00628                 call    Send_1;      // 27
+01E0   2???           00629                 call    Send_0;      // 28
+01E1   2???           00630                 call    Send_1;      // 29
+01E2   2???           00631                 call    Send_0;      // 30
+01E3   2???           00632                 call    Send_0;      // 31
+01E4   2???           00633                 call    Send_0;      // 32
+01E5   2???           00634                 call    Send_1;      // 33
+01E6   2???           00635                 call    Send_0;      // 34
+01E7   2???           00636                 call    Send_0;      // 35
+01E8   2???           00637                 call    Send_0;      // 36
+01E9   2???           00638                 call    Send_1;      // 37
+01EA   2???           00639                 call    Send_0;      // 38
+01EB   2???           00640                 call    Send_0;      // 39
+01EC   2???           00641                 call    Send_0;      // 40
+01ED   2???           00642                 call    Send_1;      // 41
+01EE   2???           00643                 call    Send_0;      // 42
+01EF   0008           00644                 return
+                      00645 ;-----------------------------------------------------------------------------  
+01F0                  00646 Send_1 ; ???????????? 527 ???.
+01F0   3014           00647         movlw   d'20'
+01F1   00BC           00648         movwf   fCOUNTER
+01F2                  00649 Send1_Loop
+01F2   1505           00650         bsf     IR_LED
+01F3   0000           00651         nop
+01F4   0000           00652         nop
+01F5   0000           00653         nop
+01F6   0000           00654         nop
+01F7   0000           00655         nop
+01F8   0000           00656         nop
+01F9   0000           00657         nop
+01FA   0000           00658         nop
+01FB   0000           00659         nop
+01FC   0000           00660         nop
+01FD   0000           00661         nop
+01FE   0000           00662         nop
+01FF   1105           00663         bcf     IR_LED
+0200   0000           00664         nop
+0201   0000           00665         nop
+0202   0000           00666         nop
+0203   0000           00667         nop
+0204   0000           00668         nop
+0205   0000           00669         nop
+0206   0000           00670         nop
+0207   0000           00671         nop
+0208   0000           00672         nop
+0209   0000           00673         nop
+020A   0BBC           00674         decfsz  fCOUNTER,1
+020B   2???           00675         goto    Send1_Loop
+020C   0008           00676         return
+                      00677 ;-----------------------------------------------------------------------------
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+020D                  00678 Send_0 ; ???????????? 527 ???.
+020D   3014           00679         movlw   d'20'
+020E   00BC           00680         movwf   fCOUNTER
+020F                  00681 Send0_Loop
+020F   1105           00682         bcf     IR_LED
+0210   0000           00683         nop
+0211   0000           00684         nop
+0212   0000           00685         nop
+0213   0000           00686         nop
+0214   0000           00687         nop
+0215   0000           00688         nop
+0216   0000           00689         nop
+0217   0000           00690         nop
+0218   0000           00691         nop
+0219   0000           00692         nop
+021A   0000           00693         nop
+021B   0000           00694         nop
+021C   1105           00695         bcf     IR_LED
+021D   0000           00696         nop
+021E   0000           00697         nop
+021F   0000           00698         nop
+0220   0000           00699         nop
+0221   0000           00700         nop
+0222   0000           00701         nop
+0223   0000           00702         nop
+0224   0000           00703         nop
+0225   0000           00704         nop
+0226   0000           00705         nop
+0227   0BBC           00706         decfsz  fCOUNTER,1
+0228   2???           00707         goto    Send0_Loop
+0229   0008           00708         return
+                      00709 ;-----------------------------------------------------------------------------
+022A                  00710 delayy9ms 
+                      00711          
+022A   30C8           00712         movlw   d'200'
+022B   00BC           00713         movwf   fCOUNTER
+022C                  00714 Send0_Loopp
+022C   1505           00715         bsf     IR_LED
+022D   0000           00716         nop
+022E   0000           00717         nop
+022F   0000           00718         nop
+0230   0000           00719         nop
+0231   0000           00720         nop
+0232   0000           00721         nop
+0233   0000           00722         nop
+0234   0000           00723         nop
+0235   0000           00724         nop
+0236   0000           00725         nop
+0237   0000           00726         nop
+0238   0000           00727         nop
+0239   1105           00728         bcf     IR_LED
+023A   0000           00729         nop
+023B   0000           00730         nop
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+023C   0000           00731         nop
+023D   0000           00732         nop
+023E   0000           00733         nop
+023F   0000           00734         nop
+0240   0000           00735         nop
+0241   0000           00736         nop
+0242   0000           00737         nop
+0243   0000           00738         nop
+0244   0BBC           00739         decfsz  fCOUNTER,1
+0245   2???           00740         goto    Send0_Loopp
+                      00741         
+0246   3084           00742         movlw   d'132'
+0247   00BC           00743         movwf   fCOUNTER
+0248                  00744 Send0_Loopp1
+0248   1505           00745         bsf     IR_LED
+0249   0000           00746         nop
+024A   0000           00747         nop
+024B   0000           00748         nop
+024C   0000           00749         nop
+024D   0000           00750         nop
+024E   0000           00751         nop
+024F   0000           00752         nop
+0250   0000           00753         nop
+0251   0000           00754         nop
+0252   0000           00755         nop
+0253   0000           00756         nop
+0254   0000           00757         nop
+0255   1105           00758         bcf     IR_LED
+0256   0000           00759         nop
+0257   0000           00760         nop
+0258   0000           00761         nop
+0259   0000           00762         nop
+025A   0000           00763         nop
+025B   0000           00764         nop
+025C   0000           00765         nop
+025D   0000           00766         nop
+025E   0000           00767         nop
+025F   0000           00768         nop
+0260   0BBC           00769         decfsz  fCOUNTER,1
+0261   2???           00770         goto    Send0_Loopp1
+0262   0008           00771         return
+                      00772         
+                      00773         
+0263                  00774 delayy4.5ms     
+0263   30D7           00775         movlw       .215
+0264   00B1           00776         movwf       Reg_1
+0265   3006           00777         movlw       .6
+0266   00B2           00778         movwf       Reg_2
+0267   0BB1           00779         decfsz      Reg_1,F
+0268   2???           00780         goto        $-1
+0269   0BB2           00781         decfsz      Reg_2,F
+026A   2???           00782         goto        $-3
+026B   0008           00783         return
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00784 ;-----------------------------------------------------------------------------  
+                      00785 
+0014                  00786         end
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+BD_Loop94                         000000A0
+Big_delay                         0000009E
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+D_Loop36                          000000A6
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+IR_LED                            GPIO,2
+Init                              00000001
+LED                               00000048
+Main_Loop                         00000080
+Mainloop                          00000033
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+Reg_1                             00000031
+Reg_2                             00000032
+Reg_3                             00000033
+Reg_4                             00000034
+Reg_5                             00000035
+Reg_6                             00000036
+STATUS                            00000003
+Sec1                              0000003E
+Send0_Loop                        0000020F
+Send0_Loopp                       0000022C
+Send0_Loopp1                      00000248
+Send1_Loop                        000001F2
+Send_0                            0000020D
+Send_1                            000001F0
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+UMessen1                          00000036
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+W                                 00000000
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_0_0044                      00000044
+_.org_0_0046                      00000046
+_.org_0_0268                      00000268
+_.org_0_026A                      0000026A
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+MPASM 5.83                           ALP.ASM   7-2-2019  12:36:51         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F675                          00000001
+c                                 00000092
+cmmode                            000000E1
+cmpower                           000000A9
+cmseek                            00000119
+cmvolumpas                        00000189
+cmvolumtepa                       00000151
+count                             00000026
+delay                             000000A5
+delayy4.5ms                       00000263
+delayy9ms                         0000022A
+f0                                00000029
+f1                                0000002A
+fCOUNTER                          0000003C
+fCOUNTER2                         0000003D
+loop                              00000037
+loops                             00000027
+loops2                            00000028
+mode                              00000064
+modemax                           0000002D
+modemin                           0000002E
+power                             0000005D
+powermax                          0000002B
+powermin                          0000002C
+seek                              0000006B
+seekmax                           00000037
+seekmin                           00000038
+volumpas                          00000079
+volumpasmax                       0000003A
+volumpasmin                       0000003B
+volumtepa                         00000072
+volumtepamax                      00000039
+volumtepamin                      00000030
+yarmi                             000001C1
+
+Errors   :     0
+Warnings :     2 reported,     0 suppressed
+Messages :     0 reported,    14 suppressed
+
+

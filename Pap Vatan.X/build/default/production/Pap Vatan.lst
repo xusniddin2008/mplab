@@ -1,0 +1,449 @@
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list p=12f675
+                      00002         #include <P12f675.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 21 2019
+                      00005 ;  MPASM PIC12F675 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00367         LIST
+                      00003         ERRORLEVEL      -302
+2007   0054           00004         __CONFIG  00054H
+                      00005         ;__CONFIG       _MCLRE_OFF & _PWRTE_OFF & _WDT_OFF & _INTRC_OSC_NOCLKOUT & _BODEN_OFF
+  00000020            00006 Reg_1           equ         0x20                
+  00000021            00007 Reg_2           equ         0x21
+  00000022            00008 Reg_3           equ         0x22
+  00000023            00009 Regdata         equ         0x23                
+  00000024            00010 Reg_info        equ         0x24
+  00000025            00011 Regprog1        equ         0x25
+  00000026            00012 Regprog2        equ         0x26
+  00000029            00013 Regadres        equ         0x29
+  00000030            00014 var             equ         0x30
+  00000031            00015 STATUS_temp     equ         0x31
+  00000032            00016 W_temp          equ         0x32        
+  00000003            00017 STATUS          equ         0x03
+  00000005            00018 GPIO            equ         0x05
+  00000085            00019 TRISIO          equ         0x85
+  00000090            00020 OSCCAL          equ         0x90
+  0000009A            00021 EEData          equ         0x9A         ; EEPROM - ??????
+  0000009C            00022 EECon1          equ         0x9C         ; EECON1 - ????1.
+  0000009B            00023 EEAdr           equ         0x9B         ; EEPROM - ?????
+  0000009D            00024 EECon2          equ         0x9D         ; EECON2 - ????2.              
+                      00025 ;*******************************************************************************
+                      00026                 org         2100h       ; ????????? ? EEPROM ?????? ??????.
+2100   0005           00027                 DE          5           ; ??????????????? ??????
+                      00028                 org         0x00
+                      00029 ;*******************************************************************************
+                      00030 
+                      00031 ;*******************************************************************************                
+0000   1283           00032                 bcf         STATUS,5
+0001   3007           00033                 movlw       b'00000111'
+0002   0099           00034                 movwf       CMCON
+0003   0185           00035                 clrf        GPIO
+0004   1683           00036                 bsf         STATUS,5
+0005   23FF           00037                 call        0x3FF
+0006   0090           00038                 movwf       OSCCAL              
+0007   3000           00039                 MOVLW       b'00000000'
+0008   0081           00040                 MOVWF       OPTION_REG                                              
+0009   3000           00041                 movlw       b'00000000'
+000A   009F           00042                 movwf       ANSEL
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000B   0185           00043                 clrf        TRISIO
+000C   1405           00044                 bsf         TRISIO,0
+000D   1485           00045                 bsf         TRISIO,1
+000E   1205           00046                 bcf         TRISIO,4
+000F   1283           00047                 bcf         STATUS,5            
+                      00048                 ;movlw      b'00000000'
+                      00049                 ;movwf      Regdata
+                      00050 ;*******************************************************************************
+0010   2???           00051 start           call        Read
+0011   1C85           00052                 btfss       GPIO,1
+0012   2???           00053                 call        pap_pap
+0013   1C05           00054                 btfss       GPIO,0
+0014   2???           00055                 call        pap
+0015   2???           00056                 goto        start
+                      00057 ;*******************************************************************************                
+0016   2???           00058 pap_pap         call        delay240ms
+0017   1885           00059                 btfsc       GPIO,1
+0018   0008           00060                 return
+0019   1C23           00061                 btfss       Regdata,0
+001A   0008           00062                 return          
+001B   3082           00063                 movlw       b'10000010'
+001C   00A3           00064                 movwf       Regdata
+001D   2???           00065                 call        Write                               
+001E   1605           00066                 bsf         GPIO,4
+001F   2???           00067                 call        delay24ms
+0020   1205           00068                 bcf         GPIO,4
+0021   2???           00069                 call        delay100ms
+0022   1605           00070                 bsf         GPIO,4
+0023   2???           00071                 call        delay24ms
+0024   1205           00072                 bcf         GPIO,4
+                      00073                 
+0025   0008           00074                 return
+                      00075 ;*******************************************************************************
+0026   2???           00076 pap             call        delay240ms
+0027   1805           00077                 btfsc       GPIO,0
+0028   0008           00078                 return
+0029   1823           00079                 btfsc       Regdata,0
+002A   0008           00080                 return          
+002B   3081           00081                 movlw       b'10000001'
+002C   00A3           00082                 movwf       Regdata
+002D   2???           00083                 call        Write
+                      00084                 
+                      00085                 
+002E   1605           00086                 bsf         GPIO,4
+002F   2???           00087                 call        delay24ms
+0030   1205           00088                 bcf         GPIO,4
+                      00089                 
+0031   0008           00090                 return
+                      00091 ;*******************************************************************************                
+                      00092 ; ?????? ?????? ? ????????????????? ?????? EEPROM (???)
+0032   018B           00093 Write       clrf       INTCON      ; ?????????? ?????? ??????????
+0033   1683           00094             bsf        STATUS,5    ; ??????? ? ?????? ????.
+0034   0829           00095             movf       Regadres,W
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0035   009B           00096             movwf      EEAdr       ; ??????????? W ? ??????? EEAdr
+0036   0823           00097             movf       Regdata,W     ; ??????????? ?????? ?? Reg_4 ? ??????? W
+0037   009A           00098             movwf      EEData      ; ??????????? W ? EEPROM
+                      00099             
+0038   151C           00100             bsf        EECon1,2    ; ????????? ??????.
+0039   3055           00101             movlw      0x55         ; ????????????
+003A   009D           00102             movwf      EECon2      ; ?????????
+003B   30AA           00103             movlw      0xAA         ; ??? ??????.
+003C   009D           00104             movwf      EECon2      ; ----"----
+003D   149C           00105             bsf        EECon1,1    ; ----"----
+003E   121C           00106             bcf        EECon1,4    ; ???????? ???? ?????????? ?? ?????????
+003F   1283           00107             bcf        STATUS,5    ; ??????? ? ??????? ????.
+0040   0008           00108             return
+                      00109 ;*******************************************************************************
+                      00110 ; ?????? ?????? ?? ????????????????? ?????? EEPROM (???)
+0041   1683           00111 Read        bsf        STATUS,5    ; ??????? ? ?????? ????.
+0042   0829           00112             movf       Regadres,W
+0043   009B           00113             movwf      EEAdr       ; ??????????? W ? ??????? EEAdr
+                      00114             
+0044   141C           00115             bsf        EECon1,0    ; ???????????????? ??????.
+                      00116             
+0045   081A           00117             movf       EEData,W    ; ??????????? ? W ?? EEPROM
+0046   00A3           00118             movwf      Regdata       ; ??????????? ?? W ? ??????? Reg_4
+0047   1283           00119             bcf        STATUS,5    ; ??????? ? ??????? ????.
+0048   0008           00120             return
+                      00121 ;*******************************************************************************
+0049   3029           00122 delay24ms       movlw       .41
+004A   00A0           00123                 movwf       Reg_1
+004B   3020           00124                 movlw       .32
+004C   00A1           00125                 movwf       Reg_2
+004D   0BA0           00126                 decfsz      Reg_1,F
+004E   2???           00127                 goto        $-1
+004F   0BA1           00128                 decfsz      Reg_2,F
+0050   2???           00129                 goto        $-3
+0051   0000           00130                 nop
+0052   0000           00131                 nop
+0053   0008           00132                 return
+                      00133 ;*******************************************************************************
+0054   30DD           00134 delay100ms      movlw       .221
+0055   00A0           00135                 movwf       Reg_1
+0056   3082           00136                 movlw       .130
+0057   00A1           00137                 movwf       Reg_2
+0058   0BA0           00138                 decfsz      Reg_1,F
+0059   2???           00139                 goto        $-1
+005A   0BA1           00140                 decfsz      Reg_2,F
+005B   2???           00141                 goto        $-3
+005C   0000           00142                 nop
+005D   0000           00143                 nop
+005E   0008           00144                 return
+                      00145 ;*******************************************************************************
+005F   30C3           00146 delay240ms      movlw       .195
+0060   00A0           00147                 movwf       Reg_1
+0061   30EA           00148                 movlw       .234
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0062   00A1           00149                 movwf       Reg_2
+0063   0BA0           00150                 decfsz      Reg_1,F
+0064   2???           00151                 goto        $-1
+0065   0BA1           00152                 decfsz      Reg_2,F
+0066   2???           00153                 goto        $-3
+                      00154 
+0067   0008           00155                 return
+                      00156 ;*******************************************************************************                
+0054                  00157                 end
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+EEADR                             0000009B
+EEAdr                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EECon1                            0000009C
+EECon2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEData                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GP2                               00000002
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+Read                              00000041
+Reg_1                             00000020
+Reg_2                             00000021
+Reg_3                             00000022
+Reg_info                          00000024
+Regadres                          00000029
+Regdata                           00000023
+Regprog1                          00000025
+Regprog2                          00000026
+STATUS                            00000003
+STATUS_temp                       00000031
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+W                                 00000000
+WPU                               00000095
+WPU0                              00000000
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+W_temp                            00000032
+Write                             00000032
+Z                                 00000002
+_.org_1_004E                      0000004E
+_.org_1_0050                      00000050
+_.org_1_0059                      00000059
+_.org_1_005B                      0000005B
+_.org_1_0064                      00000064
+_.org_1_0066                      00000066
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+MPASM 5.83                     PAP VATAN.ASM   12-29-2019  18:18:32         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_XT_OSC                           00003FF9
+__12F675                          00000001
+delay100ms                        00000054
+delay240ms                        0000005F
+delay24ms                         00000049
+pap                               00000026
+pap_pap                           00000016
+start                             00000010
+var                               00000030
+
+Errors   :     0
+Warnings :     1 reported,     0 suppressed
+Messages :     0 reported,    17 suppressed
+
+

@@ -1,0 +1,94 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Sun May 19 05:55:22 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x0005f4
+                   .cinit    romdata   0x0002fa    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/KENBT.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x0002fb      
+                            0x002007    0x002007      
+            765 out of 1158 program addresses used, program memory utilization is 66%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x00007a    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                Big_delay   0x000078    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 D_Loop36   0x000080    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                      LED   0x000040    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 Mainloop   0x00002b    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+               Send0_Loop   0x00029d    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+              Send0_Loopp   0x0002ba    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             Send0_Loopp1   0x0002d6    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+               Send1_Loop   0x000280    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   Send_0   0x00029b    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   Send_1   0x00027e    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 UMessen1   0x00002e    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_003C   0x00003c    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_003E   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_02F6   0x0002f6    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_02F8   0x0002f8    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   cmmode   0x0000ea    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                  cmpower   0x000083    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   cmseek   0x00014f    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+               cmvolumpas   0x000219    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+              cmvolumtepa   0x0001b4    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                    delay   0x00007f    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+              delayy4.5ms   0x0002f1    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                delayy9ms   0x0002b8    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     loop   0x00002f    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     mode   0x00005c    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                    power   0x000055    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     seek   0x000063    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 volumpas   0x000071    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                volumtepa   0x00006a    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 Mainloop   0x00002b    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 UMessen1   0x00002e    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     loop   0x00002f    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_003C   0x00003c    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_003E   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                      LED   0x000040    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                    power   0x000055    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     mode   0x00005c    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                     seek   0x000063    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                volumtepa   0x00006a    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 volumpas   0x000071    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                Big_delay   0x000078    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                BD_Loop94   0x00007a    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                    delay   0x00007f    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                 D_Loop36   0x000080    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                  cmpower   0x000083    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   cmmode   0x0000ea    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   cmseek   0x00014f    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+              cmvolumtepa   0x0001b4    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+               cmvolumpas   0x000219    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   Send_1   0x00027e    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+               Send1_Loop   0x000280    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                   Send_0   0x00029b    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+               Send0_Loop   0x00029d    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+                delayy9ms   0x0002b8    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+              Send0_Loopp   0x0002ba    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             Send0_Loopp1   0x0002d6    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+              delayy4.5ms   0x0002f1    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_02F6   0x0002f6    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+             _.org_0_02F8   0x0002f8    program     static C:\Users\Xusniddin\Desktop\mplab\KenBt.X\KenBt.asm
+
+

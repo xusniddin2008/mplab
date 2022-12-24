@@ -1,0 +1,146 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Tue Aug 20 13:40:28 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x00046c
+                   .cinit    romdata   0x000236    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/ALPBTNE       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000237      
+                            0x002007    0x002007      
+            569 out of 1158 program addresses used, program memory utilization is 49%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x000070    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                Big_delay   0x00006e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                      LED   0x000040    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 Mainloop   0x00002b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               Send0_Loop   0x0001cb    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              Send0_Loopp   0x0001e8    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             Send0_Loopp1   0x000204    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               Send1_Loop   0x0001ae    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   Send_0   0x0001c9    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   Send_1   0x0001ac    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 UMessen1   0x00002e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_003C   0x00003c    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_003E   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0224   0x000224    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0226   0x000226    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_022F   0x00022f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0231   0x000231    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0233   0x000233    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                       bt   0x000177    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              cmequalizer   0x00010d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   cmmute   0x0000c2    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmmute1   0x000189    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmpause   0x0000ed    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmpower   0x0000fd    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmqizil   0x0000b1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            cmstrelkachap   0x00011d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              cmstrelkaon   0x00012d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             cmstrelkapas   0x00009f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            cmstrelkatepa   0x00015d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               cmvolumpas   0x00013d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              cmvolumtepa   0x00014d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 cmyashil   0x0000da    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               delay250ms   0x000228    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              delayy4.5ms   0x00021f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                delayy9ms   0x0001e6    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                     krug   0x00007d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    krug1   0x00008b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    krug2   0x000099    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                     loop   0x00002f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                metka1000   0x0001a7    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              metka101000   0x0001a5    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            metka10101000   0x0001a3    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+          metka1010101000   0x0001a1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+        metka101010101000   0x00019f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+      metka10101010101000   0x00019d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+    metka1010101010101000   0x00019b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+  metka101010101010101000   0x000199    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    power   0x000055    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             poweruderjat   0x000091    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    qizil   0x00005f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             qiziluderjat   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 volumpas   0x000069    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                volumtepa   0x000064    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    yarmi   0x00016d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   yashil   0x00005a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            yashiluderjat   0x000083    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 Mainloop   0x00002b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 UMessen1   0x00002e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                     loop   0x00002f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_003C   0x00003c    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_003E   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                      LED   0x000040    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    power   0x000055    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   yashil   0x00005a    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    qizil   0x00005f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                volumtepa   0x000064    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 volumpas   0x000069    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                Big_delay   0x00006e    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                BD_Loop94   0x000070    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             qiziluderjat   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                     krug   0x00007d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            yashiluderjat   0x000083    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    krug1   0x00008b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             poweruderjat   0x000091    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    krug2   0x000099    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             cmstrelkapas   0x00009f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmqizil   0x0000b1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   cmmute   0x0000c2    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                 cmyashil   0x0000da    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmpause   0x0000ed    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmpower   0x0000fd    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              cmequalizer   0x00010d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            cmstrelkachap   0x00011d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              cmstrelkaon   0x00012d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               cmvolumpas   0x00013d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              cmvolumtepa   0x00014d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            cmstrelkatepa   0x00015d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                    yarmi   0x00016d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                       bt   0x000177    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                  cmmute1   0x000189    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+  metka101010101010101000   0x000199    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+    metka1010101010101000   0x00019b    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+      metka10101010101000   0x00019d    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+        metka101010101000   0x00019f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+          metka1010101000   0x0001a1    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+            metka10101000   0x0001a3    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              metka101000   0x0001a5    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                metka1000   0x0001a7    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   Send_1   0x0001ac    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               Send1_Loop   0x0001ae    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                   Send_0   0x0001c9    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               Send0_Loop   0x0001cb    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+                delayy9ms   0x0001e6    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              Send0_Loopp   0x0001e8    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             Send0_Loopp1   0x000204    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+              delayy4.5ms   0x00021f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0224   0x000224    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0226   0x000226    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+               delay250ms   0x000228    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_022F   0x00022f    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0231   0x000231    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+             _.org_0_0233   0x000233    program     static C:\Users\Xusniddin\Desktop\mplab\AlpBtNew.X\AlpBtNew.asm
+
+

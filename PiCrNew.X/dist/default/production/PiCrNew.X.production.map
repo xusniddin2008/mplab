@@ -1,0 +1,154 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Wed Oct 09 16:56:22 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x00051c
+                   .cinit    romdata   0x00028e    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/PICRNEW       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00028f      
+                            0x002007    0x002007      
+            657 out of 1158 program addresses used, program memory utilization is 56%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x0000a4    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                Big_delay   0x0000a2    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                      LED   0x000050    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 Mainloop   0x00003b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               Send0_Loop   0x000222    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              Send0_Loopp   0x00023f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             Send0_Loopp1   0x00025b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               Send1_Loop   0x000205    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   Send_0   0x000220    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   Send_1   0x000203    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 UMessen1   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_004C   0x00004c    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_004E   0x00004e    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_027B   0x00027b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_027D   0x00027d    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_0286   0x000286    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_0288   0x000288    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_028A   0x00028a    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                       bt   0x0001ce    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              cmequalizer   0x00013b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   cmmute   0x0000f3    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmmute1   0x0001e0    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmpause   0x00011b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmpower   0x00012b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmqizil   0x0000e3    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            cmstrelkachap   0x000175    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              cmstrelkaon   0x000185    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             cmstrelkapas   0x0000d3    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            cmstrelkatepa   0x0001b5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               cmvolumpas   0x000195    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              cmvolumtepa   0x0001a5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 cmyashil   0x00010b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               delay250ms   0x00027f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              delayy4.5ms   0x000276    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                delayy9ms   0x00023d    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                     krug   0x0000b1    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    krug1   0x0000bf    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    krug2   0x0000cd    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                     loop   0x00003f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                metka1000   0x0001fe    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              metka101000   0x0001fc    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            metka10101000   0x0001fa    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+          metka1010101000   0x0001f8    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+        metka101010101000   0x0001f6    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+      metka10101010101000   0x0001f4    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+    metka1010101010101000   0x0001f2    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+  metka101010101010101000   0x0001f0    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    power   0x000084    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             poweruderjat   0x0000c5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    qizil   0x00007a    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             qiziluderjat   0x0000a9    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              strelkachap   0x000089    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                strelkaon   0x00008e    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               strelkapas   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              strelkatepa   0x00009d    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 volumpas   0x000093    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                volumtepa   0x000098    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    yarmi   0x0001c5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   yashil   0x00007f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            yashiluderjat   0x0000b7    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 Mainloop   0x00003b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 UMessen1   0x00003e    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                     loop   0x00003f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_004C   0x00004c    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_004E   0x00004e    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                      LED   0x000050    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               strelkapas   0x000075    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    qizil   0x00007a    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   yashil   0x00007f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    power   0x000084    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              strelkachap   0x000089    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                strelkaon   0x00008e    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 volumpas   0x000093    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                volumtepa   0x000098    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              strelkatepa   0x00009d    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                Big_delay   0x0000a2    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                BD_Loop94   0x0000a4    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             qiziluderjat   0x0000a9    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                     krug   0x0000b1    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            yashiluderjat   0x0000b7    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    krug1   0x0000bf    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             poweruderjat   0x0000c5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    krug2   0x0000cd    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             cmstrelkapas   0x0000d3    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmqizil   0x0000e3    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   cmmute   0x0000f3    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                 cmyashil   0x00010b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmpause   0x00011b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmpower   0x00012b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              cmequalizer   0x00013b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            cmstrelkachap   0x000175    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              cmstrelkaon   0x000185    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               cmvolumpas   0x000195    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              cmvolumtepa   0x0001a5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            cmstrelkatepa   0x0001b5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                    yarmi   0x0001c5    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                       bt   0x0001ce    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                  cmmute1   0x0001e0    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+  metka101010101010101000   0x0001f0    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+    metka1010101010101000   0x0001f2    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+      metka10101010101000   0x0001f4    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+        metka101010101000   0x0001f6    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+          metka1010101000   0x0001f8    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+            metka10101000   0x0001fa    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              metka101000   0x0001fc    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                metka1000   0x0001fe    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   Send_1   0x000203    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               Send1_Loop   0x000205    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                   Send_0   0x000220    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               Send0_Loop   0x000222    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+                delayy9ms   0x00023d    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              Send0_Loopp   0x00023f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             Send0_Loopp1   0x00025b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+              delayy4.5ms   0x000276    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_027B   0x00027b    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_027D   0x00027d    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+               delay250ms   0x00027f    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_0286   0x000286    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_0288   0x000288    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+             _.org_0_028A   0x00028a    program     static C:\Users\Xusniddin\Desktop\mplab\PiCrNew.X\PiCrNew.asm
+
+

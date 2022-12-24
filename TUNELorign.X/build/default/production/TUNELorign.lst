@@ -1,0 +1,616 @@
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list p=12f675
+                      00002         #include <P12f675.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC12F675 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00367         LIST
+                      00003         ERRORLEVEL      -302            
+2007   3F94           00004         __CONFIG        _MCLRE_OFF & _PWRTE_OFF & _WDT_OFF & _INTRC_OSC_NOCLKOUT & _BODEN_OFF
+  00000026            00005 count           equ     0x26    
+  00000027            00006 loops           equ     0x27    
+  00000028            00007 loops2          equ     0x28
+  00000029            00008 f0              equ     0x29    
+  0000002A            00009 f1              equ     0x2A
+  0000002B            00010 Uon1            equ     0x2B
+  0000002D            00011 Uon2            equ     0x2D
+  0000002E            00012 Uoff2           equ     0x2E
+  00000031            00013 Reg_1           equ     0x31            
+  00000032            00014 Reg_2           equ     0x32
+  00000033            00015 Reg_3           equ     0x33            
+                      00016         
+                      00017                 org     0x00    
+0000   2???           00018                 goto    Init
+                      00019                 
+                      00020                 org     0x04
+                      00021                 
+0004   30DD           00022             movlw       .221
+0005   00B1           00023             movwf       Reg_1
+0006   3082           00024             movlw       .130
+0007   00B2           00025             movwf       Reg_2
+0008   0BB1           00026             decfsz      Reg_1,F
+0009   2???           00027             goto        $-1
+000A   0BB2           00028             decfsz      Reg_2,F
+000B   2???           00029             goto        $-3
+000C   0000           00030             nop
+000D   0000           00031             nop
+                      00032 
+000E   1905           00033             btfsc       TRISIO,2
+000F   0008           00034             return          
+0010   108B           00035             bcf     INTCON, INTF            
+0011   1285           00036 analog      bcf     GPIO,5
+                      00037             ;btfss   TRISIO,3
+                      00038             ;call    sentrzamok
+0012   1D05           00039             btfss   TRISIO,2
+0013   1605           00040             bsf     GPIO,4
+0014   1D05           00041             btfss   TRISIO,2
+0015   2???           00042             goto    analog
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0016   1905           00043             btfsc   TRISIO,2
+0017   1205           00044             bcf     GPIO,4
+0018   1885           00045             btfsc   TRISIO,1        
+0019   2???           00046             goto    Mainloop
+001A   2???           00047             goto    analog
+                      00048             
+                      00049                 
+001B   1283           00050 Init        bcf     STATUS, RP0         ; Bank 0
+001C   0185           00051             clrf    GPIO                        ; aus!
+001D   3007           00052             movlw   b'00000111'
+001E   0099           00053             movwf   CMCON                       ; Comparator aus
+001F   1683           00054             bsf     STATUS, RP0         ; Bank 1
+                      00055            
+0020   1485           00056             bsf     TRISIO,1
+0021   1505           00057             bsf     TRISIO,2
+0022   1585           00058             bsf     TRISIO,3
+0023   1285           00059             bcf     TRISIO,5            ; GP5 output f?r Schalttransistor oder LED
+0024   1205           00060             bcf     TRISIO,4
+0025   1381           00061             bcf     OPTION_REG,7          ; podtyaguyushiy rezistor yoqildi
+0026   1301           00062             bcf     OPTION_REG, INTEDG  ;peredniy front
+                      00063             
+0027   1495           00064             bsf     WPU, WPU1           ;podtyaguyeshshiy rezistor gpio1 ga o`rnatildi      
+0028   1515           00065             bsf     WPU, WPU2       
+0029   1415           00066             bsf     WPU, WPU0
+002A   1283           00067             bcf     STATUS, RP0         ; Bank0 ; internen Taktgenerator kalibrieren
+002B   1683           00068             bsf     STATUS, RP0         ; Bank 1
+002C   3000           00069             movlw           b'00000000'
+002D   0090           00070             movwf   OSCCAL                      ; 4-MHz-Kalibrierung
+002E   1283           00071             bcf     STATUS, RP0         ; Bank 0
+                      00072 
+                      00073         ; Interrupt
+002F   178B           00074             bsf     INTCON, GIE         ; Int deaktiviert
+0030   130B           00075             bcf     INTCON, PEIE                ; Int deaktiviert
+0031   160B           00076             bsf     INTCON, INTE                ; Int deaktiviert
+0032   128B           00077             bcf     INTCON, T0IE
+0033   118B           00078             bcf     INTCON, GPIE
+                      00079 ;****************************************************************************** 
+0034   141F           00080             BSF     ADCON0, ADON                
+0035   119F           00081             BCF     ADCON0, CHS1        
+0036   111F           00082             BCF     ADCON0, CHS0        
+0037   1683           00083             BSF     STATUS,RP0  
+0038   019F           00084             clrf    ANSEL
+0039   161F           00085             BSF     ANSEL, ADCS0        
+003A   141F           00086             BSF     ANSEL, ANS0 
+003B   1283           00087             BCF     STATUS,RP0          
+003C   131F           00088             BCF     ADCON0, VCFG        
+003D   139F           00089             BCF     ADCON0, ADFM
+                      00090             
+003E   3047           00091             movlw   0x47
+003F   00AD           00092             movwf   Uon2
+                      00093             
+0040   3027           00094             movlw   0x27                ; Uoff1  1,6V      
+0041   00AE           00095             movwf   Uoff2       
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00096             
+0042   3081           00097             movlw   0x81
+0043   00AB           00098             movwf   Uon1
+                      00099             
+                      00100             ;movlw   0x42
+                      00101             ;movwf   Uoff1
+                      00102 ;***********************************************************************
+0044   1D85           00103 Mainloop    btfss       TRISIO,3
+0045   2???           00104             call        sentrzamok
+0046   1D05           00105             btfss       TRISIO,2
+0047   2???           00106             goto        analog
+0048   1885           00107             btfsc       TRISIO,1
+0049   2???           00108             goto        zajiganiya
+004A   2???           00109             call        delay_4sekund
+004B   1D85           00110 Mainloop1   btfss       TRISIO,3
+004C   2???           00111             call        sentrzamok
+004D   1885           00112             btfsc       TRISIO,1
+004E   2???           00113             goto        zajiganiya
+004F   1D05           00114             btfss       TRISIO,2
+0050   2???           00115             call        analog
+0051   2???           00116             call        UMessen1        ; AN0 nach f1,f0  (f1 is entscheidend)
+0052   2???           00117             call        LED             ; LED ein-/ausschalten      
+0053   2???           00118             goto        Mainloop1
+                      00119 ;***********************************************************************
+0054   1285           00120 zajiganiya  bcf     GPIO,5
+0055   1205           00121             bcf     GPIO,4
+0056   2???           00122             goto        Mainloop
+                      00123 ;***********************************************************************            
+0057   149F           00124 UMessen1    BSF         ADCON0, 1       ; ADC starten
+0058   189F           00125 loop        BTFSC       ADCON0, 1       ; ist der ADC fertig?
+0059   2???           00126             GOTO        loop            ; nein, weiter warten
+005A   081E           00127             movfw       ADRESH          ; obere  8 Bit auslesen
+005B   00AA           00128             movwf       f1              ; obere  8-Bit nach f1
+005C   1683           00129             bsf         STATUS,RP0      ; Bank1
+005D   081E           00130             movfw       ADRESL          ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+005E   1283           00131             bcf         STATUS,RP0      ; Bank0
+005F   00A9           00132             movwf       f0              ; untere 2-Bit nach f0      
+0060   01A6           00133             clrf        count           ; Warten, damit der ADC sich erholen kann
+0061   0BA6           00134 warten      DECFSZ      count, f
+0062   2???           00135             goto        warten
+0063   0008           00136             return
+                      00137 ;***********************************************************************            
+0064   082E           00138 LED         MOVFW       Uoff2
+0065   022A           00139             subwf       f1, w           ; w:=f1-w 
+0066   1C03           00140             btfss       STATUS, C
+0067   2???           00141             call        ochirish              
+                      00142 
+0068   082D           00143             MOVFW       Uon2
+0069   022A           00144             subwf       f1, w           ; w:=f1-w 
+006A   1803           00145             btfsc       STATUS, C
+006B   2???           00146             call        gabarityoqish
+                      00147             
+006C   082B           00148             MOVFW       Uon1
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006D   022A           00149             subwf       f1, w           ; w:=f1-w 
+006E   1803           00150             btfsc       STATUS, C
+006F   2???           00151             call        blijniyyoqish
+                      00152             
+0070   0008           00153             return          
+                      00154 ;***********************************************************************
+0071   149F           00155 sentrzamok  BSF         ADCON0, 1       ; ADC starten
+0072   189F           00156 loopsentr   BTFSC       ADCON0, 1       ; ist der ADC fertig?
+0073   2???           00157             GOTO        loopsentr               ; nein, weiter warten
+0074   081E           00158             movfw       ADRESH          ; obere  8 Bit auslesen
+0075   00AA           00159             movwf       f1              ; obere  8-Bit nach f1
+0076   1683           00160             bsf         STATUS,RP0      ; Bank1
+0077   081E           00161             movfw       ADRESL          ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+0078   1283           00162             bcf         STATUS,RP0      ; Bank0
+0079   00A9           00163             movwf       f0              ; untere 2-Bit nach f0      
+007A   01A6           00164             clrf        count           ; Warten, damit der ADC sich erholen kann
+007B   0BA6           00165 wartensentr DECFSZ      count, f
+007C   2???           00166             goto        wartensentr         
+                      00167             
+007D   082D           00168             MOVFW       Uon2
+007E   022A           00169             subwf       f1, w           ; w:=f1-w 
+007F   1C03           00170             btfss       STATUS, C
+0080   0008           00171             return
+0081   1685           00172             bsf         GPIO,5
+0082   1605           00173             bsf         GPIO,4
+0083   304F           00174             movlw       .79
+0084   00B1           00175             movwf       Reg_1
+0085   3019           00176             movlw       .25
+0086   00B2           00177             movwf       Reg_2
+0087   304D           00178             movlw       .77
+0088   00B3           00179             movwf       Reg_3
+0089   0BB1           00180             decfsz      Reg_1,F
+008A   2???           00181             goto        $-1
+008B   0BB2           00182             decfsz      Reg_2,F
+008C   2???           00183             goto        $-3
+008D   0BB3           00184             decfsz      Reg_3,F
+008E   2???           00185             goto        $-5
+008F   0000           00186             nop
+0090   0000           00187             nop
+0091   1285           00188             bcf         GPIO,5
+0092   1205           00189             bcf         GPIO,4
+0093   0008           00190             return
+                      00191 ;***********************************************************************            
+0094                  00192 UMessenonoff
+0094   149F           00193             BSF         ADCON0, 1       ; ADC starten
+0095   189F           00194 looponoff   BTFSC       ADCON0, 1       ; ist der ADC fertig?
+0096   2???           00195             GOTO        looponoff               ; nein, weiter warten
+0097   081E           00196             movfw       ADRESH          ; obere  8 Bit auslesen
+0098   00AA           00197             movwf       f1              ; obere  8-Bit nach f1
+0099   1683           00198             bsf         STATUS,RP0      ; Bank1
+009A   081E           00199             movfw       ADRESL          ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+009B   1283           00200             bcf         STATUS,RP0      ; Bank0
+009C   00A9           00201             movwf       f0              ; untere 2-Bit nach f0      
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+009D   01A6           00202             clrf        count           ; Warten, damit der ADC sich erholen kann
+009E   0BA6           00203 wartenonoff DECFSZ      count, f
+009F   2???           00204             goto        wartenonoff         
+00A0   0008           00205             return
+                      00206 ;***********************************************************************            
+00A1                  00207 blijniyyoqish
+00A1   3055           00208              movlw       .85
+00A2   00B1           00209             movwf       Reg_1
+00A3   308A           00210             movlw       .138
+00A4   00B2           00211             movwf       Reg_2
+00A5   3003           00212             movlw       .3
+00A6   00B3           00213             movwf       Reg_3
+00A7   0BB1           00214             decfsz      Reg_1,F
+00A8   2???           00215             goto        $-1
+00A9   0BB2           00216             decfsz      Reg_2,F
+00AA   2???           00217             goto        $-3
+00AB   0BB3           00218             decfsz      Reg_3,F
+00AC   2???           00219             goto        $-5
+00AD   0000           00220             nop
+00AE   0000           00221             nop
+00AF   2???           00222             call    UMessenonoff
+00B0   082B           00223             MOVFW   Uon1
+00B1   022A           00224             subwf   f1, w               ; w:=f1-w 
+00B2   1803           00225             btfsc   STATUS, C
+00B3   1685           00226             bsf     GPIO,5
+00B4   0008           00227             return              
+                      00228             
+00B5                  00229 gabarityoqish
+00B5   3055           00230             movlw       .85
+00B6   00B1           00231             movwf       Reg_1
+00B7   308A           00232             movlw       .138
+00B8   00B2           00233             movwf       Reg_2
+00B9   3003           00234             movlw       .3
+00BA   00B3           00235             movwf       Reg_3
+00BB   0BB1           00236             decfsz      Reg_1,F
+00BC   2???           00237             goto        $-1
+00BD   0BB2           00238             decfsz      Reg_2,F
+00BE   2???           00239             goto        $-3
+00BF   0BB3           00240             decfsz      Reg_3,F
+00C0   2???           00241             goto        $-5
+00C1   0000           00242             nop
+00C2   0000           00243             nop
+00C3   2???           00244             call    UMessenonoff
+00C4   082D           00245             MOVFW   Uon2
+00C5   022A           00246             subwf   f1, w               ; w:=f1-w 
+00C6   1803           00247             btfsc   STATUS, C
+00C7   1605           00248             bsf     GPIO,4
+00C8   0008           00249             return          
+                      00250 ;***********************************************************************
+00C9   1E05           00251 ochirish    btfss       GPIO,4
+00CA   0008           00252             return          
+00CB   30DF           00253             movlw       .223
+00CC   00B1           00254             movwf       Reg_1
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00CD   30BB           00255             movlw       .187
+00CE   00B2           00256             movwf       Reg_2
+00CF   3033           00257             movlw       .51
+00D0   00B3           00258             movwf       Reg_3
+00D1   0BB1           00259             decfsz      Reg_1,F
+00D2   2???           00260             goto        $-1
+00D3   0BB2           00261             decfsz      Reg_2,F
+00D4   2???           00262             goto        $-3
+00D5   0BB3           00263             decfsz      Reg_3,F
+00D6   2???           00264             goto        $-5
+00D7   0000           00265             nop
+00D8   0000           00266             nop
+00D9   2???           00267             call        UMessenonoff
+00DA   082E           00268             MOVFW       Uoff2
+00DB   022A           00269             subwf       f1, w           ; w:=f1-w 
+00DC   1C03           00270             btfss       STATUS, C
+00DD   2???           00271             call        off
+00DE   0008           00272             return
+                      00273             
+00DF   1285           00274 off         bcf         GPIO,5          ; LED aus
+00E0   1205           00275             bcf         GPIO,4          ; LED aus
+00E1   0008           00276             return
+                      00277 ;***********************************************************************            
+00E2                  00278 delay_4sekund
+00E2   30BE           00279             movlw       .190
+00E3   00B1           00280             movwf       Reg_1
+00E4   304B           00281             movlw       .75
+00E5   00B2           00282             movwf       Reg_2
+00E6   3015           00283             movlw       .21
+00E7   00B3           00284             movwf       Reg_3
+00E8   0BB1           00285             decfsz      Reg_1,F
+00E9   2???           00286             goto        $-1
+00EA   0BB2           00287             decfsz      Reg_2,F
+00EB   2???           00288             goto        $-3
+00EC   0BB3           00289             decfsz      Reg_3,F
+00ED   2???           00290             goto        $-5
+00EE   0000           00291             nop
+00EF   0008           00292             return          
+3F94                  00293                 end
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+Init                              0000001B
+LED                               00000064
+Mainloop                          00000044
+Mainloop1                         0000004B
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+Reg_1                             00000031
+Reg_2                             00000032
+Reg_3                             00000033
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+UMessen1                          00000057
+UMessenonoff                      00000094
+Uoff2                             0000002E
+Uon1                              0000002B
+Uon2                              0000002D
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+W                                 00000000
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_1_0009                      00000009
+_.org_1_000B                      0000000B
+_.org_1_008A                      0000008A
+_.org_1_008C                      0000008C
+_.org_1_008E                      0000008E
+_.org_1_00A8                      000000A8
+_.org_1_00AA                      000000AA
+_.org_1_00AC                      000000AC
+_.org_1_00BC                      000000BC
+_.org_1_00BE                      000000BE
+_.org_1_00C0                      000000C0
+_.org_1_00D2                      000000D2
+_.org_1_00D4                      000000D4
+_.org_1_00D6                      000000D6
+_.org_1_00E9                      000000E9
+_.org_1_00EB                      000000EB
+_.org_1_00ED                      000000ED
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+MPASM 5.87                    TUNELORIGN.ASM   6-26-2020  18:22:44         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F675                          00000001
+analog                            00000011
+blijniyyoqish                     000000A1
+count                             00000026
+delay_4sekund                     000000E2
+f0                                00000029
+f1                                0000002A
+gabarityoqish                     000000B5
+loop                              00000058
+looponoff                         00000095
+loops                             00000027
+loops2                            00000028
+loopsentr                         00000072
+ochirish                          000000C9
+off                               000000DF
+sentrzamok                        00000071
+warten                            00000061
+wartenonoff                       0000009E
+wartensentr                       0000007B
+zajiganiya                        00000054
+
+Errors   :     0
+Warnings :     1 reported,     0 suppressed
+Messages :     0 reported,    28 suppressed
+
+

@@ -1,0 +1,727 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[v F537 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic.h
+[v __delay `JF537 ~T0 @X0 0 e ]
+[p i __delay ]
+"1498 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1498: extern volatile __bit ADON __attribute__((address(0xF8)));
+[v _ADON `Vb ~T0 @X0 0 e@248 ]
+"1579
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1579: extern volatile __bit GO_DONE __attribute__((address(0xF9)));
+[v _GO_DONE `Vb ~T0 @X0 0 e@249 ]
+"623
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 623: extern volatile unsigned char ADRESH __attribute__((address(0x01E)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"1594
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1594: extern volatile __bit GP3 __attribute__((address(0x2B)));
+[v _GP3 `Vb ~T0 @X0 0 e@43 ]
+"1585
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1585: extern volatile __bit GP0 __attribute__((address(0x28)));
+[v _GP0 `Vb ~T0 @X0 0 e@40 ]
+"1588
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1588: extern volatile __bit GP1 __attribute__((address(0x29)));
+[v _GP1 `Vb ~T0 @X0 0 e@41 ]
+[t ~ __interrupt . k ]
+[t T1 __interrupt ]
+"1633
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1633: extern volatile __bit INTF __attribute__((address(0x59)));
+[v _INTF `Vb ~T0 @X0 0 e@89 ]
+"1591
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1591: extern volatile __bit GP2 __attribute__((address(0x2A)));
+[v _GP2 `Vb ~T0 @X0 0 e@42 ]
+[p mainexit ]
+"797
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 797: extern volatile unsigned char TRISIO __attribute__((address(0x085)));
+[v _TRISIO `Vuc ~T0 @X0 0 e@133 ]
+"218
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 218: extern volatile unsigned char GPIO __attribute__((address(0x005)));
+[v _GPIO `Vuc ~T0 @X0 0 e@5 ]
+"564
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 564: extern volatile unsigned char CMCON __attribute__((address(0x019)));
+[v _CMCON `Vuc ~T0 @X0 0 e@25 ]
+"326
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 326: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
+[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
+"733
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 733:     struct {
+[s S42 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S42 . PS PSA T0SE T0CS INTEDG nGPPU ]
+"741
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 741:     struct {
+[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S43 . PS0 PS1 PS2 ]
+"732
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 732: typedef union {
+[u S41 `S42 1 `S43 1 ]
+[n S41 . . . ]
+"747
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 747: extern volatile OPTION_REGbits_t OPTION_REGbits __attribute__((address(0x081)));
+[v _OPTION_REGbits `VS41 ~T0 @X0 0 e@129 ]
+"643
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 643: extern volatile unsigned char ADCON0 __attribute__((address(0x01F)));
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"1404
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1404: extern volatile unsigned char ANSEL __attribute__((address(0x09F)));
+[v _ANSEL `Vuc ~T0 @X0 0 e@159 ]
+"1600
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1600: extern volatile __bit GP5 __attribute__((address(0x2D)));
+[v _GP5 `Vb ~T0 @X0 0 e@45 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 54: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"74
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 74: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"94
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 94: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"114
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 114: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"200
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 200: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"220
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 220: __asm("GPIO equ 05h");
+[; <" GPIO equ 05h ;# ">
+"308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 308: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 328: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 406: __asm("PIR1 equ 0Ch");
+[; <" PIR1 equ 0Ch ;# ">
+"454
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 454: __asm("TMR1 equ 0Eh");
+[; <" TMR1 equ 0Eh ;# ">
+"461
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 461: __asm("TMR1L equ 0Eh");
+[; <" TMR1L equ 0Eh ;# ">
+"481
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 481: __asm("TMR1H equ 0Fh");
+[; <" TMR1H equ 0Fh ;# ">
+"501
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 501: __asm("T1CON equ 010h");
+[; <" T1CON equ 010h ;# ">
+"566
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 566: __asm("CMCON equ 019h");
+[; <" CMCON equ 019h ;# ">
+"625
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 625: __asm("ADRESH equ 01Eh");
+[; <" ADRESH equ 01Eh ;# ">
+"645
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 645: __asm("ADCON0 equ 01Fh");
+[; <" ADCON0 equ 01Fh ;# ">
+"729
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 729: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"799
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 799: __asm("TRISIO equ 085h");
+[; <" TRISIO equ 085h ;# ">
+"849
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 849: __asm("PIE1 equ 08Ch");
+[; <" PIE1 equ 08Ch ;# ">
+"897
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 897: __asm("PCON equ 08Eh");
+[; <" PCON equ 08Eh ;# ">
+"931
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 931: __asm("OSCCAL equ 090h");
+[; <" OSCCAL equ 090h ;# ">
+"991
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 991: __asm("WPU equ 095h");
+[; <" WPU equ 095h ;# ">
+"1036
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1036: __asm("IOC equ 096h");
+[; <" IOC equ 096h ;# ">
+"1041
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1041: __asm("IOCB equ 096h");
+[; <" IOCB equ 096h ;# ">
+"1210
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1210: __asm("VRCON equ 099h");
+[; <" VRCON equ 099h ;# ">
+"1270
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1270: __asm("EEDATA equ 09Ah");
+[; <" EEDATA equ 09Ah ;# ">
+"1275
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1275: __asm("EEDAT equ 09Ah");
+[; <" EEDAT equ 09Ah ;# ">
+"1308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1308: __asm("EEADR equ 09Bh");
+[; <" EEADR equ 09Bh ;# ">
+"1328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1328: __asm("EECON1 equ 09Ch");
+[; <" EECON1 equ 09Ch ;# ">
+"1366
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1366: __asm("EECON2 equ 09Dh");
+[; <" EECON2 equ 09Dh ;# ">
+"1386
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1386: __asm("ADRESL equ 09Eh");
+[; <" ADRESL equ 09Eh ;# ">
+"1406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1406: __asm("ANSEL equ 09Fh");
+[; <" ANSEL equ 09Fh ;# ">
+"10 Tunel-New.c
+[; ;Tunel-New.c: 10:     _delay((unsigned long)((15)*(4000000/4000.0)));
+[p x FOSC = INTRCIO ]
+"11
+[; ;Tunel-New.c: 11:     GO_DONE = 1;
+[p x WDTE = OFF ]
+"12
+[; ;Tunel-New.c: 12:     while (GO_DONE);
+[p x PWRTE = OFF ]
+"13
+[; ;Tunel-New.c: 13:     volt = ADRESH;
+[p x MCLRE = OFF ]
+"14
+[; ;Tunel-New.c: 14:     ADON = 0;
+[p x BOREN = OFF ]
+"15
+[; ;Tunel-New.c: 15: }
+[p x CP = ON ]
+"16
+[; ;Tunel-New.c: 16: 
+[p x CPD = ON ]
+"18
+[; ;Tunel-New.c: 18:     for (i = 0; i <= 235; i++) {
+[v _gabOn `ui ~T0 @X0 1 e ]
+[i _gabOn
+-> -> 150 `i `ui
+]
+"19
+[; ;Tunel-New.c: 19:         ADC();
+[v _gabOff `ui ~T0 @X0 1 e ]
+[i _gabOff
+-> -> 48 `i `ui
+]
+"20
+[; ;Tunel-New.c: 20:         if (GP3 == 0 || volt < 140) {
+[v _blijOn `ui ~T0 @X0 1 e ]
+[i _blijOn
+-> -> 200 `i `ui
+]
+"21
+[; ;Tunel-New.c: 21:             return;
+[v _blijOff `ui ~T0 @X0 1 e ]
+[i _blijOff
+-> -> 50 `i `ui
+]
+"22
+[; ;Tunel-New.c: 22:         }
+[v _i `ui ~T0 @X0 1 e ]
+"23
+[; ;Tunel-New.c: 23:         _delay((unsigned long)((1)*(4000000/4000.0)));
+[v _volt `ui ~T0 @X0 1 e ]
+"25
+[; ;Tunel-New.c: 25:     if (volt > blijOn) {
+[v _ADC `(v ~T0 @X0 1 ef ]
+{
+[e :U _ADC ]
+[f ]
+"26
+[; ;Tunel-New.c: 26:         GP0 = 1;
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"27
+[; ;Tunel-New.c: 27:     }
+[e = _ADON -> -> 1 `i `b ]
+"28
+[; ;Tunel-New.c: 28:     if (volt > gabOn) {
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"29
+[; ;Tunel-New.c: 29:         GP1 = 1;
+[e = _GO_DONE -> -> 1 `i `b ]
+"30
+[; ;Tunel-New.c: 30:     }
+[e $U 82  ]
+[e :U 83 ]
+[e :U 82 ]
+[e $ _GO_DONE 83  ]
+[e :U 84 ]
+"31
+[; ;Tunel-New.c: 31: }
+[e = _volt -> _ADRESH `ui ]
+"32
+[; ;Tunel-New.c: 32: 
+[e = _ADON -> -> 0 `i `b ]
+"33
+[; ;Tunel-New.c: 33: void gabaritOff() {
+[e :UE 81 ]
+}
+"35
+[; ;Tunel-New.c: 35:         ADC();
+[v _gabaritOn `(v ~T0 @X0 1 ef ]
+{
+[e :U _gabaritOn ]
+[f ]
+"36
+[; ;Tunel-New.c: 36:         if (GP3 == 0 || volt > 48) {
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ <= _i -> -> 235 `i `ui 86  ]
+[e $U 87  ]
+[e :U 86 ]
+{
+"37
+[; ;Tunel-New.c: 37:             return;
+[e ( _ADC ..  ]
+"38
+[; ;Tunel-New.c: 38:         }
+[e $ ! || == -> _GP3 `i -> 0 `i < _volt -> -> 140 `i `ui 89  ]
+{
+"39
+[; ;Tunel-New.c: 39:         _delay((unsigned long)((1)*(4000000/4000.0)));
+[e $UE 85  ]
+"40
+[; ;Tunel-New.c: 40:     }
+}
+[e :U 89 ]
+"41
+[; ;Tunel-New.c: 41:     if (volt < gabOff) {
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"42
+[; ;Tunel-New.c: 42:         GP1 = 0;
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ <= _i -> -> 235 `i `ui 86  ]
+[e :U 87 ]
+}
+"43
+[; ;Tunel-New.c: 43:     }
+[e $ ! > _volt _blijOn 90  ]
+{
+"44
+[; ;Tunel-New.c: 44: }
+[e = _GP0 -> -> 1 `i `b ]
+"45
+[; ;Tunel-New.c: 45: 
+}
+[e :U 90 ]
+"46
+[; ;Tunel-New.c: 46: void blijniyOn() {
+[e $ ! > _volt _gabOn 91  ]
+{
+"47
+[; ;Tunel-New.c: 47:     for (i = 0; i <= 235; i++) {
+[e = _GP1 -> -> 1 `i `b ]
+"48
+[; ;Tunel-New.c: 48:         ADC();
+}
+[e :U 91 ]
+"49
+[; ;Tunel-New.c: 49:         if (GP3 == 0 || volt < 190) {
+[e :UE 85 ]
+}
+"51
+[; ;Tunel-New.c: 51:         }
+[v _gabaritOff `(v ~T0 @X0 1 ef ]
+{
+[e :U _gabaritOff ]
+[f ]
+"52
+[; ;Tunel-New.c: 52:         _delay((unsigned long)((1)*(4000000/4000.0)));
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ <= _i -> -> 435 `i `ui 93  ]
+[e $U 94  ]
+[e :U 93 ]
+{
+"53
+[; ;Tunel-New.c: 53:     }
+[e ( _ADC ..  ]
+"54
+[; ;Tunel-New.c: 54:     if (volt > blijOn) {
+[e $ ! || == -> _GP3 `i -> 0 `i > _volt -> -> 48 `i `ui 96  ]
+{
+"55
+[; ;Tunel-New.c: 55:         GP0 = 1;
+[e $UE 92  ]
+"56
+[; ;Tunel-New.c: 56:     }
+}
+[e :U 96 ]
+"57
+[; ;Tunel-New.c: 57: }
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"58
+[; ;Tunel-New.c: 58: 
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ <= _i -> -> 435 `i `ui 93  ]
+[e :U 94 ]
+}
+"59
+[; ;Tunel-New.c: 59: void blijniyOff() {
+[e $ ! < _volt _gabOff 97  ]
+{
+"60
+[; ;Tunel-New.c: 60:     for (i = 0; i <= 435; i++) {
+[e = _GP1 -> -> 0 `i `b ]
+"61
+[; ;Tunel-New.c: 61:         ADC();
+}
+[e :U 97 ]
+"62
+[; ;Tunel-New.c: 62:         if (GP3 == 0 || volt > 60) {
+[e :UE 92 ]
+}
+"64
+[; ;Tunel-New.c: 64:         }
+[v _blijniyOn `(v ~T0 @X0 1 ef ]
+{
+[e :U _blijniyOn ]
+[f ]
+"65
+[; ;Tunel-New.c: 65:     }
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ <= _i -> -> 235 `i `ui 99  ]
+[e $U 100  ]
+[e :U 99 ]
+{
+"66
+[; ;Tunel-New.c: 66:     if (volt < blijOff) {
+[e ( _ADC ..  ]
+"67
+[; ;Tunel-New.c: 67:         GP0 = 0;
+[e $ ! || == -> _GP3 `i -> 0 `i < _volt -> -> 190 `i `ui 102  ]
+{
+"68
+[; ;Tunel-New.c: 68:     }
+[e $UE 98  ]
+"69
+[; ;Tunel-New.c: 69: }
+}
+[e :U 102 ]
+"70
+[; ;Tunel-New.c: 70: 
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"71
+[; ;Tunel-New.c: 71: void sentrZamok() {
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ <= _i -> -> 235 `i `ui 99  ]
+[e :U 100 ]
+}
+"72
+[; ;Tunel-New.c: 72:     GP1 = 1;
+[e $ ! > _volt _blijOn 103  ]
+{
+"73
+[; ;Tunel-New.c: 73:     GP0 = 1;
+[e = _GP0 -> -> 1 `i `b ]
+"74
+[; ;Tunel-New.c: 74:     for (i = 0; i <= 10000; i++) {
+}
+[e :U 103 ]
+"75
+[; ;Tunel-New.c: 75:         if (GP3 == 1) {
+[e :UE 98 ]
+}
+"77
+[; ;Tunel-New.c: 77:         } else {
+[v _blijniyOff `(v ~T0 @X0 1 ef ]
+{
+[e :U _blijniyOff ]
+[f ]
+"78
+[; ;Tunel-New.c: 78:             _delay((unsigned long)((1)*(4000000/4000.0)));
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ <= _i -> -> 435 `i `ui 105  ]
+[e $U 106  ]
+[e :U 105 ]
+{
+"79
+[; ;Tunel-New.c: 79:         }
+[e ( _ADC ..  ]
+"80
+[; ;Tunel-New.c: 80:     }
+[e $ ! || == -> _GP3 `i -> 0 `i > _volt -> -> 60 `i `ui 108  ]
+{
+"81
+[; ;Tunel-New.c: 81:     GP1 = 0;
+[e $UE 104  ]
+"82
+[; ;Tunel-New.c: 82:     GP0 = 0;
+}
+[e :U 108 ]
+"83
+[; ;Tunel-New.c: 83: }
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ <= _i -> -> 435 `i `ui 105  ]
+[e :U 106 ]
+}
+"84
+[; ;Tunel-New.c: 84: 
+[e $ ! < _volt _blijOff 109  ]
+{
+"85
+[; ;Tunel-New.c: 85: void __attribute__((picinterrupt(""))) isr() {
+[e = _GP0 -> -> 0 `i `b ]
+"86
+[; ;Tunel-New.c: 86:     if (INTF) {
+}
+[e :U 109 ]
+"87
+[; ;Tunel-New.c: 87:         INTF = 0;
+[e :UE 104 ]
+}
+"89
+[; ;Tunel-New.c: 89:         while (GP3 == 1) {
+[v _sentrZamok `(v ~T0 @X0 1 ef ]
+{
+[e :U _sentrZamok ]
+[f ]
+"90
+[; ;Tunel-New.c: 90:             if (GP2 == 0) {
+[e = _GP1 -> -> 1 `i `b ]
+"91
+[; ;Tunel-New.c: 91:                 GP1 = 1;
+[e = _GP0 -> -> 1 `i `b ]
+"92
+[; ;Tunel-New.c: 92:             } else {
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ <= _i -> -> 10000 `i `ui 111  ]
+[e $U 112  ]
+[e :U 111 ]
+{
+"93
+[; ;Tunel-New.c: 93:                 GP1 = 0;
+[e $ ! == -> _GP3 `i -> 1 `i 114  ]
+{
+"94
+[; ;Tunel-New.c: 94:             }
+[e = _i -> -> 10000 `i `ui ]
+"95
+[; ;Tunel-New.c: 95:         }
+}
+[e $U 115  ]
+[e :U 114 ]
+{
+"96
+[; ;Tunel-New.c: 96:         if (GP2 == 0) {
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"97
+[; ;Tunel-New.c: 97:             GP1 = 1;
+}
+[e :U 115 ]
+"98
+[; ;Tunel-New.c: 98:         }
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ <= _i -> -> 10000 `i `ui 111  ]
+[e :U 112 ]
+}
+"99
+[; ;Tunel-New.c: 99:     }
+[e = _GP1 -> -> 0 `i `b ]
+"100
+[; ;Tunel-New.c: 100: }
+[e = _GP0 -> -> 0 `i `b ]
+"101
+[; ;Tunel-New.c: 101: 
+[e :UE 110 ]
+}
+[v $root$_isr `(v ~T0 @X0 0 e ]
+"103
+[; ;Tunel-New.c: 103:     TRISIO = 0b00111100;
+[v _isr `(v ~T1 @X0 1 ef ]
+{
+[e :U _isr ]
+[f ]
+"104
+[; ;Tunel-New.c: 104:     GPIO = 0b00000000;
+[e $ ! _INTF 117  ]
+{
+"105
+[; ;Tunel-New.c: 105:     CMCON = 0x07;
+[e = _INTF -> -> 0 `i `b ]
+"106
+[; ;Tunel-New.c: 106:     INTCON = 0b10010000;
+[e = _GP0 -> -> 0 `i `b ]
+"107
+[; ;Tunel-New.c: 107:     OPTION_REGbits.INTEDG = 0;
+[e $U 118  ]
+[e :U 119 ]
+{
+"108
+[; ;Tunel-New.c: 108:     ADCON0 = 0b00001100;
+[e $ ! == -> _GP2 `i -> 0 `i 121  ]
+{
+"109
+[; ;Tunel-New.c: 109:     ANSEL = 0b00011000;
+[e = _GP1 -> -> 1 `i `b ]
+"110
+[; ;Tunel-New.c: 110:     while (1) {
+}
+[e $U 122  ]
+[e :U 121 ]
+{
+"111
+[; ;Tunel-New.c: 111:         while (GP3 == 1) {
+[e = _GP1 -> -> 0 `i `b ]
+"112
+[; ;Tunel-New.c: 112:             ADC();
+}
+[e :U 122 ]
+"113
+[; ;Tunel-New.c: 113:             if (volt > gabOn && GP1 == 0) {
+}
+[e :U 118 ]
+"107
+[; ;Tunel-New.c: 107:     OPTION_REGbits.INTEDG = 0;
+[e $ == -> _GP3 `i -> 1 `i 119  ]
+[e :U 120 ]
+"114
+[; ;Tunel-New.c: 114:                 gabaritOn();
+[e $ ! == -> _GP2 `i -> 0 `i 123  ]
+{
+"115
+[; ;Tunel-New.c: 115:             }
+[e = _GP1 -> -> 1 `i `b ]
+"116
+[; ;Tunel-New.c: 116:             if (volt > blijOn && GP0 == 0) {
+}
+[e :U 123 ]
+"117
+[; ;Tunel-New.c: 117:                 blijniyOn();
+}
+[e :U 117 ]
+"118
+[; ;Tunel-New.c: 118:             }
+[e :UE 116 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"120
+[; ;Tunel-New.c: 120:                 blijniyOff();
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"121
+[; ;Tunel-New.c: 121:             }
+[e = _TRISIO -> -> 60 `i `uc ]
+"122
+[; ;Tunel-New.c: 122:             if (volt < gabOff && GP1 == 1) {
+[e = _GPIO -> -> 0 `i `uc ]
+"123
+[; ;Tunel-New.c: 123:                 gabaritOff();
+[e = _CMCON -> -> 7 `i `uc ]
+"124
+[; ;Tunel-New.c: 124:             }
+[e = _INTCON -> -> 144 `i `uc ]
+"125
+[; ;Tunel-New.c: 125:         }
+[e = . . _OPTION_REGbits 0 4 -> -> 0 `i `uc ]
+"126
+[; ;Tunel-New.c: 126:         if (GP5 == 0) {
+[e = _ADCON0 -> -> 12 `i `uc ]
+"127
+[; ;Tunel-New.c: 127:             ADC();
+[e = _ANSEL -> -> 24 `i `uc ]
+"128
+[; ;Tunel-New.c: 128:             if (volt > gabOn) {
+[e :U 126 ]
+{
+"129
+[; ;Tunel-New.c: 129:                 sentrZamok();
+[e $U 128  ]
+[e :U 129 ]
+{
+"130
+[; ;Tunel-New.c: 130:             }
+[e ( _ADC ..  ]
+"131
+[; ;Tunel-New.c: 131:         }
+[e $ ! && > _volt _gabOn == -> _GP1 `i -> 0 `i 131  ]
+{
+"132
+[; ;Tunel-New.c: 132:         if (GP2 == 1) {
+[e ( _gabaritOn ..  ]
+"133
+[; ;Tunel-New.c: 133:             GP1 = 0;
+}
+[e :U 131 ]
+"134
+[; ;Tunel-New.c: 134:             GP0 = 0;
+[e $ ! && > _volt _blijOn == -> _GP0 `i -> 0 `i 132  ]
+{
+"135
+[; ;Tunel-New.c: 135:         }
+[e ( _blijniyOn ..  ]
+"136
+[; ;Tunel-New.c: 136:         if (GP2 == 0) {
+}
+[e :U 132 ]
+"137
+[; ;Tunel-New.c: 137:             GP1 = 1;
+[e $ ! && < _volt _blijOff == -> _GP0 `i -> 1 `i 133  ]
+{
+"138
+[; ;Tunel-New.c: 138:         }
+[e ( _blijniyOff ..  ]
+"139
+[; ;Tunel-New.c: 139:     }
+}
+[e :U 133 ]
+"140
+[; ;Tunel-New.c: 140: }
+[e $ ! && < _volt _gabOff == -> _GP1 `i -> 1 `i 134  ]
+{
+"141
+[e ( _gabaritOff ..  ]
+"142
+}
+[e :U 134 ]
+"143
+}
+[e :U 128 ]
+"129
+[; ;Tunel-New.c: 129:                 sentrZamok();
+[e $ == -> _GP3 `i -> 1 `i 129  ]
+[e :U 130 ]
+"144
+[e $ ! == -> _GP5 `i -> 0 `i 135  ]
+{
+"145
+[e ( _ADC ..  ]
+"146
+[e $ ! > _volt _gabOn 136  ]
+{
+"147
+[e ( _sentrZamok ..  ]
+"148
+}
+[e :U 136 ]
+"149
+}
+[e :U 135 ]
+"150
+[e $ ! == -> _GP2 `i -> 1 `i 137  ]
+{
+"151
+[e = _GP1 -> -> 0 `i `b ]
+"152
+[e = _GP0 -> -> 0 `i `b ]
+"153
+}
+[e :U 137 ]
+"154
+[e $ ! == -> _GP2 `i -> 0 `i 138  ]
+{
+"155
+[e = _GP1 -> -> 1 `i `b ]
+"156
+}
+[e :U 138 ]
+"157
+}
+[e :U 125 ]
+[e $U 126  ]
+[e :U 127 ]
+"158
+[e :UE 124 ]
+}

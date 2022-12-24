@@ -1,0 +1,125 @@
+[p LITE_MODE AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F675 ]
+[d frameptr 6 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"25 C:\Users\User\Desktop\mplab\Tunel-New.X\Tunel-New.c
+[v _ADC ADC `(v  1 e 1 0 ]
+"35
+[v _gabaritOn gabaritOn `(v  1 e 1 0 ]
+"51
+[v _gabaritOff gabaritOff `(v  1 e 1 0 ]
+"64
+[v _blijniyOn blijniyOn `(v  1 e 1 0 ]
+"77
+[v _blijniyOff blijniyOff `(v  1 e 1 0 ]
+"89
+[v _sentrZamok sentrZamok `(v  1 e 1 0 ]
+"103
+[v _isr isr `II(v  1 e 1 0 ]
+"120
+[v _main main `(v  1 e 1 0 ]
+"218 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[v _GPIO GPIO `VEuc  1 e 1 @5 ]
+"326
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"564
+[v _CMCON CMCON `VEuc  1 e 1 @25 ]
+"623
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"643
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+[s S40 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nGPPU 1 0 :1:7 
+]
+"747
+[s S47 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+]
+[u S51 . 1 `S40 1 . 1 0 `S47 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES51  1 e 1 @129 ]
+"797
+[v _TRISIO TRISIO `VEuc  1 e 1 @133 ]
+"1404
+[v _ANSEL ANSEL `VEuc  1 e 1 @159 ]
+"1498
+[v _ADON ADON `VEb  1 e 0 @248 ]
+"1579
+[v _GO_DONE GO_DONE `VEb  1 e 0 @249 ]
+"1585
+[v _GP0 GP0 `VEb  1 e 0 @40 ]
+"1588
+[v _GP1 GP1 `VEb  1 e 0 @41 ]
+"1591
+[v _GP2 GP2 `VEb  1 e 0 @42 ]
+"1594
+[v _GP3 GP3 `VEb  1 e 0 @43 ]
+"1600
+[v _GP5 GP5 `VEb  1 e 0 @45 ]
+"1633
+[v _INTF INTF `VEb  1 e 0 @89 ]
+"18 C:\Users\User\Desktop\mplab\Tunel-New.X\Tunel-New.c
+[v _gabOn gabOn `ui  1 e 2 0 ]
+"19
+[v _gabOff gabOff `ui  1 e 2 0 ]
+"20
+[v _blijOn blijOn `ui  1 e 2 0 ]
+"21
+[v _blijOff blijOff `ui  1 e 2 0 ]
+"22
+[v _i i `ui  1 e 2 0 ]
+"23
+[v _volt volt `ui  1 e 2 0 ]
+"120
+[v _main main `(v  1 e 1 0 ]
+{
+"158
+} 0
+"89
+[v _sentrZamok sentrZamok `(v  1 e 1 0 ]
+{
+"101
+} 0
+"35
+[v _gabaritOn gabaritOn `(v  1 e 1 0 ]
+{
+"49
+} 0
+"51
+[v _gabaritOff gabaritOff `(v  1 e 1 0 ]
+{
+"62
+} 0
+"64
+[v _blijniyOn blijniyOn `(v  1 e 1 0 ]
+{
+"75
+} 0
+"77
+[v _blijniyOff blijniyOff `(v  1 e 1 0 ]
+{
+"87
+} 0
+"25
+[v _ADC ADC `(v  1 e 1 0 ]
+{
+"33
+} 0
+"103
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"118
+} 0

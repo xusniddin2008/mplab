@@ -1,0 +1,5 @@
+Warning[205] C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\KENCR.X\KENCR.ASM 1 : Found directive in column 1. (list)
+Error[113]   C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\KENCR.X\KENCR.ASM 63 : Symbol not previously defined (qizilmax)
+Error[113]   C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\KENCR.X\KENCR.ASM 65 : Symbol not previously defined (qizilmin)
+Error[113]   C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\KENCR.X\KENCR.ASM 67 : Symbol not previously defined (yashilmax)
+Error[113]   C:\USERS\XUSNIDDIN\DESKTOP\MPLAB\KENCR.X\KENCR.ASM 69 : Symbol not previously defined (yashilmin)

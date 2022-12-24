@@ -1,0 +1,96 @@
+[p LITE_MODE AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F675 ]
+[d frameptr 6 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"20 C:\Users\User\Desktop\mplab\PiCr-25.09.22.X\PiCr-25.09.22.c
+[v _ms9And4ms ms9And4ms `(v  1 e 1 0 ]
+"30
+[v _bit1 bit1 `(v  1 e 1 0 ]
+"40
+[v _bit0 bit0 `(v  1 e 1 0 ]
+"50
+[v _commandd commandd `(v  1 e 1 0 ]
+"95
+[v _ADC ADC `(v  1 e 1 0 ]
+"105
+[v _ADC1 ADC1 `(v  1 e 1 0 ]
+"114
+[v _main main `(v  1 e 1 0 ]
+"326 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"564
+[v _CMCON CMCON `VEuc  1 e 1 @25 ]
+"623
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"643
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+"727
+[v _OPTION_REG OPTION_REG `VEuc  1 e 1 @129 ]
+"797
+[v _TRISIO TRISIO `VEuc  1 e 1 @133 ]
+"929
+[v _OSCCAL OSCCAL `VEuc  1 e 1 @144 ]
+"1404
+[v _ANSEL ANSEL `VEuc  1 e 1 @159 ]
+"1498
+[v _ADON ADON `VEb  1 e 0 @248 ]
+"1579
+[v _GO_DONE GO_DONE `VEb  1 e 0 @249 ]
+"1591
+[v _GP2 GP2 `VEb  1 e 0 @42 ]
+"1693
+[v _RP0 RP0 `VEb  1 e 0 @29 ]
+"13 C:\Users\User\Desktop\mplab\PiCr-25.09.22.X\PiCr-25.09.22.c
+[v _i i `ui  1 e 2 0 ]
+"14
+[v _volt volt `ui  1 e 2 0 ]
+"15
+[v _codeAddress codeAddress `uc  1 e 1 0 ]
+"16
+[v _codeCommand codeCommand `uc  1 e 1 0 ]
+"18
+[v _loopBit loopBit `uc  1 e 1 0 ]
+"114
+[v _main main `(v  1 e 1 0 ]
+{
+"218
+} 0
+"50
+[v _commandd commandd `(v  1 e 1 0 ]
+{
+"93
+} 0
+"20
+[v _ms9And4ms ms9And4ms `(v  1 e 1 0 ]
+{
+"28
+} 0
+"30
+[v _bit1 bit1 `(v  1 e 1 0 ]
+{
+"38
+} 0
+"40
+[v _bit0 bit0 `(v  1 e 1 0 ]
+{
+"48
+} 0
+"105
+[v _ADC1 ADC1 `(v  1 e 1 0 ]
+{
+"112
+} 0
+"95
+[v _ADC ADC `(v  1 e 1 0 ]
+{
+"103
+} 0

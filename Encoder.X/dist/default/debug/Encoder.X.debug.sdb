@@ -1,0 +1,67 @@
+[p LITE_MODE AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F1822 ]
+[d frameptr 6 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"43 C:\Users\User\Desktop\mplab\Encoder.X\Encoder.c
+[v _test_bit test_bit `(ui  1 e 2 0 ]
+"47
+[v _up up `(v  1 e 1 0 ]
+"53
+[v _down down `(v  1 e 1 0 ]
+"59
+[v _main main `(v  1 e 1 0 ]
+"429 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f1822.h
+[v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"1242
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"1645
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1826
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"2632
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"5738
+[v _RA0 RA0 `VEb  1 e 0 @96 ]
+"5741
+[v _RA1 RA1 `VEb  1 e 0 @97 ]
+"5750
+[v _RA4 RA4 `VEb  1 e 0 @100 ]
+"5753
+[v _RA5 RA5 `VEb  1 e 0 @101 ]
+"38 C:\Users\User\Desktop\mplab\Encoder.X\Encoder.c
+[v _u u `uc  1 e 1 0 ]
+"40
+[v _qqq qqq `uc  1 e 1 0 ]
+"41
+[v _www www `uc  1 e 1 0 ]
+"59
+[v _main main `(v  1 e 1 0 ]
+{
+"120
+} 0
+"47
+[v _up up `(v  1 e 1 0 ]
+{
+"51
+} 0
+"43
+[v _test_bit test_bit `(ui  1 e 2 0 ]
+{
+[v test_bit@aValue aValue `ui  1 p 2 0 ]
+[v test_bit@aNumber aNumber `ui  1 p 2 2 ]
+"45
+} 0
+"53
+[v _down down `(v  1 e 1 0 ]
+{
+"57
+} 0

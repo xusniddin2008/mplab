@@ -1,0 +1,98 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Sun May 19 05:34:28 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x00063c
+                   .cinit    romdata   0x00031e    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/KEN.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00031f      
+                            0x002007    0x002007      
+            801 out of 1158 program addresses used, program memory utilization is 69%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x0000a0    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                Big_delay   0x00009e    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 D_Loop36   0x0000a6    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                      LED   0x000048    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                Main_Loop   0x000080    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 Mainloop   0x000033    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+               Send0_Loop   0x0002c1    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+              Send0_Loopp   0x0002de    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             Send0_Loopp1   0x0002fa    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+               Send1_Loop   0x0002a4    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   Send_0   0x0002bf    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   Send_1   0x0002a2    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 UMessen1   0x000036    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_0044   0x000044    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_0046   0x000046    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_031A   0x00031a    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_031C   0x00031c    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                        c   0x000092    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   cmmode   0x00010e    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                  cmpower   0x0000a9    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   cmseek   0x000173    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+               cmvolumpas   0x00023d    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+              cmvolumtepa   0x0001d8    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                    delay   0x0000a5    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+              delayy4.5ms   0x000315    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                delayy9ms   0x0002dc    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     loop   0x000037    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     mode   0x000064    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                    power   0x00005d    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     seek   0x00006b    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 volumpas   0x000079    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                volumtepa   0x000072    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 Mainloop   0x000033    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 UMessen1   0x000036    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     loop   0x000037    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_0044   0x000044    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_0046   0x000046    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                      LED   0x000048    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                    power   0x00005d    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     mode   0x000064    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                     seek   0x00006b    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                volumtepa   0x000072    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 volumpas   0x000079    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                Main_Loop   0x000080    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                        c   0x000092    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                Big_delay   0x00009e    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                BD_Loop94   0x0000a0    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                    delay   0x0000a5    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                 D_Loop36   0x0000a6    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                  cmpower   0x0000a9    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   cmmode   0x00010e    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   cmseek   0x000173    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+              cmvolumtepa   0x0001d8    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+               cmvolumpas   0x00023d    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   Send_1   0x0002a2    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+               Send1_Loop   0x0002a4    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                   Send_0   0x0002bf    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+               Send0_Loop   0x0002c1    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+                delayy9ms   0x0002dc    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+              Send0_Loopp   0x0002de    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             Send0_Loopp1   0x0002fa    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+              delayy4.5ms   0x000315    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_031A   0x00031a    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+             _.org_0_031C   0x00031c    program     static C:\Users\Xusniddin\Desktop\mplab\Ken.X\Ken.asm
+
+

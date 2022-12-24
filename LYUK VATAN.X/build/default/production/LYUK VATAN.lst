@@ -1,0 +1,531 @@
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list p=12f675
+                      00002         #include <P12f675.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC12F675 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00367         LIST
+                      00003         ERRORLEVEL      -302
+2007   0054           00004         __CONFIG  00054H
+                      00005         ;__CONFIG       _MCLRE_OFF & _PWRTE_OFF & _WDT_OFF & _INTRC_OSC_NOCLKOUT & _BODEN_OFF
+  00000020            00006 Reg_1           equ         0x20                
+  00000021            00007 Reg_2           equ         0x21
+  00000022            00008 Reg_3           equ         0x22
+  00000023            00009 Reg_info        equ         0x23                
+  00000003            00010 STATUS          equ         0x03
+  00000005            00011 GPIO            equ         0x05
+  00000085            00012 TRISIO          equ         0x85
+                      00013                 
+                      00014                 
+                      00015 ;*******************************************************************************                
+                      00016                 org         0x00
+                      00017 ;*******************************************************************************
+0000   1283           00018                 bcf         STATUS,5
+0001   3007           00019                 movlw       b'00000111'
+0002   0099           00020                 movwf       CMCON
+0003   0185           00021                 clrf        GPIO
+0004   1683           00022                 bsf         STATUS,5
+0005   23FF           00023                 call        0x3FF
+0006   0090           00024                 movwf       OSCCAL
+0007   3080           00025                 movlw       b'10000000'
+0008   0090           00026                 movwf       OSCCAL
+0009   3080           00027                 MOVLW       b'10000000'
+000A   0081           00028                 MOVWF       OPTION_REG                                              
+000B   3000           00029                 movlw       b'00000000'
+000C   009F           00030                 movwf       ANSEL
+000D   0185           00031                 clrf        TRISIO
+000E   1005           00032                 bcf         TRISIO,0
+000F   1085           00033                 bcf         TRISIO,1
+0010   1505           00034                 bsf         TRISIO,2
+0011   1585           00035                 bsf         TRISIO,3
+0012   1685           00036                 bsf         TRISIO,5
+0013   1283           00037                 bcf         STATUS,5
+0014   3000           00038                 movlw       b'00000000'
+0015   00A3           00039                 movwf       Reg_info
+                      00040 ;*******************************************************************************
+0016   2???           00041 prog            call        blok
+0017   1E85           00042                 btfss       GPIO,5
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0018   2???           00043                 call        aux
+0019   2???           00044                 goto        prog
+                      00045 ;*******************************************************************************
+001A   1985           00046 blok            btfsc       GPIO,3
+001B   0008           00047                 return          
+001C   2???           00048                 call        delay50ms
+001D   1985           00049                 btfsc       GPIO,3
+001E   0008           00050                 return          
+001F   1905           00051                 btfsc       GPIO,2
+0020   0008           00052                 return
+0021   2???           00053                 call        sekund_3.5
+0022   1905           00054                 btfsc       GPIO,2
+0023   0008           00055                 return
+0024   2???           00056                 call        delay_20msekund
+0025   2???           00057                 call        sekund_10.5info
+0026   1005           00058                 bcf         GPIO,0
+0027   0008           00059                 return          
+                      00060 ;*******************************************************************************
+0028   2???           00061 aux             call        delay50ms
+0029   1A85           00062                 btfsc       GPIO,5
+002A   0008           00063                 return          
+002B   1C23           00064                 btfss       Reg_info,0
+002C   2???           00065                 call        sekund_10.5aux              
+002D   1823           00066                 btfsc       Reg_info,0
+002E   2???           00067                 call        sekund_3.5aux
+                      00068                 
+002F   0008           00069                 return          
+                      00070 ;*******************************************************************************                
+0030   1485           00071 sekund_3.5      bsf         GPIO,1
+0031   2???           00072                 call        delay_3.5
+0032   1085           00073                 bcf         GPIO,1
+0033   0008           00074                 return
+                      00075 ;*******************************************************************************                
+0034   1485           00076 sekund_3.5aux   bsf         GPIO,1
+0035   2???           00077                 call        aux_3.5
+0036   1085           00078                 bcf         GPIO,1
+0037   0008           00079                 return          
+                      00080 ;*******************************************************************************
+0038   1405           00081 sekund_10.5info bsf         GPIO,0
+0039   2???           00082                 call        delay_1
+003A   1905           00083                 btfsc       GPIO,2
+003B   0008           00084                 return          
+003C   2???           00085                 call        delay_1
+003D   1905           00086                 btfsc       GPIO,2
+003E   0008           00087                 return  
+003F   2???           00088                 call        delay_1
+0040   1905           00089                 btfsc       GPIO,2
+0041   0008           00090                 return          
+0042   2???           00091                 call        delay_1
+0043   1905           00092                 btfsc       GPIO,2
+0044   0008           00093                 return  
+0045   2???           00094                 call        delay_1
+0046   1905           00095                 btfsc       GPIO,2
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0047   0008           00096                 return  
+0048   2???           00097                 call        delay_1
+0049   1905           00098                 btfsc       GPIO,2
+004A   0008           00099                 return  
+004B   2???           00100                 call        delay_1
+004C   1905           00101                 btfsc       GPIO,2
+004D   0008           00102                 return
+004E   2???           00103                 call        delay_1
+004F   1905           00104                 btfsc       GPIO,2
+0050   0008           00105                 return  
+0051   2???           00106                 call        delay_1
+0052   1905           00107                 btfsc       GPIO,2
+0053   0008           00108                 return  
+0054   2???           00109                 call        delay_1
+0055   1905           00110                 btfsc       GPIO,2
+0056   0008           00111                 return  
+0057   2???           00112                 call        delay_1
+0058   1905           00113                 btfsc       GPIO,2
+0059   0008           00114                 return  
+005A   2???           00115                 call        delay_1             
+005B   0008           00116                 return  
+                      00117 ;*******************************************************************************                
+005C   1405           00118 sekund_10.5aux  bsf         GPIO,0
+005D   2???           00119                 call        aux_10.5
+005E   1005           00120                 bcf         GPIO,0
+005F   0008           00121                 return
+                      00122 ;*******************************************************************************                
+0060   3000           00123 delay_3.5       movlw       b'00000000'
+0061   00A3           00124                 movwf       Reg_info
+0062   3066           00125                 movlw       .102
+0063   00A0           00126                 movwf       Reg_1
+0064   30C2           00127                 movlw       .194
+0065   00A1           00128                 movwf       Reg_2
+0066   3012           00129                 movlw       .18
+0067   00A2           00130                 movwf       Reg_3
+0068   0BA0           00131                 decfsz      Reg_1,F
+0069   2???           00132                 goto        $-1
+006A   0BA1           00133                 decfsz      Reg_2,F
+006B   2???           00134                 goto        $-3
+006C   0BA2           00135                 decfsz      Reg_3,F
+006D   2???           00136                 goto        $-5
+006E   0000           00137                 nop                                     
+006F   0008           00138                 return
+                      00139 ;*******************************************************************************
+0070   3001           00140 aux_10.5        movlw       b'00000001'
+                      00141                 ;movwf      Reg_info
+                      00142                 ;movlw       .55
+                      00143                 ;movwf       Reg_1
+                      00144                 ;movlw       .1
+                      00145                 ;movwf       Reg_2
+                      00146                 ;movlw       .63
+                      00147                 ;movwf       Reg_3
+                      00148                 ;decfsz      Reg_1,F
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00149                 ;goto        $-1
+                      00150                 ;decfsz      Reg_2,F
+                      00151                 ;goto        $-3
+                      00152                 ;decfsz      Reg_3,F
+                      00153                 ;goto        $-5
+0071   00A3           00154                 movwf       Reg_info
+0072   3066           00155                 movlw       .102
+0073   00A0           00156                 movwf       Reg_1
+0074   30C2           00157                 movlw       .194
+0075   00A1           00158                 movwf       Reg_2
+0076   3015           00159                 movlw       .21
+0077   00A2           00160                 movwf       Reg_3
+0078   0BA0           00161                 decfsz      Reg_1,F
+0079   2???           00162                 goto        $-1
+007A   0BA1           00163                 decfsz      Reg_2,F
+007B   2???           00164                 goto        $-3
+007C   0BA2           00165                 decfsz      Reg_3,F
+007D   2???           00166                 goto        $-5
+007E   0000           00167                 nop
+007F   1005           00168                 bcf         GPIO,0
+0080   2???           00169                 goto        prog
+                      00170 ;*******************************************************************************
+0081   3000           00171 aux_3.5         movlw       b'00000000'
+0082   00A3           00172                 movwf       Reg_info
+0083   3066           00173                 movlw       .102
+0084   00A0           00174                 movwf       Reg_1
+0085   30C2           00175                 movlw       .194
+0086   00A1           00176                 movwf       Reg_2
+0087   3015           00177                 movlw       .21
+0088   00A2           00178                 movwf       Reg_3
+0089   0BA0           00179                 decfsz      Reg_1,F
+008A   2???           00180                 goto        $-1
+008B   0BA1           00181                 decfsz      Reg_2,F
+008C   2???           00182                 goto        $-3
+008D   0BA2           00183                 decfsz      Reg_3,F
+008E   2???           00184                 goto        $-5
+008F   0000           00185                 nop
+0090   1085           00186                 bcf         GPIO,1
+0091   2???           00187                 goto        prog
+                      00188 ;*******************************************************************************
+0092                  00189 delay_1         ;movlw      b'00000001'
+                      00190                 ;movwf      Reg_info            
+0092   30C8           00191                 movlw       .200
+0093   00A0           00192                 movwf       Reg_1
+0094   303C           00193                 movlw       .60
+0095   00A1           00194                 movwf       Reg_2
+0096   3006           00195                 movlw       .6
+0097   00A2           00196                 movwf       Reg_3
+0098   0BA0           00197                 decfsz      Reg_1,F
+0099   2???           00198                 goto        $-1
+009A   0BA1           00199                 decfsz      Reg_2,F
+009B   2???           00200                 goto        $-3
+009C   0BA2           00201                 decfsz      Reg_3,F
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+009D   2???           00202                 goto        $-5 
+009E   0008           00203                 return          
+                      00204 ;*******************************************************************************
+009F   30EE           00205 delay_20msekund movlw       .238
+00A0   00A0           00206                 movwf       Reg_1
+00A1   3041           00207                 movlw       .65
+00A2   00A1           00208                 movwf       Reg_2
+00A3   0BA0           00209                 decfsz      Reg_1,F
+00A4   2???           00210                 goto        $-1
+00A5   0BA1           00211                 decfsz      Reg_2,F
+00A6   2???           00212                 goto        $-3
+00A7   0000           00213                 nop
+00A8   0008           00214                 return
+                      00215                 
+                      00216 ;*******************************************************************************                
+00A9   30EE           00217 delay50ms   movlw       .238
+00AA   00A0           00218             movwf       Reg_1
+00AB   3041           00219             movlw       .65
+00AC   00A1           00220             movwf       Reg_2
+00AD   0BA0           00221             decfsz      Reg_1,F
+00AE   2???           00222             goto        $-1
+00AF   0BA1           00223             decfsz      Reg_2,F
+00B0   2???           00224             goto        $-3
+00B1   0000           00225             nop
+                      00226 
+00B2   0008           00227             return
+                      00228 ;*******************************************************************************            
+0054                  00229                 end
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+Reg_1                             00000020
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+Reg_2                             00000021
+Reg_3                             00000022
+Reg_info                          00000023
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+W                                 00000000
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_0_0069                      00000069
+_.org_0_006B                      0000006B
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_.org_0_006D                      0000006D
+_.org_0_0079                      00000079
+_.org_0_007B                      0000007B
+_.org_0_007D                      0000007D
+_.org_0_008A                      0000008A
+_.org_0_008C                      0000008C
+_.org_0_008E                      0000008E
+_.org_0_0099                      00000099
+_.org_0_009B                      0000009B
+_.org_0_009D                      0000009D
+_.org_0_00A4                      000000A4
+_.org_0_00A6                      000000A6
+_.org_0_00AE                      000000AE
+_.org_0_00B0                      000000B0
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F675                          00000001
+MPASM 5.87                    LYUK VATAN.ASM   5-31-2022  2:45:36         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+aux                               00000028
+aux_10.5                          00000070
+aux_3.5                           00000081
+blok                              0000001A
+delay50ms                         000000A9
+delay_1                           00000092
+delay_20msekund                   0000009F
+delay_3.5                         00000060
+prog                              00000016
+sekund_10.5aux                    0000005C
+sekund_10.5info                   00000038
+sekund_3.5                        00000030
+sekund_3.5aux                     00000034
+
+Errors   :     0
+Warnings :     1 reported,     0 suppressed
+Messages :     0 reported,    10 suppressed
+
+

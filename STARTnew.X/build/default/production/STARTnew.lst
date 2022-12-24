@@ -1,0 +1,1071 @@
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; Mehribon va Rahmli Alloh nomi bilan       
+                      00002             LIST        p=16F628A
+                      00003             ;__CONFIG   02170H
+2007   0010           00004             __CONFIG    00010H
+                      00005             #include <P16f628A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC16F628A processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00386         LIST
+                      00006         ERRORLEVEL      -302                
+  00000006            00007 PORTB       equ         06h
+  00000086            00008 TRISB       equ         86h
+  00000003            00009 STATUS      equ         03h
+  00000005            00010 PORTA       equ         05h
+  00000085            00011 TRISA       equ         85h
+  00000020            00012 Reg_1       equ         20h
+  00000021            00013 Reg_2       equ         21h
+  00000022            00014 Reg_3       equ         22h
+  00000023            00015 Regstart    equ         23h         
+  0000009F            00016 VRCON       equ         9Fh
+                      00017     
+                      00018             ORG         0x000              
+                      00019 ;-------------------------------------------------------------------------------            
+0000   1283           00020             bcf         STATUS,5
+0001   0185           00021             clrf        PORTA
+0002   0186           00022             clrf        PORTB
+0003   1683           00023             bsf         STATUS,5            
+0004   158E           00024             bsf         PCON,3
+0005   108E           00025             bcf         PCON,1
+0006   140E           00026             bsf         PCON,0      
+0007   3080           00027             MOVLW       b'10000000'        
+0008   0081           00028             MOVWF       OPTION_REG          
+0009   0186           00029             CLRF        TRISB
+000A   0185           00030             CLRF        TRISA
+000B   1085           00031             bcf         TRISA,1     
+000C   1505           00032             bsf         TRISA,2
+000D   1585           00033             bsf         TRISA,3
+000E   1406           00034             bsf         TRISB,0
+000F   1486           00035             bsf         TRISB,1
+0010   1506           00036             bsf         TRISB,2
+0011   1005           00037             bcf         TRISA,0
+0012   1305           00038             bcf         TRISA,6
+0013   1385           00039             bcf         TRISA,7
+0014   1586           00040             bsf         TRISB,3
+0015   1206           00041             bcf         TRISB,4
+0016   1286           00042             bcf         TRISB,5
+0017   1306           00043             bcf         TRISB,6
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0018   1386           00044             bcf         TRISB,7
+0019   1283           00045             bcf         STATUS,5            
+001A   3007           00046             MOVLW       7           
+001B   009F           00047             MOVWF       CMCON         ; Comparators off, all pins digital I/O       
+                      00048 ;-------------------------------------------------------------------------------
+                      00049 ;prerevaniya btfss      PORTA,2
+                      00050             ;goto       margat      
+                      00051 ;-------------------------------------------------------------------------------            
+                      00052             
+001C   3002           00053 programma   movlw       .2
+001D   00A3           00054             movwf       Regstart
+001E   1785           00055             bsf         PORTA,7
+                      00056             ;btfss      PORTA,2
+001F   1C06           00057             btfss       PORTB,0
+0020   2???           00058             goto        ahrana
+0021   1886           00059             btfsc       PORTB,1
+0022   2???           00060             call        tormoz
+                      00061             ;btfsc      PORTA,1
+0023   1905           00062             btfsc       PORTA,2
+0024   2???           00063             goto        magnitafon
+                      00064             ;btfsc      PORTB,0 ; knopka generator
+0025   1906           00065             btfsc       PORTB,2
+                      00066             ;bsf                PORTB,7
+0026   1485           00067             bsf         PORTA,1
+                      00068             ;btfss      PORTB,0 ; knopka generator
+0027   1D06           00069             btfss       PORTB,2
+                      00070             ;bcf                PORTB,7
+0028   1085           00071             bcf         PORTA,1
+0029   2???           00072             goto        programma
+                      00073 ;-------------------------------------------------------------------------------
+002A                  00074 magnitafon  ;btfsc      PORTB,0 ; knopka generator
+002A   1906           00075             btfsc       PORTB,2
+002B   2???           00076             goto        programma
+002C   2???           00077             call        delayknopka
+                      00078             ;btfsc      PORTA,1
+002D   1905           00079             btfsc       PORTA,2
+002E   2???           00080             call        knopkauderjatstart
+002F                  00081 magnitafon1 ;btfss      PORTA,2
+002F   1C06           00082             btfss       PORTB,0
+0030   2???           00083             goto        ahrana
+                      00084             ;btfsc      PORTB,0 ; knopka generator
+0031   1906           00085             btfsc       PORTB,2
+                      00086             ;bsf                PORTB,7
+0032   1485           00087             bsf         PORTA,1
+                      00088             ;btfss      PORTB,0 ; knopka generator
+0033   1D06           00089             btfss       PORTB,2
+                      00090             ;bcf                PORTB,7
+0034   1085           00091             bcf         PORTA,1
+0035   1785           00092             bsf         PORTA,7
+                      00093             ;bsf                PORTB,3
+0036   1606           00094             bsf         PORTB,4
+0037   1405           00095             bsf         PORTA,0
+0038   1886           00096             btfsc       PORTB,1
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0039   2???           00097             call        tormozmag
+                      00098             ;btfsc      PORTA,1
+003A   1905           00099             btfsc       PORTA,2
+003B   2???           00100             goto        zajiganiya
+003C   2???           00101             goto        magnitafon1
+                      00102 ;-------------------------------------------------------------------------------
+003D                  00103 tormozmag   ;btfsc      PORTB,0 ; knopka generator
+003D   1906           00104             btfsc       PORTB,2
+003E   2???           00105             goto        magnitafon1
+                      00106             ;btfsc      PORTA,1
+003F   1905           00107             btfsc       PORTA,2
+0040   2???           00108             call        startmag
+                      00109             ;bsf                PORTB,3
+0041   1606           00110             bsf         PORTB,4
+0042   2???           00111             goto        magnitafon1
+                      00112 ;-------------------------------------------------------------------------------
+0043                  00113 startmag    ;btfsc      PORTB,2 ;knopka karobka
+0043   1985           00114             btfsc       PORTA,3
+0044   2???           00115             goto        karobkamag      
+0045   1705           00116             bsf         PORTA,6
+                      00117             ;bcf                PORTB,3
+0046   1206           00118             bcf         PORTB,4
+                      00119             ;bcf                PORTB,4
+0047   1306           00120             bcf         PORTB,6
+0048   2???           00121             call        delayzvuk
+0049   1305           00122             bcf         PORTA,6         
+                      00123             ;bsf                PORTB,6
+004A   1786           00124             bsf         PORTB,7
+004B   1405           00125             bsf         PORTA,0     
+004C   2???           00126             call        delaystart          
+004D   1686           00127             bsf         PORTB,5
+004E   2???           00128             call        delay520ms
+                      00129             ;btfss      PORTB,0 ; knopka generator
+004F   1D06           00130             btfss       PORTB,2
+0050   2???           00131             call        delay3sek                   
+0051   1286           00132             bcf         PORTB,5
+                      00133             ;bsf                PORTB,3
+0052   1606           00134             bsf         PORTB,4
+                      00135             ;bsf                PORTB,4
+0053   1706           00136             bsf         PORTB,6
+                      00137             ;bsf                PORTB,6
+0054   1786           00138             bsf         PORTB,7
+0055   1785           00139             bsf         PORTA,7
+0056   1405           00140             bsf         PORTA,0     
+0057   2???           00141             call        bigdelay            
+                      00142             ;btfss      PORTB,0 ; knopka generator
+0058   1D06           00143             btfss       PORTB,2
+0059   0186           00144             clrf        PORTB
+                      00145             ;btfss      PORTB,0 ; knopka generator
+005A   1D06           00146             btfss       PORTB,2
+005B   0185           00147             clrf        PORTA
+005C   1785           00148             bsf         PORTA,7
+                      00149             ;bsf                PORTB,3
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+005D   1606           00150             bsf         PORTB,4
+                      00151             ;btfsc      PORTB,0 ; knopka generator
+005E   1906           00152             btfsc       PORTB,2
+005F   2???           00153             goto        start1
+0060   0008           00154             return
+                      00155 ;-------------------------------------------------------------------------------            
+0061   1705           00156 karobkamag  bsf         PORTA,6 
+0062   2???           00157             call        delayzvuk
+0063   1305           00158             bcf         PORTA,6
+0064   2???           00159             call        delayzvuk
+0065   1705           00160             bsf         PORTA,6
+0066   2???           00161             call        delayzvuk
+0067   1305           00162             bcf         PORTA,6     
+0068   2???           00163             call        delaystart
+0069   2???           00164             goto        magnitafon1    
+                      00165 ;-------------------------------------------------------------------------------
+006A                  00166 zajiganiya  ;btfsc      PORTB,0 ; knopka generator
+006A   1906           00167             btfsc       PORTB,2
+006B   2???           00168             goto        magnitafon1
+006C   2???           00169             call        delayknopka
+                      00170             ;btfsc      PORTA,1
+006D   1905           00171             btfsc       PORTA,2
+006E   2???           00172             call        knopkauderjatstart
+006F                  00173 zajiganiya1 ;btfss      PORTA,2
+006F   1C06           00174             btfss       PORTB,0
+0070   2???           00175             goto        ahrana
+                      00176             ;btfsc      PORTB,0 ; knopka generator
+0071   1906           00177             btfsc       PORTB,2
+                      00178             ;bsf                PORTB,7
+0072   1485           00179             bsf         PORTA,1
+                      00180             ;btfss      PORTB,0 ; knopka generator
+0073   1D06           00181             btfss       PORTB,2
+                      00182             ;bcf                PORTB,7
+0074   1085           00183             bcf         PORTA,1
+0075   1405           00184             bsf         PORTA,0
+0076   1785           00185             bsf         PORTA,7
+                      00186             ;bsf                PORTB,3
+0077   1606           00187             bsf         PORTB,4
+                      00188             ;bsf                PORTB,4
+0078   1706           00189             bsf         PORTB,6
+                      00190             ;bsf                PORTB,6
+0079   1786           00191             bsf         PORTB,7
+007A   1886           00192             btfsc       PORTB,1
+007B   2???           00193             call        tormozzaj
+                      00194             ;btfsc      PORTA,1
+007C   1905           00195             btfsc       PORTA,2
+007D   2???           00196             goto        metkaclrf           
+007E   2???           00197             goto        zajiganiya1
+                      00198 ;-------------------------------------------------------------------------------
+007F                  00199 startzaj    ;btfsc      PORTB,2 ;knopka karobka
+007F   1985           00200             btfsc       PORTA,3
+0080   2???           00201             goto        karobkazaj      
+0081   1705           00202             bsf         PORTA,6
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00203             ;bcf                PORTB,3
+0082   1206           00204             bcf         PORTB,4
+                      00205             ;bcf                PORTB,4
+0083   1306           00206             bcf         PORTB,6
+0084   2???           00207             call        delayzvuk
+0085   1305           00208             bcf         PORTA,6         
+                      00209             ;bsf                PORTB,6
+0086   1786           00210             bsf         PORTB,7
+0087   1405           00211             bsf         PORTA,0     
+0088   2???           00212             call        delaystart          
+0089   1686           00213             bsf         PORTB,5
+008A   2???           00214             call        delay520ms
+                      00215             ;btfss      PORTB,0 ; knopka generator
+008B   1D06           00216             btfss       PORTB,2
+008C   2???           00217             call        delay3sek                   
+008D   1286           00218             bcf         PORTB,5
+                      00219             ;bsf                PORTB,3
+008E   1606           00220             bsf         PORTB,4
+                      00221             ;bsf                PORTB,4
+008F   1706           00222             bsf         PORTB,6
+                      00223             ;bsf                PORTB,6
+0090   1786           00224             bsf         PORTB,7
+0091   1785           00225             bsf         PORTA,7
+0092   1405           00226             bsf         PORTA,0     
+0093   2???           00227             call        bigdelay            
+                      00228             ;btfss      PORTB,0 ; knopka generator
+0094   1D06           00229             btfss       PORTB,2
+0095   0186           00230             clrf        PORTB
+                      00231             ;btfss      PORTB,0 ; knopka generator
+0096   1D06           00232             btfss       PORTB,2
+0097   0185           00233             clrf        PORTA
+0098   1785           00234             bsf         PORTA,7
+                      00235             ;bsf                PORTB,3
+0099   1606           00236             bsf         PORTB,4
+                      00237             ;btfsc      PORTB,0 ; knopka generator
+009A   1906           00238             btfsc       PORTB,2
+009B   2???           00239             goto        start1
+009C   0008           00240             return
+                      00241 ;-------------------------------------------------------------------------------            
+009D   1705           00242 karobkazaj  bsf         PORTA,6 
+009E   2???           00243             call        delayzvuk
+009F   1305           00244             bcf         PORTA,6
+00A0   2???           00245             call        delayzvuk
+00A1   1705           00246             bsf         PORTA,6
+00A2   2???           00247             call        delayzvuk
+00A3   1305           00248             bcf         PORTA,6     
+00A4   2???           00249             call        delaystart
+00A5   2???           00250             goto        zajiganiya1         
+                      00251 ;-------------------------------------------------------------------------------
+00A6                  00252 tormozzaj   ;btfsc      PORTB,0 ; knopka generator
+00A6   1906           00253             btfsc       PORTB,2
+00A7   2???           00254             goto        start1
+                      00255             ;btfsc      PORTA,1
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A8   1905           00256             btfsc       PORTA,2
+00A9   2???           00257             call        startzaj
+                      00258             ;bsf                PORTB,3
+00AA   1606           00259             bsf         PORTB,4
+00AB   2???           00260             goto        zajiganiya1         
+                      00261 ;-------------------------------------------------------------------------------
+00AC                  00262 tormoz      ;btfsc      PORTA,1
+00AC   1905           00263             btfsc       PORTA,2
+00AD   2???           00264             goto        start       
+00AE   2???           00265             goto        programma
+                      00266 ;-------------------------------------------------------------------------------
+00AF                  00267 start       ;btfsc      PORTB,2 ;knopka karobka
+00AF   1985           00268             btfsc       PORTA,3
+00B0   2???           00269             goto        karobka 
+00B1   1705           00270             bsf         PORTA,6
+                      00271             ;bcf                PORTB,3
+00B2   1206           00272             bcf         PORTB,4
+                      00273             ;bcf                PORTB,4
+00B3   1306           00274             bcf         PORTB,6
+00B4   2???           00275             call        delayzvuk
+00B5   1305           00276             bcf         PORTA,6         
+                      00277             ;bsf                PORTB,6
+00B6   1786           00278             bsf         PORTB,7
+00B7   1405           00279             bsf         PORTA,0     
+00B8   2???           00280             call        delaystart          
+00B9   1686           00281             bsf         PORTB,5
+00BA   2???           00282             call        delay520ms
+                      00283             ;btfss      PORTB,0 ; knopka generator
+00BB   1D06           00284             btfss       PORTB,2
+00BC   2???           00285             call        delay3sek                   
+00BD   1286           00286             bcf         PORTB,5
+                      00287             ;bsf                PORTB,3
+00BE   1606           00288             bsf         PORTB,4
+                      00289             ;bsf                PORTB,4
+00BF   1706           00290             bsf         PORTB,6
+                      00291             ;bsf                PORTB,6
+00C0   1786           00292             bsf         PORTB,7
+00C1   1785           00293             bsf         PORTA,7
+00C2   1405           00294             bsf         PORTA,0     
+00C3   2???           00295             call        bigdelay            
+                      00296             ;btfss      PORTB,0 ; knopka generator
+00C4   1D06           00297             btfss       PORTB,2
+00C5   2???           00298             goto        metkaclrf
+00C6                  00299 start1      ;btfss      PORTA,2
+00C6   1C06           00300             btfss       PORTB,0
+00C7   2???           00301             goto        ahrana
+00C8   1286           00302             bcf         PORTB,5
+                      00303             ;bsf                PORTB,3
+00C9   1606           00304             bsf         PORTB,4
+                      00305             ;bsf                PORTB,4
+00CA   1706           00306             bsf         PORTB,6
+                      00307             ;bsf                PORTB,6
+00CB   1786           00308             bsf         PORTB,7
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00CC   1785           00309             bsf         PORTA,7
+00CD   1405           00310             bsf         PORTA,0
+                      00311             ;btfsc      PORTB,0 ; knopka generator
+00CE   1906           00312             btfsc       PORTB,2
+                      00313             ;bsf                PORTB,7
+00CF   1485           00314             bsf         PORTA,1
+                      00315             ;btfss      PORTB,0 ; knopka generator
+00D0   1D06           00316             btfss       PORTB,2
+00D1   2???           00317             goto        zajiganiya1
+                      00318             ;btfss      PORTB,0 ; knopka generator
+00D2   1D06           00319             btfss       PORTB,2
+                      00320             ;bcf                PORTB,7
+00D3   1085           00321             bcf         PORTA,1
+                      00322             ;btfsc      PORTA,1
+00D4   1905           00323             btfsc       PORTA,2
+00D5   2???           00324             call        stop
+00D6   2???           00325             goto        start1  
+                      00326 ;-------------------------------------------------------------------------------
+00D7   0BA3           00327 pavtor      decfsz      Regstart,F
+00D8   2???           00328             goto        start
+00D9   0008           00329             return
+                      00330 ;-------------------------------------------------------------------------------            
+00DA   1705           00331 karobka     bsf         PORTA,6 
+00DB   2???           00332             call        delayzvuk
+00DC   1305           00333             bcf         PORTA,6
+00DD   2???           00334             call        delayzvuk
+00DE   1705           00335             bsf         PORTA,6
+00DF   2???           00336             call        delayzvuk
+00E0   1305           00337             bcf         PORTA,6
+                      00338             ;bcf                PORTB,3
+00E1   1206           00339             bcf         PORTB,4
+                      00340             ;bcf                PORTB,6
+00E2   1386           00341             bcf         PORTB,7
+00E3   1005           00342             bcf         PORTA,0
+00E4   2???           00343             call        delaystart
+00E5   2???           00344             goto        programma           
+                      00345 ;-------------------------------------------------------------------------------
+00E6   1705           00346 helpstart   bsf         PORTA,6
+                      00347             ;bcf                PORTB,3
+00E7   1206           00348             bcf         PORTB,4
+00E8   2???           00349             call        delayzvuk
+00E9   1305           00350             bcf         PORTA,6
+                      00351             ;btfsc      PORTB,2 ;knopka karobka
+00EA   1985           00352             btfsc       PORTA,3
+00EB   0008           00353             return          
+                      00354             ;bsf                PORTB,6
+00EC   1786           00355             bsf         PORTB,7
+00ED   1405           00356             bsf         PORTA,0     
+00EE   2???           00357             call        delaystart          
+00EF   1686           00358             bsf         PORTB,5
+00F0   2???           00359             call        delay520ms
+                      00360             ;btfss      PORTB,0 ; knopka generator
+00F1   1D06           00361             btfss       PORTB,2
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00F2   2???           00362             call        delay3sek       
+00F3   1286           00363 helpstart1  bcf         PORTB,5
+                      00364             ;bsf                PORTB,3
+00F4   1606           00365             bsf         PORTB,4
+                      00366             ;bsf                PORTB,4
+00F5   1706           00367             bsf         PORTB,6
+00F6   2???           00368             call        bigdelay            
+                      00369             ;btfss      PORTB,0 ; knopka generator
+00F7   1D06           00370             btfss       PORTB,2
+00F8   2???           00371             goto        metkaclrfstart      
+00F9   2???           00372             goto        start1  
+                      00373 ;-------------------------------------------------------------------------------
+00FA   2???           00374 stop        call        delayknopka
+                      00375             ;btfsc      PORTA,1
+00FB   1905           00376             btfsc       PORTA,2
+00FC   2???           00377             call        knopkauderjatstop
+00FD   1886           00378             btfsc       PORTB,1
+00FE   2???           00379             goto        metkaclrfstart
+00FF   0008           00380             return
+                      00381 ;-------------------------------------------------------------------------------            
+0100   0185           00382 ahrana      clrf        PORTA
+0101   0186           00383             clrf        PORTB
+0102   2???           00384             call        delayknopka
+                      00385             ;btfsc      PORTA,2
+0103   1806           00386             btfsc       PORTB,0
+0104   2???           00387             goto        programma
+                      00388             ;btfss      PORTB,0
+0105   1D06           00389             btfss       PORTB,2
+0106   2???           00390             goto        ahrana
+0107   1886           00391 margat      btfsc       PORTB,1
+0108   2???           00392             goto        ahranastart
+0109   1785           00393             bsf         PORTA,7
+010A   2???           00394             call        delaymargat
+010B   1385           00395             bcf         PORTA,7
+010C   2???           00396             call        delaymargat
+                      00397             ;btfsc      PORTB,0
+010D   1906           00398             btfsc       PORTB,2
+                      00399             
+010E   2???           00400             goto        margat
+010F   2???           00401             goto        ahrana
+                      00402 ;-------------------------------------------------------------------------------
+0110   2???           00403 ahranastart call        margat1
+                      00404             ;bsf                PORTB,7
+0111   1485           00405             bsf         PORTA,1
+0112   1405           00406             bsf         PORTA,0
+                      00407             ;bsf                PORTB,3
+0113   1606           00408             bsf         PORTB,4
+                      00409             ;bsf                PORTB,4
+0114   1706           00410             bsf         PORTB,6
+                      00411             ;bsf                PORTB,6
+0115   1786           00412             bsf         PORTB,7
+                      00413             ;btfsc      PORTB,0 ; knopka generator
+0116   1906           00414             btfsc       PORTB,2
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00415             ;bsf                PORTB,7
+0117   1485           00416             bsf         PORTA,1
+                      00417             ;btfss      PORTB,0 ; knopka generator
+0118   1D06           00418             btfss       PORTB,2
+                      00419             ;bcf                PORTB,7
+0119   1085           00420             bcf         PORTA,1
+                      00421             ;btfss      PORTA,2 ;knopka ohrana
+011A   1C06           00422             btfss       PORTB,0
+011B   2???           00423             goto        ahranastart
+011C   2???           00424             goto        start1
+                      00425 ;-------------------------------------------------------------------------------            
+011D   1785           00426 margat1     bsf         PORTA,7
+011E   2???           00427             call        delaymargat
+011F   1385           00428             bcf         PORTA,7
+0120   2???           00429             call        delaymargat
+0121   0008           00430             return          
+                      00431 ;-------------------------------------------------------------------------------            
+0122                  00432 knopkauderjatstart
+0122   2???           00433             call        delayknopka
+                      00434             ;btfss      PORTA,1
+0123   1D05           00435             btfss       PORTA,2
+0124   0008           00436             return
+0125   2???           00437             call        delayknopka
+                      00438             ;btfss      PORTA,1
+0126   1D05           00439             btfss       PORTA,2
+0127   0008           00440             return
+0128   2???           00441             call        delayknopka
+                      00442             ;btfss      PORTA,1
+0129   1D05           00443             btfss       PORTA,2
+012A   0008           00444             return
+012B   2???           00445             call        delayknopka
+                      00446             ;btfss      PORTA,1
+012C   1D05           00447             btfss       PORTA,2
+012D   0008           00448             return
+012E   2???           00449             call        delayknopka
+                      00450             ;btfss      PORTA,1
+012F   1D05           00451             btfss       PORTA,2
+0130   0008           00452             return
+0131   2???           00453             call        delayknopka
+                      00454             ;btfss      PORTA,1
+0132   1D05           00455             btfss       PORTA,2
+0133   0008           00456             return
+0134   2???           00457             call        delayknopka
+                      00458             ;btfss      PORTA,1
+0135   1D05           00459             btfss       PORTA,2
+0136   0008           00460             return
+0137   2???           00461             call        delayknopka
+                      00462             ;btfss      PORTA,1
+0138   1D05           00463             btfss       PORTA,2
+0139   0008           00464             return
+013A   2???           00465             call        delayknopka
+                      00466             ;btfss      PORTA,1
+013B   1D05           00467             btfss       PORTA,2
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+013C   0008           00468             return
+013D   2???           00469             call        delayknopka
+013E                  00470 startpoyla  ;btfsc      PORTA,1
+013E   1905           00471             btfsc       PORTA,2
+013F   2???           00472             goto        startpoyla
+0140   2???           00473             call        helpstart
+                      00474 ;-------------------------------------------------------------------------------
+0141                  00475 knopkauderjatstop
+0141   2???           00476             call        delayknopka
+                      00477             ;btfss      PORTA,1
+0142   1D05           00478             btfss       PORTA,2
+0143   0008           00479             return
+0144   2???           00480             call        delayknopka
+                      00481             ;btfss      PORTA,1
+0145   1D05           00482             btfss       PORTA,2
+0146   0008           00483             return
+0147   2???           00484             call        delayknopka
+                      00485             ;btfss      PORTA,1
+0148   1D05           00486             btfss       PORTA,2
+0149   0008           00487             return
+014A   2???           00488             call        delayknopka
+                      00489             ;btfss      PORTA,1
+014B   1D05           00490             btfss       PORTA,2
+014C   0008           00491             return
+014D   2???           00492             call        delayknopka
+                      00493             ;btfss      PORTA,1
+014E   1D05           00494             btfss       PORTA,2
+014F   0008           00495             return
+0150   2???           00496             call        delayknopka
+                      00497             ;btfss      PORTA,1
+0151   1D05           00498             btfss       PORTA,2
+0152   0008           00499             return
+0153   2???           00500             call        delayknopka
+                      00501             ;btfss      PORTA,1
+0154   1D05           00502             btfss       PORTA,2
+0155   0008           00503             return
+0156   2???           00504             call        delayknopka
+                      00505             ;btfss      PORTA,1
+0157   1D05           00506             btfss       PORTA,2
+0158   0008           00507             return
+0159   2???           00508             call        delayknopka
+                      00509             ;btfss      PORTA,1
+015A   1D05           00510             btfss       PORTA,2
+015B   0008           00511             return
+015C   2???           00512             call        delayknopka
+015D                  00513 stoppoyla   ;btfsc      PORTA,1
+015D   1905           00514             btfsc       PORTA,2
+015E   2???           00515             goto        stoppoyla
+015F   2???           00516             call        metkaclrfstart
+                      00517                     
+                      00518             
+                      00519 ;-------------------------------------------------------------------------------            
+0160                  00520 metkaclrf   ;btfsc      PORTB,0 ; knopka generator
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0160   1906           00521             btfsc       PORTB,2
+0161   2???           00522             goto        zajiganiya1
+0162   2???           00523             call        delayknopka
+0163   0185           00524             clrf        PORTA
+0164   0186           00525             clrf        PORTB
+0165   1785           00526             bsf         PORTA,7     
+0166   2???           00527             goto        programma
+                      00528 ;-------------------------------------------------------------------------------            
+0167                  00529 metkaclrfstart      
+0167   0185           00530             clrf        PORTA
+0168   0186           00531             clrf        PORTB
+0169   1785           00532             bsf         PORTA,7
+016A   2???           00533             call        bigdelay
+016B   2???           00534             goto        programma                   
+                      00535 ;-------------------------------------------------------------------------------            
+016C   3099           00536 delaymargat movlw       .153
+016D   00A0           00537             movwf       Reg_1
+016E   3086           00538             movlw       .134
+016F   00A1           00539             movwf       Reg_2
+0170   3002           00540             movlw       .2
+0171   00A2           00541             movwf       Reg_3
+0172   0BA0           00542             decfsz      Reg_1,F
+0173   2???           00543             goto        $-1
+0174   0BA1           00544             decfsz      Reg_2,F
+0175   2???           00545             goto        $-3
+0176   0BA2           00546             decfsz      Reg_3,F
+0177   2???           00547             goto        $-5         
+0178   0008           00548             return      
+                      00549             
+0179   3055           00550 delayknopka movlw       .85
+017A   00A0           00551             movwf       Reg_1
+017B   308A           00552             movlw       .138
+017C   00A1           00553             movwf       Reg_2
+017D   3003           00554             movlw       .3
+017E   00A2           00555             movwf       Reg_3
+017F   0BA0           00556             decfsz      Reg_1,F
+0180   2???           00557             goto        $-1
+0181   0BA1           00558             decfsz      Reg_2,F
+0182   2???           00559             goto        $-3
+0183   0BA2           00560             decfsz      Reg_3,F
+0184   2???           00561             goto        $-5
+0185   0000           00562             nop
+0186   0000           00563             nop
+0187   0008           00564             return
+                      00565             
+0188   3002           00566 delay3sek   movlw       .2
+0189   00A0           00567             movwf       Reg_1
+018A   3007           00568             movlw       .7
+018B   00A1           00569             movwf       Reg_2
+018C   3009           00570             movlw       .9
+018D   00A2           00571             movwf       Reg_3
+                      00572             ;btfsc      PORTB,0 ; knopka generator
+018E   1906           00573             btfsc       PORTB,2
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+018F   0008           00574             return
+0190   0BA0           00575             decfsz      Reg_1,F
+0191   2???           00576             goto        $-3
+0192   0BA1           00577             decfsz      Reg_2,F
+0193   2???           00578             goto        $-3
+0194   0BA2           00579             decfsz      Reg_3,F
+0195   2???           00580             goto        $-5
+0196   0000           00581             nop
+0197   0000           00582             nop            
+0198   0008           00583             return
+                      00584 
+0199   3049           00585 delaystart  movlw       .73
+019A   00A0           00586             movwf       Reg_1
+019B   3099           00587             movlw       .153
+019C   00A1           00588             movwf       Reg_2
+019D   3007           00589             movlw       .7
+019E   00A2           00590             movwf       Reg_3
+019F   0BA0           00591             decfsz      Reg_1,F
+01A0   2???           00592             goto        $-1
+01A1   0BA1           00593             decfsz      Reg_2,F
+01A2   2???           00594             goto        $-3
+01A3   0BA2           00595             decfsz      Reg_3,F
+01A4   2???           00596             goto        $-5
+01A5   0008           00597             return          
+                      00598             
+01A6   3069           00599 delayzvuk   movlw       .105
+01A7   00A0           00600             movwf       Reg_1
+01A8   3055           00601             movlw       .85
+01A9   00A1           00602             movwf       Reg_2
+01AA   0BA0           00603             decfsz      Reg_1,F
+01AB   2???           00604             goto        $-1
+01AC   0BA1           00605             decfsz      Reg_2,F
+01AD   2???           00606             goto        $-3
+01AE   0008           00607             return
+                      00608             
+01AF   300D           00609 bigdelay    movlw       .13
+01B0   00A0           00610             movwf       Reg_1
+01B1   3039           00611             movlw       .57
+01B2   00A1           00612             movwf       Reg_2
+01B3   3010           00613             movlw       .16
+01B4   00A2           00614             movwf       Reg_3
+01B5   0BA0           00615             decfsz      Reg_1,F
+01B6   2???           00616             goto        $-1
+01B7   0BA1           00617             decfsz      Reg_2,F
+01B8   2???           00618             goto        $-3
+01B9   0BA2           00619             decfsz      Reg_3,F
+01BA   2???           00620             goto        $-5
+01BB   0000           00621             nop
+01BC   0000           00622             nop
+01BD   0008           00623             return
+                      00624             
+01BE   30BA           00625 delay20ms   movlw       .186
+01BF   00A0           00626             movwf       Reg_1
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01C0   3004           00627             movlw       .4
+01C1   00A1           00628             movwf       Reg_2
+01C2   3002           00629             movlw       .2
+01C3   00A2           00630             movwf       Reg_3
+01C4   0BA0           00631             decfsz      Reg_1,F
+01C5   2???           00632             goto        $-1
+01C6   0BA1           00633             decfsz      Reg_2,F
+01C7   2???           00634             goto        $-3
+01C8   0BA2           00635             decfsz      Reg_3,F
+01C9   2???           00636             goto        $-5
+01CA   0000           00637             nop
+01CB   0008           00638             return
+                      00639             
+01CC   304B           00640 delay520ms  movlw       .75
+01CD   00A0           00641             movwf       Reg_1
+01CE   30B1           00642             movlw       .177
+01CF   00A1           00643             movwf       Reg_2
+01D0   3003           00644             movlw       .3
+01D1   00A2           00645             movwf       Reg_3
+01D2   0BA0           00646             decfsz      Reg_1,F
+01D3   2???           00647             goto        $-1
+01D4   0BA1           00648             decfsz      Reg_2,F
+01D5   2???           00649             goto        $-3
+01D6   0BA2           00650             decfsz      Reg_3,F
+01D7   2???           00651             goto        $-5
+01D8   0000           00652             nop
+01D9   0000           00653             nop
+                      00654 
+01DA   0008           00655             return
+                      00656 
+                      00657             
+                      00658 
+                      00659 ;-------------------------------------------------------------------------------            
+0010                  00660             end
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADDEN                             00000003
+ADEN                              00000003
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000001F
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+DATA_CP_OFF                       00003FFF
+DATA_CP_ON                        00003EFF
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+NOT_BO                            00000000
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_RBPU                          00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OERR                              00000001
+OPTION_REG                        00000081
+OSCF                              00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+Reg_1                             00000020
+Reg_2                             00000021
+Reg_3                             00000022
+Regstart                          00000023
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRMT                              00000001
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             0000009F
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_0_0173                      00000173
+_.org_0_0175                      00000175
+_.org_0_0177                      00000177
+_.org_0_0180                      00000180
+_.org_0_0182                      00000182
+_.org_0_0184                      00000184
+_.org_0_0191                      00000191
+_.org_0_0193                      00000193
+_.org_0_0195                      00000195
+_.org_0_01A0                      000001A0
+_.org_0_01A2                      000001A2
+_.org_0_01A4                      000001A4
+_.org_0_01AB                      000001AB
+_.org_0_01AD                      000001AD
+_.org_0_01B6                      000001B6
+_.org_0_01B8                      000001B8
+_.org_0_01BA                      000001BA
+_.org_0_01C5                      000001C5
+_.org_0_01C7                      000001C7
+_.org_0_01C9                      000001C9
+_.org_0_01D3                      000001D3
+_.org_0_01D5                      000001D5
+_.org_0_01D7                      000001D7
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEVID1                           00002006
+_ER_OSC_CLKOUT                    00003FFF
+_ER_OSC_NOCLKOUT                  00003FFE
+_EXTCLK_OSC                       00003FEF
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_ECIO                        00003FEF
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FEE
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FEC
+_FOSC_XT                          00003FED
+_HS_OSC                           00003FEE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTOSC_OSC_CLKOUT                00003FFD
+_INTOSC_OSC_NOCLKOUT              00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC_CLKOUT                    00003FFF
+_RC_OSC_NOCLKOUT                  00003FFE
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FED
+__16F628A                         00000001
+ahrana                            00000100
+ahranastart                       00000110
+bigdelay                          000001AF
+delay20ms                         000001BE
+delay3sek                         00000188
+delay520ms                        000001CC
+delayknopka                       00000179
+delaymargat                       0000016C
+delaystart                        00000199
+delayzvuk                         000001A6
+helpstart                         000000E6
+helpstart1                        000000F3
+karobka                           000000DA
+karobkamag                        00000061
+karobkazaj                        0000009D
+knopkauderjatstart                00000122
+knopkauderjatstop                 00000141
+magnitafon                        0000002A
+magnitafon1                       0000002F
+margat                            00000107
+margat1                           0000011D
+MPASM 5.87                      STARTNEW.ASM   4-3-2020  1:48:18         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+metkaclrf                         00000160
+metkaclrfstart                    00000167
+pavtor                            000000D7
+programma                         0000001C
+start                             000000AF
+start1                            000000C6
+startmag                          00000043
+startpoyla                        0000013E
+startzaj                          0000007F
+stop                              000000FA
+stoppoyla                         0000015D
+tormoz                            000000AC
+tormozmag                         0000003D
+tormozzaj                         000000A6
+zajiganiya                        0000006A
+zajiganiya1                       0000006F
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,    20 suppressed
+
+

@@ -1,0 +1,636 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[v F537 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic.h
+[v __delay `JF537 ~T0 @X0 0 e ]
+[p i __delay ]
+"1306 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1306: extern volatile unsigned char EEADR __attribute__((address(0x09B)));
+[v _EEADR `Vuc ~T0 @X0 0 e@155 ]
+"1332
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1332:     struct {
+[s S73 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S73 . RD WR WREN WRERR ]
+"1331
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1331: typedef union {
+[u S72 `S73 1 ]
+[n S72 . . ]
+"1339
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1339: extern volatile EECON1bits_t EECON1bits __attribute__((address(0x09C)));
+[v _EECON1bits `VS72 ~T0 @X0 0 e@156 ]
+"1690
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1690: extern volatile __bit RD __attribute__((address(0x4E0)));
+[v _RD `Vb ~T0 @X0 0 e@1248 ]
+"1268
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1268: extern volatile unsigned char EEDATA __attribute__((address(0x09A)));
+[v _EEDATA `Vuc ~T0 @X0 0 e@154 ]
+"1804
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1804: extern volatile __bit WREN __attribute__((address(0x4E2)));
+[v _WREN `Vb ~T0 @X0 0 e@1250 ]
+"1364
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1364: extern volatile unsigned char EECON2 __attribute__((address(0x09D)));
+[v _EECON2 `Vuc ~T0 @X0 0 e@157 ]
+"1801
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1801: extern volatile __bit WR __attribute__((address(0x4E1)));
+[v _WR `Vb ~T0 @X0 0 e@1249 ]
+"224
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 224:     struct {
+[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S14 . GP0 GP1 GP2 GP3 GP4 GP5 ]
+"232
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 232:     struct {
+[s S15 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S15 . GPIO0 GPIO1 GPIO2 GPIO3 GPIO4 GPIO5 ]
+"223
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 223: typedef union {
+[u S13 `S14 1 `S15 1 ]
+[n S13 . . . ]
+"241
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 241: extern volatile GPIObits_t GPIObits __attribute__((address(0x005)));
+[v _GPIObits `VS13 ~T0 @X0 0 e@5 ]
+[p mainexit ]
+"1693
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1693: extern volatile __bit RP0 __attribute__((address(0x1D)));
+[v _RP0 `Vb ~T0 @X0 0 e@29 ]
+"218
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 218: extern volatile unsigned char GPIO __attribute__((address(0x005)));
+[v _GPIO `Vuc ~T0 @X0 0 e@5 ]
+"564
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 564: extern volatile unsigned char CMCON __attribute__((address(0x019)));
+[v _CMCON `Vuc ~T0 @X0 0 e@25 ]
+"797
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 797: extern volatile unsigned char TRISIO __attribute__((address(0x085)));
+[v _TRISIO `Vuc ~T0 @X0 0 e@133 ]
+"727
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 727: extern volatile unsigned char OPTION_REG __attribute__((address(0x081)));
+[v _OPTION_REG `Vuc ~T0 @X0 0 e@129 ]
+"1404
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1404: extern volatile unsigned char ANSEL __attribute__((address(0x09F)));
+[v _ANSEL `Vuc ~T0 @X0 0 e@159 ]
+"1615
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1615: extern volatile __bit GPIO2 __attribute__((address(0x2A)));
+[v _GPIO2 `Vb ~T0 @X0 0 e@42 ]
+"1618
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1618: extern volatile __bit GPIO3 __attribute__((address(0x2B)));
+[v _GPIO3 `Vb ~T0 @X0 0 e@43 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 54: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"74
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 74: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"94
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 94: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"114
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 114: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"200
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 200: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"220
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 220: __asm("GPIO equ 05h");
+[; <" GPIO equ 05h ;# ">
+"308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 308: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 328: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 406: __asm("PIR1 equ 0Ch");
+[; <" PIR1 equ 0Ch ;# ">
+"454
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 454: __asm("TMR1 equ 0Eh");
+[; <" TMR1 equ 0Eh ;# ">
+"461
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 461: __asm("TMR1L equ 0Eh");
+[; <" TMR1L equ 0Eh ;# ">
+"481
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 481: __asm("TMR1H equ 0Fh");
+[; <" TMR1H equ 0Fh ;# ">
+"501
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 501: __asm("T1CON equ 010h");
+[; <" T1CON equ 010h ;# ">
+"566
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 566: __asm("CMCON equ 019h");
+[; <" CMCON equ 019h ;# ">
+"625
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 625: __asm("ADRESH equ 01Eh");
+[; <" ADRESH equ 01Eh ;# ">
+"645
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 645: __asm("ADCON0 equ 01Fh");
+[; <" ADCON0 equ 01Fh ;# ">
+"729
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 729: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"799
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 799: __asm("TRISIO equ 085h");
+[; <" TRISIO equ 085h ;# ">
+"849
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 849: __asm("PIE1 equ 08Ch");
+[; <" PIE1 equ 08Ch ;# ">
+"897
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 897: __asm("PCON equ 08Eh");
+[; <" PCON equ 08Eh ;# ">
+"931
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 931: __asm("OSCCAL equ 090h");
+[; <" OSCCAL equ 090h ;# ">
+"991
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 991: __asm("WPU equ 095h");
+[; <" WPU equ 095h ;# ">
+"1036
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1036: __asm("IOC equ 096h");
+[; <" IOC equ 096h ;# ">
+"1041
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1041: __asm("IOCB equ 096h");
+[; <" IOCB equ 096h ;# ">
+"1210
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1210: __asm("VRCON equ 099h");
+[; <" VRCON equ 099h ;# ">
+"1270
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1270: __asm("EEDATA equ 09Ah");
+[; <" EEDATA equ 09Ah ;# ">
+"1275
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1275: __asm("EEDAT equ 09Ah");
+[; <" EEDAT equ 09Ah ;# ">
+"1308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1308: __asm("EEADR equ 09Bh");
+[; <" EEADR equ 09Bh ;# ">
+"1328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1328: __asm("EECON1 equ 09Ch");
+[; <" EECON1 equ 09Ch ;# ">
+"1366
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1366: __asm("EECON2 equ 09Dh");
+[; <" EECON2 equ 09Dh ;# ">
+"1386
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1386: __asm("ADRESL equ 09Eh");
+[; <" ADRESL equ 09Eh ;# ">
+"1406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1406: __asm("ANSEL equ 09Fh");
+[; <" ANSEL equ 09Fh ;# ">
+"4 Bakavoy_New.c
+[; ;Bakavoy_New.c: 4: 
+[p x FOSC = INTRCIO ]
+"5
+[; ;Bakavoy_New.c: 5: void delay_ms(int x) {
+[p x WDTE = OFF ]
+"6
+[; ;Bakavoy_New.c: 6:     for (int i = 0; i <= x; i++) {
+[p x PWRTE = OFF ]
+"7
+[; ;Bakavoy_New.c: 7:         _delay((unsigned long)((1)*(4000000/4000.0)));
+[p x MCLRE = OFF ]
+"8
+[; ;Bakavoy_New.c: 8:     }
+[p x BOREN = OFF ]
+"9
+[; ;Bakavoy_New.c: 9: }
+[p x CP = ON ]
+"10
+[; ;Bakavoy_New.c: 10: 
+[p x CPD = ON ]
+"12
+[; ;Bakavoy_New.c: 12:     EEADR = 0x02;
+[v _i `ui ~T0 @X0 1 e ]
+"13
+[; ;Bakavoy_New.c: 13:     EECON1bits.RD = 1;
+[v _UpDown `uc ~T0 @X0 1 e ]
+"14
+[; ;Bakavoy_New.c: 14:     while (RD) {
+[v _timesUp `ui ~T0 @X0 1 e ]
+"15
+[; ;Bakavoy_New.c: 15:     }
+[v _timesDown `ui ~T0 @X0 1 e ]
+"17
+[; ;Bakavoy_New.c: 17:         timesUp = EEDATA;
+[v _delay_ms `(v ~T0 @X0 1 ef1`i ]
+{
+[e :U _delay_ms ]
+[v _x `i ~T0 @X0 1 r1 ]
+[f ]
+"18
+[; ;Bakavoy_New.c: 18:     }
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 85  ]
+[e :U 82 ]
+{
+"19
+[; ;Bakavoy_New.c: 19:     _delay((unsigned long)((100)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"20
+[; ;Bakavoy_New.c: 20:     EEADR = 0x01;
+}
+[e ++ _i -> 1 `i ]
+[e :U 85 ]
+[e $ <= _i _x 82  ]
+[e :U 83 ]
+}
+"21
+[; ;Bakavoy_New.c: 21:     EECON1bits.RD = 1;
+[e :UE 81 ]
+}
+"23
+[; ;Bakavoy_New.c: 23:     }
+[v _ReadEEPROM `(v ~T0 @X0 1 ef ]
+{
+[e :U _ReadEEPROM ]
+[f ]
+"24
+[; ;Bakavoy_New.c: 24:     if (EEDATA >= 20) {
+[e = _EEADR -> -> 2 `i `uc ]
+"25
+[; ;Bakavoy_New.c: 25:         timesDown = EEDATA;
+[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+"26
+[; ;Bakavoy_New.c: 26:     }
+[e $U 87  ]
+[e :U 88 ]
+{
+"27
+[; ;Bakavoy_New.c: 27:     _delay((unsigned long)((100)*(4000000/4000.0)));
+}
+[e :U 87 ]
+"26
+[; ;Bakavoy_New.c: 26:     }
+[e $ _RD 88  ]
+[e :U 89 ]
+"28
+[; ;Bakavoy_New.c: 28:     EEADR = 0x10;
+[e $ ! >= -> _EEDATA `i -> 20 `i 90  ]
+{
+"29
+[; ;Bakavoy_New.c: 29:     EECON1bits.RD = 1;
+[e = _timesUp -> _EEDATA `ui ]
+"30
+[; ;Bakavoy_New.c: 30:     while (RD) {
+}
+[e :U 90 ]
+"31
+[; ;Bakavoy_New.c: 31:     }
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"32
+[; ;Bakavoy_New.c: 32:     if (EEDATA == 50 || EEDATA == 60) {
+[e = _EEADR -> -> 1 `i `uc ]
+"33
+[; ;Bakavoy_New.c: 33:         UpDown = EEDATA;
+[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+"34
+[; ;Bakavoy_New.c: 34:     }
+[e $U 91  ]
+[e :U 92 ]
+{
+"35
+[; ;Bakavoy_New.c: 35: }
+}
+[e :U 91 ]
+"34
+[; ;Bakavoy_New.c: 34:     }
+[e $ _RD 92  ]
+[e :U 93 ]
+"36
+[; ;Bakavoy_New.c: 36: 
+[e $ ! >= -> _EEDATA `i -> 20 `i 94  ]
+{
+"37
+[; ;Bakavoy_New.c: 37: void WriteEEPROM(int data, int adress) {
+[e = _timesDown -> _EEDATA `ui ]
+"38
+[; ;Bakavoy_New.c: 38:     EEADR = adress;
+}
+[e :U 94 ]
+"39
+[; ;Bakavoy_New.c: 39:     EEDATA = data;
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"40
+[; ;Bakavoy_New.c: 40:     WREN = 1;
+[e = _EEADR -> -> 16 `i `uc ]
+"41
+[; ;Bakavoy_New.c: 41:     EECON2 = 0x55;
+[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+"42
+[; ;Bakavoy_New.c: 42:     EECON2 = 0xAA;
+[e $U 95  ]
+[e :U 96 ]
+{
+"43
+[; ;Bakavoy_New.c: 43:     WR = 1;
+}
+[e :U 95 ]
+"42
+[; ;Bakavoy_New.c: 42:     EECON2 = 0xAA;
+[e $ _RD 96  ]
+[e :U 97 ]
+"44
+[; ;Bakavoy_New.c: 44:     while (WR) {
+[e $ ! || == -> _EEDATA `i -> 50 `i == -> _EEDATA `i -> 60 `i 98  ]
+{
+"45
+[; ;Bakavoy_New.c: 45:     }
+[e = _UpDown _EEDATA ]
+"46
+[; ;Bakavoy_New.c: 46:     WREN = 0;
+}
+[e :U 98 ]
+"47
+[; ;Bakavoy_New.c: 47: 
+[e :UE 86 ]
+}
+"49
+[; ;Bakavoy_New.c: 49: 
+[v _WriteEEPROM `(v ~T0 @X0 1 ef2`i`i ]
+{
+[e :U _WriteEEPROM ]
+[v _data `i ~T0 @X0 1 r1 ]
+[v _adress `i ~T0 @X0 1 r2 ]
+[f ]
+"50
+[; ;Bakavoy_New.c: 50: void up(int time) {
+[e = _EEADR -> _adress `uc ]
+"51
+[; ;Bakavoy_New.c: 51:     GPIObits.GP1 = 1;
+[e = _EEDATA -> _data `uc ]
+"52
+[; ;Bakavoy_New.c: 52:     delay_ms(time * 40);
+[e = _WREN -> -> 1 `i `b ]
+"53
+[; ;Bakavoy_New.c: 53:     GPIObits.GP1 = 0;
+[e = _EECON2 -> -> 85 `i `uc ]
+"54
+[; ;Bakavoy_New.c: 54: }
+[e = _EECON2 -> -> 170 `i `uc ]
+"55
+[; ;Bakavoy_New.c: 55: 
+[e = _WR -> -> 1 `i `b ]
+"56
+[; ;Bakavoy_New.c: 56: void down(int time) {
+[e $U 100  ]
+[e :U 101 ]
+{
+"57
+[; ;Bakavoy_New.c: 57:     GPIObits.GP0 = 1;
+}
+[e :U 100 ]
+"56
+[; ;Bakavoy_New.c: 56: void down(int time) {
+[e $ _WR 101  ]
+[e :U 102 ]
+"58
+[; ;Bakavoy_New.c: 58:     delay_ms(time * 40);
+[e = _WREN -> -> 0 `i `b ]
+"60
+[; ;Bakavoy_New.c: 60: }
+[e :UE 99 ]
+}
+"62
+[; ;Bakavoy_New.c: 62: void main(void) {
+[v _up `(v ~T0 @X0 1 ef1`i ]
+{
+[e :U _up ]
+[v _time `i ~T0 @X0 1 r1 ]
+[f ]
+"63
+[; ;Bakavoy_New.c: 63:     RP0 = 0;
+[e = . . _GPIObits 0 1 -> -> 1 `i `uc ]
+"64
+[; ;Bakavoy_New.c: 64:     GPIO = 0b00000000;
+[e ( _delay_ms (1 * _time -> 40 `i ]
+"65
+[; ;Bakavoy_New.c: 65:     CMCON = 0b00000111;
+[e = . . _GPIObits 0 1 -> -> 0 `i `uc ]
+"66
+[; ;Bakavoy_New.c: 66:     RP0 = 1;
+[e :UE 103 ]
+}
+"68
+[; ;Bakavoy_New.c: 68:     OPTION_REG = 0b10000000;
+[v _down `(v ~T0 @X0 1 ef1`i ]
+{
+[e :U _down ]
+[v _time `i ~T0 @X0 1 r1 ]
+[f ]
+"69
+[; ;Bakavoy_New.c: 69: 
+[e = . . _GPIObits 0 0 -> -> 1 `i `uc ]
+"70
+[; ;Bakavoy_New.c: 70:     ANSEL = 0b00000000;
+[e ( _delay_ms (1 * _time -> 40 `i ]
+"71
+[; ;Bakavoy_New.c: 71:     RP0 = 0;
+[e = . . _GPIObits 0 0 -> -> 0 `i `uc ]
+"72
+[; ;Bakavoy_New.c: 72:     ReadEEPROM();
+[e :UE 104 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"74
+[; ;Bakavoy_New.c: 74: 
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"75
+[; ;Bakavoy_New.c: 75: 
+[e = _RP0 -> -> 0 `i `b ]
+"76
+[; ;Bakavoy_New.c: 76: 
+[e = _GPIO -> -> 0 `i `uc ]
+"77
+[; ;Bakavoy_New.c: 77: 
+[e = _CMCON -> -> 7 `i `uc ]
+"78
+[; ;Bakavoy_New.c: 78: 
+[e = _RP0 -> -> 1 `i `b ]
+"79
+[; ;Bakavoy_New.c: 79: 
+[e = _TRISIO -> -> 12 `i `uc ]
+"80
+[; ;Bakavoy_New.c: 80: 
+[e = _OPTION_REG -> -> 128 `i `uc ]
+"82
+[; ;Bakavoy_New.c: 82:         while (GPIO2 == 1) {
+[e = _ANSEL -> -> 0 `i `uc ]
+"83
+[; ;Bakavoy_New.c: 83:             _delay((unsigned long)((50)*(4000000/4000.0)));
+[e = _RP0 -> -> 0 `i `b ]
+"84
+[; ;Bakavoy_New.c: 84:             while (GPIO2 == 1) {
+[e ( _ReadEEPROM ..  ]
+"85
+[; ;Bakavoy_New.c: 85:                 _delay((unsigned long)((100)*(4000000/4000.0)));
+[e :U 107 ]
+{
+"93
+[; ;Bakavoy_New.c: 93:                     down(1);
+[e = _i -> -> 0 `i `ui ]
+"94
+[; ;Bakavoy_New.c: 94:                 }
+[e $U 109  ]
+[e :U 110 ]
+{
+"95
+[; ;Bakavoy_New.c: 95:                 i++;
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"96
+[; ;Bakavoy_New.c: 96:                 if (i >= 100) {
+[e $U 112  ]
+[e :U 113 ]
+{
+"97
+[; ;Bakavoy_New.c: 97:                     while (GPIO2 == 1) {
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"98
+[; ;Bakavoy_New.c: 98:                     }
+[e $ ! && && == -> _GPIO2 `i -> 0 `i < _i -> -> 2 `i `ui == -> _UpDown `i -> 60 `i 115  ]
+{
+"99
+[e = _timesUp + _timesUp -> -> 1 `i `ui ]
+"100
+[e ( _WriteEEPROM (2 , -> _timesUp `i -> 2 `i ]
+"101
+[e ( _up (1 -> 1 `i ]
+"102
+}
+[e $U 116  ]
+[e :U 115 ]
+[e $ ! && && == -> _GPIO2 `i -> 0 `i < _i -> -> 2 `i `ui == -> _UpDown `i -> 50 `i 117  ]
+{
+"103
+[e = _timesDown + _timesDown -> -> 1 `i `ui ]
+"104
+[e ( _WriteEEPROM (2 , -> _timesDown `i -> 1 `i ]
+"105
+[e ( _down (1 -> 1 `i ]
+"106
+}
+[e :U 117 ]
+[e :U 116 ]
+"107
+[e ++ _i -> -> 1 `i `ui ]
+"108
+[e $ ! >= _i -> -> 100 `i `ui 118  ]
+{
+"109
+[e $U 119  ]
+[e :U 120 ]
+{
+"110
+}
+[e :U 119 ]
+"109
+[e $ == -> _GPIO2 `i -> 1 `i 120  ]
+[e :U 121 ]
+"119
+[; ;Bakavoy_New.c: 119:                     timesUp = 22;
+[e = _timesUp -> -> 22 `i `ui ]
+"120
+[; ;Bakavoy_New.c: 120:                     timesDown = 22;
+[e = _timesDown -> -> 22 `i `ui ]
+"121
+[; ;Bakavoy_New.c: 121:                     UpDown = 50;
+[e = _UpDown -> -> 50 `i `uc ]
+"122
+[; ;Bakavoy_New.c: 122:                     WriteEEPROM(timesUp, 0x02);
+[e ( _WriteEEPROM (2 , -> _timesUp `i -> 2 `i ]
+"123
+[; ;Bakavoy_New.c: 123:                     WriteEEPROM(timesDown, 0x01);
+[e ( _WriteEEPROM (2 , -> _timesDown `i -> 1 `i ]
+"124
+[; ;Bakavoy_New.c: 124:                     WriteEEPROM(UpDown, 0x10);
+[e ( _WriteEEPROM (2 , -> _UpDown `i -> 16 `i ]
+"125
+[; ;Bakavoy_New.c: 125:                     up(timesUp);
+[e ( _up (1 -> _timesUp `i ]
+"126
+[; ;Bakavoy_New.c: 126:                     down(timesDown);
+[e ( _down (1 -> _timesDown `i ]
+"127
+[; ;Bakavoy_New.c: 127:                 }
+}
+[e :U 118 ]
+"128
+[; ;Bakavoy_New.c: 128:             }
+}
+[e :U 112 ]
+"96
+[; ;Bakavoy_New.c: 96:                 if (i >= 100) {
+[e $ == -> _GPIO2 `i -> 1 `i 113  ]
+[e :U 114 ]
+"129
+[; ;Bakavoy_New.c: 129:         }
+}
+[e :U 109 ]
+"94
+[; ;Bakavoy_New.c: 94:                 }
+[e $ == -> _GPIO2 `i -> 1 `i 110  ]
+[e :U 111 ]
+"130
+[; ;Bakavoy_New.c: 130:         if (GPIO3 == 1 && UpDown == 50) {
+[e $ ! && == -> _GPIO3 `i -> 1 `i == -> _UpDown `i -> 50 `i 122  ]
+{
+"131
+[; ;Bakavoy_New.c: 131:             _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"132
+[; ;Bakavoy_New.c: 132:             if (GPIO3 == 1 && UpDown == 50) {
+[e $ ! && == -> _GPIO3 `i -> 1 `i == -> _UpDown `i -> 50 `i 123  ]
+{
+"133
+[; ;Bakavoy_New.c: 133:                 up(timesUp);
+[e ( _up (1 -> _timesUp `i ]
+"134
+[; ;Bakavoy_New.c: 134:                 UpDown = 60;
+[e = _UpDown -> -> 60 `i `uc ]
+"135
+[; ;Bakavoy_New.c: 135:                 WriteEEPROM(UpDown, 0x10);
+[e ( _WriteEEPROM (2 , -> _UpDown `i -> 16 `i ]
+"136
+[; ;Bakavoy_New.c: 136:             }
+}
+[e :U 123 ]
+"137
+[; ;Bakavoy_New.c: 137:         } else if (GPIO3 == 0 && UpDown == 60) {
+}
+[e $U 124  ]
+[e :U 122 ]
+[e $ ! && == -> _GPIO3 `i -> 0 `i == -> _UpDown `i -> 60 `i 125  ]
+{
+"138
+[; ;Bakavoy_New.c: 138:             _delay((unsigned long)((100)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"139
+[; ;Bakavoy_New.c: 139:             if (GPIO3 == 0 && UpDown == 60) {
+[e $ ! && == -> _GPIO3 `i -> 0 `i == -> _UpDown `i -> 60 `i 126  ]
+{
+"140
+[; ;Bakavoy_New.c: 140:                 down(timesDown);
+[e ( _down (1 -> _timesDown `i ]
+"141
+[; ;Bakavoy_New.c: 141:                 UpDown = 50;
+[e = _UpDown -> -> 50 `i `uc ]
+"142
+[; ;Bakavoy_New.c: 142:                 WriteEEPROM(UpDown, 0x10);
+[e ( _WriteEEPROM (2 , -> _UpDown `i -> 16 `i ]
+"143
+[; ;Bakavoy_New.c: 143:             }
+}
+[e :U 126 ]
+"144
+[; ;Bakavoy_New.c: 144:         }
+}
+[e :U 125 ]
+[e :U 124 ]
+"145
+[; ;Bakavoy_New.c: 145:     }
+}
+[e :U 106 ]
+[e $U 107  ]
+[e :U 108 ]
+"146
+[; ;Bakavoy_New.c: 146:     return;
+[e $UE 105  ]
+"147
+[; ;Bakavoy_New.c: 147: }
+[e :UE 105 ]
+}

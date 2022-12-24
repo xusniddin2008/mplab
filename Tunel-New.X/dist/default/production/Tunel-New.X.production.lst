@@ -1,0 +1,2403 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V2.00 build -1524193055 
+                                                                                               Tue Mar 22 20:25:11 2022
+
+Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 20180527130849
+     1  0000                     
+      + 0000                     
+     2                           ; Version 2.00
+     3                           ; Generated 27/05/2018 GMT
+     4                           
+     5                           ; 
+     6                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+     7                           ; All rights reserved.
+     8                           ; 
+     9                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+                                 ip").
+    10                           ; 
+    11                           ; Redistribution and use in source and binary forms, with or without modification, are
+    12                           ; permitted provided that the following conditions are met:
+    13                           ; 
+    14                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+                                 t of
+    15                           ;        conditions and the following disclaimer.
+    16                           ; 
+    17                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+                                 list
+    18                           ;        of conditions and the following disclaimer in the documentation and/or other
+    19                           ;        materials provided with the distribution.
+    20                           ; 
+    21                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+                                 is
+    22                           ;        software without specific prior written permission.
+    23                           ; 
+    24                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+
+    25                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+                                 OR
+    26                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+                                 T,
+    27                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+                                 
+    28                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+                                 
+    29                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+                                 RICT
+    30                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+                                 SE OF
+    31                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    32                           ; 
+    33                           
+    34                           
+    35                           ; 
+    36                           ; Code-generator required, PIC12F675 Definitions
+    37                           ; 
+    38  0004                     fsr0 equ 04h
+    39  0004                     indf equ 00h
+    40  0000                     indf0 equ 00h
+    41  0000                     pc equ 02h
+    42  0002                     pcl equ 02h
+    43  0002                     pclath equ 0Ah
+    44  000A                     status equ 03h
+    45  0003                     
+     2                           opt pagewidth 120
+     3  0000                     byte0	macro	val
+     4                           	(getbyte(val,0))
+     5                           endm
+     6  0000                     byte1	macro	val
+     7                           	(getbyte(val,1))
+     8                           endm
+     9  0000                     byte2	macro	val
+    10                           	(getbyte(val,2))
+    11                           endm
+    12  0000                     byte3	macro	val
+    13                           	(getbyte(val,3))
+    14                           endm
+    15  0000                     byte4	macro	val
+    16                           	(getbyte(val,4))
+    17                           endm
+    18  0000                     byte5	macro	val
+    19                           	(getbyte(val,5))
+    20                           endm
+    21  0000                     byte6	macro	val
+    22                           	(getbyte(val,6))
+    23                           endm
+    24  0000                     byte7	macro	val
+    25                           	(getbyte(val,7))
+    26                           endm
+    27  0000                     getword	macro	val,pos
+    28                           	(((val) >> (8 * pos)) and 0xffff)
+    29                           endm
+    30  0000                     word0	macro	val
+    31                           	(getword(val,0))
+    32                           endm
+    33  0000                     word1	macro	val
+    34                           	(getword(val,2))
+    35                           endm
+    36  0000                     word2	macro	val
+    37                           	(getword(val,4))
+    38                           endm
+    39  0000                     word3	macro	val
+    40                           	(getword(val,6))
+    41                           endm
+    42  0000                     gettword	macro	val,pos
+    43                           	(((val) >> (8 * pos)) and 0xffffff)
+    44                           endm
+    45  0000                     tword0	macro	val
+    46                           	(gettword(val,0))
+    47                           endm
+    48  0000                     tword1	macro	val
+    49                           	(gettword(val,3))
+    50                           endm
+    51  0000                     tword2	macro	val
+    52                           	(gettword(val,6))
+    53                           endm
+    54  0000                     getdword	macro	val,pos
+    55                           	(((val) >> (8 * pos)) and 0xffffffff)
+    56                           endm
+    57  0000                     dword0	macro	val
+    58                           	(getdword(val,0))
+    59                           endm
+    60  0000                     dword1	macro	val
+    61                           	(getdword(val,4))
+    62                           endm
+    63  0000                     clrc	macro
+    64                           	bcf	3,0
+    65                           	endm
+    66  0000                     clrz	macro
+    67                           	bcf	3,2
+    68                           	endm
+    69  0000                     setc	macro
+    70                           	bsf	3,0
+    71                           	endm
+    72  0000                     setz	macro
+    73                           	bsf	3,2
+    74                           	endm
+    75  0000                     skipc	macro
+    76                           	btfss	3,0
+    77                           	endm
+    78  0000                     skipz	macro
+    79                           	btfss	3,2
+    80                           	endm
+    81  0000                     skipnc	macro
+    82                           	btfsc	3,0
+    83                           	endm
+    84  0000                     skipnz	macro
+    85                           	btfsc	3,2
+    86                           	endm
+    87  0000                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    88                           INDF equ 00h ;# 
+    89  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    90                           TMR0 equ 01h ;# 
+    91  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    92                           PCL equ 02h ;# 
+    93  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    94                           STATUS equ 03h ;# 
+    95  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    96                           FSR equ 04h ;# 
+    97  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    98                           GPIO equ 05h ;# 
+    99  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   100                           PCLATH equ 0Ah ;# 
+   101  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   102                           INTCON equ 0Bh ;# 
+   103  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   104                           PIR1 equ 0Ch ;# 
+   105  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   106                           TMR1 equ 0Eh ;# 
+   107  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   108                           TMR1L equ 0Eh ;# 
+   109  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   110                           TMR1H equ 0Fh ;# 
+   111  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   112                           T1CON equ 010h ;# 
+   113  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   114                           CMCON equ 019h ;# 
+   115  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   116                           ADRESH equ 01Eh ;# 
+   117  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   118                           ADCON0 equ 01Fh ;# 
+   119  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   120                           OPTION_REG equ 081h ;# 
+   121  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   122                           TRISIO equ 085h ;# 
+   123  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   124                           PIE1 equ 08Ch ;# 
+   125  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   126                           PCON equ 08Eh ;# 
+   127  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   128                           OSCCAL equ 090h ;# 
+   129  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   130                           WPU equ 095h ;# 
+   131  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   132                           IOC equ 096h ;# 
+   133  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   134                           IOCB equ 096h ;# 
+   135  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   136                           VRCON equ 099h ;# 
+   137  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   138                           EEDATA equ 09Ah ;# 
+   139  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   140                           EEDAT equ 09Ah ;# 
+   141  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   142                           EEADR equ 09Bh ;# 
+   143  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   144                           EECON1 equ 09Ch ;# 
+   145  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   146                           EECON2 equ 09Dh ;# 
+   147  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   148                           ADRESL equ 09Eh ;# 
+   149  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   150                           ANSEL equ 09Fh ;# 
+   151  009F                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   152                           INDF equ 00h ;# 
+   153  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   154                           TMR0 equ 01h ;# 
+   155  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   156                           PCL equ 02h ;# 
+   157  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   158                           STATUS equ 03h ;# 
+   159  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   160                           FSR equ 04h ;# 
+   161  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   162                           GPIO equ 05h ;# 
+   163  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   164                           PCLATH equ 0Ah ;# 
+   165  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   166                           INTCON equ 0Bh ;# 
+   167  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   168                           PIR1 equ 0Ch ;# 
+   169  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   170                           TMR1 equ 0Eh ;# 
+   171  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   172                           TMR1L equ 0Eh ;# 
+   173  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   174                           TMR1H equ 0Fh ;# 
+   175  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   176                           T1CON equ 010h ;# 
+   177  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   178                           CMCON equ 019h ;# 
+   179  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   180                           ADRESH equ 01Eh ;# 
+   181  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   182                           ADCON0 equ 01Fh ;# 
+   183  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   184                           OPTION_REG equ 081h ;# 
+   185  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   186                           TRISIO equ 085h ;# 
+   187  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   188                           PIE1 equ 08Ch ;# 
+   189  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   190                           PCON equ 08Eh ;# 
+   191  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   192                           OSCCAL equ 090h ;# 
+   193  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   194                           WPU equ 095h ;# 
+   195  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   196                           IOC equ 096h ;# 
+   197  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   198                           IOCB equ 096h ;# 
+   199  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   200                           VRCON equ 099h ;# 
+   201  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   202                           EEDATA equ 09Ah ;# 
+   203  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   204                           EEDAT equ 09Ah ;# 
+   205  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   206                           EEADR equ 09Bh ;# 
+   207  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   208                           EECON1 equ 09Ch ;# 
+   209  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   210                           EECON2 equ 09Dh ;# 
+   211  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   212                           ADRESL equ 09Eh ;# 
+   213  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   214                           ANSEL equ 09Fh ;# 
+   215  009F                     	FNCALL	_main,_ADC
+   216                           	FNCALL	_main,_blijniyOff
+   217                           	FNCALL	_main,_blijniyOn
+   218                           	FNCALL	_main,_gabaritOff
+   219                           	FNCALL	_main,_gabaritOn
+   220                           	FNCALL	_main,_sentrZamok
+   221                           	FNCALL	_gabaritOn,_ADC
+   222                           	FNCALL	_gabaritOff,_ADC
+   223                           	FNCALL	_blijniyOn,_ADC
+   224                           	FNCALL	_blijniyOff,_ADC
+   225                           	FNROOT	_main
+   226                           	FNCALL	intlevel1,_isr
+   227                           	global	intlevel1
+   228                           	FNROOT	intlevel1
+   229                           	global	_blijOff
+   230                           	global	_blijOn
+   231                           	global	_gabOff
+   232                           	global	_gabOn
+   233                           psect	idataBANK0,class=CODE,space=0,delta=2,noexec
+   234                           global __pidataBANK0
+   235                           __pidataBANK0:
+   236  0231                     	file	"Tunel-New.c"
+   237                           	line	21
+   238                           
+   239                           ;initializer for _blijOff
+   240                           	retlw	032h
+   241  0231  3432               	retlw	0
+   242  0232  3400               
+   243                           	line	20
+   244                           
+   245                           ;initializer for _blijOn
+   246                           	retlw	0C8h
+   247  0233  34C8               	retlw	0
+   248  0234  3400               
+   249                           	line	19
+   250                           
+   251                           ;initializer for _gabOff
+   252                           	retlw	030h
+   253  0235  3430               	retlw	0
+   254  0236  3400               
+   255                           	line	18
+   256                           
+   257                           ;initializer for _gabOn
+   258                           	retlw	096h
+   259  0237  3496               	retlw	0
+   260  0238  3400               
+   261                           	global	_volt
+   262                           	global	_i
+   263                           	global	_ADCON0
+   264                           _ADCON0	set	0x1F
+   265  001F                     	global	_INTCON
+   266                           _INTCON	set	0xB
+   267  000B                     	global	_CMCON
+   268                           _CMCON	set	0x19
+   269  0019                     	global	_GPIO
+   270                           _GPIO	set	0x5
+   271  0005                     	global	_ADRESH
+   272                           _ADRESH	set	0x1E
+   273  001E                     	global	_GP5
+   274                           _GP5	set	0x2D
+   275  002D                     	global	_GP2
+   276                           _GP2	set	0x2A
+   277  002A                     	global	_INTF
+   278                           _INTF	set	0x59
+   279  0059                     	global	_GP1
+   280                           _GP1	set	0x29
+   281  0029                     	global	_GP0
+   282                           _GP0	set	0x28
+   283  0028                     	global	_GP3
+   284                           _GP3	set	0x2B
+   285  002B                     	global	_GO_DONE
+   286                           _GO_DONE	set	0xF9
+   287  00F9                     	global	_ADON
+   288                           _ADON	set	0xF8
+   289  00F8                     	global	_ANSEL
+   290                           _ANSEL	set	0x9F
+   291  009F                     	global	_OPTION_REGbits
+   292                           _OPTION_REGbits	set	0x81
+   293  0081                     	global	_TRISIO
+   294                           _TRISIO	set	0x85
+   295  0085                     ; #config settings
+   296                           global __CFG_FOSC$INTRCIO
+   297                           __CFG_FOSC$INTRCIO equ 0x0
+   298  0000                     global __CFG_WDTE$OFF
+   299                           __CFG_WDTE$OFF equ 0x0
+   300  0000                     global __CFG_PWRTE$OFF
+   301                           __CFG_PWRTE$OFF equ 0x0
+   302  0000                     global __CFG_MCLRE$OFF
+   303                           __CFG_MCLRE$OFF equ 0x0
+   304  0000                     global __CFG_BOREN$OFF
+   305                           __CFG_BOREN$OFF equ 0x0
+   306  0000                     global __CFG_CP$ON
+   307                           __CFG_CP$ON equ 0x0
+   308  0000                     global __CFG_CPD$ON
+   309                           __CFG_CPD$ON equ 0x0
+   310  0000                     	file	"C:\Users\User\AppData\Local\Temp\se30."
+   311                           	line	#
+   312                           psect cinit,class=CODE,delta=2
+   313                           global start_initialization
+   314                           start_initialization:
+   315  000C                     
+   316                           global __initialization
+   317                           __initialization:
+   318  000C                     psect	bssBANK0,class=BANK0,space=1,noexec
+   319                           global __pbssBANK0
+   320                           __pbssBANK0:
+   321  002D                     _volt:
+   322  002D                            ds      2
+   323  002D                     
+   324                           _i:
+   325  002F                            ds      2
+   326  002F                     
+   327                           psect	dataBANK0,class=BANK0,space=1,noexec
+   328                           global __pdataBANK0
+   329                           __pdataBANK0:
+   330  0020                     	file	"Tunel-New.c"
+   331                           	line	21
+   332                           _blijOff:
+   333  0020                            ds      2
+   334  0020                     
+   335                           psect	dataBANK0
+   336                           	file	"Tunel-New.c"
+   337                           	line	20
+   338                           _blijOn:
+   339  0022                            ds      2
+   340  0022                     
+   341                           psect	dataBANK0
+   342                           	file	"Tunel-New.c"
+   343                           	line	19
+   344                           _gabOff:
+   345  0024                            ds      2
+   346  0024                     
+   347                           psect	dataBANK0
+   348                           	file	"Tunel-New.c"
+   349                           	line	18
+   350                           _gabOn:
+   351  0026                            ds      2
+   352  0026                     
+   353                           	file	"C:\Users\User\AppData\Local\Temp\se30."
+   354                           	line	#
+   355                           ; Initialize objects allocated to BANK0
+   356                           	global __pidataBANK0
+   357                           psect cinit,class=CODE,delta=2,merge=1
+   358                           	fcall	__pidataBANK0+0		;fetch initializer
+   359  000C  2231               	movwf	__pdataBANK0+0&07fh		
+   360  000D  00A0               	fcall	__pidataBANK0+1		;fetch initializer
+   361  000E  2232               	movwf	__pdataBANK0+1&07fh		
+   362  000F  00A1               	fcall	__pidataBANK0+2		;fetch initializer
+   363  0010  2233               	movwf	__pdataBANK0+2&07fh		
+   364  0011  00A2               	fcall	__pidataBANK0+3		;fetch initializer
+   365  0012  2234               	movwf	__pdataBANK0+3&07fh		
+   366  0013  00A3               	fcall	__pidataBANK0+4		;fetch initializer
+   367  0014  2235               	movwf	__pdataBANK0+4&07fh		
+   368  0015  00A4               	fcall	__pidataBANK0+5		;fetch initializer
+   369  0016  2236               	movwf	__pdataBANK0+5&07fh		
+   370  0017  00A5               	fcall	__pidataBANK0+6		;fetch initializer
+   371  0018  2237               	movwf	__pdataBANK0+6&07fh		
+   372  0019  00A6               	fcall	__pidataBANK0+7		;fetch initializer
+   373  001A  2238               	movwf	__pdataBANK0+7&07fh		
+   374  001B  00A7               	line	#
+   375                           ; Clear objects allocated to BANK0
+   376                           psect cinit,class=CODE,delta=2,merge=1
+   377                           	clrf	((__pbssBANK0)+0)&07Fh
+   378  001C  01AD               	clrf	((__pbssBANK0)+1)&07Fh
+   379  001D  01AE               	clrf	((__pbssBANK0)+2)&07Fh
+   380  001E  01AF               	clrf	((__pbssBANK0)+3)&07Fh
+   381  001F  01B0               psect cinit,class=CODE,delta=2,merge=1
+   382                           global end_of_initialization,__end_of__initialization
+   383                           
+   384                           ;End of C runtime variable initialization code
+   385                           
+   386                           end_of_initialization:
+   387  0020                     __end_of__initialization:
+   388  0020                     clrf status
+   389  0020  0183               ljmp _main	;jump to C main() function
+   390  0021  2822               psect	cstackCOMMON,class=COMMON,space=1,noexec
+   391                           global __pcstackCOMMON
+   392                           __pcstackCOMMON:
+   393  0000                     ??_blijniyOff:	; 1 bytes @ 0x0
+   394  0000                     ??_main:	; 1 bytes @ 0x0
+   395  0000                     psect	cstackBANK0,class=BANK0,space=1,noexec
+   396                           global __pcstackBANK0
+   397                           __pcstackBANK0:
+   398  0028                     ?_ADC:	; 1 bytes @ 0x0
+   399  0028                     ?_gabaritOn:	; 1 bytes @ 0x0
+   400  0028                     ?_gabaritOff:	; 1 bytes @ 0x0
+   401  0028                     ?_blijniyOn:	; 1 bytes @ 0x0
+   402  0028                     ?_blijniyOff:	; 1 bytes @ 0x0
+   403  0028                     ?_sentrZamok:	; 1 bytes @ 0x0
+   404  0028                     ?_isr:	; 1 bytes @ 0x0
+   405  0028                     ??_isr:	; 1 bytes @ 0x0
+   406  0028                     ?_main:	; 1 bytes @ 0x0
+   407  0028                     	ds	2
+   408  0028                     ??_ADC:	; 1 bytes @ 0x2
+   409  002A                     ??_sentrZamok:	; 1 bytes @ 0x2
+   410  002A                     	ds	2
+   411  002A                     ??_gabaritOn:	; 1 bytes @ 0x4
+   412  002C                     ??_gabaritOff:	; 1 bytes @ 0x4
+   413  002C                     ??_blijniyOn:	; 1 bytes @ 0x4
+   414  002C                     	ds	1
+   415  002C                     ;!
+   416                           ;!Data Sizes:
+   417                           ;!    Strings     0
+   418                           ;!    Constant    0
+   419                           ;!    Data        8
+   420                           ;!    BSS         4
+   421                           ;!    Persistent  0
+   422                           ;!    Stack       0
+   423                           ;!
+   424                           ;!Auto Spaces:
+   425                           ;!    Space          Size  Autos    Used
+   426                           ;!    COMMON            0      0       0
+   427                           ;!    BANK0            62      5      17
+   428                           
+   429                           ;!
+   430                           ;!Pointer List with Targets:
+   431                           ;!
+   432                           ;!    None.
+   433                           
+   434                           
+   435                           ;!
+   436                           ;!Critical Paths under _main in COMMON
+   437                           ;!
+   438                           ;!    None.
+   439                           ;!
+   440                           ;!Critical Paths under _isr in COMMON
+   441                           ;!
+   442                           ;!    None.
+   443                           ;!
+   444                           ;!Critical Paths under _main in BANK0
+   445                           ;!
+   446                           ;!    _main->_blijniyOn
+   447                           ;!    _main->_gabaritOff
+   448                           ;!    _main->_gabaritOn
+   449                           ;!    _gabaritOn->_ADC
+   450                           ;!    _gabaritOff->_ADC
+   451                           ;!    _blijniyOn->_ADC
+   452                           ;!    _blijniyOff->_ADC
+   453                           ;!
+   454                           ;!Critical Paths under _isr in BANK0
+   455                           ;!
+   456                           ;!    None.
+   457                           
+   458 ;;
+   459 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   460 ;;
+   461                           
+   462                           ;!
+   463                           ;!Call Graph Tables:
+   464                           ;!
+   465                           ;! ---------------------------------------------------------------------------------
+   466                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   467                           ;! ---------------------------------------------------------------------------------
+   468                           ;! (0) _main                                                 0     0      0       0
+   469                           ;!                                _ADC
+   470                           ;!                         _blijniyOff
+   471                           ;!                          _blijniyOn
+   472                           ;!                         _gabaritOff
+   473                           ;!                          _gabaritOn
+   474                           ;!                         _sentrZamok
+   475                           ;! ---------------------------------------------------------------------------------
+   476                           ;! (1) _sentrZamok                                           1     1      0       0
+   477                           ;!                                              2 BANK0      1     1      0
+   478                           ;! ---------------------------------------------------------------------------------
+   479                           ;! (1) _gabaritOn                                            1     1      0       0
+   480                           ;!                                              4 BANK0      1     1      0
+   481                           ;!                                _ADC
+   482                           ;! ---------------------------------------------------------------------------------
+   483                           ;! (1) _gabaritOff                                           1     1      0       0
+   484                           ;!                                              4 BANK0      1     1      0
+   485                           ;!                                _ADC
+   486                           ;! ---------------------------------------------------------------------------------
+   487                           ;! (1) _blijniyOn                                            1     1      0       0
+   488                           ;!                                              4 BANK0      1     1      0
+   489                           ;!                                _ADC
+   490                           ;! ---------------------------------------------------------------------------------
+   491                           ;! (1) _blijniyOff                                           0     0      0       0
+   492                           ;!                                _ADC
+   493                           ;! ---------------------------------------------------------------------------------
+   494                           ;! (2) _ADC                                                  2     2      0       0
+   495                           ;!                                              2 BANK0      2     2      0
+   496                           ;! ---------------------------------------------------------------------------------
+   497                           ;! Estimated maximum stack depth 2
+   498                           ;! ---------------------------------------------------------------------------------
+   499                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   500                           ;! ---------------------------------------------------------------------------------
+   501                           ;! (3) _isr                                                  2     2      0       0
+   502                           ;!                                              0 BANK0      2     2      0
+   503                           ;! ---------------------------------------------------------------------------------
+   504                           ;! Estimated maximum stack depth 3
+   505                           ;! ---------------------------------------------------------------------------------
+   506                           ;!
+   507                           ;! Call Graph Graphs:
+   508                           ;!
+   509                           ;! _main (ROOT)
+   510                           ;!   _ADC
+   511                           ;!   _blijniyOff
+   512                           ;!     _ADC
+   513                           ;!   _blijniyOn
+   514                           ;!     _ADC
+   515                           ;!   _gabaritOff
+   516                           ;!     _ADC
+   517                           ;!   _gabaritOn
+   518                           ;!     _ADC
+   519                           ;!   _sentrZamok
+   520                           ;!
+   521                           ;! _isr (ROOT)
+   522                           ;!
+   523                           
+   524                           ;! Address spaces:
+   525                           
+   526                           ;!Name               Size   Autos  Total    Cost      Usage
+   527                           ;!SFR1                 0      0       0       2        0.0%
+   528                           ;!BITSFR1              0      0       0       2        0.0%
+   529                           ;!BANK0               3E      5      11       4       27.4%
+   530                           ;!BITBANK0            3E      0       0       3        0.0%
+   531                           ;!SFR0                 0      0       0       1        0.0%
+   532                           ;!BITSFR0              0      0       0       1        0.0%
+   533                           ;!COMMON               0      0       0       1        0.0%
+   534                           ;!BITCOMMON            0      0       0       0        0.0%
+   535                           ;!CODE                 0      0       0       0        0.0%
+   536                           ;!DATA                 0      0      11       6        0.0%
+   537                           ;!ABS                  0      0      11       5        0.0%
+   538                           ;!NULL                 0      0       0       0        0.0%
+   539                           ;!STACK                0      0       0       2        0.0%
+   540                           ;!EEDATA              80      0       0       0        0.0%
+   541                           
+   542                           	global	_main
+   543                           
+   544 ;; *************** function _main *****************
+   545 ;; Defined at:
+   546 ;;		line 120 in file "Tunel-New.c"
+   547 ;; Parameters:    Size  Location     Type
+   548 ;;		None
+   549 ;; Auto vars:     Size  Location     Type
+   550 ;;		None
+   551 ;; Return value:  Size  Location     Type
+   552 ;;                  1    wreg      void 
+   553 ;; Registers used:
+   554 ;;		wreg, status,2, status,0, pclath, cstack
+   555 ;; Tracked objects:
+   556 ;;		On entry : B00/0
+   557 ;;		On exit  : 0/0
+   558 ;;		Unchanged: 0/0
+   559 ;; Data sizes:     COMMON   BANK0
+   560 ;;      Params:         0       0
+   561 ;;      Locals:         0       0
+   562 ;;      Temps:          0       0
+   563 ;;      Totals:         0       0
+   564 ;;Total ram usage:        0 bytes
+   565 ;; Hardware stack levels required when called:    3
+   566 ;; This function calls:
+   567 ;;		_ADC
+   568 ;;		_blijniyOff
+   569 ;;		_blijniyOn
+   570 ;;		_gabaritOff
+   571 ;;		_gabaritOn
+   572 ;;		_sentrZamok
+   573 ;; This function is called by:
+   574 ;;		Startup code after reset
+   575 ;; This function uses a non-reentrant model
+   576 ;;
+   577                           psect	maintext,global,class=CODE,delta=2,split=1,group=0
+   578                           	file	"Tunel-New.c"
+   579                           	line	120
+   580                           global __pmaintext
+   581                           __pmaintext:	;psect for function _main
+   582  0022                     psect	maintext
+   583                           	file	"Tunel-New.c"
+   584                           	line	120
+   585                           	global	__size_of_main
+   586                           	__size_of_main	equ	__end_of_main-_main
+   587  0081                     	
+   588                           _main:	
+   589  0022                     ;incstack = 0
+   590                           	opt	stack 5
+   591                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   592                           	line	121
+   593                           	
+   594                           l966:	
+   595  0022                     ;Tunel-New.c: 121:             }
+   596                           	movlw	low(03Ch)
+   597  0022  303C               	bsf	status, 5	;RP0=1, select bank1
+   598  0023  1683               	movwf	(133)^080h	;volatile
+   599  0024  0085               	line	122
+   600                           	
+   601                           l968:	
+   602  0025                     ;Tunel-New.c: 122:             if (volt < gabOff && GP1 == 1) {
+   603                           	bcf	status, 5	;RP0=0, select bank0
+   604  0025  1283               	clrf	(5)	;volatile
+   605  0026  0185               	line	123
+   606                           	
+   607                           l970:	
+   608  0027                     ;Tunel-New.c: 123:                 gabaritOff();
+   609                           	movlw	low(07h)
+   610  0027  3007               	movwf	(25)	;volatile
+   611  0028  0099               	line	124
+   612                           	
+   613                           l972:	
+   614  0029                     ;Tunel-New.c: 124:             }
+   615                           	movlw	low(090h)
+   616  0029  3090               	movwf	(11)	;volatile
+   617  002A  008B               	line	125
+   618                           	
+   619                           l974:	
+   620  002B                     ;Tunel-New.c: 125:         }
+   621                           	bsf	status, 5	;RP0=1, select bank1
+   622  002B  1683               	bcf	(129)^080h,6	;volatile
+   623  002C  1301               	line	126
+   624                           	
+   625                           l976:	
+   626  002D                     ;Tunel-New.c: 126:         if (GP5 == 0) {
+   627                           	movlw	low(0Ch)
+   628  002D  300C               	bcf	status, 5	;RP0=0, select bank0
+   629  002E  1283               	movwf	(31)	;volatile
+   630  002F  009F               	line	127
+   631                           	
+   632                           l978:	
+   633  0030                     ;Tunel-New.c: 127:             ADC();
+   634                           	movlw	low(018h)
+   635  0030  3018               	bsf	status, 5	;RP0=1, select bank1
+   636  0031  1683               	movwf	(159)^080h	;volatile
+   637  0032  009F               	goto	l1006
+   638  0033  287B               	line	128
+   639                           ;Tunel-New.c: 128:             if (volt > gabOn) {
+   640                           	
+   641                           l113:	
+   642  0034                     	line	129
+   643                           ;Tunel-New.c: 129:                 sentrZamok();
+   644                           	goto	l1006
+   645  0034  287B               	
+   646                           l115:	
+   647  0035                     	line	130
+   648                           	
+   649                           l980:	
+   650  0035                     ;Tunel-New.c: 130:             }
+   651                           	fcall	_ADC
+   652  0035  21EA               	line	131
+   653                           	
+   654                           l982:	
+   655  0036                     ;Tunel-New.c: 131:         }
+   656                           	bcf	status, 5	;RP0=0, select bank0
+   657  0036  1283               	movf	(_volt+1),w
+   658  0037  082E               	subwf	(_gabOn+1),w
+   659  0038  0227               	skipz
+   660  0039  1D03               	goto	u725
+   661  003A  283D               	movf	(_volt),w
+   662  003B  082D               	subwf	(_gabOn),w
+   663  003C  0226               u725:
+   664  003D                     	skipnc
+   665  003D  1803               	goto	u721
+   666  003E  2840               	goto	u720
+   667  003F  2841               u721:
+   668  0040                     	goto	l988
+   669  0040  2847               u720:
+   670  0041                     	
+   671                           l984:	
+   672  0041                     	btfsc	(41/8),(41)&7	;volatile
+   673  0041  1885               	goto	u731
+   674  0042  2844               	goto	u730
+   675  0043  2845               u731:
+   676  0044                     	goto	l988
+   677  0044  2847               u730:
+   678  0045                     	line	132
+   679                           	
+   680                           l986:	
+   681  0045                     ;Tunel-New.c: 132:         if (GP2 == 1) {
+   682                           	fcall	_gabaritOn
+   683  0045  20A3               	goto	l988
+   684  0046  2847               	line	133
+   685                           ;Tunel-New.c: 133:             GP1 = 0;
+   686                           	
+   687                           l116:	
+   688  0047                     	line	134
+   689                           	
+   690                           l988:	
+   691  0047                     ;Tunel-New.c: 134:             GP0 = 0;
+   692                           	bcf	status, 5	;RP0=0, select bank0
+   693  0047  1283               	movf	(_volt+1),w
+   694  0048  082E               	subwf	(_blijOn+1),w
+   695  0049  0223               	skipz
+   696  004A  1D03               	goto	u745
+   697  004B  284E               	movf	(_volt),w
+   698  004C  082D               	subwf	(_blijOn),w
+   699  004D  0222               u745:
+   700  004E                     	skipnc
+   701  004E  1803               	goto	u741
+   702  004F  2851               	goto	u740
+   703  0050  2852               u741:
+   704  0051                     	goto	l994
+   705  0051  2858               u740:
+   706  0052                     	
+   707                           l990:	
+   708  0052                     	btfsc	(40/8),(40)&7	;volatile
+   709  0052  1805               	goto	u751
+   710  0053  2855               	goto	u750
+   711  0054  2856               u751:
+   712  0055                     	goto	l994
+   713  0055  2858               u750:
+   714  0056                     	line	135
+   715                           	
+   716                           l992:	
+   717  0056                     ;Tunel-New.c: 135:         }
+   718                           	fcall	_blijniyOn
+   719  0056  2137               	goto	l994
+   720  0057  2858               	line	136
+   721                           ;Tunel-New.c: 136:         if (GP2 == 0) {
+   722                           	
+   723                           l117:	
+   724  0058                     	line	137
+   725                           	
+   726                           l994:	
+   727  0058                     ;Tunel-New.c: 137:             GP1 = 1;
+   728                           	bcf	status, 5	;RP0=0, select bank0
+   729  0058  1283               	movf	(_blijOff+1),w
+   730  0059  0821               	subwf	(_volt+1),w
+   731  005A  022E               	skipz
+   732  005B  1D03               	goto	u765
+   733  005C  285F               	movf	(_blijOff),w
+   734  005D  0820               	subwf	(_volt),w
+   735  005E  022D               u765:
+   736  005F                     	skipnc
+   737  005F  1803               	goto	u761
+   738  0060  2862               	goto	u760
+   739  0061  2863               u761:
+   740  0062                     	goto	l1000
+   741  0062  2869               u760:
+   742  0063                     	
+   743                           l996:	
+   744  0063                     	btfss	(40/8),(40)&7	;volatile
+   745  0063  1C05               	goto	u771
+   746  0064  2866               	goto	u770
+   747  0065  2867               u771:
+   748  0066                     	goto	l1000
+   749  0066  2869               u770:
+   750  0067                     	line	138
+   751                           	
+   752                           l998:	
+   753  0067                     ;Tunel-New.c: 138:         }
+   754                           	fcall	_blijniyOff
+   755  0067  217B               	goto	l1000
+   756  0068  2869               	line	139
+   757                           ;Tunel-New.c: 139:     }
+   758                           	
+   759                           l118:	
+   760  0069                     	line	140
+   761                           	
+   762                           l1000:	
+   763  0069                     ;Tunel-New.c: 140: }
+   764                           	bcf	status, 5	;RP0=0, select bank0
+   765  0069  1283               	movf	(_gabOff+1),w
+   766  006A  0825               	subwf	(_volt+1),w
+   767  006B  022E               	skipz
+   768  006C  1D03               	goto	u785
+   769  006D  2870               	movf	(_gabOff),w
+   770  006E  0824               	subwf	(_volt),w
+   771  006F  022D               u785:
+   772  0070                     	skipnc
+   773  0070  1803               	goto	u781
+   774  0071  2873               	goto	u780
+   775  0072  2874               u781:
+   776  0073                     	goto	l1006
+   777  0073  287B               u780:
+   778  0074                     	
+   779                           l1002:	
+   780  0074                     	btfss	(41/8),(41)&7	;volatile
+   781  0074  1C85               	goto	u791
+   782  0075  2877               	goto	u790
+   783  0076  2878               u791:
+   784  0077                     	goto	l1006
+   785  0077  287B               u790:
+   786  0078                     	line	141
+   787                           	
+   788                           l1004:	
+   789  0078                     	fcall	_gabaritOff
+   790  0078  20F3               	goto	l1006
+   791  0079  287B               	line	142
+   792                           	
+   793                           l119:	
+   794  007A                     	goto	l1006
+   795  007A  287B               	line	143
+   796                           	
+   797                           l114:	
+   798  007B                     	line	129
+   799                           	
+   800                           l1006:	
+   801  007B                     ;Tunel-New.c: 129:                 sentrZamok();
+   802                           	bcf	status, 5	;RP0=0, select bank0
+   803  007B  1283               	btfsc	(43/8),(43)&7	;volatile
+   804  007C  1985               	goto	u801
+   805  007D  287F               	goto	u800
+   806  007E  2880               u801:
+   807  007F                     	goto	l980
+   808  007F  2835               u800:
+   809  0080                     	
+   810                           l120:	
+   811  0080                     	line	144
+   812                           	btfsc	(45/8),(45)&7	;volatile
+   813  0080  1A85               	goto	u811
+   814  0081  2883               	goto	u810
+   815  0082  2884               u811:
+   816  0083                     	goto	l1014
+   817  0083  2893               u810:
+   818  0084                     	line	145
+   819                           	
+   820                           l1008:	
+   821  0084                     	fcall	_ADC
+   822  0084  21EA               	line	146
+   823                           	
+   824                           l1010:	
+   825  0085                     	bcf	status, 5	;RP0=0, select bank0
+   826  0085  1283               	movf	(_volt+1),w
+   827  0086  082E               	subwf	(_gabOn+1),w
+   828  0087  0227               	skipz
+   829  0088  1D03               	goto	u825
+   830  0089  288C               	movf	(_volt),w
+   831  008A  082D               	subwf	(_gabOn),w
+   832  008B  0226               u825:
+   833  008C                     	skipnc
+   834  008C  1803               	goto	u821
+   835  008D  288F               	goto	u820
+   836  008E  2890               u821:
+   837  008F                     	goto	l1014
+   838  008F  2893               u820:
+   839  0090                     	line	147
+   840                           	
+   841                           l1012:	
+   842  0090                     	fcall	_sentrZamok
+   843  0090  21B7               	goto	l1014
+   844  0091  2893               	line	148
+   845                           	
+   846                           l122:	
+   847  0092                     	goto	l1014
+   848  0092  2893               	line	149
+   849                           	
+   850                           l121:	
+   851  0093                     	line	150
+   852                           	
+   853                           l1014:	
+   854  0093                     	bcf	status, 5	;RP0=0, select bank0
+   855  0093  1283               	btfss	(42/8),(42)&7	;volatile
+   856  0094  1D05               	goto	u831
+   857  0095  2897               	goto	u830
+   858  0096  2898               u831:
+   859  0097                     	goto	l123
+   860  0097  289A               u830:
+   861  0098                     	line	151
+   862                           	
+   863                           l1016:	
+   864  0098                     	bcf	(41/8),(41)&7	;volatile
+   865  0098  1085               	line	152
+   866                           	bcf	(40/8),(40)&7	;volatile
+   867  0099  1005               	line	153
+   868                           	
+   869                           l123:	
+   870  009A                     	line	154
+   871                           	btfsc	(42/8),(42)&7	;volatile
+   872  009A  1905               	goto	u841
+   873  009B  289D               	goto	u840
+   874  009C  289E               u841:
+   875  009D                     	goto	l1006
+   876  009D  287B               u840:
+   877  009E                     	line	155
+   878                           	
+   879                           l1018:	
+   880  009E                     	bsf	(41/8),(41)&7	;volatile
+   881  009E  1485               	goto	l1006
+   882  009F  287B               	line	156
+   883                           	
+   884                           l124:	
+   885  00A0                     	goto	l1006
+   886  00A0  287B               	line	157
+   887                           	
+   888                           l125:	
+   889  00A1                     	goto	l1006
+   890  00A1  287B               	
+   891                           l126:	
+   892  00A2                     	line	158
+   893                           	
+   894                           l127:	
+   895  00A2                     	global	start
+   896                           	ljmp	start
+   897  00A2  280B               	opt stack 0
+   898                           GLOBAL	__end_of_main
+   899                           	__end_of_main:
+   900  00A3                     	signat	_main,89
+   901                           	global	_sentrZamok
+   902                           
+   903 ;; *************** function _sentrZamok *****************
+   904 ;; Defined at:
+   905 ;;		line 89 in file "Tunel-New.c"
+   906 ;; Parameters:    Size  Location     Type
+   907 ;;		None
+   908 ;; Auto vars:     Size  Location     Type
+   909 ;;		None
+   910 ;; Return value:  Size  Location     Type
+   911 ;;                  1    wreg      void 
+   912 ;; Registers used:
+   913 ;;		wreg, status,2
+   914 ;; Tracked objects:
+   915 ;;		On entry : 0/0
+   916 ;;		On exit  : 0/0
+   917 ;;		Unchanged: 0/0
+   918 ;; Data sizes:     COMMON   BANK0
+   919 ;;      Params:         0       0
+   920 ;;      Locals:         0       0
+   921 ;;      Temps:          0       1
+   922 ;;      Totals:         0       1
+   923 ;;Total ram usage:        1 bytes
+   924 ;; Hardware stack levels used:    1
+   925 ;; Hardware stack levels required when called:    1
+   926 ;; This function calls:
+   927 ;;		Nothing
+   928 ;; This function is called by:
+   929 ;;		_main
+   930 ;; This function uses a non-reentrant model
+   931 ;;
+   932                           psect	text1,local,class=CODE,delta=2,merge=1,group=0
+   933                           	line	89
+   934                           global __ptext1
+   935                           __ptext1:	;psect for function _sentrZamok
+   936  01B7                     psect	text1
+   937                           	file	"Tunel-New.c"
+   938                           	line	89
+   939                           	global	__size_of_sentrZamok
+   940                           	__size_of_sentrZamok	equ	__end_of_sentrZamok-_sentrZamok
+   941  0033                     	
+   942                           _sentrZamok:	
+   943  01B7                     ;incstack = 0
+   944                           	opt	stack 6
+   945                           ; Regs used in _sentrZamok: [wreg+status,2]
+   946                           	line	90
+   947                           	
+   948                           l946:	
+   949  01B7                     ;Tunel-New.c: 90:             if (GP2 == 0) {
+   950                           	bcf	status, 5	;RP0=0, select bank0
+   951  01B7  1283               	bsf	(41/8),(41)&7	;volatile
+   952  01B8  1485               	line	91
+   953                           ;Tunel-New.c: 91:                 GP1 = 1;
+   954                           	bsf	(40/8),(40)&7	;volatile
+   955  01B9  1405               	line	92
+   956                           	
+   957                           l948:	
+   958  01BA                     ;Tunel-New.c: 92:             } else {
+   959                           	clrf	(_i)
+   960  01BA  01AF               	clrf	(_i+1)
+   961  01BB  01B0               	
+   962                           l950:	
+   963  01BC                     	movlw	027h
+   964  01BC  3027               	subwf	(_i+1),w
+   965  01BD  0230               	movlw	011h
+   966  01BE  3011               	skipnz
+   967  01BF  1903               	subwf	(_i),w
+   968  01C0  022F               	skipc
+   969  01C1  1C03               	goto	u651
+   970  01C2  29C4               	goto	u650
+   971  01C3  29C5               u651:
+   972  01C4                     	goto	l92
+   973  01C4  29C7               u650:
+   974  01C5                     	goto	l93
+   975  01C5  29E7               	
+   976                           l952:	
+   977  01C6                     	goto	l93
+   978  01C6  29E7               	
+   979                           l92:	
+   980  01C7                     	line	93
+   981                           ;Tunel-New.c: 93:                 GP1 = 0;
+   982                           	btfss	(43/8),(43)&7	;volatile
+   983  01C7  1D85               	goto	u661
+   984  01C8  29CA               	goto	u660
+   985  01C9  29CB               u661:
+   986  01CA                     	goto	l956
+   987  01CA  29D0               u660:
+   988  01CB                     	line	94
+   989                           	
+   990                           l954:	
+   991  01CB                     ;Tunel-New.c: 94:             }
+   992                           	movlw	010h
+   993  01CB  3010               	movwf	(_i)
+   994  01CC  00AF               	movlw	027h
+   995  01CD  3027               	movwf	((_i))+1
+   996  01CE  00B0               	line	95
+   997                           ;Tunel-New.c: 95:         }
+   998                           	goto	l95
+   999  01CF  29D7               	
+  1000                           l94:	
+  1001  01D0                     	line	96
+  1002                           	
+  1003                           l956:	
+  1004  01D0                     ;Tunel-New.c: 96:         if (GP2 == 0) {
+  1005                           	opt asmopt_push
+  1006                           opt asmopt_off
+  1007                           	movlw	199
+  1008  01D0  30C7               movwf	((??_sentrZamok+0)+0),f
+  1009  01D1  00AA               	u857:
+  1010  01D2                     	nop2
+  1011  01D2  29D3               decfsz	(??_sentrZamok+0)+0,f
+  1012  01D3  0BAA               	goto	u857
+  1013  01D4  29D2               	nop2
+  1014  01D5  29D6               	nop2
+  1015  01D6  29D7               opt asmopt_pop
+  1016                           
+  1017                           	line	97
+  1018                           ;Tunel-New.c: 97:             GP1 = 1;
+  1019                           	
+  1020                           l95:	
+  1021  01D7                     	line	98
+  1022                           ;Tunel-New.c: 98:         }
+  1023                           	movlw	01h
+  1024  01D7  3001               	bcf	status, 5	;RP0=0, select bank0
+  1025  01D8  1283               	addwf	(_i),f
+  1026  01D9  07AF               	skipnc
+  1027  01DA  1803               	incf	(_i+1),f
+  1028  01DB  0AB0               	movlw	0
+  1029  01DC  3000               	addwf	(_i+1),f
+  1030  01DD  07B0               	movlw	027h
+  1031  01DE  3027               	subwf	(_i+1),w
+  1032  01DF  0230               	movlw	011h
+  1033  01E0  3011               	skipnz
+  1034  01E1  1903               	subwf	(_i),w
+  1035  01E2  022F               	skipc
+  1036  01E3  1C03               	goto	u671
+  1037  01E4  29E6               	goto	u670
+  1038  01E5  29E7               u671:
+  1039  01E6                     	goto	l92
+  1040  01E6  29C7               u670:
+  1041  01E7                     	
+  1042                           l93:	
+  1043  01E7                     	line	99
+  1044                           ;Tunel-New.c: 99:     }
+  1045                           	bcf	(41/8),(41)&7	;volatile
+  1046  01E7  1085               	line	100
+  1047                           ;Tunel-New.c: 100: }
+  1048                           	bcf	(40/8),(40)&7	;volatile
+  1049  01E8  1005               	line	101
+  1050                           	
+  1051                           l96:	
+  1052  01E9                     	return
+  1053  01E9  0008               	opt stack 0
+  1054                           GLOBAL	__end_of_sentrZamok
+  1055                           	__end_of_sentrZamok:
+  1056  01EA                     	signat	_sentrZamok,89
+  1057                           	global	_gabaritOn
+  1058                           
+  1059 ;; *************** function _gabaritOn *****************
+  1060 ;; Defined at:
+  1061 ;;		line 35 in file "Tunel-New.c"
+  1062 ;; Parameters:    Size  Location     Type
+  1063 ;;		None
+  1064 ;; Auto vars:     Size  Location     Type
+  1065 ;;		None
+  1066 ;; Return value:  Size  Location     Type
+  1067 ;;                  1    wreg      void 
+  1068 ;; Registers used:
+  1069 ;;		wreg, status,2, status,0, pclath, cstack
+  1070 ;; Tracked objects:
+  1071 ;;		On entry : 0/0
+  1072 ;;		On exit  : 0/0
+  1073 ;;		Unchanged: 0/0
+  1074 ;; Data sizes:     COMMON   BANK0
+  1075 ;;      Params:         0       0
+  1076 ;;      Locals:         0       0
+  1077 ;;      Temps:          0       1
+  1078 ;;      Totals:         0       1
+  1079 ;;Total ram usage:        1 bytes
+  1080 ;; Hardware stack levels used:    1
+  1081 ;; Hardware stack levels required when called:    2
+  1082 ;; This function calls:
+  1083 ;;		_ADC
+  1084 ;; This function is called by:
+  1085 ;;		_main
+  1086 ;; This function uses a non-reentrant model
+  1087 ;;
+  1088                           psect	text2,local,class=CODE,delta=2,merge=1,group=0
+  1089                           	line	35
+  1090                           global __ptext2
+  1091                           __ptext2:	;psect for function _gabaritOn
+  1092  00A3                     psect	text2
+  1093                           	file	"Tunel-New.c"
+  1094                           	line	35
+  1095                           	global	__size_of_gabaritOn
+  1096                           	__size_of_gabaritOn	equ	__end_of_gabaritOn-_gabaritOn
+  1097  0050                     	
+  1098                           _gabaritOn:	
+  1099  00A3                     ;incstack = 0
+  1100                           	opt	stack 5
+  1101                           ; Regs used in _gabaritOn: [wreg+status,2+status,0+pclath+cstack]
+  1102                           	line	36
+  1103                           	
+  1104                           l870:	
+  1105  00A3                     ;Tunel-New.c: 36:         if (GP3 == 0 || volt > 48) {
+  1106                           	bcf	status, 5	;RP0=0, select bank0
+  1107  00A3  1283               	clrf	(_i)
+  1108  00A4  01AF               	clrf	(_i+1)
+  1109  00A5  01B0               	
+  1110                           l872:	
+  1111  00A6                     	movlw	0
+  1112  00A6  3000               	subwf	(_i+1),w
+  1113  00A7  0230               	movlw	0ECh
+  1114  00A8  30EC               	skipnz
+  1115  00A9  1903               	subwf	(_i),w
+  1116  00AA  022F               	skipc
+  1117  00AB  1C03               	goto	u441
+  1118  00AC  28AE               	goto	u440
+  1119  00AD  28AF               u441:
+  1120  00AE                     	goto	l876
+  1121  00AE  28B1               u440:
+  1122  00AF                     	goto	l884
+  1123  00AF  28DA               	
+  1124                           l874:	
+  1125  00B0                     	goto	l884
+  1126  00B0  28DA               	
+  1127                           l55:	
+  1128  00B1                     	line	37
+  1129                           	
+  1130                           l876:	
+  1131  00B1                     ;Tunel-New.c: 37:             return;
+  1132                           	fcall	_ADC
+  1133  00B1  21EA               	line	38
+  1134                           	
+  1135                           l878:	
+  1136  00B2                     ;Tunel-New.c: 38:         }
+  1137                           	bcf	status, 5	;RP0=0, select bank0
+  1138  00B2  1283               	btfss	(43/8),(43)&7	;volatile
+  1139  00B3  1D85               	goto	u451
+  1140  00B4  28B6               	goto	u450
+  1141  00B5  28B7               u451:
+  1142  00B6                     	goto	l60
+  1143  00B6  28F2               u450:
+  1144  00B7                     	
+  1145                           l880:	
+  1146  00B7                     	movlw	0
+  1147  00B7  3000               	subwf	(_volt+1),w
+  1148  00B8  022E               	movlw	08Ch
+  1149  00B9  308C               	skipnz
+  1150  00BA  1903               	subwf	(_volt),w
+  1151  00BB  022D               	skipnc
+  1152  00BC  1803               	goto	u461
+  1153  00BD  28BF               	goto	u460
+  1154  00BE  28C0               u461:
+  1155  00BF                     	goto	l882
+  1156  00BF  28C2               u460:
+  1157  00C0                     	goto	l60
+  1158  00C0  28F2               	
+  1159                           l59:	
+  1160  00C1                     	line	39
+  1161                           ;Tunel-New.c: 39:         _delay((unsigned long)((1)*(4000000/4000.0)));
+  1162                           	goto	l60
+  1163  00C1  28F2               	line	40
+  1164                           ;Tunel-New.c: 40:     }
+  1165                           	
+  1166                           l57:	
+  1167  00C2                     	line	41
+  1168                           	
+  1169                           l882:	
+  1170  00C2                     ;Tunel-New.c: 41:     if (volt < gabOff) {
+  1171                           	opt asmopt_push
+  1172                           opt asmopt_off
+  1173                           	movlw	199
+  1174  00C2  30C7               movwf	((??_gabaritOn+0)+0),f
+  1175  00C3  00AC               	u867:
+  1176  00C4                     	nop2
+  1177  00C4  28C5               decfsz	(??_gabaritOn+0)+0,f
+  1178  00C5  0BAC               	goto	u867
+  1179  00C6  28C4               	nop2
+  1180  00C7  28C8               	nop2
+  1181  00C8  28C9               opt asmopt_pop
+  1182                           
+  1183                           	line	42
+  1184                           ;Tunel-New.c: 42:         GP1 = 0;
+  1185                           	movlw	01h
+  1186  00C9  3001               	bcf	status, 5	;RP0=0, select bank0
+  1187  00CA  1283               	addwf	(_i),f
+  1188  00CB  07AF               	skipnc
+  1189  00CC  1803               	incf	(_i+1),f
+  1190  00CD  0AB0               	movlw	0
+  1191  00CE  3000               	addwf	(_i+1),f
+  1192  00CF  07B0               	movlw	0
+  1193  00D0  3000               	subwf	(_i+1),w
+  1194  00D1  0230               	movlw	0ECh
+  1195  00D2  30EC               	skipnz
+  1196  00D3  1903               	subwf	(_i),w
+  1197  00D4  022F               	skipc
+  1198  00D5  1C03               	goto	u471
+  1199  00D6  28D8               	goto	u470
+  1200  00D7  28D9               u471:
+  1201  00D8                     	goto	l876
+  1202  00D8  28B1               u470:
+  1203  00D9                     	goto	l884
+  1204  00D9  28DA               	
+  1205                           l56:	
+  1206  00DA                     	line	43
+  1207                           	
+  1208                           l884:	
+  1209  00DA                     ;Tunel-New.c: 43:     }
+  1210                           	movf	(_volt+1),w
+  1211  00DA  082E               	subwf	(_blijOn+1),w
+  1212  00DB  0223               	skipz
+  1213  00DC  1D03               	goto	u485
+  1214  00DD  28E0               	movf	(_volt),w
+  1215  00DE  082D               	subwf	(_blijOn),w
+  1216  00DF  0222               u485:
+  1217  00E0                     	skipnc
+  1218  00E0  1803               	goto	u481
+  1219  00E1  28E3               	goto	u480
+  1220  00E2  28E4               u481:
+  1221  00E3                     	goto	l888
+  1222  00E3  28E6               u480:
+  1223  00E4                     	line	44
+  1224                           	
+  1225                           l886:	
+  1226  00E4                     ;Tunel-New.c: 44: }
+  1227                           	bsf	(40/8),(40)&7	;volatile
+  1228  00E4  1405               	goto	l888
+  1229  00E5  28E6               	line	45
+  1230                           ;Tunel-New.c: 45: 
+  1231                           	
+  1232                           l61:	
+  1233  00E6                     	line	46
+  1234                           	
+  1235                           l888:	
+  1236  00E6                     ;Tunel-New.c: 46: void blijniyOn() {
+  1237                           	movf	(_volt+1),w
+  1238  00E6  082E               	subwf	(_gabOn+1),w
+  1239  00E7  0227               	skipz
+  1240  00E8  1D03               	goto	u495
+  1241  00E9  28EC               	movf	(_volt),w
+  1242  00EA  082D               	subwf	(_gabOn),w
+  1243  00EB  0226               u495:
+  1244  00EC                     	skipnc
+  1245  00EC  1803               	goto	u491
+  1246  00ED  28EF               	goto	u490
+  1247  00EE  28F0               u491:
+  1248  00EF                     	goto	l60
+  1249  00EF  28F2               u490:
+  1250  00F0                     	line	47
+  1251                           	
+  1252                           l890:	
+  1253  00F0                     ;Tunel-New.c: 47:     for (i = 0; i <= 235; i++) {
+  1254                           	bsf	(41/8),(41)&7	;volatile
+  1255  00F0  1485               	goto	l60
+  1256  00F1  28F2               	line	48
+  1257                           ;Tunel-New.c: 48:         ADC();
+  1258                           	
+  1259                           l62:	
+  1260  00F2                     	line	49
+  1261                           	
+  1262                           l60:	
+  1263  00F2                     	return
+  1264  00F2  0008               	opt stack 0
+  1265                           GLOBAL	__end_of_gabaritOn
+  1266                           	__end_of_gabaritOn:
+  1267  00F3                     	signat	_gabaritOn,89
+  1268                           	global	_gabaritOff
+  1269                           
+  1270 ;; *************** function _gabaritOff *****************
+  1271 ;; Defined at:
+  1272 ;;		line 51 in file "Tunel-New.c"
+  1273 ;; Parameters:    Size  Location     Type
+  1274 ;;		None
+  1275 ;; Auto vars:     Size  Location     Type
+  1276 ;;		None
+  1277 ;; Return value:  Size  Location     Type
+  1278 ;;                  1    wreg      void 
+  1279 ;; Registers used:
+  1280 ;;		wreg, status,2, status,0, pclath, cstack
+  1281 ;; Tracked objects:
+  1282 ;;		On entry : 0/0
+  1283 ;;		On exit  : 0/0
+  1284 ;;		Unchanged: 0/0
+  1285 ;; Data sizes:     COMMON   BANK0
+  1286 ;;      Params:         0       0
+  1287 ;;      Locals:         0       0
+  1288 ;;      Temps:          0       1
+  1289 ;;      Totals:         0       1
+  1290 ;;Total ram usage:        1 bytes
+  1291 ;; Hardware stack levels used:    1
+  1292 ;; Hardware stack levels required when called:    2
+  1293 ;; This function calls:
+  1294 ;;		_ADC
+  1295 ;; This function is called by:
+  1296 ;;		_main
+  1297 ;; This function uses a non-reentrant model
+  1298 ;;
+  1299                           psect	text3,local,class=CODE,delta=2,merge=1,group=0
+  1300                           	line	51
+  1301                           global __ptext3
+  1302                           __ptext3:	;psect for function _gabaritOff
+  1303  00F3                     psect	text3
+  1304                           	file	"Tunel-New.c"
+  1305                           	line	51
+  1306                           	global	__size_of_gabaritOff
+  1307                           	__size_of_gabaritOff	equ	__end_of_gabaritOff-_gabaritOff
+  1308  0044                     	
+  1309                           _gabaritOff:	
+  1310  00F3                     ;incstack = 0
+  1311                           	opt	stack 5
+  1312                           ; Regs used in _gabaritOff: [wreg+status,2+status,0+pclath+cstack]
+  1313                           	line	52
+  1314                           	
+  1315                           l892:	
+  1316  00F3                     ;Tunel-New.c: 52:         _delay((unsigned long)((1)*(4000000/4000.0)));
+  1317                           	bcf	status, 5	;RP0=0, select bank0
+  1318  00F3  1283               	clrf	(_i)
+  1319  00F4  01AF               	clrf	(_i+1)
+  1320  00F5  01B0               	
+  1321                           l894:	
+  1322  00F6                     	movlw	01h
+  1323  00F6  3001               	subwf	(_i+1),w
+  1324  00F7  0230               	movlw	0B4h
+  1325  00F8  30B4               	skipnz
+  1326  00F9  1903               	subwf	(_i),w
+  1327  00FA  022F               	skipc
+  1328  00FB  1C03               	goto	u501
+  1329  00FC  28FE               	goto	u500
+  1330  00FD  28FF               u501:
+  1331  00FE                     	goto	l898
+  1332  00FE  2901               u500:
+  1333  00FF                     	goto	l906
+  1334  00FF  292A               	
+  1335                           l896:	
+  1336  0100                     	goto	l906
+  1337  0100  292A               	
+  1338                           l65:	
+  1339  0101                     	line	53
+  1340                           	
+  1341                           l898:	
+  1342  0101                     ;Tunel-New.c: 53:     }
+  1343                           	fcall	_ADC
+  1344  0101  21EA               	line	54
+  1345                           	
+  1346                           l900:	
+  1347  0102                     ;Tunel-New.c: 54:     if (volt > blijOn) {
+  1348                           	bcf	status, 5	;RP0=0, select bank0
+  1349  0102  1283               	btfss	(43/8),(43)&7	;volatile
+  1350  0103  1D85               	goto	u511
+  1351  0104  2906               	goto	u510
+  1352  0105  2907               u511:
+  1353  0106                     	goto	l70
+  1354  0106  2936               u510:
+  1355  0107                     	
+  1356                           l902:	
+  1357  0107                     	movlw	0
+  1358  0107  3000               	subwf	(_volt+1),w
+  1359  0108  022E               	movlw	031h
+  1360  0109  3031               	skipnz
+  1361  010A  1903               	subwf	(_volt),w
+  1362  010B  022D               	skipc
+  1363  010C  1C03               	goto	u521
+  1364  010D  290F               	goto	u520
+  1365  010E  2910               u521:
+  1366  010F                     	goto	l904
+  1367  010F  2912               u520:
+  1368  0110                     	goto	l70
+  1369  0110  2936               	
+  1370                           l69:	
+  1371  0111                     	line	55
+  1372                           ;Tunel-New.c: 55:         GP0 = 1;
+  1373                           	goto	l70
+  1374  0111  2936               	line	56
+  1375                           ;Tunel-New.c: 56:     }
+  1376                           	
+  1377                           l67:	
+  1378  0112                     	line	57
+  1379                           	
+  1380                           l904:	
+  1381  0112                     ;Tunel-New.c: 57: }
+  1382                           	opt asmopt_push
+  1383                           opt asmopt_off
+  1384                           	movlw	199
+  1385  0112  30C7               movwf	((??_gabaritOff+0)+0),f
+  1386  0113  00AC               	u877:
+  1387  0114                     	nop2
+  1388  0114  2915               decfsz	(??_gabaritOff+0)+0,f
+  1389  0115  0BAC               	goto	u877
+  1390  0116  2914               	nop2
+  1391  0117  2918               	nop2
+  1392  0118  2919               opt asmopt_pop
+  1393                           
+  1394                           	line	58
+  1395                           ;Tunel-New.c: 58: 
+  1396                           	movlw	01h
+  1397  0119  3001               	bcf	status, 5	;RP0=0, select bank0
+  1398  011A  1283               	addwf	(_i),f
+  1399  011B  07AF               	skipnc
+  1400  011C  1803               	incf	(_i+1),f
+  1401  011D  0AB0               	movlw	0
+  1402  011E  3000               	addwf	(_i+1),f
+  1403  011F  07B0               	movlw	01h
+  1404  0120  3001               	subwf	(_i+1),w
+  1405  0121  0230               	movlw	0B4h
+  1406  0122  30B4               	skipnz
+  1407  0123  1903               	subwf	(_i),w
+  1408  0124  022F               	skipc
+  1409  0125  1C03               	goto	u531
+  1410  0126  2928               	goto	u530
+  1411  0127  2929               u531:
+  1412  0128                     	goto	l898
+  1413  0128  2901               u530:
+  1414  0129                     	goto	l906
+  1415  0129  292A               	
+  1416                           l66:	
+  1417  012A                     	line	59
+  1418                           	
+  1419                           l906:	
+  1420  012A                     ;Tunel-New.c: 59: void blijniyOff() {
+  1421                           	movf	(_gabOff+1),w
+  1422  012A  0825               	subwf	(_volt+1),w
+  1423  012B  022E               	skipz
+  1424  012C  1D03               	goto	u545
+  1425  012D  2930               	movf	(_gabOff),w
+  1426  012E  0824               	subwf	(_volt),w
+  1427  012F  022D               u545:
+  1428  0130                     	skipnc
+  1429  0130  1803               	goto	u541
+  1430  0131  2933               	goto	u540
+  1431  0132  2934               u541:
+  1432  0133                     	goto	l70
+  1433  0133  2936               u540:
+  1434  0134                     	line	60
+  1435                           	
+  1436                           l908:	
+  1437  0134                     ;Tunel-New.c: 60:     for (i = 0; i <= 435; i++) {
+  1438                           	bcf	(41/8),(41)&7	;volatile
+  1439  0134  1085               	goto	l70
+  1440  0135  2936               	line	61
+  1441                           ;Tunel-New.c: 61:         ADC();
+  1442                           	
+  1443                           l71:	
+  1444  0136                     	line	62
+  1445                           	
+  1446                           l70:	
+  1447  0136                     	return
+  1448  0136  0008               	opt stack 0
+  1449                           GLOBAL	__end_of_gabaritOff
+  1450                           	__end_of_gabaritOff:
+  1451  0137                     	signat	_gabaritOff,89
+  1452                           	global	_blijniyOn
+  1453                           
+  1454 ;; *************** function _blijniyOn *****************
+  1455 ;; Defined at:
+  1456 ;;		line 64 in file "Tunel-New.c"
+  1457 ;; Parameters:    Size  Location     Type
+  1458 ;;		None
+  1459 ;; Auto vars:     Size  Location     Type
+  1460 ;;		None
+  1461 ;; Return value:  Size  Location     Type
+  1462 ;;                  1    wreg      void 
+  1463 ;; Registers used:
+  1464 ;;		wreg, status,2, status,0, pclath, cstack
+  1465 ;; Tracked objects:
+  1466 ;;		On entry : 0/0
+  1467 ;;		On exit  : 0/0
+  1468 ;;		Unchanged: 0/0
+  1469 ;; Data sizes:     COMMON   BANK0
+  1470 ;;      Params:         0       0
+  1471 ;;      Locals:         0       0
+  1472 ;;      Temps:          0       1
+  1473 ;;      Totals:         0       1
+  1474 ;;Total ram usage:        1 bytes
+  1475 ;; Hardware stack levels used:    1
+  1476 ;; Hardware stack levels required when called:    2
+  1477 ;; This function calls:
+  1478 ;;		_ADC
+  1479 ;; This function is called by:
+  1480 ;;		_main
+  1481 ;; This function uses a non-reentrant model
+  1482 ;;
+  1483                           psect	text4,local,class=CODE,delta=2,merge=1,group=0
+  1484                           	line	64
+  1485                           global __ptext4
+  1486                           __ptext4:	;psect for function _blijniyOn
+  1487  0137                     psect	text4
+  1488                           	file	"Tunel-New.c"
+  1489                           	line	64
+  1490                           	global	__size_of_blijniyOn
+  1491                           	__size_of_blijniyOn	equ	__end_of_blijniyOn-_blijniyOn
+  1492  0044                     	
+  1493                           _blijniyOn:	
+  1494  0137                     ;incstack = 0
+  1495                           	opt	stack 5
+  1496                           ; Regs used in _blijniyOn: [wreg+status,2+status,0+pclath+cstack]
+  1497                           	line	65
+  1498                           	
+  1499                           l910:	
+  1500  0137                     ;Tunel-New.c: 65:     }
+  1501                           	bcf	status, 5	;RP0=0, select bank0
+  1502  0137  1283               	clrf	(_i)
+  1503  0138  01AF               	clrf	(_i+1)
+  1504  0139  01B0               	
+  1505                           l912:	
+  1506  013A                     	movlw	0
+  1507  013A  3000               	subwf	(_i+1),w
+  1508  013B  0230               	movlw	0ECh
+  1509  013C  30EC               	skipnz
+  1510  013D  1903               	subwf	(_i),w
+  1511  013E  022F               	skipc
+  1512  013F  1C03               	goto	u551
+  1513  0140  2942               	goto	u550
+  1514  0141  2943               u551:
+  1515  0142                     	goto	l916
+  1516  0142  2945               u550:
+  1517  0143                     	goto	l924
+  1518  0143  296E               	
+  1519                           l914:	
+  1520  0144                     	goto	l924
+  1521  0144  296E               	
+  1522                           l74:	
+  1523  0145                     	line	66
+  1524                           	
+  1525                           l916:	
+  1526  0145                     ;Tunel-New.c: 66:     if (volt < blijOff) {
+  1527                           	fcall	_ADC
+  1528  0145  21EA               	line	67
+  1529                           	
+  1530                           l918:	
+  1531  0146                     ;Tunel-New.c: 67:         GP0 = 0;
+  1532                           	bcf	status, 5	;RP0=0, select bank0
+  1533  0146  1283               	btfss	(43/8),(43)&7	;volatile
+  1534  0147  1D85               	goto	u561
+  1535  0148  294A               	goto	u560
+  1536  0149  294B               u561:
+  1537  014A                     	goto	l79
+  1538  014A  297A               u560:
+  1539  014B                     	
+  1540                           l920:	
+  1541  014B                     	movlw	0
+  1542  014B  3000               	subwf	(_volt+1),w
+  1543  014C  022E               	movlw	0BEh
+  1544  014D  30BE               	skipnz
+  1545  014E  1903               	subwf	(_volt),w
+  1546  014F  022D               	skipnc
+  1547  0150  1803               	goto	u571
+  1548  0151  2953               	goto	u570
+  1549  0152  2954               u571:
+  1550  0153                     	goto	l922
+  1551  0153  2956               u570:
+  1552  0154                     	goto	l79
+  1553  0154  297A               	
+  1554                           l78:	
+  1555  0155                     	line	68
+  1556                           ;Tunel-New.c: 68:     }
+  1557                           	goto	l79
+  1558  0155  297A               	line	69
+  1559                           ;Tunel-New.c: 69: }
+  1560                           	
+  1561                           l76:	
+  1562  0156                     	line	70
+  1563                           	
+  1564                           l922:	
+  1565  0156                     ;Tunel-New.c: 70: 
+  1566                           	opt asmopt_push
+  1567                           opt asmopt_off
+  1568                           	movlw	199
+  1569  0156  30C7               movwf	((??_blijniyOn+0)+0),f
+  1570  0157  00AC               	u887:
+  1571  0158                     	nop2
+  1572  0158  2959               decfsz	(??_blijniyOn+0)+0,f
+  1573  0159  0BAC               	goto	u887
+  1574  015A  2958               	nop2
+  1575  015B  295C               	nop2
+  1576  015C  295D               opt asmopt_pop
+  1577                           
+  1578                           	line	71
+  1579                           ;Tunel-New.c: 71: void sentrZamok() {
+  1580                           	movlw	01h
+  1581  015D  3001               	bcf	status, 5	;RP0=0, select bank0
+  1582  015E  1283               	addwf	(_i),f
+  1583  015F  07AF               	skipnc
+  1584  0160  1803               	incf	(_i+1),f
+  1585  0161  0AB0               	movlw	0
+  1586  0162  3000               	addwf	(_i+1),f
+  1587  0163  07B0               	movlw	0
+  1588  0164  3000               	subwf	(_i+1),w
+  1589  0165  0230               	movlw	0ECh
+  1590  0166  30EC               	skipnz
+  1591  0167  1903               	subwf	(_i),w
+  1592  0168  022F               	skipc
+  1593  0169  1C03               	goto	u581
+  1594  016A  296C               	goto	u580
+  1595  016B  296D               u581:
+  1596  016C                     	goto	l916
+  1597  016C  2945               u580:
+  1598  016D                     	goto	l924
+  1599  016D  296E               	
+  1600                           l75:	
+  1601  016E                     	line	72
+  1602                           	
+  1603                           l924:	
+  1604  016E                     ;Tunel-New.c: 72:     GP1 = 1;
+  1605                           	movf	(_volt+1),w
+  1606  016E  082E               	subwf	(_blijOn+1),w
+  1607  016F  0223               	skipz
+  1608  0170  1D03               	goto	u595
+  1609  0171  2974               	movf	(_volt),w
+  1610  0172  082D               	subwf	(_blijOn),w
+  1611  0173  0222               u595:
+  1612  0174                     	skipnc
+  1613  0174  1803               	goto	u591
+  1614  0175  2977               	goto	u590
+  1615  0176  2978               u591:
+  1616  0177                     	goto	l79
+  1617  0177  297A               u590:
+  1618  0178                     	line	73
+  1619                           	
+  1620                           l926:	
+  1621  0178                     ;Tunel-New.c: 73:     GP0 = 1;
+  1622                           	bsf	(40/8),(40)&7	;volatile
+  1623  0178  1405               	goto	l79
+  1624  0179  297A               	line	74
+  1625                           ;Tunel-New.c: 74:     for (i = 0; i <= 10000; i++) {
+  1626                           	
+  1627                           l80:	
+  1628  017A                     	line	75
+  1629                           	
+  1630                           l79:	
+  1631  017A                     	return
+  1632  017A  0008               	opt stack 0
+  1633                           GLOBAL	__end_of_blijniyOn
+  1634                           	__end_of_blijniyOn:
+  1635  017B                     	signat	_blijniyOn,89
+  1636                           	global	_blijniyOff
+  1637                           
+  1638 ;; *************** function _blijniyOff *****************
+  1639 ;; Defined at:
+  1640 ;;		line 77 in file "Tunel-New.c"
+  1641 ;; Parameters:    Size  Location     Type
+  1642 ;;		None
+  1643 ;; Auto vars:     Size  Location     Type
+  1644 ;;		None
+  1645 ;; Return value:  Size  Location     Type
+  1646 ;;                  1    wreg      void 
+  1647 ;; Registers used:
+  1648 ;;		wreg, status,2, status,0, pclath, cstack
+  1649 ;; Tracked objects:
+  1650 ;;		On entry : 0/0
+  1651 ;;		On exit  : 0/0
+  1652 ;;		Unchanged: 0/0
+  1653 ;; Data sizes:     COMMON   BANK0
+  1654 ;;      Params:         0       0
+  1655 ;;      Locals:         0       0
+  1656 ;;      Temps:          0       0
+  1657 ;;      Totals:         0       0
+  1658 ;;Total ram usage:        0 bytes
+  1659 ;; Hardware stack levels used:    1
+  1660 ;; Hardware stack levels required when called:    2
+  1661 ;; This function calls:
+  1662 ;;		_ADC
+  1663 ;; This function is called by:
+  1664 ;;		_main
+  1665 ;; This function uses a non-reentrant model
+  1666 ;;
+  1667                           psect	text5,local,class=CODE,delta=2,merge=1,group=0
+  1668                           	line	77
+  1669                           global __ptext5
+  1670                           __ptext5:	;psect for function _blijniyOff
+  1671  017B                     psect	text5
+  1672                           	file	"Tunel-New.c"
+  1673                           	line	77
+  1674                           	global	__size_of_blijniyOff
+  1675                           	__size_of_blijniyOff	equ	__end_of_blijniyOff-_blijniyOff
+  1676  003C                     	
+  1677                           _blijniyOff:	
+  1678  017B                     ;incstack = 0
+  1679                           	opt	stack 5
+  1680                           ; Regs used in _blijniyOff: [wreg+status,2+status,0+pclath+cstack]
+  1681                           	line	78
+  1682                           	
+  1683                           l928:	
+  1684  017B                     ;Tunel-New.c: 78:             _delay((unsigned long)((1)*(4000000/4000.0)));
+  1685                           	bcf	status, 5	;RP0=0, select bank0
+  1686  017B  1283               	clrf	(_i)
+  1687  017C  01AF               	clrf	(_i+1)
+  1688  017D  01B0               	
+  1689                           l930:	
+  1690  017E                     	movlw	01h
+  1691  017E  3001               	subwf	(_i+1),w
+  1692  017F  0230               	movlw	0B4h
+  1693  0180  30B4               	skipnz
+  1694  0181  1903               	subwf	(_i),w
+  1695  0182  022F               	skipc
+  1696  0183  1C03               	goto	u601
+  1697  0184  2986               	goto	u600
+  1698  0185  2987               u601:
+  1699  0186                     	goto	l934
+  1700  0186  2989               u600:
+  1701  0187                     	goto	l942
+  1702  0187  29AA               	
+  1703                           l932:	
+  1704  0188                     	goto	l942
+  1705  0188  29AA               	
+  1706                           l83:	
+  1707  0189                     	line	79
+  1708                           	
+  1709                           l934:	
+  1710  0189                     ;Tunel-New.c: 79:         }
+  1711                           	fcall	_ADC
+  1712  0189  21EA               	line	80
+  1713                           	
+  1714                           l936:	
+  1715  018A                     ;Tunel-New.c: 80:     }
+  1716                           	bcf	status, 5	;RP0=0, select bank0
+  1717  018A  1283               	btfss	(43/8),(43)&7	;volatile
+  1718  018B  1D85               	goto	u611
+  1719  018C  298E               	goto	u610
+  1720  018D  298F               u611:
+  1721  018E                     	goto	l88
+  1722  018E  29B6               u610:
+  1723  018F                     	
+  1724                           l938:	
+  1725  018F                     	movlw	0
+  1726  018F  3000               	subwf	(_volt+1),w
+  1727  0190  022E               	movlw	03Dh
+  1728  0191  303D               	skipnz
+  1729  0192  1903               	subwf	(_volt),w
+  1730  0193  022D               	skipc
+  1731  0194  1C03               	goto	u621
+  1732  0195  2997               	goto	u620
+  1733  0196  2998               u621:
+  1734  0197                     	goto	l940
+  1735  0197  299A               u620:
+  1736  0198                     	goto	l88
+  1737  0198  29B6               	
+  1738                           l87:	
+  1739  0199                     	line	81
+  1740                           ;Tunel-New.c: 81:     GP1 = 0;
+  1741                           	goto	l88
+  1742  0199  29B6               	line	82
+  1743                           ;Tunel-New.c: 82:     GP0 = 0;
+  1744                           	
+  1745                           l85:	
+  1746  019A                     	line	83
+  1747                           	
+  1748                           l940:	
+  1749  019A                     ;Tunel-New.c: 83: }
+  1750                           	movlw	01h
+  1751  019A  3001               	addwf	(_i),f
+  1752  019B  07AF               	skipnc
+  1753  019C  1803               	incf	(_i+1),f
+  1754  019D  0AB0               	movlw	0
+  1755  019E  3000               	addwf	(_i+1),f
+  1756  019F  07B0               	movlw	01h
+  1757  01A0  3001               	subwf	(_i+1),w
+  1758  01A1  0230               	movlw	0B4h
+  1759  01A2  30B4               	skipnz
+  1760  01A3  1903               	subwf	(_i),w
+  1761  01A4  022F               	skipc
+  1762  01A5  1C03               	goto	u631
+  1763  01A6  29A8               	goto	u630
+  1764  01A7  29A9               u631:
+  1765  01A8                     	goto	l934
+  1766  01A8  2989               u630:
+  1767  01A9                     	goto	l942
+  1768  01A9  29AA               	
+  1769                           l84:	
+  1770  01AA                     	line	84
+  1771                           	
+  1772                           l942:	
+  1773  01AA                     ;Tunel-New.c: 84: 
+  1774                           	movf	(_blijOff+1),w
+  1775  01AA  0821               	subwf	(_volt+1),w
+  1776  01AB  022E               	skipz
+  1777  01AC  1D03               	goto	u645
+  1778  01AD  29B0               	movf	(_blijOff),w
+  1779  01AE  0820               	subwf	(_volt),w
+  1780  01AF  022D               u645:
+  1781  01B0                     	skipnc
+  1782  01B0  1803               	goto	u641
+  1783  01B1  29B3               	goto	u640
+  1784  01B2  29B4               u641:
+  1785  01B3                     	goto	l88
+  1786  01B3  29B6               u640:
+  1787  01B4                     	line	85
+  1788                           	
+  1789                           l944:	
+  1790  01B4                     ;Tunel-New.c: 85: void __attribute__((picinterrupt(""))) isr() {
+  1791                           	bcf	(40/8),(40)&7	;volatile
+  1792  01B4  1005               	goto	l88
+  1793  01B5  29B6               	line	86
+  1794                           ;Tunel-New.c: 86:     if (INTF) {
+  1795                           	
+  1796                           l89:	
+  1797  01B6                     	line	87
+  1798                           	
+  1799                           l88:	
+  1800  01B6                     	return
+  1801  01B6  0008               	opt stack 0
+  1802                           GLOBAL	__end_of_blijniyOff
+  1803                           	__end_of_blijniyOff:
+  1804  01B7                     	signat	_blijniyOff,89
+  1805                           	global	_ADC
+  1806                           
+  1807 ;; *************** function _ADC *****************
+  1808 ;; Defined at:
+  1809 ;;		line 25 in file "Tunel-New.c"
+  1810 ;; Parameters:    Size  Location     Type
+  1811 ;;		None
+  1812 ;; Auto vars:     Size  Location     Type
+  1813 ;;		None
+  1814 ;; Return value:  Size  Location     Type
+  1815 ;;                  1    wreg      void 
+  1816 ;; Registers used:
+  1817 ;;		wreg
+  1818 ;; Tracked objects:
+  1819 ;;		On entry : 0/0
+  1820 ;;		On exit  : 0/0
+  1821 ;;		Unchanged: 0/0
+  1822 ;; Data sizes:     COMMON   BANK0
+  1823 ;;      Params:         0       0
+  1824 ;;      Locals:         0       0
+  1825 ;;      Temps:          0       2
+  1826 ;;      Totals:         0       2
+  1827 ;;Total ram usage:        2 bytes
+  1828 ;; Hardware stack levels used:    1
+  1829 ;; Hardware stack levels required when called:    1
+  1830 ;; This function calls:
+  1831 ;;		Nothing
+  1832 ;; This function is called by:
+  1833 ;;		_gabaritOn
+  1834 ;;		_gabaritOff
+  1835 ;;		_blijniyOn
+  1836 ;;		_blijniyOff
+  1837 ;;		_main
+  1838 ;; This function uses a non-reentrant model
+  1839 ;;
+  1840                           psect	text6,local,class=CODE,delta=2,merge=1,group=0
+  1841                           	line	25
+  1842                           global __ptext6
+  1843                           __ptext6:	;psect for function _ADC
+  1844  01EA                     psect	text6
+  1845                           	file	"Tunel-New.c"
+  1846                           	line	25
+  1847                           	global	__size_of_ADC
+  1848                           	__size_of_ADC	equ	__end_of_ADC-_ADC
+  1849  0026                     	
+  1850                           _ADC:	
+  1851  01EA                     ;incstack = 0
+  1852                           	opt	stack 5
+  1853                           ; Regs used in _ADC: [wreg]
+  1854                           	line	26
+  1855                           	
+  1856                           l860:	
+  1857  01EA                     ;Tunel-New.c: 26:         GP0 = 1;
+  1858                           	opt asmopt_push
+  1859                           opt asmopt_off
+  1860                           movlw	3
+  1861  01EA  3003               	bcf	status, 5	;RP0=0, select bank0
+  1862  01EB  1283               movwf	((??_ADC+0)+0+1),f
+  1863  01EC  00AB               	movlw	151
+  1864  01ED  3097               movwf	((??_ADC+0)+0),f
+  1865  01EE  00AA               	u897:
+  1866  01EF                     decfsz	((??_ADC+0)+0),f
+  1867  01EF  0BAA               	goto	u897
+  1868  01F0  29EF               	decfsz	((??_ADC+0)+0+1),f
+  1869  01F1  0BAB               	goto	u897
+  1870  01F2  29EF               	nop2
+  1871  01F3  29F4               opt asmopt_pop
+  1872                           
+  1873                           	line	27
+  1874                           	
+  1875                           l862:	
+  1876  01F4                     ;Tunel-New.c: 27:     }
+  1877                           	bcf	status, 5	;RP0=0, select bank0
+  1878  01F4  1283               	bsf	(248/8),(248)&7	;volatile
+  1879  01F5  141F               	line	28
+  1880                           ;Tunel-New.c: 28:     if (volt > gabOn) {
+  1881                           	opt asmopt_push
+  1882                           opt asmopt_off
+  1883                           movlw	20
+  1884  01F6  3014               movwf	((??_ADC+0)+0+1),f
+  1885  01F7  00AB               	movlw	121
+  1886  01F8  3079               movwf	((??_ADC+0)+0),f
+  1887  01F9  00AA               	u907:
+  1888  01FA                     decfsz	((??_ADC+0)+0),f
+  1889  01FA  0BAA               	goto	u907
+  1890  01FB  29FA               	decfsz	((??_ADC+0)+0+1),f
+  1891  01FC  0BAB               	goto	u907
+  1892  01FD  29FA               	nop2
+  1893  01FE  29FF               opt asmopt_pop
+  1894                           
+  1895                           	line	29
+  1896                           	
+  1897                           l864:	
+  1898  01FF                     ;Tunel-New.c: 29:         GP1 = 1;
+  1899                           	bcf	status, 5	;RP0=0, select bank0
+  1900  01FF  1283               	bsf	(249/8),(249)&7	;volatile
+  1901  0200  149F               	line	30
+  1902                           ;Tunel-New.c: 30:     }
+  1903                           	goto	l49
+  1904  0201  2A02               	
+  1905                           l50:	
+  1906  0202                     	
+  1907                           l49:	
+  1908  0202                     	btfsc	(249/8),(249)&7	;volatile
+  1909  0202  189F               	goto	u431
+  1910  0203  2A05               	goto	u430
+  1911  0204  2A06               u431:
+  1912  0205                     	goto	l49
+  1913  0205  2A02               u430:
+  1914  0206                     	goto	l866
+  1915  0206  2A07               	
+  1916                           l51:	
+  1917  0207                     	line	31
+  1918                           	
+  1919                           l866:	
+  1920  0207                     ;Tunel-New.c: 31: }
+  1921                           	movf	(30),w	;volatile
+  1922  0207  081E               	movwf	(??_ADC+0)+0
+  1923  0208  00AA               	clrf	(??_ADC+0)+0+1
+  1924  0209  01AB               	movf	0+(??_ADC+0)+0,w
+  1925  020A  082A               	movwf	(_volt)
+  1926  020B  00AD               	movf	1+(??_ADC+0)+0,w
+  1927  020C  082B               	movwf	(_volt+1)
+  1928  020D  00AE               	line	32
+  1929                           	
+  1930                           l868:	
+  1931  020E                     ;Tunel-New.c: 32: 
+  1932                           	bcf	(248/8),(248)&7	;volatile
+  1933  020E  101F               	line	33
+  1934                           	
+  1935                           l52:	
+  1936  020F                     	return
+  1937  020F  0008               	opt stack 0
+  1938                           GLOBAL	__end_of_ADC
+  1939                           	__end_of_ADC:
+  1940  0210                     	signat	_ADC,89
+  1941                           	global	_isr
+  1942                           
+  1943 ;; *************** function _isr *****************
+  1944 ;; Defined at:
+  1945 ;;		line 103 in file "Tunel-New.c"
+  1946 ;; Parameters:    Size  Location     Type
+  1947 ;;		None
+  1948 ;; Auto vars:     Size  Location     Type
+  1949 ;;		None
+  1950 ;; Return value:  Size  Location     Type
+  1951 ;;                  1    wreg      void 
+  1952 ;; Registers used:
+  1953 ;;		None
+  1954 ;; Tracked objects:
+  1955 ;;		On entry : 0/0
+  1956 ;;		On exit  : 0/0
+  1957 ;;		Unchanged: 0/0
+  1958 ;; Data sizes:     COMMON   BANK0
+  1959 ;;      Params:         0       0
+  1960 ;;      Locals:         0       0
+  1961 ;;      Temps:          0       2
+  1962 ;;      Totals:         0       2
+  1963 ;;Total ram usage:        2 bytes
+  1964 ;; Hardware stack levels used:    1
+  1965 ;; This function calls:
+  1966 ;;		Nothing
+  1967 ;; This function is called by:
+  1968 ;;		Interrupt level 1
+  1969 ;; This function uses a non-reentrant model
+  1970 ;;
+  1971                           psect	text7,local,class=CODE,delta=2,merge=1,group=0
+  1972                           	line	103
+  1973                           global __ptext7
+  1974                           __ptext7:	;psect for function _isr
+  1975  0210                     psect	text7
+  1976                           	file	"Tunel-New.c"
+  1977                           	line	103
+  1978                           	global	__size_of_isr
+  1979                           	__size_of_isr	equ	__end_of_isr-_isr
+  1980  0021                     	
+  1981                           _isr:	
+  1982  0210                     ;incstack = 0
+  1983                           	opt	stack 5
+  1984                           ; Regs used in _isr: []
+  1985                           psect	intentry,class=CODE,delta=2
+  1986                           global __pintentry
+  1987                           __pintentry:
+  1988  0004                     global interrupt_function
+  1989                           interrupt_function:
+  1990  0004                     	global saved_w
+  1991                           	saved_w	set	btemp+0
+  1992  005E                     	movwf	saved_w
+  1993  0004  00DE               	swapf	status,w
+  1994  0005  0E03               	bcf	status, 5	;RP0=0, select bank0
+  1995  0006  1283               	movwf	(??_isr+0)
+  1996  0007  00A8               	movf	pclath,w
+  1997  0008  080A               	movwf	(??_isr+1)
+  1998  0009  00A9               	ljmp	_isr
+  1999  000A  2A10               psect	text7
+  2000                           	line	104
+  2001                           	
+  2002                           i1l958:	
+  2003  0210                     ;Tunel-New.c: 104:     GPIO = 0b00000000;
+  2004                           	btfss	(89/8),(89)&7	;volatile
+  2005  0210  1C8B               	goto	u68_21
+  2006  0211  2A13               	goto	u68_20
+  2007  0212  2A14               u68_21:
+  2008  0213                     	goto	i1l108
+  2009  0213  2A2A               u68_20:
+  2010  0214                     	line	105
+  2011                           	
+  2012                           i1l960:	
+  2013  0214                     ;Tunel-New.c: 105:     CMCON = 0x07;
+  2014                           	bcf	(89/8),(89)&7	;volatile
+  2015  0214  108B               	line	106
+  2016                           ;Tunel-New.c: 106:     INTCON = 0b10010000;
+  2017                           	bcf	(40/8),(40)&7	;volatile
+  2018  0215  1005               	line	107
+  2019                           ;Tunel-New.c: 107:     OPTION_REGbits.INTEDG = 0;
+  2020                           	goto	i1l102
+  2021  0216  2A1F               	
+  2022                           i1l103:	
+  2023  0217                     	line	108
+  2024                           ;Tunel-New.c: 108:     ADCON0 = 0b00001100;
+  2025                           	btfsc	(42/8),(42)&7	;volatile
+  2026  0217  1905               	goto	u69_21
+  2027  0218  2A1A               	goto	u69_20
+  2028  0219  2A1B               u69_21:
+  2029  021A                     	goto	i1l104
+  2030  021A  2A1D               u69_20:
+  2031  021B                     	line	109
+  2032                           	
+  2033                           i1l962:	
+  2034  021B                     ;Tunel-New.c: 109:     ANSEL = 0b00011000;
+  2035                           	bsf	(41/8),(41)&7	;volatile
+  2036  021B  1485               	line	110
+  2037                           ;Tunel-New.c: 110:     while (1) {
+  2038                           	goto	i1l102
+  2039  021C  2A1F               	
+  2040                           i1l104:	
+  2041  021D                     	line	111
+  2042                           ;Tunel-New.c: 111:         while (GP3 == 1) {
+  2043                           	bcf	(41/8),(41)&7	;volatile
+  2044  021D  1085               	goto	i1l102
+  2045  021E  2A1F               	line	112
+  2046                           ;Tunel-New.c: 112:             ADC();
+  2047                           	
+  2048                           i1l105:	
+  2049  021F                     	line	113
+  2050                           ;Tunel-New.c: 113:             if (volt > gabOn && GP1 == 0) {
+  2051                           	
+  2052                           i1l102:	
+  2053  021F                     	line	107
+  2054                           ;Tunel-New.c: 107:     OPTION_REGbits.INTEDG = 0;
+  2055                           	btfsc	(43/8),(43)&7	;volatile
+  2056  021F  1985               	goto	u70_21
+  2057  0220  2A22               	goto	u70_20
+  2058  0221  2A23               u70_21:
+  2059  0222                     	goto	i1l103
+  2060  0222  2A17               u70_20:
+  2061  0223                     	
+  2062                           i1l106:	
+  2063  0223                     	line	114
+  2064                           ;Tunel-New.c: 114:                 gabaritOn();
+  2065                           	btfsc	(42/8),(42)&7	;volatile
+  2066  0223  1905               	goto	u71_21
+  2067  0224  2A26               	goto	u71_20
+  2068  0225  2A27               u71_21:
+  2069  0226                     	goto	i1l108
+  2070  0226  2A2A               u71_20:
+  2071  0227                     	line	115
+  2072                           	
+  2073                           i1l964:	
+  2074  0227                     ;Tunel-New.c: 115:             }
+  2075                           	bsf	(41/8),(41)&7	;volatile
+  2076  0227  1485               	goto	i1l108
+  2077  0228  2A2A               	line	116
+  2078                           ;Tunel-New.c: 116:             if (volt > blijOn && GP0 == 0) {
+  2079                           	
+  2080                           i1l107:	
+  2081  0229                     	goto	i1l108
+  2082  0229  2A2A               	line	117
+  2083                           ;Tunel-New.c: 117:                 blijniyOn();
+  2084                           	
+  2085                           i1l101:	
+  2086  022A                     	line	118
+  2087                           	
+  2088                           i1l108:	
+  2089  022A                     	movf	(??_isr+1),w
+  2090  022A  0829               	movwf	pclath
+  2091  022B  008A               	swapf	(??_isr+0)^00h,w
+  2092  022C  0E28               	movwf	status
+  2093  022D  0083               	swapf	saved_w,f
+  2094  022E  0EDE               	swapf	saved_w,w
+  2095  022F  0E5E               	retfie
+  2096  0230  0009               	opt stack 0
+  2097                           GLOBAL	__end_of_isr
+  2098                           	__end_of_isr:
+  2099  0231                     	signat	_isr,89
+  2100                           global	___latbits
+  2101                           ___latbits	equ	0
+  2102  0000                     	global	btemp
+  2103                           	btemp set 05Eh
+  2104  005E                     
+  2105                           	DABS	1,94,2	;btemp
+  2106                           	global	wtemp0
+  2107                           	wtemp0 set btemp+0
+  2108  005E                     	end
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        8
+    BSS         4
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62      5      17
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _isr in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_blijniyOn
+    _main->_gabaritOff
+    _main->_gabaritOn
+    _gabaritOn->_ADC
+    _gabaritOff->_ADC
+    _blijniyOn->_ADC
+    _blijniyOff->_ADC
+
+Critical Paths under _isr in BANK0
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0       0
+                                _ADC
+                         _blijniyOff
+                          _blijniyOn
+                         _gabaritOff
+                          _gabaritOn
+                         _sentrZamok
+ ---------------------------------------------------------------------------------
+ (1) _sentrZamok                                           1     1      0       0
+                                              2 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _gabaritOn                                            1     1      0       0
+                                              4 BANK0      1     1      0
+                                _ADC
+ ---------------------------------------------------------------------------------
+ (1) _gabaritOff                                           1     1      0       0
+                                              4 BANK0      1     1      0
+                                _ADC
+ ---------------------------------------------------------------------------------
+ (1) _blijniyOn                                            1     1      0       0
+                                              4 BANK0      1     1      0
+                                _ADC
+ ---------------------------------------------------------------------------------
+ (1) _blijniyOff                                           0     0      0       0
+                                _ADC
+ ---------------------------------------------------------------------------------
+ (2) _ADC                                                  2     2      0       0
+                                              2 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (3) _isr                                                  2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ADC
+   _blijniyOff
+     _ADC
+   _blijniyOn
+     _ADC
+   _gabaritOff
+     _ADC
+   _gabaritOn
+     _ADC
+   _sentrZamok
+
+ _isr (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               3E      5      11       4       27.4%
+BITBANK0            3E      0       0       3        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITCOMMON            0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0      11       6        0.0%
+ABS                  0      0      11       5        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA              80      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.00 build -1524193055 
+Symbol Table                                                                                   Tue Mar 22 20:25:11 2022
+
+             __CFG_CP$ON 0000                        _i 002F                       l50 0202  
+                     l51 0207                       l52 020F                       l60 00F2  
+                     l61 00E6                       l70 0136                       l62 00F2  
+                     l71 0136                       l55 00B1                       l80 017A  
+                     l56 00DA                       l49 0202                       l65 0101  
+                     l57 00C2                       l74 0145                       l66 012A  
+                     l83 0189                       l75 016E                       l67 0112  
+                     l59 00C1                       l84 01AA                       l76 0156  
+                     l92 01C7                       l85 019A                       l69 0111  
+                     l93 01E7                       l78 0155                       l94 01D0  
+                     l87 0199                       l79 017A                       l95 01D7  
+                     l88 01B6                       l96 01E9                       l89 01B6  
+            __CFG_CPD$ON 0000                      l120 0080                      l121 0093  
+                    l113 0034                      l122 0092                      l114 007B  
+                    l123 009A                      l115 0035                      l124 00A0  
+                    l116 0047                      l125 00A1                      l117 0058  
+                    l126 00A2                      l118 0069                      l127 00A2  
+                    l119 007A                      _ADC 01EA                      l900 0102  
+                    l910 0137                      l902 0107                      l920 014B  
+                    l912 013A                      l904 0112                      l930 017E  
+                    l922 0156                      l914 0144                      l906 012A  
+                    l860 01EA                      l940 019A                      l932 0188  
+                    l924 016E                      l916 0145                      l908 0134  
+                    l862 01F4                      l942 01AA                      l934 0189  
+                    l926 0178                      l918 0146                      l870 00A3  
+                    l950 01BC                      l864 01FF                      l944 01B4  
+                    l936 018A                      l928 017B                      l880 00B7  
+                    l872 00A6                      l952 01C6                      l866 0207  
+                    l938 018F                      l890 00F0                      l882 00C2  
+                    l874 00B0                      l954 01CB                      l946 01B7  
+                    l970 0027                      l868 020E                      l892 00F3  
+                    l884 00DA                      l876 00B1                      l956 01D0  
+                    l948 01BA                      l980 0035                      l972 0029  
+                    _GP0 0028                      _GP1 0029                      l894 00F6  
+                    l886 00E4                      l878 00B2                      l990 0052  
+                    l982 0036                      l974 002B                      l966 0022  
+                    _GP2 002A                      _GP3 002B                      l896 0100  
+                    l888 00E6                      l992 0056                      l984 0041  
+                    l976 002D                      l968 0025                      _GP5 002D  
+                    l898 0101                      l994 0058                      l986 0045  
+                    l978 0030                      l996 0063                      l988 0047  
+                    l998 0067                      u500 00FF                      u501 00FE  
+                    u430 0206                      u510 0107                      u431 0205  
+                    u511 0106                      u600 0187                      u520 0110  
+                    u440 00AF                      u601 0186                      u521 010F  
+                    u441 00AE                      u610 018F                      u530 0129  
+                    u450 00B7                      u611 018E                      u531 0128  
+                    u451 00B6                      u620 0198                      u540 0134  
+                    u460 00C0                      u621 0197                      u541 0133  
+                    u461 00BF                      u630 01A9                      u550 0143  
+                    u470 00D9                      u631 01A8                      u551 0142  
+                    u471 00D8                      u640 01B4                      u560 014B  
+                    u480 00E4                      u800 0080                      u720 0041  
+                    u641 01B3                      u561 014A                      u545 0130  
+                    u481 00E3                      u801 007F                      u721 0040  
+                    u570 0154                      u490 00F0                      u650 01C5  
+                    u810 0084                      u730 0045                      u571 0153  
+                    u491 00EF                      u651 01C4                      u811 0083  
+                    u731 0044                      u580 016D                      u660 01CB  
+                    u820 0090                      u740 0052                      u645 01B0  
+                    u581 016C                      u485 00E0                      u661 01CA  
+                    u821 008F                      u741 0051                      u725 003D  
+                    u590 0178                      u670 01E7                      u830 0098  
+                    u750 0056                      u591 0177                      u495 00EC  
+                    u671 01E6                      u831 0097                      u751 0055  
+                    u840 009E                      u760 0063                      u841 009D  
+                    u825 008C                      u761 0062                      u745 004E  
+                    u770 0067                      u907 01FA                      u595 0174  
+                    u771 0066                      u780 0074                      u781 0073  
+                    u765 005F                      u790 0078                      u791 0077  
+                    u857 01D2                      u785 0070                      u867 00C4  
+                    u877 0114                      u887 0158                      u897 01EF  
+                    _isr 0210                     ?_ADC 0028                     l1000 0069  
+                   l1010 0085                     l1002 0074                     l1012 0090  
+                   l1004 0078                     l1014 0093                     l1006 007B  
+                   l1016 0098                     l1008 0084                     l1018 009E  
+                   ?_isr 0028                     _ADON 00F8                     _GPIO 0005  
+                   _INTF 0059                     _main 0022                     btemp 005E  
+                   _volt 002D                     start 000B                    ??_ADC 002A  
+                  ??_isr 0028                    ?_main 0028            __CFG_WDTE$OFF 0000  
+                  _CMCON 0019                    _ANSEL 009F                    i1l101 022A  
+                  i1l102 021F                    i1l103 0217                    i1l104 021D  
+                  i1l105 021F                    i1l106 0223                    i1l107 0229  
+                  i1l108 022A                    i1l960 0214                    i1l962 021B  
+                  i1l964 0227                    i1l958 0210                    u70_20 0223  
+                  u70_21 0222                    u71_20 0227                    u71_21 0226  
+                  u68_20 0214                    u68_21 0213                    u69_20 021B  
+                  u69_21 021A                    _gabOn 0026           __CFG_BOREN$OFF 0000  
+                  pclath 000A                    status 0003                    wtemp0 005E  
+         __CFG_MCLRE$OFF 0000          __initialization 000C             __end_of_main 00A3  
+                 ??_main 0000                   _ADCON0 001F                   _ADRESH 001E  
+                 _INTCON 000B                   _TRISIO 0085           __CFG_PWRTE$OFF 0000  
+                 _gabOff 0024                   _blijOn 0022                   saved_w 005E  
+__end_of__initialization 0020           __pcstackCOMMON 0000             __pidataBANK0 0231  
+     __size_of_gabaritOn 0050       __size_of_blijniyOn 0044           _OPTION_REGbits 0081  
+             __pbssBANK0 002D               _gabaritOff 00F3               __pmaintext 0022  
+             __pintentry 0004               _blijniyOff 017B                  _GO_DONE 00F9  
+      __end_of_gabaritOn 00F3        __end_of_blijniyOn 017B                  _blijOff 0020  
+                __ptext1 01B7                  __ptext2 00A3                  __ptext3 00F3  
+                __ptext4 0137                  __ptext5 017B                  __ptext6 01EA  
+                __ptext7 0210             __size_of_ADC 0026             __size_of_isr 0021  
+   end_of_initialization 0020              ?_gabaritOff 0028               _sentrZamok 01B7  
+            ?_blijniyOff 0028      __size_of_gabaritOff 0044      start_initialization 000C  
+            __end_of_ADC 0210              __end_of_isr 0231      __size_of_blijniyOff 003C  
+            ?_sentrZamok 0028              __pdataBANK0 0020                ___latbits 0000  
+          __pcstackBANK0 0028                _gabaritOn 00A3                _blijniyOn 0137  
+    __size_of_sentrZamok 0033             ??_gabaritOff 002C        interrupt_function 0004  
+             ?_gabaritOn 0028               ?_blijniyOn 0028             ??_blijniyOff 0000  
+     __end_of_gabaritOff 0137       __end_of_blijniyOff 01B7            __size_of_main 0081  
+            ??_gabaritOn 002C              ??_blijniyOn 002C             ??_sentrZamok 002A  
+               intlevel1 0000       __end_of_sentrZamok 01EA        __CFG_FOSC$INTRCIO 0000  

@@ -1,0 +1,202 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Mon Jan 11 23:44:41 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x0004c4
+                   .cinit    romdata   0x000262    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/START+C       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000263      
+                            0x002007    0x002007      
+            613 out of 2182 program addresses used, program memory utilization is 28%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             _.org_0_0119   0x000119    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_011B   0x00011b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0128   0x000128    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_012A   0x00012a    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_012C   0x00012c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0135   0x000135    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0137   0x000137    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0144   0x000144    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0146   0x000146    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0148   0x000148    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0151   0x000151    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0153   0x000153    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0160   0x000160    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0162   0x000162    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0164   0x000164    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01EB   0x0001eb    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01ED   0x0001ed    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01EF   0x0001ef    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01F1   0x0001f1    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01FA   0x0001fa    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01FC   0x0001fc    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01FE   0x0001fe    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0207   0x000207    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0209   0x000209    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_020B   0x00020b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0218   0x000218    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_021A   0x00021a    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_021C   0x00021c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0227   0x000227    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0229   0x000229    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_022B   0x00022b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0232   0x000232    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0234   0x000234    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_023D   0x00023d    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_023F   0x00023f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0241   0x000241    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_024C   0x00024c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_024E   0x00024e    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0250   0x000250    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_025A   0x00025a    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_025C   0x00025c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_025E   0x00025e    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   ahrana   0x000102    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              ahranastart   0x000184    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                 bigdelay   0x000236    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter1   0x000114    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter2   0x000130    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter3   0x00014c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter4   0x000168    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               delay10min   0x0001e0    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                delay20ms   0x000245    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                delay3sek   0x00020f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               delay520ms   0x000253    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              delayknopka   0x000200    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              delaymargat   0x0001f3    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               delaystart   0x000220    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                delayzvuk   0x00022d    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                helpstart   0x0000e8    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               helpstart1   0x0000f5    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                  karobka   0x0000dc    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               karobkamag   0x000063    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               karobkazaj   0x00009f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+       knopkauderjatstart   0x000196    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+        knopkauderjatstop   0x0001b5    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               magnitafon   0x00002c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              magnitafon1   0x000031    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   margat   0x00010b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                  margat1   0x000191    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                metkaclrf   0x0001d4    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+           metkaclrfstart   0x0001db    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   pavtor   0x0000d9    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                programma   0x00001c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                    start   0x0000b1    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   start1   0x0000c8    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   start2   0x00017b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                 startmag   0x000045    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               startpoyla   0x0001b2    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                 startzaj   0x000081    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                     stop   0x0000fc    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                stoppoyla   0x0001d1    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   tormoz   0x0000ae    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                tormozmag   0x00003f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                tormozzaj   0x0000a8    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               zajiganiya   0x00006c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              zajiganiya1   0x000071    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                programma   0x00001c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               magnitafon   0x00002c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              magnitafon1   0x000031    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                tormozmag   0x00003f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                 startmag   0x000045    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               karobkamag   0x000063    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               zajiganiya   0x00006c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              zajiganiya1   0x000071    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                 startzaj   0x000081    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               karobkazaj   0x00009f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                tormozzaj   0x0000a8    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   tormoz   0x0000ae    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                    start   0x0000b1    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   start1   0x0000c8    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   pavtor   0x0000d9    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                  karobka   0x0000dc    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                helpstart   0x0000e8    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               helpstart1   0x0000f5    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                     stop   0x0000fc    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   ahrana   0x000102    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   margat   0x00010b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter1   0x000114    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0119   0x000119    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_011B   0x00011b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0128   0x000128    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_012A   0x00012a    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_012C   0x00012c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter2   0x000130    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0135   0x000135    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0137   0x000137    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0144   0x000144    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0146   0x000146    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0148   0x000148    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter3   0x00014c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0151   0x000151    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0153   0x000153    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0160   0x000160    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0162   0x000162    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0164   0x000164    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+          cobalt_starter4   0x000168    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                   start2   0x00017b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              ahranastart   0x000184    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                  margat1   0x000191    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+       knopkauderjatstart   0x000196    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               startpoyla   0x0001b2    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+        knopkauderjatstop   0x0001b5    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                stoppoyla   0x0001d1    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                metkaclrf   0x0001d4    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+           metkaclrfstart   0x0001db    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               delay10min   0x0001e0    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01EB   0x0001eb    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01ED   0x0001ed    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01EF   0x0001ef    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01F1   0x0001f1    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              delaymargat   0x0001f3    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01FA   0x0001fa    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01FC   0x0001fc    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_01FE   0x0001fe    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+              delayknopka   0x000200    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0207   0x000207    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0209   0x000209    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_020B   0x00020b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                delay3sek   0x00020f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0218   0x000218    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_021A   0x00021a    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_021C   0x00021c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               delaystart   0x000220    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0227   0x000227    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0229   0x000229    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_022B   0x00022b    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                delayzvuk   0x00022d    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0232   0x000232    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0234   0x000234    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                 bigdelay   0x000236    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_023D   0x00023d    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_023F   0x00023f    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0241   0x000241    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+                delay20ms   0x000245    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_024C   0x00024c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_024E   0x00024e    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_0250   0x000250    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+               delay520ms   0x000253    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_025A   0x00025a    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_025C   0x00025c    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+             _.org_0_025E   0x00025e    program     static C:\Users\Xusniddin\Desktop\mplab\Start+CobaltStarter.X\Start+CobaltStarter.asm
+
+

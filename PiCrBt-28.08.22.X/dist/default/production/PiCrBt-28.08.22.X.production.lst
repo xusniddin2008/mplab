@@ -1,0 +1,3115 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V2.00 build -1524193055 
+                                                                                               Sun Sep 25 16:04:44 2022
+
+Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 20180527130849
+     1  0000                     
+      + 0000                     
+     2                           ; Version 2.00
+     3                           ; Generated 27/05/2018 GMT
+     4                           
+     5                           ; 
+     6                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+     7                           ; All rights reserved.
+     8                           ; 
+     9                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+                                 ip").
+    10                           ; 
+    11                           ; Redistribution and use in source and binary forms, with or without modification, are
+    12                           ; permitted provided that the following conditions are met:
+    13                           ; 
+    14                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+                                 t of
+    15                           ;        conditions and the following disclaimer.
+    16                           ; 
+    17                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+                                 list
+    18                           ;        of conditions and the following disclaimer in the documentation and/or other
+    19                           ;        materials provided with the distribution.
+    20                           ; 
+    21                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+                                 is
+    22                           ;        software without specific prior written permission.
+    23                           ; 
+    24                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+
+    25                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+                                 OR
+    26                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+                                 T,
+    27                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+                                 
+    28                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+                                 
+    29                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+                                 RICT
+    30                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+                                 SE OF
+    31                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    32                           ; 
+    33                           
+    34                           
+    35                           ; 
+    36                           ; Code-generator required, PIC12F675 Definitions
+    37                           ; 
+    38  0004                     fsr0 equ 04h
+    39  0004                     indf equ 00h
+    40  0000                     indf0 equ 00h
+    41  0000                     pc equ 02h
+    42  0002                     pcl equ 02h
+    43  0002                     pclath equ 0Ah
+    44  000A                     status equ 03h
+    45  0003                     
+     2                           opt pagewidth 120
+     3  0000                     byte0	macro	val
+     4                           	(getbyte(val,0))
+     5                           endm
+     6  0000                     byte1	macro	val
+     7                           	(getbyte(val,1))
+     8                           endm
+     9  0000                     byte2	macro	val
+    10                           	(getbyte(val,2))
+    11                           endm
+    12  0000                     byte3	macro	val
+    13                           	(getbyte(val,3))
+    14                           endm
+    15  0000                     byte4	macro	val
+    16                           	(getbyte(val,4))
+    17                           endm
+    18  0000                     byte5	macro	val
+    19                           	(getbyte(val,5))
+    20                           endm
+    21  0000                     byte6	macro	val
+    22                           	(getbyte(val,6))
+    23                           endm
+    24  0000                     byte7	macro	val
+    25                           	(getbyte(val,7))
+    26                           endm
+    27  0000                     getword	macro	val,pos
+    28                           	(((val) >> (8 * pos)) and 0xffff)
+    29                           endm
+    30  0000                     word0	macro	val
+    31                           	(getword(val,0))
+    32                           endm
+    33  0000                     word1	macro	val
+    34                           	(getword(val,2))
+    35                           endm
+    36  0000                     word2	macro	val
+    37                           	(getword(val,4))
+    38                           endm
+    39  0000                     word3	macro	val
+    40                           	(getword(val,6))
+    41                           endm
+    42  0000                     gettword	macro	val,pos
+    43                           	(((val) >> (8 * pos)) and 0xffffff)
+    44                           endm
+    45  0000                     tword0	macro	val
+    46                           	(gettword(val,0))
+    47                           endm
+    48  0000                     tword1	macro	val
+    49                           	(gettword(val,3))
+    50                           endm
+    51  0000                     tword2	macro	val
+    52                           	(gettword(val,6))
+    53                           endm
+    54  0000                     getdword	macro	val,pos
+    55                           	(((val) >> (8 * pos)) and 0xffffffff)
+    56                           endm
+    57  0000                     dword0	macro	val
+    58                           	(getdword(val,0))
+    59                           endm
+    60  0000                     dword1	macro	val
+    61                           	(getdword(val,4))
+    62                           endm
+    63  0000                     clrc	macro
+    64                           	bcf	3,0
+    65                           	endm
+    66  0000                     clrz	macro
+    67                           	bcf	3,2
+    68                           	endm
+    69  0000                     setc	macro
+    70                           	bsf	3,0
+    71                           	endm
+    72  0000                     setz	macro
+    73                           	bsf	3,2
+    74                           	endm
+    75  0000                     skipc	macro
+    76                           	btfss	3,0
+    77                           	endm
+    78  0000                     skipz	macro
+    79                           	btfss	3,2
+    80                           	endm
+    81  0000                     skipnc	macro
+    82                           	btfsc	3,0
+    83                           	endm
+    84  0000                     skipnz	macro
+    85                           	btfsc	3,2
+    86                           	endm
+    87  0000                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    88                           INDF equ 00h ;# 
+    89  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    90                           TMR0 equ 01h ;# 
+    91  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    92                           PCL equ 02h ;# 
+    93  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    94                           STATUS equ 03h ;# 
+    95  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    96                           FSR equ 04h ;# 
+    97  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    98                           GPIO equ 05h ;# 
+    99  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   100                           PCLATH equ 0Ah ;# 
+   101  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   102                           INTCON equ 0Bh ;# 
+   103  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   104                           PIR1 equ 0Ch ;# 
+   105  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   106                           TMR1 equ 0Eh ;# 
+   107  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   108                           TMR1L equ 0Eh ;# 
+   109  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   110                           TMR1H equ 0Fh ;# 
+   111  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   112                           T1CON equ 010h ;# 
+   113  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   114                           CMCON equ 019h ;# 
+   115  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   116                           ADRESH equ 01Eh ;# 
+   117  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   118                           ADCON0 equ 01Fh ;# 
+   119  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   120                           OPTION_REG equ 081h ;# 
+   121  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   122                           TRISIO equ 085h ;# 
+   123  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   124                           PIE1 equ 08Ch ;# 
+   125  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   126                           PCON equ 08Eh ;# 
+   127  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   128                           OSCCAL equ 090h ;# 
+   129  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   130                           WPU equ 095h ;# 
+   131  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   132                           IOC equ 096h ;# 
+   133  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   134                           IOCB equ 096h ;# 
+   135  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   136                           VRCON equ 099h ;# 
+   137  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   138                           EEDATA equ 09Ah ;# 
+   139  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   140                           EEDAT equ 09Ah ;# 
+   141  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   142                           EEADR equ 09Bh ;# 
+   143  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   144                           EECON1 equ 09Ch ;# 
+   145  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   146                           EECON2 equ 09Dh ;# 
+   147  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   148                           ADRESL equ 09Eh ;# 
+   149  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   150                           ANSEL equ 09Fh ;# 
+   151  009F                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   152                           INDF equ 00h ;# 
+   153  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   154                           TMR0 equ 01h ;# 
+   155  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   156                           PCL equ 02h ;# 
+   157  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   158                           STATUS equ 03h ;# 
+   159  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   160                           FSR equ 04h ;# 
+   161  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   162                           GPIO equ 05h ;# 
+   163  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   164                           PCLATH equ 0Ah ;# 
+   165  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   166                           INTCON equ 0Bh ;# 
+   167  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   168                           PIR1 equ 0Ch ;# 
+   169  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   170                           TMR1 equ 0Eh ;# 
+   171  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   172                           TMR1L equ 0Eh ;# 
+   173  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   174                           TMR1H equ 0Fh ;# 
+   175  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   176                           T1CON equ 010h ;# 
+   177  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   178                           CMCON equ 019h ;# 
+   179  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   180                           ADRESH equ 01Eh ;# 
+   181  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   182                           ADCON0 equ 01Fh ;# 
+   183  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   184                           OPTION_REG equ 081h ;# 
+   185  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   186                           TRISIO equ 085h ;# 
+   187  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   188                           PIE1 equ 08Ch ;# 
+   189  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   190                           PCON equ 08Eh ;# 
+   191  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   192                           OSCCAL equ 090h ;# 
+   193  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   194                           WPU equ 095h ;# 
+   195  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   196                           IOC equ 096h ;# 
+   197  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   198                           IOCB equ 096h ;# 
+   199  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   200                           VRCON equ 099h ;# 
+   201  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   202                           EEDATA equ 09Ah ;# 
+   203  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   204                           EEDAT equ 09Ah ;# 
+   205  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   206                           EEADR equ 09Bh ;# 
+   207  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   208                           EECON1 equ 09Ch ;# 
+   209  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   210                           EECON2 equ 09Dh ;# 
+   211  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   212                           ADRESL equ 09Eh ;# 
+   213  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   214                           ANSEL equ 09Fh ;# 
+   215  009F                     	FNCALL	_main,_ADC
+   216                           	FNCALL	_main,_ADC1
+   217                           	FNCALL	_main,_commandd
+   218                           	FNCALL	_commandd,_bit0
+   219                           	FNCALL	_commandd,_bit1
+   220                           	FNCALL	_commandd,_ms9And4ms
+   221                           	FNROOT	_main
+   222                           	global	_codeCommand
+   223                           	global	_codeAddress
+   224                           psect	idataBANK0,class=CODE,space=0,delta=2,noexec
+   225                           global __pidataBANK0
+   226                           __pidataBANK0:
+   227  000E                     	file	"PiCrBt-28.08.22.c"
+   228                           	line	17
+   229                           
+   230                           ;initializer for _codeCommandPlus
+   231                           	retlw	050h
+   232  000E  3450               	line	16
+   233                           
+   234                           ;initializer for _codeCommand
+   235                           	retlw	050h
+   236  000F  3450               	line	15
+   237                           
+   238                           ;initializer for _codeAddress
+   239                           	retlw	0B5h
+   240  0010  34B5               	global	_volt
+   241                           	global	_i
+   242                           	global	_loopBit
+   243                           	global	_INTCON
+   244                           _INTCON	set	0xB
+   245  000B                     	global	_ADCON0
+   246                           _ADCON0	set	0x1F
+   247  001F                     	global	_CMCON
+   248                           _CMCON	set	0x19
+   249  0019                     	global	_ADRESH
+   250                           _ADRESH	set	0x1E
+   251  001E                     	global	_RP0
+   252                           _RP0	set	0x1D
+   253  001D                     	global	_GO_DONE
+   254                           _GO_DONE	set	0xF9
+   255  00F9                     	global	_ADON
+   256                           _ADON	set	0xF8
+   257  00F8                     	global	_GP2
+   258                           _GP2	set	0x2A
+   259  002A                     	global	_OPTION_REG
+   260                           _OPTION_REG	set	0x81
+   261  0081                     	global	_ANSEL
+   262                           _ANSEL	set	0x9F
+   263  009F                     	global	_TRISIO
+   264                           _TRISIO	set	0x85
+   265  0085                     	global	_OSCCAL
+   266                           _OSCCAL	set	0x90
+   267  0090                     ; #config settings
+   268                           global __CFG_FOSC$INTRCIO
+   269                           __CFG_FOSC$INTRCIO equ 0x0
+   270  0000                     global __CFG_WDTE$OFF
+   271                           __CFG_WDTE$OFF equ 0x0
+   272  0000                     global __CFG_PWRTE$OFF
+   273                           __CFG_PWRTE$OFF equ 0x0
+   274  0000                     global __CFG_MCLRE$OFF
+   275                           __CFG_MCLRE$OFF equ 0x0
+   276  0000                     global __CFG_BOREN$OFF
+   277                           __CFG_BOREN$OFF equ 0x0
+   278  0000                     global __CFG_CP$ON
+   279                           __CFG_CP$ON equ 0x0
+   280  0000                     global __CFG_CPD$ON
+   281                           __CFG_CPD$ON equ 0x0
+   282  0000                     	file	"C:\Users\User\AppData\Local\Temp\sd5o."
+   283                           	line	#
+   284                           psect cinit,class=CODE,delta=2
+   285                           global start_initialization
+   286                           start_initialization:
+   287  03F1                     
+   288                           global __initialization
+   289                           __initialization:
+   290  03F1                     psect	bssBANK0,class=BANK0,space=1,noexec
+   291                           global __pbssBANK0
+   292                           __pbssBANK0:
+   293  0020                     _volt:
+   294  0020                            ds      2
+   295  0020                     
+   296                           _i:
+   297  0022                            ds      2
+   298  0022                     
+   299                           _loopBit:
+   300  0024                            ds      1
+   301  0024                     
+   302                           _Reg_1:
+   303  0025                            ds      1
+   304  0025                     
+   305                           psect	dataBANK0,class=BANK0,space=1,noexec
+   306                           global __pdataBANK0
+   307                           __pdataBANK0:
+   308  002B                     	file	"PiCrBt-28.08.22.c"
+   309                           	line	17
+   310                           _codeCommandPlus:
+   311  002B                            ds      1
+   312  002B                     
+   313                           psect	dataBANK0
+   314                           	file	"PiCrBt-28.08.22.c"
+   315                           	line	16
+   316                           _codeCommand:
+   317  002C                            ds      1
+   318  002C                     
+   319                           psect	dataBANK0
+   320                           	file	"PiCrBt-28.08.22.c"
+   321                           	line	15
+   322                           _codeAddress:
+   323  002D                            ds      1
+   324  002D                     
+   325                           	file	"C:\Users\User\AppData\Local\Temp\sd5o."
+   326                           	line	#
+   327                           ; Initialize objects allocated to BANK0
+   328                           	global __pidataBANK0
+   329                           psect cinit,class=CODE,delta=2,merge=1
+   330                           	fcall	__pidataBANK0+0		;fetch initializer
+   331  03F1  200E               	movwf	__pdataBANK0+0&07fh		
+   332  03F2  00AB               	fcall	__pidataBANK0+1		;fetch initializer
+   333  03F3  200F               	movwf	__pdataBANK0+1&07fh		
+   334  03F4  00AC               	fcall	__pidataBANK0+2		;fetch initializer
+   335  03F5  2010               	movwf	__pdataBANK0+2&07fh		
+   336  03F6  00AD               	line	#
+   337                           ; Clear objects allocated to BANK0
+   338                           psect cinit,class=CODE,delta=2,merge=1
+   339                           	clrf	((__pbssBANK0)+0)&07Fh
+   340  03F7  01A0               	clrf	((__pbssBANK0)+1)&07Fh
+   341  03F8  01A1               	clrf	((__pbssBANK0)+2)&07Fh
+   342  03F9  01A2               	clrf	((__pbssBANK0)+3)&07Fh
+   343  03FA  01A3               	clrf	((__pbssBANK0)+4)&07Fh
+   344  03FB  01A4               	clrf	((__pbssBANK0)+5)&07Fh
+   345  03FC  01A5               psect cinit,class=CODE,delta=2,merge=1
+   346                           global end_of_initialization,__end_of__initialization
+   347                           
+   348                           ;End of C runtime variable initialization code
+   349                           
+   350                           end_of_initialization:
+   351  03FD                     __end_of__initialization:
+   352  03FD                     clrf status
+   353  03FD  0183               ljmp _main	;jump to C main() function
+   354  03FE  29A7               psect	cstackBANK0,class=BANK0,space=1,noexec
+   355                           global __pcstackBANK0
+   356                           __pcstackBANK0:
+   357  0026                     ?_ms9And4ms:	; 1 bytes @ 0x0
+   358  0026                     ??_ms9And4ms:	; 1 bytes @ 0x0
+   359  0026                     ?_bit1:	; 1 bytes @ 0x0
+   360  0026                     ??_bit1:	; 1 bytes @ 0x0
+   361  0026                     ?_bit0:	; 1 bytes @ 0x0
+   362  0026                     ??_bit0:	; 1 bytes @ 0x0
+   363  0026                     ?_commandd:	; 1 bytes @ 0x0
+   364  0026                     ?_ADC:	; 1 bytes @ 0x0
+   365  0026                     ??_ADC:	; 1 bytes @ 0x0
+   366  0026                     ?_ADC1:	; 1 bytes @ 0x0
+   367  0026                     ??_ADC1:	; 1 bytes @ 0x0
+   368  0026                     ?_main:	; 1 bytes @ 0x0
+   369  0026                     	ds	2
+   370  0026                     ??_commandd:	; 1 bytes @ 0x2
+   371  0028                     	ds	1
+   372  0028                     ??_main:	; 1 bytes @ 0x3
+   373  0029                     	ds	2
+   374  0029                     ;!
+   375                           ;!Data Sizes:
+   376                           ;!    Strings     0
+   377                           ;!    Constant    0
+   378                           ;!    Data        3
+   379                           ;!    BSS         6
+   380                           ;!    Persistent  0
+   381                           ;!    Stack       0
+   382                           ;!
+   383                           ;!Auto Spaces:
+   384                           ;!    Space          Size  Autos    Used
+   385                           ;!    COMMON            0      0       0
+   386                           ;!    BANK0            62      5      14
+   387                           
+   388                           ;!
+   389                           ;!Pointer List with Targets:
+   390                           ;!
+   391                           ;!    None.
+   392                           
+   393                           
+   394                           ;!
+   395                           ;!Critical Paths under _main in COMMON
+   396                           ;!
+   397                           ;!    None.
+   398                           ;!
+   399                           ;!Critical Paths under _main in BANK0
+   400                           ;!
+   401                           ;!    _main->_commandd
+   402                           ;!    _commandd->_ms9And4ms
+   403                           
+   404 ;;
+   405 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   406 ;;
+   407                           
+   408                           ;!
+   409                           ;!Call Graph Tables:
+   410                           ;!
+   411                           ;! ---------------------------------------------------------------------------------
+   412                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   413                           ;! ---------------------------------------------------------------------------------
+   414                           ;! (0) _main                                                 2     2      0       0
+   415                           ;!                                              3 BANK0      2     2      0
+   416                           ;!                                _ADC
+   417                           ;!                               _ADC1
+   418                           ;!                           _commandd
+   419                           ;! ---------------------------------------------------------------------------------
+   420                           ;! (1) _commandd                                             1     1      0       0
+   421                           ;!                                              2 BANK0      1     1      0
+   422                           ;!                               _bit0
+   423                           ;!                               _bit1
+   424                           ;!                          _ms9And4ms
+   425                           ;! ---------------------------------------------------------------------------------
+   426                           ;! (2) _ms9And4ms                                            2     2      0       0
+   427                           ;!                                              0 BANK0      2     2      0
+   428                           ;! ---------------------------------------------------------------------------------
+   429                           ;! (2) _bit1                                                 1     1      0       0
+   430                           ;!                                              0 BANK0      1     1      0
+   431                           ;! ---------------------------------------------------------------------------------
+   432                           ;! (2) _bit0                                                 1     1      0       0
+   433                           ;!                                              0 BANK0      1     1      0
+   434                           ;! ---------------------------------------------------------------------------------
+   435                           ;! (1) _ADC1                                                 2     2      0       0
+   436                           ;!                                              0 BANK0      2     2      0
+   437                           ;! ---------------------------------------------------------------------------------
+   438                           ;! (1) _ADC                                                  2     2      0       0
+   439                           ;!                                              0 BANK0      2     2      0
+   440                           ;! ---------------------------------------------------------------------------------
+   441                           ;! Estimated maximum stack depth 2
+   442                           ;! ---------------------------------------------------------------------------------
+   443                           ;!
+   444                           ;! Call Graph Graphs:
+   445                           ;!
+   446                           ;! _main (ROOT)
+   447                           ;!   _ADC
+   448                           ;!   _ADC1
+   449                           ;!   _commandd
+   450                           ;!     _bit0
+   451                           ;!     _bit1
+   452                           ;!     _ms9And4ms
+   453                           ;!
+   454                           
+   455                           ;! Address spaces:
+   456                           
+   457                           ;!Name               Size   Autos  Total    Cost      Usage
+   458                           ;!SFR1                 0      0       0       2        0.0%
+   459                           ;!BITSFR1              0      0       0       2        0.0%
+   460                           ;!BANK0               3E      5       E       4       22.6%
+   461                           ;!BITBANK0            3E      0       0       3        0.0%
+   462                           ;!SFR0                 0      0       0       1        0.0%
+   463                           ;!BITSFR0              0      0       0       1        0.0%
+   464                           ;!COMMON               0      0       0       1        0.0%
+   465                           ;!BITCOMMON            0      0       0       0        0.0%
+   466                           ;!CODE                 0      0       0       0        0.0%
+   467                           ;!DATA                 0      0       E       6        0.0%
+   468                           ;!ABS                  0      0       E       5        0.0%
+   469                           ;!NULL                 0      0       0       0        0.0%
+   470                           ;!STACK                0      0       0       2        0.0%
+   471                           ;!EEDATA              80      0       0       0        0.0%
+   472                           
+   473                           	global	_main
+   474                           
+   475 ;; *************** function _main *****************
+   476 ;; Defined at:
+   477 ;;		line 114 in file "PiCrBt-28.08.22.c"
+   478 ;; Parameters:    Size  Location     Type
+   479 ;;		None
+   480 ;; Auto vars:     Size  Location     Type
+   481 ;;		None
+   482 ;; Return value:  Size  Location     Type
+   483 ;;                  1    wreg      void 
+   484 ;; Registers used:
+   485 ;;		wreg, status,2, status,0, pclath, cstack
+   486 ;; Tracked objects:
+   487 ;;		On entry : B00/0
+   488 ;;		On exit  : 0/0
+   489 ;;		Unchanged: 0/0
+   490 ;; Data sizes:     COMMON   BANK0
+   491 ;;      Params:         0       0
+   492 ;;      Locals:         0       0
+   493 ;;      Temps:          0       2
+   494 ;;      Totals:         0       2
+   495 ;;Total ram usage:        2 bytes
+   496 ;; Hardware stack levels required when called:    2
+   497 ;; This function calls:
+   498 ;;		_ADC
+   499 ;;		_ADC1
+   500 ;;		_commandd
+   501 ;; This function is called by:
+   502 ;;		Startup code after reset
+   503 ;; This function uses a non-reentrant model
+   504 ;;
+   505                           psect	maintext,global,class=CODE,delta=2,split=1,group=0
+   506                           	file	"PiCrBt-28.08.22.c"
+   507                           	line	114
+   508                           global __pmaintext
+   509                           __pmaintext:	;psect for function _main
+   510  01A7                     psect	maintext
+   511                           	file	"PiCrBt-28.08.22.c"
+   512                           	line	114
+   513                           	global	__size_of_main
+   514                           	__size_of_main	equ	__end_of_main-_main
+   515  024A                     	
+   516                           _main:	
+   517  01A7                     ;incstack = 0
+   518                           	opt	stack 6
+   519                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   520                           	line	115
+   521                           	
+   522                           l1093:	
+   523  01A7                     ;PiCrBt-28.08.22.c: 115:     RP0 = 0;
+   524                           	bcf	status, 5	;RP0=0, select bank0
+   525  01A7  1283               	bcf	(29/8),(29)&7	;volatile
+   526  01A8  1283               	line	116
+   527                           	
+   528                           l1095:	
+   529  01A9                     ;PiCrBt-28.08.22.c: 116:     codeAddress = 0b11111111;
+   530                           	movlw	low(07h)
+   531  01A9  3007               	movwf	(25)	;volatile
+   532  01AA  0099               	line	117
+   533                           	
+   534                           l1097:	
+   535  01AB                     ;PiCrBt-28.08.22.c: 117:     codeCommand = 0b11111111;
+   536                           	bsf	(29/8),(29)&7	;volatile
+   537  01AB  1683               	line	118
+   538                           ;PiCrBt-28.08.22.c: 118:     commandd();
+   539                           	movlw	low(080h)
+   540  01AC  3080               	bsf	status, 5	;RP0=1, select bank1
+   541  01AD  1683               	movwf	(144)^080h	;volatile
+   542  01AE  0090               	line	119
+   543                           ;PiCrBt-28.08.22.c: 119:     while (1) {
+   544                           	movlw	low(010h)
+   545  01AF  3010               	movwf	(133)^080h	;volatile
+   546  01B0  0085               	line	120
+   547                           	
+   548                           l1099:	
+   549  01B1                     ;PiCrBt-28.08.22.c: 120:         ADC1();
+   550                           	bcf	status, 5	;RP0=0, select bank0
+   551  01B1  1283               	bcf	(29/8),(29)&7	;volatile
+   552  01B2  1283               	line	121
+   553                           ;PiCrBt-28.08.22.c: 121:         if (volt < 252 && volt > 235) {
+   554                           	movlw	low(0Ch)
+   555  01B3  300C               	movwf	(31)	;volatile
+   556  01B4  009F               	line	122
+   557                           	
+   558                           l1101:	
+   559  01B5                     ;PiCrBt-28.08.22.c: 122:             ADC();
+   560                           	clrf	(11)	;volatile
+   561  01B5  018B               	line	123
+   562                           	
+   563                           l1103:	
+   564  01B6                     ;PiCrBt-28.08.22.c: 123:             if (volt < 252 && volt > 235) {
+   565                           	bsf	(29/8),(29)&7	;volatile
+   566  01B6  1683               	line	124
+   567                           	
+   568                           l1105:	
+   569  01B7                     ;PiCrBt-28.08.22.c: 124:                 codeAddress = 0b10110101;
+   570                           	movlw	low(068h)
+   571  01B7  3068               	bsf	status, 5	;RP0=1, select bank1
+   572  01B8  1683               	movwf	(159)^080h	;volatile
+   573  01B9  009F               	line	125
+   574                           	
+   575                           l1107:	
+   576  01BA                     ;PiCrBt-28.08.22.c: 125:                 codeCommand = 0b10000010;
+   577                           	movlw	low(083h)
+   578  01BA  3083               	movwf	(129)^080h	;volatile
+   579  01BB  0081               	line	127
+   580                           	
+   581                           l1109:	
+   582  01BC                     ;PiCrBt-28.08.22.c: 127:             }
+   583                           	bcf	status, 5	;RP0=0, select bank0
+   584  01BC  1283               	bcf	(29/8),(29)&7	;volatile
+   585  01BD  1283               	line	128
+   586                           	
+   587                           l1111:	
+   588  01BE                     ;PiCrBt-28.08.22.c: 128:         }
+   589                           	movlw	low(0FFh)
+   590  01BE  30FF               	movwf	(??_main+0)+0
+   591  01BF  00A9               	movf	(??_main+0)+0,w
+   592  01C0  0829               	movwf	(_codeAddress)
+   593  01C1  00AD               	line	129
+   594                           	
+   595                           l1113:	
+   596  01C2                     ;PiCrBt-28.08.22.c: 129: 
+   597                           	movlw	low(0FFh)
+   598  01C2  30FF               	movwf	(??_main+0)+0
+   599  01C3  00A9               	movf	(??_main+0)+0,w
+   600  01C4  0829               	movwf	(_codeCommand)
+   601  01C5  00AC               	line	130
+   602                           	
+   603                           l1115:	
+   604  01C6                     ;PiCrBt-28.08.22.c: 130:         if (volt < 235 && volt > 210) {
+   605                           	fcall	_commandd
+   606  01C6  20D5               	goto	l1117
+   607  01C7  29C8               	line	131
+   608                           ;PiCrBt-28.08.22.c: 131:             ADC();
+   609                           	
+   610                           l99:	
+   611  01C8                     	line	132
+   612                           	
+   613                           l1117:	
+   614  01C8                     ;PiCrBt-28.08.22.c: 132:             if (volt < 235 && volt > 210) {
+   615                           	fcall	_ADC1
+   616  01C8  2011               	line	133
+   617                           	
+   618                           l1119:	
+   619  01C9                     ;PiCrBt-28.08.22.c: 133:                 codeAddress = 0b10110101;
+   620                           	movlw	0
+   621  01C9  3000               	bcf	status, 5	;RP0=0, select bank0
+   622  01CA  1283               	subwf	(_volt+1),w
+   623  01CB  0221               	movlw	0FCh
+   624  01CC  30FC               	skipnz
+   625  01CD  1903               	subwf	(_volt),w
+   626  01CE  0220               	skipnc
+   627  01CF  1803               	goto	u931
+   628  01D0  29D2               	goto	u930
+   629  01D1  29D3               u931:
+   630  01D2                     	goto	l1133
+   631  01D2  29FB               u930:
+   632  01D3                     	
+   633                           l1121:	
+   634  01D3                     	movlw	0
+   635  01D3  3000               	subwf	(_volt+1),w
+   636  01D4  0221               	movlw	0ECh
+   637  01D5  30EC               	skipnz
+   638  01D6  1903               	subwf	(_volt),w
+   639  01D7  0220               	skipc
+   640  01D8  1C03               	goto	u941
+   641  01D9  29DB               	goto	u940
+   642  01DA  29DC               u941:
+   643  01DB                     	goto	l1133
+   644  01DB  29FB               u940:
+   645  01DC                     	line	134
+   646                           	
+   647                           l1123:	
+   648  01DC                     ;PiCrBt-28.08.22.c: 134:                 codeCommand = 0b11101001;
+   649                           	fcall	_ADC
+   650  01DC  202C               	line	135
+   651                           	
+   652                           l1125:	
+   653  01DD                     ;PiCrBt-28.08.22.c: 135:                 commandd();
+   654                           	movlw	0
+   655  01DD  3000               	bcf	status, 5	;RP0=0, select bank0
+   656  01DE  1283               	subwf	(_volt+1),w
+   657  01DF  0221               	movlw	0FCh
+   658  01E0  30FC               	skipnz
+   659  01E1  1903               	subwf	(_volt),w
+   660  01E2  0220               	skipnc
+   661  01E3  1803               	goto	u951
+   662  01E4  29E6               	goto	u950
+   663  01E5  29E7               u951:
+   664  01E6                     	goto	l1133
+   665  01E6  29FB               u950:
+   666  01E7                     	
+   667                           l1127:	
+   668  01E7                     	movlw	0
+   669  01E7  3000               	subwf	(_volt+1),w
+   670  01E8  0221               	movlw	0ECh
+   671  01E9  30EC               	skipnz
+   672  01EA  1903               	subwf	(_volt),w
+   673  01EB  0220               	skipc
+   674  01EC  1C03               	goto	u961
+   675  01ED  29EF               	goto	u960
+   676  01EE  29F0               u961:
+   677  01EF                     	goto	l1133
+   678  01EF  29FB               u960:
+   679  01F0                     	line	136
+   680                           	
+   681                           l1129:	
+   682  01F0                     ;PiCrBt-28.08.22.c: 136:                 _delay((unsigned long)((29)*(4000000/4000.0)));
+                                 
+   683                           	movlw	low(0B5h)
+   684  01F0  30B5               	movwf	(??_main+0)+0
+   685  01F1  00A9               	movf	(??_main+0)+0,w
+   686  01F2  0829               	movwf	(_codeAddress)
+   687  01F3  00AD               	line	137
+   688                           ;PiCrBt-28.08.22.c: 137:                 codeAddress = 0b11110101;
+   689                           	movlw	low(082h)
+   690  01F4  3082               	movwf	(??_main+0)+0
+   691  01F5  00A9               	movf	(??_main+0)+0,w
+   692  01F6  0829               	movwf	(_codeCommand)
+   693  01F7  00AC               	line	138
+   694                           	
+   695                           l1131:	
+   696  01F8                     ;PiCrBt-28.08.22.c: 138:                 codeCommand = 0b11001100;
+   697                           	fcall	_commandd
+   698  01F8  20D5               	goto	l1133
+   699  01F9  29FB               	line	139
+   700                           ;PiCrBt-28.08.22.c: 139:                 commandd();
+   701                           	
+   702                           l101:	
+   703  01FA                     	goto	l1133
+   704  01FA  29FB               	line	140
+   705                           ;PiCrBt-28.08.22.c: 140:                 _delay((unsigned long)((34)*(4000000/4000.0)));
+                                 
+   706                           	
+   707                           l100:	
+   708  01FB                     	line	142
+   709                           	
+   710                           l1133:	
+   711  01FB                     ;PiCrBt-28.08.22.c: 142:                 codeCommand = 0b10011000;
+   712                           	movlw	0
+   713  01FB  3000               	bcf	status, 5	;RP0=0, select bank0
+   714  01FC  1283               	subwf	(_volt+1),w
+   715  01FD  0221               	movlw	0EBh
+   716  01FE  30EB               	skipnz
+   717  01FF  1903               	subwf	(_volt),w
+   718  0200  0220               	skipnc
+   719  0201  1803               	goto	u971
+   720  0202  2A04               	goto	u970
+   721  0203  2A05               u971:
+   722  0204                     	goto	l1163
+   723  0204  2A69               u970:
+   724  0205                     	
+   725                           l1135:	
+   726  0205                     	movlw	0
+   727  0205  3000               	subwf	(_volt+1),w
+   728  0206  0221               	movlw	0D3h
+   729  0207  30D3               	skipnz
+   730  0208  1903               	subwf	(_volt),w
+   731  0209  0220               	skipc
+   732  020A  1C03               	goto	u981
+   733  020B  2A0D               	goto	u980
+   734  020C  2A0E               u981:
+   735  020D                     	goto	l1163
+   736  020D  2A69               u980:
+   737  020E                     	line	143
+   738                           	
+   739                           l1137:	
+   740  020E                     ;PiCrBt-28.08.22.c: 143:                 commandd();
+   741                           	fcall	_ADC
+   742  020E  202C               	line	144
+   743                           	
+   744                           l1139:	
+   745  020F                     ;PiCrBt-28.08.22.c: 144:                 _delay((unsigned long)((29)*(4000000/4000.0)));
+                                 
+   746                           	movlw	0
+   747  020F  3000               	bcf	status, 5	;RP0=0, select bank0
+   748  0210  1283               	subwf	(_volt+1),w
+   749  0211  0221               	movlw	0EBh
+   750  0212  30EB               	skipnz
+   751  0213  1903               	subwf	(_volt),w
+   752  0214  0220               	skipnc
+   753  0215  1803               	goto	u991
+   754  0216  2A18               	goto	u990
+   755  0217  2A19               u991:
+   756  0218                     	goto	l1163
+   757  0218  2A69               u990:
+   758  0219                     	
+   759                           l1141:	
+   760  0219                     	movlw	0
+   761  0219  3000               	subwf	(_volt+1),w
+   762  021A  0221               	movlw	0D3h
+   763  021B  30D3               	skipnz
+   764  021C  1903               	subwf	(_volt),w
+   765  021D  0220               	skipc
+   766  021E  1C03               	goto	u1001
+   767  021F  2A21               	goto	u1000
+   768  0220  2A22               u1001:
+   769  0221                     	goto	l1163
+   770  0221  2A69               u1000:
+   771  0222                     	line	145
+   772                           	
+   773                           l1143:	
+   774  0222                     ;PiCrBt-28.08.22.c: 145:                 codeAddress = 0b11110101;
+   775                           	movlw	low(0B5h)
+   776  0222  30B5               	movwf	(??_main+0)+0
+   777  0223  00A9               	movf	(??_main+0)+0,w
+   778  0224  0829               	movwf	(_codeAddress)
+   779  0225  00AD               	line	146
+   780                           ;PiCrBt-28.08.22.c: 146:                 codeCommand = 0b00001100;
+   781                           	movlw	low(0E9h)
+   782  0226  30E9               	movwf	(??_main+0)+0
+   783  0227  00A9               	movf	(??_main+0)+0,w
+   784  0228  0829               	movwf	(_codeCommand)
+   785  0229  00AC               	line	147
+   786                           	
+   787                           l1145:	
+   788  022A                     ;PiCrBt-28.08.22.c: 147:                 commandd();
+   789                           	fcall	_commandd
+   790  022A  20D5               	line	148
+   791                           	
+   792                           l1147:	
+   793  022B                     ;PiCrBt-28.08.22.c: 148:             }
+   794                           	opt asmopt_push
+   795                           opt asmopt_off
+   796                           movlw	38
+   797  022B  3026               	bcf	status, 5	;RP0=0, select bank0
+   798  022C  1283               movwf	((??_main+0)+0+1),f
+   799  022D  00AA               	movlw	168
+   800  022E  30A8               movwf	((??_main+0)+0),f
+   801  022F  00A9               	u1297:
+   802  0230                     decfsz	((??_main+0)+0),f
+   803  0230  0BA9               	goto	u1297
+   804  0231  2A30               	decfsz	((??_main+0)+0+1),f
+   805  0232  0BAA               	goto	u1297
+   806  0233  2A30               	nop
+   807  0234  0000               opt asmopt_pop
+   808                           
+   809                           	line	149
+   810                           	
+   811                           l1149:	
+   812  0235                     ;PiCrBt-28.08.22.c: 149:         }
+   813                           	movlw	low(0F5h)
+   814  0235  30F5               	bcf	status, 5	;RP0=0, select bank0
+   815  0236  1283               	movwf	(??_main+0)+0
+   816  0237  00A9               	movf	(??_main+0)+0,w
+   817  0238  0829               	movwf	(_codeAddress)
+   818  0239  00AD               	line	150
+   819                           	
+   820                           l1151:	
+   821  023A                     ;PiCrBt-28.08.22.c: 150: 
+   822                           	movlw	low(0CCh)
+   823  023A  30CC               	movwf	(??_main+0)+0
+   824  023B  00A9               	movf	(??_main+0)+0,w
+   825  023C  0829               	movwf	(_codeCommand)
+   826  023D  00AC               	line	151
+   827                           ;PiCrBt-28.08.22.c: 151:         if (volt < 210 && volt > 200) {
+   828                           	fcall	_commandd
+   829  023E  20D5               	line	152
+   830                           	
+   831                           l1153:	
+   832  023F                     ;PiCrBt-28.08.22.c: 152:             ADC();
+   833                           	opt asmopt_push
+   834                           opt asmopt_off
+   835                           movlw	45
+   836  023F  302D               	bcf	status, 5	;RP0=0, select bank0
+   837  0240  1283               movwf	((??_main+0)+0+1),f
+   838  0241  00AA               	movlw	38
+   839  0242  3026               movwf	((??_main+0)+0),f
+   840  0243  00A9               	u1307:
+   841  0244                     decfsz	((??_main+0)+0),f
+   842  0244  0BA9               	goto	u1307
+   843  0245  2A44               	decfsz	((??_main+0)+0+1),f
+   844  0246  0BAA               	goto	u1307
+   845  0247  2A44               	nop
+   846  0248  0000               opt asmopt_pop
+   847                           
+   848                           	line	153
+   849                           	
+   850                           l1155:	
+   851  0249                     ;PiCrBt-28.08.22.c: 153:             if (volt < 210 && volt > 200) {
+   852                           	movlw	low(0B5h)
+   853  0249  30B5               	bcf	status, 5	;RP0=0, select bank0
+   854  024A  1283               	movwf	(??_main+0)+0
+   855  024B  00A9               	movf	(??_main+0)+0,w
+   856  024C  0829               	movwf	(_codeAddress)
+   857  024D  00AD               	line	154
+   858                           	
+   859                           l1157:	
+   860  024E                     ;PiCrBt-28.08.22.c: 154:                 codeAddress = 0b10110101;
+   861                           	movlw	low(098h)
+   862  024E  3098               	movwf	(??_main+0)+0
+   863  024F  00A9               	movf	(??_main+0)+0,w
+   864  0250  0829               	movwf	(_codeCommand)
+   865  0251  00AC               	line	155
+   866                           	
+   867                           l1159:	
+   868  0252                     ;PiCrBt-28.08.22.c: 155:                 codeCommand = 0b11101001;
+   869                           	fcall	_commandd
+   870  0252  20D5               	line	156
+   871                           ;PiCrBt-28.08.22.c: 156:                 commandd();
+   872                           	opt asmopt_push
+   873                           opt asmopt_off
+   874                           movlw	38
+   875  0253  3026               	bcf	status, 5	;RP0=0, select bank0
+   876  0254  1283               movwf	((??_main+0)+0+1),f
+   877  0255  00AA               	movlw	168
+   878  0256  30A8               movwf	((??_main+0)+0),f
+   879  0257  00A9               	u1317:
+   880  0258                     decfsz	((??_main+0)+0),f
+   881  0258  0BA9               	goto	u1317
+   882  0259  2A58               	decfsz	((??_main+0)+0+1),f
+   883  025A  0BAA               	goto	u1317
+   884  025B  2A58               	nop
+   885  025C  0000               opt asmopt_pop
+   886                           
+   887                           	line	157
+   888                           ;PiCrBt-28.08.22.c: 157:                 _delay((unsigned long)((29)*(4000000/4000.0)));
+                                 
+   889                           	movlw	low(0F5h)
+   890  025D  30F5               	bcf	status, 5	;RP0=0, select bank0
+   891  025E  1283               	movwf	(??_main+0)+0
+   892  025F  00A9               	movf	(??_main+0)+0,w
+   893  0260  0829               	movwf	(_codeAddress)
+   894  0261  00AD               	line	158
+   895                           ;PiCrBt-28.08.22.c: 158:                 codeAddress = 0b11110101;
+   896                           	movlw	low(0Ch)
+   897  0262  300C               	movwf	(??_main+0)+0
+   898  0263  00A9               	movf	(??_main+0)+0,w
+   899  0264  0829               	movwf	(_codeCommand)
+   900  0265  00AC               	line	159
+   901                           	
+   902                           l1161:	
+   903  0266                     ;PiCrBt-28.08.22.c: 159:                 codeCommand = 0b01001100;
+   904                           	fcall	_commandd
+   905  0266  20D5               	goto	l1163
+   906  0267  2A69               	line	160
+   907                           ;PiCrBt-28.08.22.c: 160:                 commandd();
+   908                           	
+   909                           l103:	
+   910  0268                     	goto	l1163
+   911  0268  2A69               	line	161
+   912                           ;PiCrBt-28.08.22.c: 161:                 _delay((unsigned long)((34)*(4000000/4000.0)));
+                                 
+   913                           	
+   914                           l102:	
+   915  0269                     	line	163
+   916                           	
+   917                           l1163:	
+   918  0269                     ;PiCrBt-28.08.22.c: 163:                 codeCommand = 0b00011010;
+   919                           	movlw	0
+   920  0269  3000               	bcf	status, 5	;RP0=0, select bank0
+   921  026A  1283               	subwf	(_volt+1),w
+   922  026B  0221               	movlw	0D2h
+   923  026C  30D2               	skipnz
+   924  026D  1903               	subwf	(_volt),w
+   925  026E  0220               	skipnc
+   926  026F  1803               	goto	u1011
+   927  0270  2A72               	goto	u1010
+   928  0271  2A73               u1011:
+   929  0272                     	goto	l104
+   930  0272  2AC2               u1010:
+   931  0273                     	
+   932                           l1165:	
+   933  0273                     	movlw	0
+   934  0273  3000               	subwf	(_volt+1),w
+   935  0274  0221               	movlw	0C9h
+   936  0275  30C9               	skipnz
+   937  0276  1903               	subwf	(_volt),w
+   938  0277  0220               	skipc
+   939  0278  1C03               	goto	u1021
+   940  0279  2A7B               	goto	u1020
+   941  027A  2A7C               u1021:
+   942  027B                     	goto	l104
+   943  027B  2AC2               u1020:
+   944  027C                     	line	164
+   945                           	
+   946                           l1167:	
+   947  027C                     ;PiCrBt-28.08.22.c: 164:                 commandd();
+   948                           	fcall	_ADC
+   949  027C  202C               	line	165
+   950                           	
+   951                           l1169:	
+   952  027D                     ;PiCrBt-28.08.22.c: 165:             }
+   953                           	movlw	0
+   954  027D  3000               	bcf	status, 5	;RP0=0, select bank0
+   955  027E  1283               	subwf	(_volt+1),w
+   956  027F  0221               	movlw	0D2h
+   957  0280  30D2               	skipnz
+   958  0281  1903               	subwf	(_volt),w
+   959  0282  0220               	skipnc
+   960  0283  1803               	goto	u1031
+   961  0284  2A86               	goto	u1030
+   962  0285  2A87               u1031:
+   963  0286                     	goto	l104
+   964  0286  2AC2               u1030:
+   965  0287                     	
+   966                           l1171:	
+   967  0287                     	movlw	0
+   968  0287  3000               	subwf	(_volt+1),w
+   969  0288  0221               	movlw	0C9h
+   970  0289  30C9               	skipnz
+   971  028A  1903               	subwf	(_volt),w
+   972  028B  0220               	skipc
+   973  028C  1C03               	goto	u1041
+   974  028D  2A8F               	goto	u1040
+   975  028E  2A90               u1041:
+   976  028F                     	goto	l104
+   977  028F  2AC2               u1040:
+   978  0290                     	line	166
+   979                           	
+   980                           l1173:	
+   981  0290                     ;PiCrBt-28.08.22.c: 166:         }
+   982                           	movlw	low(0B5h)
+   983  0290  30B5               	movwf	(??_main+0)+0
+   984  0291  00A9               	movf	(??_main+0)+0,w
+   985  0292  0829               	movwf	(_codeAddress)
+   986  0293  00AD               	line	167
+   987                           ;PiCrBt-28.08.22.c: 167: 
+   988                           	movlw	low(0E9h)
+   989  0294  30E9               	movwf	(??_main+0)+0
+   990  0295  00A9               	movf	(??_main+0)+0,w
+   991  0296  0829               	movwf	(_codeCommand)
+   992  0297  00AC               	line	168
+   993                           	
+   994                           l1175:	
+   995  0298                     ;PiCrBt-28.08.22.c: 168:         if (volt < 200 && volt > 189) {
+   996                           	fcall	_commandd
+   997  0298  20D5               	line	169
+   998                           	
+   999                           l1177:	
+  1000  0299                     ;PiCrBt-28.08.22.c: 169:             ADC();
+  1001                           	opt asmopt_push
+  1002                           opt asmopt_off
+  1003                           movlw	38
+  1004  0299  3026               	bcf	status, 5	;RP0=0, select bank0
+  1005  029A  1283               movwf	((??_main+0)+0+1),f
+  1006  029B  00AA               	movlw	168
+  1007  029C  30A8               movwf	((??_main+0)+0),f
+  1008  029D  00A9               	u1327:
+  1009  029E                     decfsz	((??_main+0)+0),f
+  1010  029E  0BA9               	goto	u1327
+  1011  029F  2A9E               	decfsz	((??_main+0)+0+1),f
+  1012  02A0  0BAA               	goto	u1327
+  1013  02A1  2A9E               	nop
+  1014  02A2  0000               opt asmopt_pop
+  1015                           
+  1016                           	line	170
+  1017                           	
+  1018                           l1179:	
+  1019  02A3                     ;PiCrBt-28.08.22.c: 170:             if (volt < 200 && volt > 189) {
+  1020                           	movlw	low(0F5h)
+  1021  02A3  30F5               	bcf	status, 5	;RP0=0, select bank0
+  1022  02A4  1283               	movwf	(??_main+0)+0
+  1023  02A5  00A9               	movf	(??_main+0)+0,w
+  1024  02A6  0829               	movwf	(_codeAddress)
+  1025  02A7  00AD               	line	171
+  1026                           	
+  1027                           l1181:	
+  1028  02A8                     ;PiCrBt-28.08.22.c: 171:                 codeAddress = 0b10110101;
+  1029                           	movlw	low(04Ch)
+  1030  02A8  304C               	movwf	(??_main+0)+0
+  1031  02A9  00A9               	movf	(??_main+0)+0,w
+  1032  02AA  0829               	movwf	(_codeCommand)
+  1033  02AB  00AC               	line	172
+  1034                           ;PiCrBt-28.08.22.c: 172:                 codeCommand = 0b01011000;
+  1035                           	fcall	_commandd
+  1036  02AC  20D5               	line	173
+  1037                           	
+  1038                           l1183:	
+  1039  02AD                     ;PiCrBt-28.08.22.c: 173:                 commandd();
+  1040                           	opt asmopt_push
+  1041                           opt asmopt_off
+  1042                           movlw	45
+  1043  02AD  302D               	bcf	status, 5	;RP0=0, select bank0
+  1044  02AE  1283               movwf	((??_main+0)+0+1),f
+  1045  02AF  00AA               	movlw	38
+  1046  02B0  3026               movwf	((??_main+0)+0),f
+  1047  02B1  00A9               	u1337:
+  1048  02B2                     decfsz	((??_main+0)+0),f
+  1049  02B2  0BA9               	goto	u1337
+  1050  02B3  2AB2               	decfsz	((??_main+0)+0+1),f
+  1051  02B4  0BAA               	goto	u1337
+  1052  02B5  2AB2               	nop
+  1053  02B6  0000               opt asmopt_pop
+  1054                           
+  1055                           	line	174
+  1056                           	
+  1057                           l1185:	
+  1058  02B7                     ;PiCrBt-28.08.22.c: 174:             }
+  1059                           	movlw	low(0B5h)
+  1060  02B7  30B5               	bcf	status, 5	;RP0=0, select bank0
+  1061  02B8  1283               	movwf	(??_main+0)+0
+  1062  02B9  00A9               	movf	(??_main+0)+0,w
+  1063  02BA  0829               	movwf	(_codeAddress)
+  1064  02BB  00AD               	line	175
+  1065                           	
+  1066                           l1187:	
+  1067  02BC                     ;PiCrBt-28.08.22.c: 175:         }
+  1068                           	movlw	low(01Ah)
+  1069  02BC  301A               	movwf	(??_main+0)+0
+  1070  02BD  00A9               	movf	(??_main+0)+0,w
+  1071  02BE  0829               	movwf	(_codeCommand)
+  1072  02BF  00AC               	line	176
+  1073                           	
+  1074                           l1189:	
+  1075  02C0                     ;PiCrBt-28.08.22.c: 176: 
+  1076                           	fcall	_commandd
+  1077  02C0  20D5               	goto	l104
+  1078  02C1  2AC2               	line	177
+  1079                           ;PiCrBt-28.08.22.c: 177:         if (volt < 189 && volt > 175) {
+  1080                           	
+  1081                           l105:	
+  1082  02C2                     	line	178
+  1083                           ;PiCrBt-28.08.22.c: 178:             ADC();
+  1084                           	
+  1085                           l104:	
+  1086  02C2                     	line	180
+  1087                           ;PiCrBt-28.08.22.c: 180:                 codeAddress = 0b10110101;
+  1088                           	movlw	0
+  1089  02C2  3000               	bcf	status, 5	;RP0=0, select bank0
+  1090  02C3  1283               	subwf	(_volt+1),w
+  1091  02C4  0221               	movlw	0C8h
+  1092  02C5  30C8               	skipnz
+  1093  02C6  1903               	subwf	(_volt),w
+  1094  02C7  0220               	skipnc
+  1095  02C8  1803               	goto	u1051
+  1096  02C9  2ACB               	goto	u1050
+  1097  02CA  2ACC               u1051:
+  1098  02CB                     	goto	l1203
+  1099  02CB  2AF4               u1050:
+  1100  02CC                     	
+  1101                           l1191:	
+  1102  02CC                     	movlw	0
+  1103  02CC  3000               	subwf	(_volt+1),w
+  1104  02CD  0221               	movlw	0BEh
+  1105  02CE  30BE               	skipnz
+  1106  02CF  1903               	subwf	(_volt),w
+  1107  02D0  0220               	skipc
+  1108  02D1  1C03               	goto	u1061
+  1109  02D2  2AD4               	goto	u1060
+  1110  02D3  2AD5               u1061:
+  1111  02D4                     	goto	l1203
+  1112  02D4  2AF4               u1060:
+  1113  02D5                     	line	181
+  1114                           	
+  1115                           l1193:	
+  1116  02D5                     ;PiCrBt-28.08.22.c: 181:                 codeCommand = 0b01000010;
+  1117                           	fcall	_ADC
+  1118  02D5  202C               	line	182
+  1119                           	
+  1120                           l1195:	
+  1121  02D6                     ;PiCrBt-28.08.22.c: 182:                 commandd();
+  1122                           	movlw	0
+  1123  02D6  3000               	bcf	status, 5	;RP0=0, select bank0
+  1124  02D7  1283               	subwf	(_volt+1),w
+  1125  02D8  0221               	movlw	0C8h
+  1126  02D9  30C8               	skipnz
+  1127  02DA  1903               	subwf	(_volt),w
+  1128  02DB  0220               	skipnc
+  1129  02DC  1803               	goto	u1071
+  1130  02DD  2ADF               	goto	u1070
+  1131  02DE  2AE0               u1071:
+  1132  02DF                     	goto	l1203
+  1133  02DF  2AF4               u1070:
+  1134  02E0                     	
+  1135                           l1197:	
+  1136  02E0                     	movlw	0
+  1137  02E0  3000               	subwf	(_volt+1),w
+  1138  02E1  0221               	movlw	0BEh
+  1139  02E2  30BE               	skipnz
+  1140  02E3  1903               	subwf	(_volt),w
+  1141  02E4  0220               	skipc
+  1142  02E5  1C03               	goto	u1081
+  1143  02E6  2AE8               	goto	u1080
+  1144  02E7  2AE9               u1081:
+  1145  02E8                     	goto	l1203
+  1146  02E8  2AF4               u1080:
+  1147  02E9                     	line	183
+  1148                           	
+  1149                           l1199:	
+  1150  02E9                     ;PiCrBt-28.08.22.c: 183:             }
+  1151                           	movlw	low(0B5h)
+  1152  02E9  30B5               	movwf	(??_main+0)+0
+  1153  02EA  00A9               	movf	(??_main+0)+0,w
+  1154  02EB  0829               	movwf	(_codeAddress)
+  1155  02EC  00AD               	line	184
+  1156                           ;PiCrBt-28.08.22.c: 184:         }
+  1157                           	movlw	low(058h)
+  1158  02ED  3058               	movwf	(??_main+0)+0
+  1159  02EE  00A9               	movf	(??_main+0)+0,w
+  1160  02EF  0829               	movwf	(_codeCommand)
+  1161  02F0  00AC               	line	185
+  1162                           	
+  1163                           l1201:	
+  1164  02F1                     ;PiCrBt-28.08.22.c: 185: 
+  1165                           	fcall	_commandd
+  1166  02F1  20D5               	goto	l1203
+  1167  02F2  2AF4               	line	186
+  1168                           ;PiCrBt-28.08.22.c: 186:         if (volt < 175 && volt > 163) {
+  1169                           	
+  1170                           l107:	
+  1171  02F3                     	goto	l1203
+  1172  02F3  2AF4               	line	187
+  1173                           ;PiCrBt-28.08.22.c: 187:             ADC();
+  1174                           	
+  1175                           l106:	
+  1176  02F4                     	line	189
+  1177                           	
+  1178                           l1203:	
+  1179  02F4                     ;PiCrBt-28.08.22.c: 189:                 codeAddress = 0b10110101;
+  1180                           	movlw	0
+  1181  02F4  3000               	bcf	status, 5	;RP0=0, select bank0
+  1182  02F5  1283               	subwf	(_volt+1),w
+  1183  02F6  0221               	movlw	0BDh
+  1184  02F7  30BD               	skipnz
+  1185  02F8  1903               	subwf	(_volt),w
+  1186  02F9  0220               	skipnc
+  1187  02FA  1803               	goto	u1091
+  1188  02FB  2AFD               	goto	u1090
+  1189  02FC  2AFE               u1091:
+  1190  02FD                     	goto	l1217
+  1191  02FD  2B26               u1090:
+  1192  02FE                     	
+  1193                           l1205:	
+  1194  02FE                     	movlw	0
+  1195  02FE  3000               	subwf	(_volt+1),w
+  1196  02FF  0221               	movlw	0B0h
+  1197  0300  30B0               	skipnz
+  1198  0301  1903               	subwf	(_volt),w
+  1199  0302  0220               	skipc
+  1200  0303  1C03               	goto	u1101
+  1201  0304  2B06               	goto	u1100
+  1202  0305  2B07               u1101:
+  1203  0306                     	goto	l1217
+  1204  0306  2B26               u1100:
+  1205  0307                     	line	190
+  1206                           	
+  1207                           l1207:	
+  1208  0307                     ;PiCrBt-28.08.22.c: 190:                 codeCommand = 0b11000010;
+  1209                           	fcall	_ADC
+  1210  0307  202C               	line	191
+  1211                           	
+  1212                           l1209:	
+  1213  0308                     ;PiCrBt-28.08.22.c: 191:                 commandd();
+  1214                           	movlw	0
+  1215  0308  3000               	bcf	status, 5	;RP0=0, select bank0
+  1216  0309  1283               	subwf	(_volt+1),w
+  1217  030A  0221               	movlw	0BDh
+  1218  030B  30BD               	skipnz
+  1219  030C  1903               	subwf	(_volt),w
+  1220  030D  0220               	skipnc
+  1221  030E  1803               	goto	u1111
+  1222  030F  2B11               	goto	u1110
+  1223  0310  2B12               u1111:
+  1224  0311                     	goto	l1217
+  1225  0311  2B26               u1110:
+  1226  0312                     	
+  1227                           l1211:	
+  1228  0312                     	movlw	0
+  1229  0312  3000               	subwf	(_volt+1),w
+  1230  0313  0221               	movlw	0B0h
+  1231  0314  30B0               	skipnz
+  1232  0315  1903               	subwf	(_volt),w
+  1233  0316  0220               	skipc
+  1234  0317  1C03               	goto	u1121
+  1235  0318  2B1A               	goto	u1120
+  1236  0319  2B1B               u1121:
+  1237  031A                     	goto	l1217
+  1238  031A  2B26               u1120:
+  1239  031B                     	line	192
+  1240                           	
+  1241                           l1213:	
+  1242  031B                     ;PiCrBt-28.08.22.c: 192:             }
+  1243                           	movlw	low(0B5h)
+  1244  031B  30B5               	movwf	(??_main+0)+0
+  1245  031C  00A9               	movf	(??_main+0)+0,w
+  1246  031D  0829               	movwf	(_codeAddress)
+  1247  031E  00AD               	line	193
+  1248                           ;PiCrBt-28.08.22.c: 193:         }
+  1249                           	movlw	low(042h)
+  1250  031F  3042               	movwf	(??_main+0)+0
+  1251  0320  00A9               	movf	(??_main+0)+0,w
+  1252  0321  0829               	movwf	(_codeCommand)
+  1253  0322  00AC               	line	194
+  1254                           	
+  1255                           l1215:	
+  1256  0323                     ;PiCrBt-28.08.22.c: 194: 
+  1257                           	fcall	_commandd
+  1258  0323  20D5               	goto	l1217
+  1259  0324  2B26               	line	195
+  1260                           ;PiCrBt-28.08.22.c: 195:         if (volt < 163 && volt > 148) {
+  1261                           	
+  1262                           l109:	
+  1263  0325                     	goto	l1217
+  1264  0325  2B26               	line	196
+  1265                           ;PiCrBt-28.08.22.c: 196:             ADC();
+  1266                           	
+  1267                           l108:	
+  1268  0326                     	line	198
+  1269                           	
+  1270                           l1217:	
+  1271  0326                     ;PiCrBt-28.08.22.c: 198:                 codeAddress = 0b10110101;
+  1272                           	movlw	0
+  1273  0326  3000               	bcf	status, 5	;RP0=0, select bank0
+  1274  0327  1283               	subwf	(_volt+1),w
+  1275  0328  0221               	movlw	0AFh
+  1276  0329  30AF               	skipnz
+  1277  032A  1903               	subwf	(_volt),w
+  1278  032B  0220               	skipnc
+  1279  032C  1803               	goto	u1131
+  1280  032D  2B2F               	goto	u1130
+  1281  032E  2B30               u1131:
+  1282  032F                     	goto	l1231
+  1283  032F  2B58               u1130:
+  1284  0330                     	
+  1285                           l1219:	
+  1286  0330                     	movlw	0
+  1287  0330  3000               	subwf	(_volt+1),w
+  1288  0331  0221               	movlw	0A4h
+  1289  0332  30A4               	skipnz
+  1290  0333  1903               	subwf	(_volt),w
+  1291  0334  0220               	skipc
+  1292  0335  1C03               	goto	u1141
+  1293  0336  2B38               	goto	u1140
+  1294  0337  2B39               u1141:
+  1295  0338                     	goto	l1231
+  1296  0338  2B58               u1140:
+  1297  0339                     	line	199
+  1298                           	
+  1299                           l1221:	
+  1300  0339                     ;PiCrBt-28.08.22.c: 199:                 codeCommand = 0b11010000;
+  1301                           	fcall	_ADC
+  1302  0339  202C               	line	200
+  1303                           	
+  1304                           l1223:	
+  1305  033A                     ;PiCrBt-28.08.22.c: 200:                 commandd();
+  1306                           	movlw	0
+  1307  033A  3000               	bcf	status, 5	;RP0=0, select bank0
+  1308  033B  1283               	subwf	(_volt+1),w
+  1309  033C  0221               	movlw	0AFh
+  1310  033D  30AF               	skipnz
+  1311  033E  1903               	subwf	(_volt),w
+  1312  033F  0220               	skipnc
+  1313  0340  1803               	goto	u1151
+  1314  0341  2B43               	goto	u1150
+  1315  0342  2B44               u1151:
+  1316  0343                     	goto	l1231
+  1317  0343  2B58               u1150:
+  1318  0344                     	
+  1319                           l1225:	
+  1320  0344                     	movlw	0
+  1321  0344  3000               	subwf	(_volt+1),w
+  1322  0345  0221               	movlw	0A4h
+  1323  0346  30A4               	skipnz
+  1324  0347  1903               	subwf	(_volt),w
+  1325  0348  0220               	skipc
+  1326  0349  1C03               	goto	u1161
+  1327  034A  2B4C               	goto	u1160
+  1328  034B  2B4D               u1161:
+  1329  034C                     	goto	l1231
+  1330  034C  2B58               u1160:
+  1331  034D                     	line	201
+  1332                           	
+  1333                           l1227:	
+  1334  034D                     ;PiCrBt-28.08.22.c: 201:             }
+  1335                           	movlw	low(0B5h)
+  1336  034D  30B5               	movwf	(??_main+0)+0
+  1337  034E  00A9               	movf	(??_main+0)+0,w
+  1338  034F  0829               	movwf	(_codeAddress)
+  1339  0350  00AD               	line	202
+  1340                           ;PiCrBt-28.08.22.c: 202:         }
+  1341                           	movlw	low(0C2h)
+  1342  0351  30C2               	movwf	(??_main+0)+0
+  1343  0352  00A9               	movf	(??_main+0)+0,w
+  1344  0353  0829               	movwf	(_codeCommand)
+  1345  0354  00AC               	line	203
+  1346                           	
+  1347                           l1229:	
+  1348  0355                     ;PiCrBt-28.08.22.c: 203: 
+  1349                           	fcall	_commandd
+  1350  0355  20D5               	goto	l1231
+  1351  0356  2B58               	line	204
+  1352                           ;PiCrBt-28.08.22.c: 204:         if (volt < 148 && volt > 70) {
+  1353                           	
+  1354                           l111:	
+  1355  0357                     	goto	l1231
+  1356  0357  2B58               	line	205
+  1357                           ;PiCrBt-28.08.22.c: 205:             ADC();
+  1358                           	
+  1359                           l110:	
+  1360  0358                     	line	207
+  1361                           	
+  1362                           l1231:	
+  1363  0358                     ;PiCrBt-28.08.22.c: 207:                 codeAddress = 0b10110101;
+  1364                           	movlw	0
+  1365  0358  3000               	bcf	status, 5	;RP0=0, select bank0
+  1366  0359  1283               	subwf	(_volt+1),w
+  1367  035A  0221               	movlw	0A3h
+  1368  035B  30A3               	skipnz
+  1369  035C  1903               	subwf	(_volt),w
+  1370  035D  0220               	skipnc
+  1371  035E  1803               	goto	u1171
+  1372  035F  2B61               	goto	u1170
+  1373  0360  2B62               u1171:
+  1374  0361                     	goto	l1245
+  1375  0361  2B8A               u1170:
+  1376  0362                     	
+  1377                           l1233:	
+  1378  0362                     	movlw	0
+  1379  0362  3000               	subwf	(_volt+1),w
+  1380  0363  0221               	movlw	095h
+  1381  0364  3095               	skipnz
+  1382  0365  1903               	subwf	(_volt),w
+  1383  0366  0220               	skipc
+  1384  0367  1C03               	goto	u1181
+  1385  0368  2B6A               	goto	u1180
+  1386  0369  2B6B               u1181:
+  1387  036A                     	goto	l1245
+  1388  036A  2B8A               u1180:
+  1389  036B                     	line	208
+  1390                           	
+  1391                           l1235:	
+  1392  036B                     ;PiCrBt-28.08.22.c: 208:                 codeCommand = 0b01010000;
+  1393                           	fcall	_ADC
+  1394  036B  202C               	line	209
+  1395                           	
+  1396                           l1237:	
+  1397  036C                     ;PiCrBt-28.08.22.c: 209:                 commandd();
+  1398                           	movlw	0
+  1399  036C  3000               	bcf	status, 5	;RP0=0, select bank0
+  1400  036D  1283               	subwf	(_volt+1),w
+  1401  036E  0221               	movlw	0A3h
+  1402  036F  30A3               	skipnz
+  1403  0370  1903               	subwf	(_volt),w
+  1404  0371  0220               	skipnc
+  1405  0372  1803               	goto	u1191
+  1406  0373  2B75               	goto	u1190
+  1407  0374  2B76               u1191:
+  1408  0375                     	goto	l1245
+  1409  0375  2B8A               u1190:
+  1410  0376                     	
+  1411                           l1239:	
+  1412  0376                     	movlw	0
+  1413  0376  3000               	subwf	(_volt+1),w
+  1414  0377  0221               	movlw	095h
+  1415  0378  3095               	skipnz
+  1416  0379  1903               	subwf	(_volt),w
+  1417  037A  0220               	skipc
+  1418  037B  1C03               	goto	u1201
+  1419  037C  2B7E               	goto	u1200
+  1420  037D  2B7F               u1201:
+  1421  037E                     	goto	l1245
+  1422  037E  2B8A               u1200:
+  1423  037F                     	line	210
+  1424                           	
+  1425                           l1241:	
+  1426  037F                     ;PiCrBt-28.08.22.c: 210:             }
+  1427                           	movlw	low(0B5h)
+  1428  037F  30B5               	movwf	(??_main+0)+0
+  1429  0380  00A9               	movf	(??_main+0)+0,w
+  1430  0381  0829               	movwf	(_codeAddress)
+  1431  0382  00AD               	line	211
+  1432                           ;PiCrBt-28.08.22.c: 211:         }
+  1433                           	movlw	low(0D0h)
+  1434  0383  30D0               	movwf	(??_main+0)+0
+  1435  0384  00A9               	movf	(??_main+0)+0,w
+  1436  0385  0829               	movwf	(_codeCommand)
+  1437  0386  00AC               	line	212
+  1438                           	
+  1439                           l1243:	
+  1440  0387                     ;PiCrBt-28.08.22.c: 212: 
+  1441                           	fcall	_commandd
+  1442  0387  20D5               	goto	l1245
+  1443  0388  2B8A               	line	213
+  1444                           ;PiCrBt-28.08.22.c: 213:         if (volt < 70 && volt > 1) {
+  1445                           	
+  1446                           l113:	
+  1447  0389                     	goto	l1245
+  1448  0389  2B8A               	line	214
+  1449                           ;PiCrBt-28.08.22.c: 214:             ADC();
+  1450                           	
+  1451                           l112:	
+  1452  038A                     	line	216
+  1453                           	
+  1454                           l1245:	
+  1455  038A                     ;PiCrBt-28.08.22.c: 216:                 codeAddress = 0b10110101;
+  1456                           	movlw	0
+  1457  038A  3000               	bcf	status, 5	;RP0=0, select bank0
+  1458  038B  1283               	subwf	(_volt+1),w
+  1459  038C  0221               	movlw	094h
+  1460  038D  3094               	skipnz
+  1461  038E  1903               	subwf	(_volt),w
+  1462  038F  0220               	skipnc
+  1463  0390  1803               	goto	u1211
+  1464  0391  2B93               	goto	u1210
+  1465  0392  2B94               u1211:
+  1466  0393                     	goto	l1259
+  1467  0393  2BBC               u1210:
+  1468  0394                     	
+  1469                           l1247:	
+  1470  0394                     	movlw	0
+  1471  0394  3000               	subwf	(_volt+1),w
+  1472  0395  0221               	movlw	047h
+  1473  0396  3047               	skipnz
+  1474  0397  1903               	subwf	(_volt),w
+  1475  0398  0220               	skipc
+  1476  0399  1C03               	goto	u1221
+  1477  039A  2B9C               	goto	u1220
+  1478  039B  2B9D               u1221:
+  1479  039C                     	goto	l1259
+  1480  039C  2BBC               u1220:
+  1481  039D                     	line	217
+  1482                           	
+  1483                           l1249:	
+  1484  039D                     ;PiCrBt-28.08.22.c: 217:                 codeCommand = 0b00000010;
+  1485                           	fcall	_ADC
+  1486  039D  202C               	line	218
+  1487                           	
+  1488                           l1251:	
+  1489  039E                     ;PiCrBt-28.08.22.c: 218:                 commandd();
+  1490                           	movlw	0
+  1491  039E  3000               	bcf	status, 5	;RP0=0, select bank0
+  1492  039F  1283               	subwf	(_volt+1),w
+  1493  03A0  0221               	movlw	094h
+  1494  03A1  3094               	skipnz
+  1495  03A2  1903               	subwf	(_volt),w
+  1496  03A3  0220               	skipnc
+  1497  03A4  1803               	goto	u1231
+  1498  03A5  2BA7               	goto	u1230
+  1499  03A6  2BA8               u1231:
+  1500  03A7                     	goto	l1259
+  1501  03A7  2BBC               u1230:
+  1502  03A8                     	
+  1503                           l1253:	
+  1504  03A8                     	movlw	0
+  1505  03A8  3000               	subwf	(_volt+1),w
+  1506  03A9  0221               	movlw	047h
+  1507  03AA  3047               	skipnz
+  1508  03AB  1903               	subwf	(_volt),w
+  1509  03AC  0220               	skipc
+  1510  03AD  1C03               	goto	u1241
+  1511  03AE  2BB0               	goto	u1240
+  1512  03AF  2BB1               u1241:
+  1513  03B0                     	goto	l1259
+  1514  03B0  2BBC               u1240:
+  1515  03B1                     	line	219
+  1516                           	
+  1517                           l1255:	
+  1518  03B1                     ;PiCrBt-28.08.22.c: 219:             }
+  1519                           	movlw	low(0B5h)
+  1520  03B1  30B5               	movwf	(??_main+0)+0
+  1521  03B2  00A9               	movf	(??_main+0)+0,w
+  1522  03B3  0829               	movwf	(_codeAddress)
+  1523  03B4  00AD               	line	220
+  1524                           ;PiCrBt-28.08.22.c: 220:         }
+  1525                           	movlw	low(050h)
+  1526  03B5  3050               	movwf	(??_main+0)+0
+  1527  03B6  00A9               	movf	(??_main+0)+0,w
+  1528  03B7  0829               	movwf	(_codeCommand)
+  1529  03B8  00AC               	line	221
+  1530                           	
+  1531                           l1257:	
+  1532  03B9                     ;PiCrBt-28.08.22.c: 221:     }
+  1533                           	fcall	_commandd
+  1534  03B9  20D5               	goto	l1259
+  1535  03BA  2BBC               	line	222
+  1536                           ;PiCrBt-28.08.22.c: 222:     return;
+  1537                           	
+  1538                           l115:	
+  1539  03BB                     	goto	l1259
+  1540  03BB  2BBC               	line	223
+  1541                           ;PiCrBt-28.08.22.c: 223: }
+  1542                           	
+  1543                           l114:	
+  1544  03BC                     	line	225
+  1545                           	
+  1546                           l1259:	
+  1547  03BC                     	movlw	0
+  1548  03BC  3000               	bcf	status, 5	;RP0=0, select bank0
+  1549  03BD  1283               	subwf	(_volt+1),w
+  1550  03BE  0221               	movlw	046h
+  1551  03BF  3046               	skipnz
+  1552  03C0  1903               	subwf	(_volt),w
+  1553  03C1  0220               	skipnc
+  1554  03C2  1803               	goto	u1251
+  1555  03C3  2BC5               	goto	u1250
+  1556  03C4  2BC6               u1251:
+  1557  03C5                     	goto	l1117
+  1558  03C5  29C8               u1250:
+  1559  03C6                     	
+  1560                           l1261:	
+  1561  03C6                     	movlw	0
+  1562  03C6  3000               	subwf	(_volt+1),w
+  1563  03C7  0221               	movlw	02h
+  1564  03C8  3002               	skipnz
+  1565  03C9  1903               	subwf	(_volt),w
+  1566  03CA  0220               	skipc
+  1567  03CB  1C03               	goto	u1261
+  1568  03CC  2BCE               	goto	u1260
+  1569  03CD  2BCF               u1261:
+  1570  03CE                     	goto	l1117
+  1571  03CE  29C8               u1260:
+  1572  03CF                     	line	226
+  1573                           	
+  1574                           l1263:	
+  1575  03CF                     	fcall	_ADC
+  1576  03CF  202C               	line	227
+  1577                           	
+  1578                           l1265:	
+  1579  03D0                     	movlw	0
+  1580  03D0  3000               	bcf	status, 5	;RP0=0, select bank0
+  1581  03D1  1283               	subwf	(_volt+1),w
+  1582  03D2  0221               	movlw	046h
+  1583  03D3  3046               	skipnz
+  1584  03D4  1903               	subwf	(_volt),w
+  1585  03D5  0220               	skipnc
+  1586  03D6  1803               	goto	u1271
+  1587  03D7  2BD9               	goto	u1270
+  1588  03D8  2BDA               u1271:
+  1589  03D9                     	goto	l1117
+  1590  03D9  29C8               u1270:
+  1591  03DA                     	
+  1592                           l1267:	
+  1593  03DA                     	movlw	0
+  1594  03DA  3000               	subwf	(_volt+1),w
+  1595  03DB  0221               	movlw	02h
+  1596  03DC  3002               	skipnz
+  1597  03DD  1903               	subwf	(_volt),w
+  1598  03DE  0220               	skipc
+  1599  03DF  1C03               	goto	u1281
+  1600  03E0  2BE2               	goto	u1280
+  1601  03E1  2BE3               u1281:
+  1602  03E2                     	goto	l1117
+  1603  03E2  29C8               u1280:
+  1604  03E3                     	line	228
+  1605                           	
+  1606                           l1269:	
+  1607  03E3                     	movlw	low(0B5h)
+  1608  03E3  30B5               	movwf	(??_main+0)+0
+  1609  03E4  00A9               	movf	(??_main+0)+0,w
+  1610  03E5  0829               	movwf	(_codeAddress)
+  1611  03E6  00AD               	line	229
+  1612                           	movlw	low(02h)
+  1613  03E7  3002               	movwf	(??_main+0)+0
+  1614  03E8  00A9               	movf	(??_main+0)+0,w
+  1615  03E9  0829               	movwf	(_codeCommand)
+  1616  03EA  00AC               	line	230
+  1617                           	
+  1618                           l1271:	
+  1619  03EB                     	fcall	_commandd
+  1620  03EB  20D5               	goto	l1117
+  1621  03EC  29C8               	line	231
+  1622                           	
+  1623                           l117:	
+  1624  03ED                     	goto	l1117
+  1625  03ED  29C8               	line	232
+  1626                           	
+  1627                           l116:	
+  1628  03EE                     	goto	l1117
+  1629  03EE  29C8               	line	233
+  1630                           	
+  1631                           l118:	
+  1632  03EF                     	goto	l1117
+  1633  03EF  29C8               	
+  1634                           l119:	
+  1635  03F0                     	line	235
+  1636                           	
+  1637                           l120:	
+  1638  03F0                     	global	start
+  1639                           	ljmp	start
+  1640  03F0  2800               	opt stack 0
+  1641                           GLOBAL	__end_of_main
+  1642                           	__end_of_main:
+  1643  03F1                     	signat	_main,89
+  1644                           	global	_commandd
+  1645                           
+  1646 ;; *************** function _commandd *****************
+  1647 ;; Defined at:
+  1648 ;;		line 50 in file "PiCrBt-28.08.22.c"
+  1649 ;; Parameters:    Size  Location     Type
+  1650 ;;		None
+  1651 ;; Auto vars:     Size  Location     Type
+  1652 ;;		None
+  1653 ;; Return value:  Size  Location     Type
+  1654 ;;                  1    wreg      void 
+  1655 ;; Registers used:
+  1656 ;;		wreg, status,2, status,0, pclath, cstack
+  1657 ;; Tracked objects:
+  1658 ;;		On entry : 0/0
+  1659 ;;		On exit  : 0/0
+  1660 ;;		Unchanged: 0/0
+  1661 ;; Data sizes:     COMMON   BANK0
+  1662 ;;      Params:         0       0
+  1663 ;;      Locals:         0       0
+  1664 ;;      Temps:          0       1
+  1665 ;;      Totals:         0       1
+  1666 ;;Total ram usage:        1 bytes
+  1667 ;; Hardware stack levels used:    1
+  1668 ;; Hardware stack levels required when called:    1
+  1669 ;; This function calls:
+  1670 ;;		_bit0
+  1671 ;;		_bit1
+  1672 ;;		_ms9And4ms
+  1673 ;; This function is called by:
+  1674 ;;		_main
+  1675 ;; This function uses a non-reentrant model
+  1676 ;;
+  1677                           psect	text1,local,class=CODE,delta=2,merge=1,group=0
+  1678                           	line	50
+  1679                           global __ptext1
+  1680                           __ptext1:	;psect for function _commandd
+  1681  00D5                     psect	text1
+  1682                           	file	"PiCrBt-28.08.22.c"
+  1683                           	line	50
+  1684                           	global	__size_of_commandd
+  1685                           	__size_of_commandd	equ	__end_of_commandd-_commandd
+  1686  00D2                     	
+  1687                           _commandd:	
+  1688  00D5                     ;incstack = 0
+  1689                           	opt	stack 6
+  1690                           ; Regs used in _commandd: [wreg+status,2+status,0+pclath+cstack]
+  1691                           	line	51
+  1692                           	
+  1693                           l1019:	
+  1694  00D5                     ;PiCrBt-28.08.22.c: 51:     while (loopBit > 0) {
+  1695                           	fcall	_ms9And4ms
+  1696  00D5  20A7               	line	52
+  1697                           	
+  1698                           l1021:	
+  1699  00D6                     ;PiCrBt-28.08.22.c: 52:         loopBit--;
+  1700                           	movlw	low(08h)
+  1701  00D6  3008               	bcf	status, 5	;RP0=0, select bank0
+  1702  00D7  1283               	movwf	(??_commandd+0)+0
+  1703  00D8  00A8               	movf	(??_commandd+0)+0,w
+  1704  00D9  0828               	movwf	(_loopBit)
+  1705  00DA  00A4               	line	53
+  1706                           ;PiCrBt-28.08.22.c: 53:         if (!(codeAddress & (1 << loopBit))) {
+  1707                           	goto	l1031
+  1708  00DB  2903               	
+  1709                           l59:	
+  1710  00DC                     	line	54
+  1711                           	
+  1712                           l1023:	
+  1713  00DC                     ;PiCrBt-28.08.22.c: 54:             bit0();
+  1714                           	movlw	01h
+  1715  00DC  3001               	subwf	(_loopBit),f
+  1716  00DD  02A4               	line	55
+  1717                           ;PiCrBt-28.08.22.c: 55:         } else if (codeAddress & (1 << loopBit)) {
+  1718                           	movlw	low(01h)
+  1719  00DE  3001               	movwf	(??_commandd+0)+0
+  1720  00DF  00A8               	incf	(_loopBit),w
+  1721  00E0  0A24               	goto	u714
+  1722  00E1  28E4               u715:
+  1723  00E2                     	clrc
+  1724  00E2  1003               	rlf	(??_commandd+0)+0,f
+  1725  00E3  0DA8               u714:
+  1726  00E4                     	addlw	-1
+  1727  00E4  3EFF               	skipz
+  1728  00E5  1D03               	goto	u715
+  1729  00E6  28E2               	movf	0+(??_commandd+0)+0,w
+  1730  00E7  0828               	andwf	(_codeAddress),w
+  1731  00E8  052D               	btfss	status,2
+  1732  00E9  1D03               	goto	u721
+  1733  00EA  28EC               	goto	u720
+  1734  00EB  28ED               u721:
+  1735  00EC                     	goto	l1027
+  1736  00EC  28EF               u720:
+  1737  00ED                     	line	56
+  1738                           	
+  1739                           l1025:	
+  1740  00ED                     ;PiCrBt-28.08.22.c: 56:             bit1();
+  1741                           	fcall	_bit0
+  1742  00ED  204E               	line	57
+  1743                           ;PiCrBt-28.08.22.c: 57:         }
+  1744                           	goto	l1031
+  1745  00EE  2903               	
+  1746                           l60:	
+  1747  00EF                     	
+  1748                           l1027:	
+  1749  00EF                     	movlw	low(01h)
+  1750  00EF  3001               	bcf	status, 5	;RP0=0, select bank0
+  1751  00F0  1283               	movwf	(??_commandd+0)+0
+  1752  00F1  00A8               	incf	(_loopBit),w
+  1753  00F2  0A24               	goto	u734
+  1754  00F3  28F6               u735:
+  1755  00F4                     	clrc
+  1756  00F4  1003               	rlf	(??_commandd+0)+0,f
+  1757  00F5  0DA8               u734:
+  1758  00F6                     	addlw	-1
+  1759  00F6  3EFF               	skipz
+  1760  00F7  1D03               	goto	u735
+  1761  00F8  28F4               	movf	0+(??_commandd+0)+0,w
+  1762  00F9  0828               	andwf	(_codeAddress),w
+  1763  00FA  052D               	btfsc	status,2
+  1764  00FB  1903               	goto	u741
+  1765  00FC  28FE               	goto	u740
+  1766  00FD  28FF               u741:
+  1767  00FE                     	goto	l1031
+  1768  00FE  2903               u740:
+  1769  00FF                     	line	58
+  1770                           	
+  1771                           l1029:	
+  1772  00FF                     ;PiCrBt-28.08.22.c: 58:     }
+  1773                           	fcall	_bit1
+  1774  00FF  2079               	goto	l1031
+  1775  0100  2903               	line	59
+  1776                           ;PiCrBt-28.08.22.c: 59:     codeAddress = ~codeAddress;
+  1777                           	
+  1778                           l62:	
+  1779  0101                     	goto	l1031
+  1780  0101  2903               	
+  1781                           l61:	
+  1782  0102                     	goto	l1031
+  1783  0102  2903               	line	60
+  1784                           ;PiCrBt-28.08.22.c: 60:     loopBit = 8;
+  1785                           	
+  1786                           l58:	
+  1787  0103                     	line	53
+  1788                           	
+  1789                           l1031:	
+  1790  0103                     ;PiCrBt-28.08.22.c: 53:         if (!(codeAddress & (1 << loopBit))) {
+  1791                           	bcf	status, 5	;RP0=0, select bank0
+  1792  0103  1283               	movf	((_loopBit)),w
+  1793  0104  0824               	btfss	status,2
+  1794  0105  1D03               	goto	u751
+  1795  0106  2908               	goto	u750
+  1796  0107  2909               u751:
+  1797  0108                     	goto	l1023
+  1798  0108  28DC               u750:
+  1799  0109                     	
+  1800                           l63:	
+  1801  0109                     	line	61
+  1802                           ;PiCrBt-28.08.22.c: 61:     while (loopBit > 0) {
+  1803                           	comf	(_codeAddress),f
+  1804  0109  09AD               	line	62
+  1805                           	
+  1806                           l1033:	
+  1807  010A                     ;PiCrBt-28.08.22.c: 62:         loopBit--;
+  1808                           	movlw	low(08h)
+  1809  010A  3008               	movwf	(??_commandd+0)+0
+  1810  010B  00A8               	movf	(??_commandd+0)+0,w
+  1811  010C  0828               	movwf	(_loopBit)
+  1812  010D  00A4               	line	63
+  1813                           ;PiCrBt-28.08.22.c: 63:         if (!(codeCommand & (1 << loopBit))) {
+  1814                           	goto	l1043
+  1815  010E  2936               	
+  1816                           l65:	
+  1817  010F                     	line	64
+  1818                           	
+  1819                           l1035:	
+  1820  010F                     ;PiCrBt-28.08.22.c: 64:             bit0();
+  1821                           	movlw	01h
+  1822  010F  3001               	subwf	(_loopBit),f
+  1823  0110  02A4               	line	65
+  1824                           ;PiCrBt-28.08.22.c: 65:         } else if (codeCommand & (1 << loopBit)) {
+  1825                           	movlw	low(01h)
+  1826  0111  3001               	movwf	(??_commandd+0)+0
+  1827  0112  00A8               	incf	(_loopBit),w
+  1828  0113  0A24               	goto	u764
+  1829  0114  2917               u765:
+  1830  0115                     	clrc
+  1831  0115  1003               	rlf	(??_commandd+0)+0,f
+  1832  0116  0DA8               u764:
+  1833  0117                     	addlw	-1
+  1834  0117  3EFF               	skipz
+  1835  0118  1D03               	goto	u765
+  1836  0119  2915               	movf	0+(??_commandd+0)+0,w
+  1837  011A  0828               	andwf	(_codeAddress),w
+  1838  011B  052D               	btfss	status,2
+  1839  011C  1D03               	goto	u771
+  1840  011D  291F               	goto	u770
+  1841  011E  2920               u771:
+  1842  011F                     	goto	l1039
+  1843  011F  2922               u770:
+  1844  0120                     	line	66
+  1845                           	
+  1846                           l1037:	
+  1847  0120                     ;PiCrBt-28.08.22.c: 66:             bit1();
+  1848                           	fcall	_bit0
+  1849  0120  204E               	line	67
+  1850                           ;PiCrBt-28.08.22.c: 67:         }
+  1851                           	goto	l1043
+  1852  0121  2936               	
+  1853                           l66:	
+  1854  0122                     	
+  1855                           l1039:	
+  1856  0122                     	movlw	low(01h)
+  1857  0122  3001               	bcf	status, 5	;RP0=0, select bank0
+  1858  0123  1283               	movwf	(??_commandd+0)+0
+  1859  0124  00A8               	incf	(_loopBit),w
+  1860  0125  0A24               	goto	u784
+  1861  0126  2929               u785:
+  1862  0127                     	clrc
+  1863  0127  1003               	rlf	(??_commandd+0)+0,f
+  1864  0128  0DA8               u784:
+  1865  0129                     	addlw	-1
+  1866  0129  3EFF               	skipz
+  1867  012A  1D03               	goto	u785
+  1868  012B  2927               	movf	0+(??_commandd+0)+0,w
+  1869  012C  0828               	andwf	(_codeAddress),w
+  1870  012D  052D               	btfsc	status,2
+  1871  012E  1903               	goto	u791
+  1872  012F  2931               	goto	u790
+  1873  0130  2932               u791:
+  1874  0131                     	goto	l1043
+  1875  0131  2936               u790:
+  1876  0132                     	line	68
+  1877                           	
+  1878                           l1041:	
+  1879  0132                     ;PiCrBt-28.08.22.c: 68:     }
+  1880                           	fcall	_bit1
+  1881  0132  2079               	goto	l1043
+  1882  0133  2936               	line	69
+  1883                           ;PiCrBt-28.08.22.c: 69:     codeCommand = ~codeCommand;
+  1884                           	
+  1885                           l68:	
+  1886  0134                     	goto	l1043
+  1887  0134  2936               	
+  1888                           l67:	
+  1889  0135                     	goto	l1043
+  1890  0135  2936               	line	70
+  1891                           ;PiCrBt-28.08.22.c: 70:     loopBit = 8;
+  1892                           	
+  1893                           l64:	
+  1894  0136                     	line	63
+  1895                           	
+  1896                           l1043:	
+  1897  0136                     ;PiCrBt-28.08.22.c: 63:         if (!(codeCommand & (1 << loopBit))) {
+  1898                           	bcf	status, 5	;RP0=0, select bank0
+  1899  0136  1283               	movf	((_loopBit)),w
+  1900  0137  0824               	btfss	status,2
+  1901  0138  1D03               	goto	u801
+  1902  0139  293B               	goto	u800
+  1903  013A  293C               u801:
+  1904  013B                     	goto	l1035
+  1905  013B  290F               u800:
+  1906  013C                     	
+  1907                           l69:	
+  1908  013C                     	line	71
+  1909                           ;PiCrBt-28.08.22.c: 71:     while (loopBit > 0) {
+  1910                           	comf	(_codeAddress),f
+  1911  013C  09AD               	line	72
+  1912                           	
+  1913                           l1045:	
+  1914  013D                     ;PiCrBt-28.08.22.c: 72:         loopBit--;
+  1915                           	movlw	low(08h)
+  1916  013D  3008               	movwf	(??_commandd+0)+0
+  1917  013E  00A8               	movf	(??_commandd+0)+0,w
+  1918  013F  0828               	movwf	(_loopBit)
+  1919  0140  00A4               	line	73
+  1920                           ;PiCrBt-28.08.22.c: 73:         if (!(codeCommand & (1 << loopBit))) {
+  1921                           	goto	l1055
+  1922  0141  2969               	
+  1923                           l71:	
+  1924  0142                     	line	74
+  1925                           	
+  1926                           l1047:	
+  1927  0142                     ;PiCrBt-28.08.22.c: 74:             bit0();
+  1928                           	movlw	01h
+  1929  0142  3001               	subwf	(_loopBit),f
+  1930  0143  02A4               	line	75
+  1931                           ;PiCrBt-28.08.22.c: 75:         } else if (codeCommand & (1 << loopBit)) {
+  1932                           	movlw	low(01h)
+  1933  0144  3001               	movwf	(??_commandd+0)+0
+  1934  0145  00A8               	incf	(_loopBit),w
+  1935  0146  0A24               	goto	u814
+  1936  0147  294A               u815:
+  1937  0148                     	clrc
+  1938  0148  1003               	rlf	(??_commandd+0)+0,f
+  1939  0149  0DA8               u814:
+  1940  014A                     	addlw	-1
+  1941  014A  3EFF               	skipz
+  1942  014B  1D03               	goto	u815
+  1943  014C  2948               	movf	0+(??_commandd+0)+0,w
+  1944  014D  0828               	andwf	(_codeCommand),w
+  1945  014E  052C               	btfss	status,2
+  1946  014F  1D03               	goto	u821
+  1947  0150  2952               	goto	u820
+  1948  0151  2953               u821:
+  1949  0152                     	goto	l1051
+  1950  0152  2955               u820:
+  1951  0153                     	line	76
+  1952                           	
+  1953                           l1049:	
+  1954  0153                     ;PiCrBt-28.08.22.c: 76:             bit1();
+  1955                           	fcall	_bit0
+  1956  0153  204E               	line	77
+  1957                           ;PiCrBt-28.08.22.c: 77:         }
+  1958                           	goto	l1055
+  1959  0154  2969               	
+  1960                           l72:	
+  1961  0155                     	
+  1962                           l1051:	
+  1963  0155                     	movlw	low(01h)
+  1964  0155  3001               	bcf	status, 5	;RP0=0, select bank0
+  1965  0156  1283               	movwf	(??_commandd+0)+0
+  1966  0157  00A8               	incf	(_loopBit),w
+  1967  0158  0A24               	goto	u834
+  1968  0159  295C               u835:
+  1969  015A                     	clrc
+  1970  015A  1003               	rlf	(??_commandd+0)+0,f
+  1971  015B  0DA8               u834:
+  1972  015C                     	addlw	-1
+  1973  015C  3EFF               	skipz
+  1974  015D  1D03               	goto	u835
+  1975  015E  295A               	movf	0+(??_commandd+0)+0,w
+  1976  015F  0828               	andwf	(_codeCommand),w
+  1977  0160  052C               	btfsc	status,2
+  1978  0161  1903               	goto	u841
+  1979  0162  2964               	goto	u840
+  1980  0163  2965               u841:
+  1981  0164                     	goto	l1055
+  1982  0164  2969               u840:
+  1983  0165                     	line	78
+  1984                           	
+  1985                           l1053:	
+  1986  0165                     ;PiCrBt-28.08.22.c: 78:     }
+  1987                           	fcall	_bit1
+  1988  0165  2079               	goto	l1055
+  1989  0166  2969               	line	79
+  1990                           ;PiCrBt-28.08.22.c: 79:     bit0();
+  1991                           	
+  1992                           l74:	
+  1993  0167                     	goto	l1055
+  1994  0167  2969               	
+  1995                           l73:	
+  1996  0168                     	goto	l1055
+  1997  0168  2969               	line	80
+  1998                           ;PiCrBt-28.08.22.c: 80:     codeCommand = ~codeCommand;
+  1999                           	
+  2000                           l70:	
+  2001  0169                     	line	73
+  2002                           	
+  2003                           l1055:	
+  2004  0169                     ;PiCrBt-28.08.22.c: 73:         if (!(codeCommand & (1 << loopBit))) {
+  2005                           	bcf	status, 5	;RP0=0, select bank0
+  2006  0169  1283               	movf	((_loopBit)),w
+  2007  016A  0824               	btfss	status,2
+  2008  016B  1D03               	goto	u851
+  2009  016C  296E               	goto	u850
+  2010  016D  296F               u851:
+  2011  016E                     	goto	l1047
+  2012  016E  2942               u850:
+  2013  016F                     	
+  2014                           l75:	
+  2015  016F                     	line	81
+  2016                           ;PiCrBt-28.08.22.c: 81: }
+  2017                           	comf	(_codeCommand),f
+  2018  016F  09AC               	line	82
+  2019                           	
+  2020                           l1057:	
+  2021  0170                     ;PiCrBt-28.08.22.c: 82: 
+  2022                           	movlw	low(08h)
+  2023  0170  3008               	movwf	(??_commandd+0)+0
+  2024  0171  00A8               	movf	(??_commandd+0)+0,w
+  2025  0172  0828               	movwf	(_loopBit)
+  2026  0173  00A4               	line	83
+  2027                           ;PiCrBt-28.08.22.c: 83: void ADC() {
+  2028                           	goto	l1067
+  2029  0174  299C               	
+  2030                           l77:	
+  2031  0175                     	line	84
+  2032                           	
+  2033                           l1059:	
+  2034  0175                     ;PiCrBt-28.08.22.c: 84:     ADON = 1;
+  2035                           	movlw	01h
+  2036  0175  3001               	subwf	(_loopBit),f
+  2037  0176  02A4               	line	85
+  2038                           ;PiCrBt-28.08.22.c: 85:     _delay((unsigned long)((3)*(4000000/4000.0)));
+  2039                           	movlw	low(01h)
+  2040  0177  3001               	movwf	(??_commandd+0)+0
+  2041  0178  00A8               	incf	(_loopBit),w
+  2042  0179  0A24               	goto	u864
+  2043  017A  297D               u865:
+  2044  017B                     	clrc
+  2045  017B  1003               	rlf	(??_commandd+0)+0,f
+  2046  017C  0DA8               u864:
+  2047  017D                     	addlw	-1
+  2048  017D  3EFF               	skipz
+  2049  017E  1D03               	goto	u865
+  2050  017F  297B               	movf	0+(??_commandd+0)+0,w
+  2051  0180  0828               	andwf	(_codeCommand),w
+  2052  0181  052C               	btfss	status,2
+  2053  0182  1D03               	goto	u871
+  2054  0183  2985               	goto	u870
+  2055  0184  2986               u871:
+  2056  0185                     	goto	l1063
+  2057  0185  2988               u870:
+  2058  0186                     	line	86
+  2059                           	
+  2060                           l1061:	
+  2061  0186                     ;PiCrBt-28.08.22.c: 86:     _delay((unsigned long)((200)*(4000000/4000000.0)));
+  2062                           	fcall	_bit0
+  2063  0186  204E               	line	87
+  2064                           ;PiCrBt-28.08.22.c: 87:     GO_DONE = 1;
+  2065                           	goto	l1067
+  2066  0187  299C               	
+  2067                           l78:	
+  2068  0188                     	
+  2069                           l1063:	
+  2070  0188                     	movlw	low(01h)
+  2071  0188  3001               	bcf	status, 5	;RP0=0, select bank0
+  2072  0189  1283               	movwf	(??_commandd+0)+0
+  2073  018A  00A8               	incf	(_loopBit),w
+  2074  018B  0A24               	goto	u884
+  2075  018C  298F               u885:
+  2076  018D                     	clrc
+  2077  018D  1003               	rlf	(??_commandd+0)+0,f
+  2078  018E  0DA8               u884:
+  2079  018F                     	addlw	-1
+  2080  018F  3EFF               	skipz
+  2081  0190  1D03               	goto	u885
+  2082  0191  298D               	movf	0+(??_commandd+0)+0,w
+  2083  0192  0828               	andwf	(_codeCommand),w
+  2084  0193  052C               	btfsc	status,2
+  2085  0194  1903               	goto	u891
+  2086  0195  2997               	goto	u890
+  2087  0196  2998               u891:
+  2088  0197                     	goto	l1067
+  2089  0197  299C               u890:
+  2090  0198                     	line	88
+  2091                           	
+  2092                           l1065:	
+  2093  0198                     ;PiCrBt-28.08.22.c: 88:     while (GO_DONE);
+  2094                           	fcall	_bit1
+  2095  0198  2079               	goto	l1067
+  2096  0199  299C               	line	89
+  2097                           ;PiCrBt-28.08.22.c: 89:     volt = ADRESH;
+  2098                           	
+  2099                           l80:	
+  2100  019A                     	goto	l1067
+  2101  019A  299C               	
+  2102                           l79:	
+  2103  019B                     	goto	l1067
+  2104  019B  299C               	line	90
+  2105                           ;PiCrBt-28.08.22.c: 90:     ADON = 0;
+  2106                           	
+  2107                           l76:	
+  2108  019C                     	line	83
+  2109                           	
+  2110                           l1067:	
+  2111  019C                     ;PiCrBt-28.08.22.c: 83: void ADC() {
+  2112                           	bcf	status, 5	;RP0=0, select bank0
+  2113  019C  1283               	movf	((_loopBit)),w
+  2114  019D  0824               	btfss	status,2
+  2115  019E  1D03               	goto	u901
+  2116  019F  29A1               	goto	u900
+  2117  01A0  29A2               u901:
+  2118  01A1                     	goto	l1059
+  2119  01A1  2975               u900:
+  2120  01A2                     	goto	l1069
+  2121  01A2  29A3               	
+  2122                           l81:	
+  2123  01A3                     	line	91
+  2124                           	
+  2125                           l1069:	
+  2126  01A3                     ;PiCrBt-28.08.22.c: 91: }
+  2127                           	fcall	_bit0
+  2128  01A3  204E               	line	92
+  2129                           	
+  2130                           l1071:	
+  2131  01A4                     ;PiCrBt-28.08.22.c: 92: 
+  2132                           	bcf	status, 5	;RP0=0, select bank0
+  2133  01A4  1283               	comf	(_codeCommand),f
+  2134  01A5  09AC               	line	93
+  2135                           	
+  2136                           l82:	
+  2137  01A6                     	return
+  2138  01A6  0008               	opt stack 0
+  2139                           GLOBAL	__end_of_commandd
+  2140                           	__end_of_commandd:
+  2141  01A7                     	signat	_commandd,89
+  2142                           	global	_ms9And4ms
+  2143                           
+  2144 ;; *************** function _ms9And4ms *****************
+  2145 ;; Defined at:
+  2146 ;;		line 20 in file "PiCrBt-28.08.22.c"
+  2147 ;; Parameters:    Size  Location     Type
+  2148 ;;		None
+  2149 ;; Auto vars:     Size  Location     Type
+  2150 ;;		None
+  2151 ;; Return value:  Size  Location     Type
+  2152 ;;                  1    wreg      void 
+  2153 ;; Registers used:
+  2154 ;;		wreg, status,2
+  2155 ;; Tracked objects:
+  2156 ;;		On entry : 0/0
+  2157 ;;		On exit  : 0/0
+  2158 ;;		Unchanged: 0/0
+  2159 ;; Data sizes:     COMMON   BANK0
+  2160 ;;      Params:         0       0
+  2161 ;;      Locals:         0       0
+  2162 ;;      Temps:          0       2
+  2163 ;;      Totals:         0       2
+  2164 ;;Total ram usage:        2 bytes
+  2165 ;; Hardware stack levels used:    1
+  2166 ;; This function calls:
+  2167 ;;		Nothing
+  2168 ;; This function is called by:
+  2169 ;;		_commandd
+  2170 ;; This function uses a non-reentrant model
+  2171 ;;
+  2172                           psect	text2,local,class=CODE,delta=2,merge=1,group=0
+  2173                           	line	20
+  2174                           global __ptext2
+  2175                           __ptext2:	;psect for function _ms9And4ms
+  2176  00A7                     psect	text2
+  2177                           	file	"PiCrBt-28.08.22.c"
+  2178                           	line	20
+  2179                           	global	__size_of_ms9And4ms
+  2180                           	__size_of_ms9And4ms	equ	__end_of_ms9And4ms-_ms9And4ms
+  2181  002E                     	
+  2182                           _ms9And4ms:	
+  2183  00A7                     ;incstack = 0
+  2184                           	opt	stack 6
+  2185                           ; Regs used in _ms9And4ms: [wreg+status,2]
+  2186                           	line	21
+  2187                           	
+  2188                           l983:	
+  2189  00A7                     ;PiCrBt-28.08.22.c: 21:         _delay((unsigned long)((10)*(4000000/4000000.0)));
+  2190                           	bcf	status, 5	;RP0=0, select bank0
+  2191  00A7  1283               	clrf	(_i)
+  2192  00A8  01A2               	clrf	(_i+1)
+  2193  00A9  01A3               	
+  2194                           l985:	
+  2195  00AA                     	movlw	01h
+  2196  00AA  3001               	subwf	(_i+1),w
+  2197  00AB  0223               	movlw	02Ch
+  2198  00AC  302C               	skipnz
+  2199  00AD  1903               	subwf	(_i),w
+  2200  00AE  0222               	skipc
+  2201  00AF  1C03               	goto	u651
+  2202  00B0  28B2               	goto	u650
+  2203  00B1  28B3               u651:
+  2204  00B2                     	goto	l43
+  2205  00B2  28B5               u650:
+  2206  00B3                     	goto	l44
+  2207  00B3  28CB               	
+  2208                           l987:	
+  2209  00B4                     	goto	l44
+  2210  00B4  28CB               	
+  2211                           l43:	
+  2212  00B5                     	line	22
+  2213                           ;PiCrBt-28.08.22.c: 22:         GP2 = 0;
+  2214                           	bsf	(42/8),(42)&7	;volatile
+  2215  00B5  1505               	line	23
+  2216                           	
+  2217                           l989:	
+  2218  00B6                     ;PiCrBt-28.08.22.c: 23:     }
+  2219                           	opt asmopt_push
+  2220                           opt asmopt_off
+  2221                           	movlw	3
+  2222  00B6  3003               movwf	((??_ms9And4ms+0)+0),f
+  2223  00B7  00A6               	u1347:
+  2224  00B8                     decfsz	(??_ms9And4ms+0)+0,f
+  2225  00B8  0BA6               	goto	u1347
+  2226  00B9  28B8               opt asmopt_pop
+  2227                           
+  2228                           	line	24
+  2229                           	
+  2230                           l991:	
+  2231  00BA                     ;PiCrBt-28.08.22.c: 24:     GP2 = 0;
+  2232                           	bcf	status, 5	;RP0=0, select bank0
+  2233  00BA  1283               	bcf	(42/8),(42)&7	;volatile
+  2234  00BB  1105               	line	25
+  2235                           ;PiCrBt-28.08.22.c: 25:     _delay((unsigned long)((1650)*(4000000/4000000.0)));
+  2236                           	movlw	01h
+  2237  00BC  3001               	addwf	(_i),f
+  2238  00BD  07A2               	skipnc
+  2239  00BE  1803               	incf	(_i+1),f
+  2240  00BF  0AA3               	movlw	0
+  2241  00C0  3000               	addwf	(_i+1),f
+  2242  00C1  07A3               	movlw	01h
+  2243  00C2  3001               	subwf	(_i+1),w
+  2244  00C3  0223               	movlw	02Ch
+  2245  00C4  302C               	skipnz
+  2246  00C5  1903               	subwf	(_i),w
+  2247  00C6  0222               	skipc
+  2248  00C7  1C03               	goto	u661
+  2249  00C8  28CA               	goto	u660
+  2250  00C9  28CB               u661:
+  2251  00CA                     	goto	l43
+  2252  00CA  28B5               u660:
+  2253  00CB                     	
+  2254                           l44:	
+  2255  00CB                     	line	26
+  2256                           ;PiCrBt-28.08.22.c: 26: }
+  2257                           	bcf	(42/8),(42)&7	;volatile
+  2258  00CB  1105               	line	27
+  2259                           	
+  2260                           l993:	
+  2261  00CC                     ;PiCrBt-28.08.22.c: 27: 
+  2262                           	opt asmopt_push
+  2263                           opt asmopt_off
+  2264                           movlw	6
+  2265  00CC  3006               movwf	((??_ms9And4ms+0)+0+1),f
+  2266  00CD  00A7               	movlw	215
+  2267  00CE  30D7               movwf	((??_ms9And4ms+0)+0),f
+  2268  00CF  00A6               	u1357:
+  2269  00D0                     decfsz	((??_ms9And4ms+0)+0),f
+  2270  00D0  0BA6               	goto	u1357
+  2271  00D1  28D0               	decfsz	((??_ms9And4ms+0)+0+1),f
+  2272  00D2  0BA7               	goto	u1357
+  2273  00D3  28D0               opt asmopt_pop
+  2274                           
+  2275                           	line	28
+  2276                           	
+  2277                           l45:	
+  2278  00D4                     	return
+  2279  00D4  0008               	opt stack 0
+  2280                           GLOBAL	__end_of_ms9And4ms
+  2281                           	__end_of_ms9And4ms:
+  2282  00D5                     	signat	_ms9And4ms,89
+  2283                           	global	_bit1
+  2284                           
+  2285 ;; *************** function _bit1 *****************
+  2286 ;; Defined at:
+  2287 ;;		line 30 in file "PiCrBt-28.08.22.c"
+  2288 ;; Parameters:    Size  Location     Type
+  2289 ;;		None
+  2290 ;; Auto vars:     Size  Location     Type
+  2291 ;;		None
+  2292 ;; Return value:  Size  Location     Type
+  2293 ;;                  1    wreg      void 
+  2294 ;; Registers used:
+  2295 ;;		wreg, status,2
+  2296 ;; Tracked objects:
+  2297 ;;		On entry : 0/0
+  2298 ;;		On exit  : 0/0
+  2299 ;;		Unchanged: 0/0
+  2300 ;; Data sizes:     COMMON   BANK0
+  2301 ;;      Params:         0       0
+  2302 ;;      Locals:         0       0
+  2303 ;;      Temps:          0       1
+  2304 ;;      Totals:         0       1
+  2305 ;;Total ram usage:        1 bytes
+  2306 ;; Hardware stack levels used:    1
+  2307 ;; This function calls:
+  2308 ;;		Nothing
+  2309 ;; This function is called by:
+  2310 ;;		_commandd
+  2311 ;; This function uses a non-reentrant model
+  2312 ;;
+  2313                           psect	text3,local,class=CODE,delta=2,merge=1,group=0
+  2314                           	line	30
+  2315                           global __ptext3
+  2316                           __ptext3:	;psect for function _bit1
+  2317  0079                     psect	text3
+  2318                           	file	"PiCrBt-28.08.22.c"
+  2319                           	line	30
+  2320                           	global	__size_of_bit1
+  2321                           	__size_of_bit1	equ	__end_of_bit1-_bit1
+  2322  002E                     	
+  2323                           _bit1:	
+  2324  0079                     ;incstack = 0
+  2325                           	opt	stack 6
+  2326                           ; Regs used in _bit1: [wreg+status,2]
+  2327                           	line	31
+  2328                           	
+  2329                           l995:	
+  2330  0079                     ;PiCrBt-28.08.22.c: 31:         _delay((unsigned long)((10)*(4000000/4000000.0)));
+  2331                           	bcf	status, 5	;RP0=0, select bank0
+  2332  0079  1283               	clrf	(_i)
+  2333  007A  01A2               	clrf	(_i+1)
+  2334  007B  01A3               	
+  2335                           l997:	
+  2336  007C                     	movlw	0
+  2337  007C  3000               	subwf	(_i+1),w
+  2338  007D  0223               	movlw	013h
+  2339  007E  3013               	skipnz
+  2340  007F  1903               	subwf	(_i),w
+  2341  0080  0222               	skipc
+  2342  0081  1C03               	goto	u671
+  2343  0082  2884               	goto	u670
+  2344  0083  2885               u671:
+  2345  0084                     	goto	l48
+  2346  0084  2887               u670:
+  2347  0085                     	goto	l49
+  2348  0085  289D               	
+  2349                           l999:	
+  2350  0086                     	goto	l49
+  2351  0086  289D               	
+  2352                           l48:	
+  2353  0087                     	line	32
+  2354                           ;PiCrBt-28.08.22.c: 32:         GP2 = 0;
+  2355                           	bsf	(42/8),(42)&7	;volatile
+  2356  0087  1505               	line	33
+  2357                           	
+  2358                           l1001:	
+  2359  0088                     ;PiCrBt-28.08.22.c: 33:     }
+  2360                           	opt asmopt_push
+  2361                           opt asmopt_off
+  2362                           	movlw	3
+  2363  0088  3003               movwf	((??_bit1+0)+0),f
+  2364  0089  00A6               	u1367:
+  2365  008A                     decfsz	(??_bit1+0)+0,f
+  2366  008A  0BA6               	goto	u1367
+  2367  008B  288A               opt asmopt_pop
+  2368                           
+  2369                           	line	34
+  2370                           	
+  2371                           l1003:	
+  2372  008C                     ;PiCrBt-28.08.22.c: 34:     GP2 = 0;
+  2373                           	bcf	status, 5	;RP0=0, select bank0
+  2374  008C  1283               	bcf	(42/8),(42)&7	;volatile
+  2375  008D  1105               	line	35
+  2376                           ;PiCrBt-28.08.22.c: 35:     _delay((unsigned long)((450)*(4000000/4000000.0)));
+  2377                           	movlw	01h
+  2378  008E  3001               	addwf	(_i),f
+  2379  008F  07A2               	skipnc
+  2380  0090  1803               	incf	(_i+1),f
+  2381  0091  0AA3               	movlw	0
+  2382  0092  3000               	addwf	(_i+1),f
+  2383  0093  07A3               	movlw	0
+  2384  0094  3000               	subwf	(_i+1),w
+  2385  0095  0223               	movlw	013h
+  2386  0096  3013               	skipnz
+  2387  0097  1903               	subwf	(_i),w
+  2388  0098  0222               	skipc
+  2389  0099  1C03               	goto	u681
+  2390  009A  289C               	goto	u680
+  2391  009B  289D               u681:
+  2392  009C                     	goto	l48
+  2393  009C  2887               u680:
+  2394  009D                     	
+  2395                           l49:	
+  2396  009D                     	line	36
+  2397                           ;PiCrBt-28.08.22.c: 36: }
+  2398                           	bcf	(42/8),(42)&7	;volatile
+  2399  009D  1105               	line	37
+  2400                           	
+  2401                           l1005:	
+  2402  009E                     ;PiCrBt-28.08.22.c: 37: 
+  2403                           	opt asmopt_push
+  2404                           opt asmopt_off
+  2405                           	movlw	235
+  2406  009E  30EB               movwf	((??_bit1+0)+0),f
+  2407  009F  00A6               	u1377:
+  2408  00A0                     	nop2
+  2409  00A0  28A1               	nop2
+  2410  00A1  28A2               decfsz	(??_bit1+0)+0,f
+  2411  00A2  0BA6               	goto	u1377
+  2412  00A3  28A0               	nop2
+  2413  00A4  28A5               	nop2
+  2414  00A5  28A6               opt asmopt_pop
+  2415                           
+  2416                           	line	38
+  2417                           	
+  2418                           l50:	
+  2419  00A6                     	return
+  2420  00A6  0008               	opt stack 0
+  2421                           GLOBAL	__end_of_bit1
+  2422                           	__end_of_bit1:
+  2423  00A7                     	signat	_bit1,89
+  2424                           	global	_bit0
+  2425                           
+  2426 ;; *************** function _bit0 *****************
+  2427 ;; Defined at:
+  2428 ;;		line 40 in file "PiCrBt-28.08.22.c"
+  2429 ;; Parameters:    Size  Location     Type
+  2430 ;;		None
+  2431 ;; Auto vars:     Size  Location     Type
+  2432 ;;		None
+  2433 ;; Return value:  Size  Location     Type
+  2434 ;;                  1    wreg      void 
+  2435 ;; Registers used:
+  2436 ;;		wreg, status,2
+  2437 ;; Tracked objects:
+  2438 ;;		On entry : 0/0
+  2439 ;;		On exit  : 0/0
+  2440 ;;		Unchanged: 0/0
+  2441 ;; Data sizes:     COMMON   BANK0
+  2442 ;;      Params:         0       0
+  2443 ;;      Locals:         0       0
+  2444 ;;      Temps:          0       1
+  2445 ;;      Totals:         0       1
+  2446 ;;Total ram usage:        1 bytes
+  2447 ;; Hardware stack levels used:    1
+  2448 ;; This function calls:
+  2449 ;;		Nothing
+  2450 ;; This function is called by:
+  2451 ;;		_commandd
+  2452 ;; This function uses a non-reentrant model
+  2453 ;;
+  2454                           psect	text4,local,class=CODE,delta=2,merge=1,group=0
+  2455                           	line	40
+  2456                           global __ptext4
+  2457                           __ptext4:	;psect for function _bit0
+  2458  004E                     psect	text4
+  2459                           	file	"PiCrBt-28.08.22.c"
+  2460                           	line	40
+  2461                           	global	__size_of_bit0
+  2462                           	__size_of_bit0	equ	__end_of_bit0-_bit0
+  2463  002B                     	
+  2464                           _bit0:	
+  2465  004E                     ;incstack = 0
+  2466                           	opt	stack 6
+  2467                           ; Regs used in _bit0: [wreg+status,2]
+  2468                           	line	41
+  2469                           	
+  2470                           l1007:	
+  2471  004E                     ;PiCrBt-28.08.22.c: 41:     while (loopBit > 0) {
+  2472                           	bcf	status, 5	;RP0=0, select bank0
+  2473  004E  1283               	clrf	(_i)
+  2474  004F  01A2               	clrf	(_i+1)
+  2475  0050  01A3               	
+  2476                           l1009:	
+  2477  0051                     	movlw	0
+  2478  0051  3000               	subwf	(_i+1),w
+  2479  0052  0223               	movlw	013h
+  2480  0053  3013               	skipnz
+  2481  0054  1903               	subwf	(_i),w
+  2482  0055  0222               	skipc
+  2483  0056  1C03               	goto	u691
+  2484  0057  2859               	goto	u690
+  2485  0058  285A               u691:
+  2486  0059                     	goto	l53
+  2487  0059  285C               u690:
+  2488  005A                     	goto	l54
+  2489  005A  2872               	
+  2490                           l1011:	
+  2491  005B                     	goto	l54
+  2492  005B  2872               	
+  2493                           l53:	
+  2494  005C                     	line	42
+  2495                           ;PiCrBt-28.08.22.c: 42:         loopBit--;
+  2496                           	bsf	(42/8),(42)&7	;volatile
+  2497  005C  1505               	line	43
+  2498                           	
+  2499                           l1013:	
+  2500  005D                     ;PiCrBt-28.08.22.c: 43:         if (!(codeAddress & (1 << loopBit))) {
+  2501                           	opt asmopt_push
+  2502                           opt asmopt_off
+  2503                           	movlw	3
+  2504  005D  3003               movwf	((??_bit0+0)+0),f
+  2505  005E  00A6               	u1387:
+  2506  005F                     decfsz	(??_bit0+0)+0,f
+  2507  005F  0BA6               	goto	u1387
+  2508  0060  285F               opt asmopt_pop
+  2509                           
+  2510                           	line	44
+  2511                           	
+  2512                           l1015:	
+  2513  0061                     ;PiCrBt-28.08.22.c: 44:             bit0();
+  2514                           	bcf	status, 5	;RP0=0, select bank0
+  2515  0061  1283               	bcf	(42/8),(42)&7	;volatile
+  2516  0062  1105               	line	45
+  2517                           ;PiCrBt-28.08.22.c: 45:         } else if (codeAddress & (1 << loopBit)) {
+  2518                           	movlw	01h
+  2519  0063  3001               	addwf	(_i),f
+  2520  0064  07A2               	skipnc
+  2521  0065  1803               	incf	(_i+1),f
+  2522  0066  0AA3               	movlw	0
+  2523  0067  3000               	addwf	(_i+1),f
+  2524  0068  07A3               	movlw	0
+  2525  0069  3000               	subwf	(_i+1),w
+  2526  006A  0223               	movlw	013h
+  2527  006B  3013               	skipnz
+  2528  006C  1903               	subwf	(_i),w
+  2529  006D  0222               	skipc
+  2530  006E  1C03               	goto	u701
+  2531  006F  2871               	goto	u700
+  2532  0070  2872               u701:
+  2533  0071                     	goto	l53
+  2534  0071  285C               u700:
+  2535  0072                     	
+  2536                           l54:	
+  2537  0072                     	line	46
+  2538                           ;PiCrBt-28.08.22.c: 46:             bit1();
+  2539                           	bcf	(42/8),(42)&7	;volatile
+  2540  0072  1105               	line	47
+  2541                           	
+  2542                           l1017:	
+  2543  0073                     ;PiCrBt-28.08.22.c: 47:         }
+  2544                           	opt asmopt_push
+  2545                           opt asmopt_off
+  2546                           	movlw	149
+  2547  0073  3095               movwf	((??_bit0+0)+0),f
+  2548  0074  00A6               	u1397:
+  2549  0075                     decfsz	(??_bit0+0)+0,f
+  2550  0075  0BA6               	goto	u1397
+  2551  0076  2875               	nop2
+  2552  0077  2878               opt asmopt_pop
+  2553                           
+  2554                           	line	48
+  2555                           	
+  2556                           l55:	
+  2557  0078                     	return
+  2558  0078  0008               	opt stack 0
+  2559                           GLOBAL	__end_of_bit0
+  2560                           	__end_of_bit0:
+  2561  0079                     	signat	_bit0,89
+  2562                           	global	_ADC1
+  2563                           
+  2564 ;; *************** function _ADC1 *****************
+  2565 ;; Defined at:
+  2566 ;;		line 105 in file "PiCrBt-28.08.22.c"
+  2567 ;; Parameters:    Size  Location     Type
+  2568 ;;		None
+  2569 ;; Auto vars:     Size  Location     Type
+  2570 ;;		None
+  2571 ;; Return value:  Size  Location     Type
+  2572 ;;                  1    wreg      void 
+  2573 ;; Registers used:
+  2574 ;;		wreg
+  2575 ;; Tracked objects:
+  2576 ;;		On entry : 0/0
+  2577 ;;		On exit  : 0/0
+  2578 ;;		Unchanged: 0/0
+  2579 ;; Data sizes:     COMMON   BANK0
+  2580 ;;      Params:         0       0
+  2581 ;;      Locals:         0       0
+  2582 ;;      Temps:          0       2
+  2583 ;;      Totals:         0       2
+  2584 ;;Total ram usage:        2 bytes
+  2585 ;; Hardware stack levels used:    1
+  2586 ;; This function calls:
+  2587 ;;		Nothing
+  2588 ;; This function is called by:
+  2589 ;;		_main
+  2590 ;; This function uses a non-reentrant model
+  2591 ;;
+  2592                           psect	text5,local,class=CODE,delta=2,merge=1,group=0
+  2593                           	line	105
+  2594                           global __ptext5
+  2595                           __ptext5:	;psect for function _ADC1
+  2596  0011                     psect	text5
+  2597                           	file	"PiCrBt-28.08.22.c"
+  2598                           	line	105
+  2599                           	global	__size_of_ADC1
+  2600                           	__size_of_ADC1	equ	__end_of_ADC1-_ADC1
+  2601  001B                     	
+  2602                           _ADC1:	
+  2603  0011                     ;incstack = 0
+  2604                           	opt	stack 7
+  2605                           ; Regs used in _ADC1: [wreg]
+  2606                           	line	106
+  2607                           	
+  2608                           l1083:	
+  2609  0011                     ;PiCrBt-28.08.22.c: 106:     OSCCAL = 0b10000000;
+  2610                           	bcf	status, 5	;RP0=0, select bank0
+  2611  0011  1283               	bsf	(248/8),(248)&7	;volatile
+  2612  0012  141F               	line	107
+  2613                           	
+  2614                           l1085:	
+  2615  0013                     ;PiCrBt-28.08.22.c: 107:     TRISIO = 0b00010000;
+  2616                           	opt asmopt_push
+  2617                           opt asmopt_off
+  2618                           movlw	39
+  2619  0013  3027               movwf	((??_ADC1+0)+0+1),f
+  2620  0014  00A7               	movlw	245
+  2621  0015  30F5               movwf	((??_ADC1+0)+0),f
+  2622  0016  00A6               	u1407:
+  2623  0017                     decfsz	((??_ADC1+0)+0),f
+  2624  0017  0BA6               	goto	u1407
+  2625  0018  2817               	decfsz	((??_ADC1+0)+0+1),f
+  2626  0019  0BA7               	goto	u1407
+  2627  001A  2817               opt asmopt_pop
+  2628                           
+  2629                           	line	108
+  2630                           	
+  2631                           l1087:	
+  2632  001B                     ;PiCrBt-28.08.22.c: 108:     RP0 = 0;
+  2633                           	bcf	status, 5	;RP0=0, select bank0
+  2634  001B  1283               	bsf	(249/8),(249)&7	;volatile
+  2635  001C  149F               	line	109
+  2636                           ;PiCrBt-28.08.22.c: 109:     ADCON0 = 0b00001100;
+  2637                           	goto	l91
+  2638  001D  281E               	
+  2639                           l92:	
+  2640  001E                     	
+  2641                           l91:	
+  2642  001E                     	btfsc	(249/8),(249)&7	;volatile
+  2643  001E  189F               	goto	u921
+  2644  001F  2821               	goto	u920
+  2645  0020  2822               u921:
+  2646  0021                     	goto	l91
+  2647  0021  281E               u920:
+  2648  0022                     	goto	l1089
+  2649  0022  2823               	
+  2650                           l93:	
+  2651  0023                     	line	110
+  2652                           	
+  2653                           l1089:	
+  2654  0023                     ;PiCrBt-28.08.22.c: 110:     INTCON = 0b00000000;
+  2655                           	movf	(30),w	;volatile
+  2656  0023  081E               	movwf	(??_ADC1+0)+0
+  2657  0024  00A6               	clrf	(??_ADC1+0)+0+1
+  2658  0025  01A7               	movf	0+(??_ADC1+0)+0,w
+  2659  0026  0826               	movwf	(_volt)
+  2660  0027  00A0               	movf	1+(??_ADC1+0)+0,w
+  2661  0028  0827               	movwf	(_volt+1)
+  2662  0029  00A1               	line	111
+  2663                           	
+  2664                           l1091:	
+  2665  002A                     ;PiCrBt-28.08.22.c: 111:     RP0 = 1;
+  2666                           	bcf	(248/8),(248)&7	;volatile
+  2667  002A  101F               	line	112
+  2668                           	
+  2669                           l94:	
+  2670  002B                     	return
+  2671  002B  0008               	opt stack 0
+  2672                           GLOBAL	__end_of_ADC1
+  2673                           	__end_of_ADC1:
+  2674  002C                     	signat	_ADC1,89
+  2675                           	global	_ADC
+  2676                           
+  2677 ;; *************** function _ADC *****************
+  2678 ;; Defined at:
+  2679 ;;		line 95 in file "PiCrBt-28.08.22.c"
+  2680 ;; Parameters:    Size  Location     Type
+  2681 ;;		None
+  2682 ;; Auto vars:     Size  Location     Type
+  2683 ;;		None
+  2684 ;; Return value:  Size  Location     Type
+  2685 ;;                  1    wreg      void 
+  2686 ;; Registers used:
+  2687 ;;		wreg
+  2688 ;; Tracked objects:
+  2689 ;;		On entry : 0/0
+  2690 ;;		On exit  : 0/0
+  2691 ;;		Unchanged: 0/0
+  2692 ;; Data sizes:     COMMON   BANK0
+  2693 ;;      Params:         0       0
+  2694 ;;      Locals:         0       0
+  2695 ;;      Temps:          0       2
+  2696 ;;      Totals:         0       2
+  2697 ;;Total ram usage:        2 bytes
+  2698 ;; Hardware stack levels used:    1
+  2699 ;; This function calls:
+  2700 ;;		Nothing
+  2701 ;; This function is called by:
+  2702 ;;		_main
+  2703 ;; This function uses a non-reentrant model
+  2704 ;;
+  2705                           psect	text6,local,class=CODE,delta=2,merge=1,group=0
+  2706                           	line	95
+  2707                           global __ptext6
+  2708                           __ptext6:	;psect for function _ADC
+  2709  002C                     psect	text6
+  2710                           	file	"PiCrBt-28.08.22.c"
+  2711                           	line	95
+  2712                           	global	__size_of_ADC
+  2713                           	__size_of_ADC	equ	__end_of_ADC-_ADC
+  2714  0022                     	
+  2715                           _ADC:	
+  2716  002C                     ;incstack = 0
+  2717                           	opt	stack 7
+  2718                           ; Regs used in _ADC: [wreg]
+  2719                           	line	96
+  2720                           	
+  2721                           l1073:	
+  2722  002C                     ;PiCrBt-28.08.22.c: 96:     GO_DONE = 1;
+  2723                           	bcf	status, 5	;RP0=0, select bank0
+  2724  002C  1283               	bsf	(248/8),(248)&7	;volatile
+  2725  002D  141F               	line	97
+  2726                           	
+  2727                           l1075:	
+  2728  002E                     ;PiCrBt-28.08.22.c: 97:     while (GO_DONE);
+  2729                           	opt asmopt_push
+  2730                           opt asmopt_off
+  2731                           movlw	4
+  2732  002E  3004               movwf	((??_ADC+0)+0+1),f
+  2733  002F  00A7               	movlw	228
+  2734  0030  30E4               movwf	((??_ADC+0)+0),f
+  2735  0031  00A6               	u1417:
+  2736  0032                     decfsz	((??_ADC+0)+0),f
+  2737  0032  0BA6               	goto	u1417
+  2738  0033  2832               	decfsz	((??_ADC+0)+0+1),f
+  2739  0034  0BA7               	goto	u1417
+  2740  0035  2832               	nop
+  2741  0036  0000               opt asmopt_pop
+  2742                           
+  2743                           	line	98
+  2744                           ;PiCrBt-28.08.22.c: 98:     volt = ADRESH;
+  2745                           	opt asmopt_push
+  2746                           opt asmopt_off
+  2747                           	movlw	66
+  2748  0037  3042               	bcf	status, 5	;RP0=0, select bank0
+  2749  0038  1283               movwf	((??_ADC+0)+0),f
+  2750  0039  00A6               	u1427:
+  2751  003A                     decfsz	(??_ADC+0)+0,f
+  2752  003A  0BA6               	goto	u1427
+  2753  003B  283A               	nop
+  2754  003C  0000               opt asmopt_pop
+  2755                           
+  2756                           	line	99
+  2757                           	
+  2758                           l1077:	
+  2759  003D                     ;PiCrBt-28.08.22.c: 99:     ADON = 0;
+  2760                           	bcf	status, 5	;RP0=0, select bank0
+  2761  003D  1283               	bsf	(249/8),(249)&7	;volatile
+  2762  003E  149F               	line	100
+  2763                           ;PiCrBt-28.08.22.c: 100: }
+  2764                           	goto	l85
+  2765  003F  2840               	
+  2766                           l86:	
+  2767  0040                     	
+  2768                           l85:	
+  2769  0040                     	btfsc	(249/8),(249)&7	;volatile
+  2770  0040  189F               	goto	u911
+  2771  0041  2843               	goto	u910
+  2772  0042  2844               u911:
+  2773  0043                     	goto	l85
+  2774  0043  2840               u910:
+  2775  0044                     	goto	l1079
+  2776  0044  2845               	
+  2777                           l87:	
+  2778  0045                     	line	101
+  2779                           	
+  2780                           l1079:	
+  2781  0045                     ;PiCrBt-28.08.22.c: 101: 
+  2782                           	movf	(30),w	;volatile
+  2783  0045  081E               	movwf	(??_ADC+0)+0
+  2784  0046  00A6               	clrf	(??_ADC+0)+0+1
+  2785  0047  01A7               	movf	0+(??_ADC+0)+0,w
+  2786  0048  0826               	movwf	(_volt)
+  2787  0049  00A0               	movf	1+(??_ADC+0)+0,w
+  2788  004A  0827               	movwf	(_volt+1)
+  2789  004B  00A1               	line	102
+  2790                           	
+  2791                           l1081:	
+  2792  004C                     ;PiCrBt-28.08.22.c: 102: void main(void) {
+  2793                           	bcf	(248/8),(248)&7	;volatile
+  2794  004C  101F               	line	103
+  2795                           	
+  2796                           l88:	
+  2797  004D                     	return
+  2798  004D  0008               	opt stack 0
+  2799                           GLOBAL	__end_of_ADC
+  2800                           	__end_of_ADC:
+  2801  004E                     	signat	_ADC,89
+  2802                           global	___latbits
+  2803                           ___latbits	equ	0
+  2804  0000                     	global	btemp
+  2805                           	btemp set 05Eh
+  2806  005E                     
+  2807                           	DABS	1,94,2	;btemp
+  2808                           	global	wtemp0
+  2809                           	wtemp0 set btemp+0
+  2810  005E                     	end
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        3
+    BSS         6
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62      5      14
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_commandd
+    _commandd->_ms9And4ms
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0       0
+                                              3 BANK0      2     2      0
+                                _ADC
+                               _ADC1
+                           _commandd
+ ---------------------------------------------------------------------------------
+ (1) _commandd                                             1     1      0       0
+                                              2 BANK0      1     1      0
+                               _bit0
+                               _bit1
+                          _ms9And4ms
+ ---------------------------------------------------------------------------------
+ (2) _ms9And4ms                                            2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (2) _bit1                                                 1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (2) _bit0                                                 1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC1                                                 2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC                                                  2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ADC
+   _ADC1
+   _commandd
+     _bit0
+     _bit1
+     _ms9And4ms
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               3E      5       E       4       22.6%
+BITBANK0            3E      0       0       3        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITCOMMON            0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0       E       6        0.0%
+ABS                  0      0       E       5        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA              80      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.00 build -1524193055 
+Symbol Table                                                                                   Sun Sep 25 16:04:44 2022
+
+             __CFG_CP$ON 0000                        _i 0022                       l50 00A6  
+                     l43 00B5                       l44 00CB                       l60 00EF  
+                     l53 005C                       l45 00D4                       l61 0102  
+                     l54 0072                       l70 0169                       l62 0101  
+                     l55 0078                       l71 0142                       l63 0109  
+                     l48 0087                       l80 019A                       l72 0155  
+                     l64 0136                       l49 009D                       l81 01A3  
+                     l73 0168                       l65 010F                       l82 01A6  
+                     l74 0167                       l66 0122                       l58 0103  
+                     l91 001E                       l75 016F                       l67 0135  
+                     l59 00DC                       l92 001E                       l76 019C  
+                     l68 0134                       l85 0040                       l93 0023  
+                     l77 0175                       l69 013C                       l86 0040  
+                     l94 002B                       l78 0188                       l87 0045  
+                     l79 019B                       l88 004D                       l99 01C8  
+            __CFG_CPD$ON 0000                      l100 01FB                      l101 01FA  
+                    l110 0358                      l102 0269                      l111 0357  
+                    l103 0268                      l120 03F0                      l112 038A  
+                    l104 02C2                      l113 0389                      l105 02C2  
+                    l114 03BC                      l106 02F4                      l115 03BB  
+                    l107 02F3                      l116 03EE                      l108 0326  
+                    l117 03ED                      l109 0325                      l118 03EF  
+                    l119 03F0                      _ADC 002C                      _GP2 002A  
+                    l991 00BA                      l983 00A7                      l993 00CC  
+                    l985 00AA                      l995 0079                      l987 00B4  
+                    l997 007C                      l989 00B6                      l999 0086  
+                    _RP0 001D                      u700 0072                      u701 0071  
+                    u800 013C                      u720 00ED                      u801 013B  
+                    u721 00EC                      u650 00B3                      u714 00E4  
+                    u651 00B2                      u715 00E2                      u660 00CB  
+                    u900 01A2                      u820 0153                      u740 00FF  
+                    u661 00CA                      u901 01A1                      u821 0152  
+                    u741 00FE                      u910 0044                      u670 0085  
+                    u814 014A                      u750 0109                      u734 00F6  
+                    u911 0043                      u671 0084                      u815 0148  
+                    u751 0108                      u735 00F4                      u920 0022  
+                    u680 009D                      u840 0165                      u921 0021  
+                    u681 009C                      u841 0164                      u690 005A  
+                    u850 016F                      u834 015C                      u770 0120  
+                    u930 01D3                      u691 0059                      u851 016E  
+                    u835 015A                      u771 011F                      u931 01D2  
+                    u764 0117                      u940 01DC                      u765 0115  
+                    u941 01DB                      u870 0186                      u790 0132  
+                    u950 01E7                      u871 0185                      u791 0131  
+                    u951 01E6                      u864 017D                      u784 0129  
+                    u960 01F0                      u865 017B                      u785 0127  
+                    u961 01EF                      u890 0198                      u970 0205  
+                    u891 0197                      u971 0204                      u884 018F  
+                    u980 020E                      u885 018D                      u981 020D  
+                    u990 0219                      u991 0218                     ?_ADC 0026  
+                   l1001 0088                     l1011 005B                     l1003 008C  
+                   l1013 005D                     l1005 009E                     l1021 00D6  
+                   l1101 01B5                     l1015 0061                     l1007 004E  
+                   l1023 00DC                     l1031 0103                     l1111 01BE  
+                   l1103 01B6                     l1017 0073                     l1009 0051  
+                   l1041 0132                     l1033 010A                     l1025 00ED  
+                   l1201 02F1                     l1121 01D3                     l1113 01C2  
+                   l1105 01B7                     l1051 0155                     l1035 010F  
+                   l1043 0136                     l1027 00EF                     l1019 00D5  
+                   l1211 0312                     l1203 02F4                     l1131 01F8  
+                   l1123 01DC                     l1115 01C6                     l1107 01BA  
+                   l1061 0186                     l1053 0165                     l1045 013D  
+                   l1037 0120                     l1029 00FF                     l1221 0339  
+                   l1213 031B                     l1205 02FE                     l1141 0219  
+                   l1125 01DD                     l1133 01FB                     l1117 01C8  
+                   l1109 01BC                     l1071 01A4                     l1063 0188  
+                   l1047 0142                     l1055 0169                     l1039 0122  
+                   l1223 033A                     l1231 0358                     l1215 0323  
+                   l1207 0307                     l1151 023A                     l1143 0222  
+                   l1135 0205                     l1127 01E7                     l1119 01C9  
+                   l1081 004C                     l1073 002C                     l1065 0198  
+                   l1057 0170                     l1049 0153                     l1241 037F  
+                   l1233 0362                     l1225 0344                     l1209 0308  
+                   l1217 0326                     l1161 0266                     l1153 023F  
+                   l1145 022A                     l1137 020E                     l1129 01F0  
+                   l1075 002E                     l1091 002A                     l1083 0011  
+                   l1059 0175                     l1067 019C                     l1251 039E  
+                   l1243 0387                     l1235 036B                     l1227 034D  
+                   l1219 0330                     l1171 0287                     l1155 0249  
+                   l1147 022B                     l1139 020F                     l1163 0269  
+                   l1077 003D                     l1085 0013                     l1069 01A3  
+                   l1261 03C6                     l1253 03A8                     l1237 036C  
+                   l1245 038A                     l1229 0355                     l1181 02A8  
+                   l1173 0290                     l1165 0273                     l1157 024E  
+                   l1149 0235                     l1093 01A7                     l1079 0045  
+                   l1087 001B                     l1271 03EB                     l1263 03CF  
+                   l1255 03B1                     l1247 0394                     l1239 0376  
+                   l1191 02CC                     l1183 02AD                     l1175 0298  
+                   l1167 027C                     l1159 0252                     l1095 01A9  
+                   l1089 0023                     l1265 03D0                     l1257 03B9  
+                   l1249 039D                     l1193 02D5                     l1185 02B7  
+                   l1177 0299                     l1169 027D                     l1097 01AB  
+                   l1267 03DA                     l1259 03BC                     l1195 02D6  
+                   l1187 02BC                     l1179 02A3                     l1099 01B1  
+                   l1269 03E3                     l1197 02E0                     l1189 02C0  
+                   l1199 02E9                     _ADC1 0011                     _ADON 00F8  
+                   u1000 0222                     u1001 0221                     u1010 0273  
+                   u1011 0272                     u1100 0307                     u1020 027C  
+                   u1101 0306                     u1021 027B                     u1110 0312  
+                   u1030 0287                     u1111 0311                     u1031 0286  
+                   u1200 037F                     u1120 031B                     u1040 0290  
+                   u1201 037E                     u1121 031A                     u1041 028F  
+                   u1210 0394                     u1130 0330                     u1050 02CC  
+                   u1211 0393                     u1131 032F                     u1051 02CB  
+                   u1220 039D                     u1140 0339                     u1060 02D5  
+                   u1221 039C                     u1141 0338                     u1061 02D4  
+                   u1230 03A8                     u1150 0344                     u1070 02E0  
+                   u1231 03A7                     u1151 0343                     u1071 02DF  
+                   u1240 03B1                     u1160 034D                     u1080 02E9  
+                   u1241 03B0                     u1161 034C                     u1081 02E8  
+                   u1250 03C6                     u1170 0362                     u1090 02FE  
+                   u1251 03C5                     u1171 0361                     u1091 02FD  
+                   u1307 0244                     u1260 03CF                     u1180 036B  
+                   u1261 03CE                     u1181 036A                     u1317 0258  
+                   u1270 03DA                     u1190 0376                     u1407 0017  
+                   u1271 03D9                     u1191 0375                     u1327 029E  
+                   u1280 03E3                     u1417 0032                     u1281 03E2  
+                   u1337 02B2                     u1427 003A                     u1347 00B8  
+                   u1357 00D0                     u1367 008A                     u1377 00A0  
+                   u1297 0230                     u1387 005F                     u1397 0075  
+                   _bit0 004E                     _bit1 0079                     _main 01A7  
+                   btemp 005E                     _volt 0020                     start 0000  
+                  ??_ADC 0026                    ?_ADC1 0026                    ?_bit0 0026  
+                  ?_bit1 0026                    ?_main 0026            __CFG_WDTE$OFF 0000  
+                  _CMCON 0019                    _ANSEL 009F                    _Reg_1 0025  
+         __CFG_BOREN$OFF 0000                    status 0003                    wtemp0 005E  
+           __end_of_ADC1 002C           __CFG_MCLRE$OFF 0000          __initialization 03F1  
+           __end_of_bit0 0079             __end_of_bit1 00A7             __end_of_main 03F1  
+                 ??_ADC1 0026                   ??_bit0 0026                   ??_bit1 0026  
+                 ??_main 0029                   _ADCON0 001F                   _ADRESH 001E  
+                 _INTCON 000B                   _OSCCAL 0090                   _TRISIO 0085  
+         __CFG_PWRTE$OFF 0000         __end_of_commandd 01A7  __end_of__initialization 03FD  
+           __pidataBANK0 000E       __size_of_ms9And4ms 002E               __pbssBANK0 0020  
+             __pmaintext 01A7                  _GO_DONE 00F9                ?_commandd 0026  
+      __end_of_ms9And4ms 00D5                  __ptext1 00D5                  __ptext2 00A7  
+                __ptext3 0079                  __ptext4 004E                  __ptext5 0011  
+                __ptext6 002C             __size_of_ADC 0022                  _loopBit 0024  
+             ??_commandd 0028     end_of_initialization 03FD          _codeCommandPlus 002B  
+    start_initialization 03F1              __end_of_ADC 004E              __pdataBANK0 002B  
+              ___latbits 0000            __pcstackBANK0 0026              _codeAddress 002D  
+      __size_of_commandd 00D2              _codeCommand 002C                _ms9And4ms 00A7  
+             ?_ms9And4ms 0026                 _commandd 00D5            __size_of_ADC1 001B  
+          __size_of_bit0 002B            __size_of_bit1 002E            __size_of_main 024A  
+            ??_ms9And4ms 0026               _OPTION_REG 0081        __CFG_FOSC$INTRCIO 0000  

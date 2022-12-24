@@ -1,0 +1,2225 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V2.00 build -1524193055 
+                                                                                               Mon Sep 19 18:54:57 2022
+
+Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 20180527130849
+     1  0000                     
+      + 0000                     
+     2                           ; Version 2.00
+     3                           ; Generated 27/05/2018 GMT
+     4                           
+     5                           ; 
+     6                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+     7                           ; All rights reserved.
+     8                           ; 
+     9                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+                                 ip").
+    10                           ; 
+    11                           ; Redistribution and use in source and binary forms, with or without modification, are
+    12                           ; permitted provided that the following conditions are met:
+    13                           ; 
+    14                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+                                 t of
+    15                           ;        conditions and the following disclaimer.
+    16                           ; 
+    17                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+                                 list
+    18                           ;        of conditions and the following disclaimer in the documentation and/or other
+    19                           ;        materials provided with the distribution.
+    20                           ; 
+    21                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+                                 is
+    22                           ;        software without specific prior written permission.
+    23                           ; 
+    24                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+
+    25                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+                                 OR
+    26                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+                                 T,
+    27                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+                                 
+    28                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+                                 
+    29                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+                                 RICT
+    30                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+                                 SE OF
+    31                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    32                           ; 
+    33                           
+    34                           
+    35                           ; 
+    36                           ; Code-generator required, PIC12F675 Definitions
+    37                           ; 
+    38  0004                     fsr0 equ 04h
+    39  0004                     indf equ 00h
+    40  0000                     indf0 equ 00h
+    41  0000                     pc equ 02h
+    42  0002                     pcl equ 02h
+    43  0002                     pclath equ 0Ah
+    44  000A                     status equ 03h
+    45  0003                     
+     2                           opt pagewidth 120
+     3  0000                     byte0	macro	val
+     4                           	(getbyte(val,0))
+     5                           endm
+     6  0000                     byte1	macro	val
+     7                           	(getbyte(val,1))
+     8                           endm
+     9  0000                     byte2	macro	val
+    10                           	(getbyte(val,2))
+    11                           endm
+    12  0000                     byte3	macro	val
+    13                           	(getbyte(val,3))
+    14                           endm
+    15  0000                     byte4	macro	val
+    16                           	(getbyte(val,4))
+    17                           endm
+    18  0000                     byte5	macro	val
+    19                           	(getbyte(val,5))
+    20                           endm
+    21  0000                     byte6	macro	val
+    22                           	(getbyte(val,6))
+    23                           endm
+    24  0000                     byte7	macro	val
+    25                           	(getbyte(val,7))
+    26                           endm
+    27  0000                     getword	macro	val,pos
+    28                           	(((val) >> (8 * pos)) and 0xffff)
+    29                           endm
+    30  0000                     word0	macro	val
+    31                           	(getword(val,0))
+    32                           endm
+    33  0000                     word1	macro	val
+    34                           	(getword(val,2))
+    35                           endm
+    36  0000                     word2	macro	val
+    37                           	(getword(val,4))
+    38                           endm
+    39  0000                     word3	macro	val
+    40                           	(getword(val,6))
+    41                           endm
+    42  0000                     gettword	macro	val,pos
+    43                           	(((val) >> (8 * pos)) and 0xffffff)
+    44                           endm
+    45  0000                     tword0	macro	val
+    46                           	(gettword(val,0))
+    47                           endm
+    48  0000                     tword1	macro	val
+    49                           	(gettword(val,3))
+    50                           endm
+    51  0000                     tword2	macro	val
+    52                           	(gettword(val,6))
+    53                           endm
+    54  0000                     getdword	macro	val,pos
+    55                           	(((val) >> (8 * pos)) and 0xffffffff)
+    56                           endm
+    57  0000                     dword0	macro	val
+    58                           	(getdword(val,0))
+    59                           endm
+    60  0000                     dword1	macro	val
+    61                           	(getdword(val,4))
+    62                           endm
+    63  0000                     clrc	macro
+    64                           	bcf	3,0
+    65                           	endm
+    66  0000                     clrz	macro
+    67                           	bcf	3,2
+    68                           	endm
+    69  0000                     setc	macro
+    70                           	bsf	3,0
+    71                           	endm
+    72  0000                     setz	macro
+    73                           	bsf	3,2
+    74                           	endm
+    75  0000                     skipc	macro
+    76                           	btfss	3,0
+    77                           	endm
+    78  0000                     skipz	macro
+    79                           	btfss	3,2
+    80                           	endm
+    81  0000                     skipnc	macro
+    82                           	btfsc	3,0
+    83                           	endm
+    84  0000                     skipnz	macro
+    85                           	btfsc	3,2
+    86                           	endm
+    87  0000                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    88                           INDF equ 00h ;# 
+    89  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    90                           TMR0 equ 01h ;# 
+    91  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    92                           PCL equ 02h ;# 
+    93  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    94                           STATUS equ 03h ;# 
+    95  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    96                           FSR equ 04h ;# 
+    97  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+    98                           GPIO equ 05h ;# 
+    99  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   100                           PCLATH equ 0Ah ;# 
+   101  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   102                           INTCON equ 0Bh ;# 
+   103  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   104                           PIR1 equ 0Ch ;# 
+   105  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   106                           TMR1 equ 0Eh ;# 
+   107  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   108                           TMR1L equ 0Eh ;# 
+   109  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   110                           TMR1H equ 0Fh ;# 
+   111  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   112                           T1CON equ 010h ;# 
+   113  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   114                           CMCON equ 019h ;# 
+   115  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   116                           ADRESH equ 01Eh ;# 
+   117  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   118                           ADCON0 equ 01Fh ;# 
+   119  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   120                           OPTION_REG equ 081h ;# 
+   121  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   122                           TRISIO equ 085h ;# 
+   123  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   124                           PIE1 equ 08Ch ;# 
+   125  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   126                           PCON equ 08Eh ;# 
+   127  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   128                           OSCCAL equ 090h ;# 
+   129  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   130                           WPU equ 095h ;# 
+   131  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   132                           IOC equ 096h ;# 
+   133  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   134                           IOCB equ 096h ;# 
+   135  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   136                           VRCON equ 099h ;# 
+   137  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   138                           EEDATA equ 09Ah ;# 
+   139  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   140                           EEDAT equ 09Ah ;# 
+   141  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   142                           EEADR equ 09Bh ;# 
+   143  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   144                           EECON1 equ 09Ch ;# 
+   145  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   146                           EECON2 equ 09Dh ;# 
+   147  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   148                           ADRESL equ 09Eh ;# 
+   149  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   150                           ANSEL equ 09Fh ;# 
+   151  009F                     # 54 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   152                           INDF equ 00h ;# 
+   153  0000                     # 74 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   154                           TMR0 equ 01h ;# 
+   155  0001                     # 94 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   156                           PCL equ 02h ;# 
+   157  0002                     # 114 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   158                           STATUS equ 03h ;# 
+   159  0003                     # 200 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   160                           FSR equ 04h ;# 
+   161  0004                     # 220 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   162                           GPIO equ 05h ;# 
+   163  0005                     # 308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   164                           PCLATH equ 0Ah ;# 
+   165  000A                     # 328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   166                           INTCON equ 0Bh ;# 
+   167  000B                     # 406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   168                           PIR1 equ 0Ch ;# 
+   169  000C                     # 454 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   170                           TMR1 equ 0Eh ;# 
+   171  000E                     # 461 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   172                           TMR1L equ 0Eh ;# 
+   173  000E                     # 481 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   174                           TMR1H equ 0Fh ;# 
+   175  000F                     # 501 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   176                           T1CON equ 010h ;# 
+   177  0010                     # 566 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   178                           CMCON equ 019h ;# 
+   179  0019                     # 625 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   180                           ADRESH equ 01Eh ;# 
+   181  001E                     # 645 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   182                           ADCON0 equ 01Fh ;# 
+   183  001F                     # 729 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   184                           OPTION_REG equ 081h ;# 
+   185  0081                     # 799 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   186                           TRISIO equ 085h ;# 
+   187  0085                     # 849 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   188                           PIE1 equ 08Ch ;# 
+   189  008C                     # 897 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   190                           PCON equ 08Eh ;# 
+   191  008E                     # 931 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   192                           OSCCAL equ 090h ;# 
+   193  0090                     # 991 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   194                           WPU equ 095h ;# 
+   195  0095                     # 1036 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   196                           IOC equ 096h ;# 
+   197  0096                     # 1041 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   198                           IOCB equ 096h ;# 
+   199  0096                     # 1210 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   200                           VRCON equ 099h ;# 
+   201  0099                     # 1270 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   202                           EEDATA equ 09Ah ;# 
+   203  009A                     # 1275 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   204                           EEDAT equ 09Ah ;# 
+   205  009A                     # 1308 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   206                           EEADR equ 09Bh ;# 
+   207  009B                     # 1328 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   208                           EECON1 equ 09Ch ;# 
+   209  009C                     # 1366 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   210                           EECON2 equ 09Dh ;# 
+   211  009D                     # 1386 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   212                           ADRESL equ 09Eh ;# 
+   213  009E                     # 1406 "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h"
+   214                           ANSEL equ 09Fh ;# 
+   215  009F                     	FNCALL	_main,_ReadEEPROM
+   216                           	FNCALL	_main,_WriteEEPROM
+   217                           	FNCALL	_main,_down
+   218                           	FNCALL	_main,_up
+   219                           	FNCALL	_up,___wmul
+   220                           	FNCALL	_up,_delay_ms
+   221                           	FNCALL	_down,___wmul
+   222                           	FNCALL	_down,_delay_ms
+   223                           	FNROOT	_main
+   224                           	global	_timesDown
+   225                           	global	_timesUp
+   226                           	global	_i
+   227                           	global	_UpDown
+   228                           	global	_CMCON
+   229                           _CMCON	set	0x19
+   230  0019                     	global	_GPIO
+   231                           _GPIO	set	0x5
+   232  0005                     	global	_GPIObits
+   233                           _GPIObits	set	0x5
+   234  0005                     	global	_GPIO3
+   235                           _GPIO3	set	0x2B
+   236  002B                     	global	_GPIO2
+   237                           _GPIO2	set	0x2A
+   238  002A                     	global	_RP0
+   239                           _RP0	set	0x1D
+   240  001D                     	global	_ANSEL
+   241                           _ANSEL	set	0x9F
+   242  009F                     	global	_OPTION_REG
+   243                           _OPTION_REG	set	0x81
+   244  0081                     	global	_TRISIO
+   245                           _TRISIO	set	0x85
+   246  0085                     	global	_EECON2
+   247                           _EECON2	set	0x9D
+   248  009D                     	global	_EEDATA
+   249                           _EEDATA	set	0x9A
+   250  009A                     	global	_EECON1bits
+   251                           _EECON1bits	set	0x9C
+   252  009C                     	global	_EEADR
+   253                           _EEADR	set	0x9B
+   254  009B                     	global	_WR
+   255                           _WR	set	0x4E1
+   256  04E1                     	global	_WREN
+   257                           _WREN	set	0x4E2
+   258  04E2                     	global	_RD
+   259                           _RD	set	0x4E0
+   260  04E0                     ; #config settings
+   261                           global __CFG_FOSC$INTRCIO
+   262                           __CFG_FOSC$INTRCIO equ 0x0
+   263  0000                     global __CFG_WDTE$OFF
+   264                           __CFG_WDTE$OFF equ 0x0
+   265  0000                     global __CFG_PWRTE$OFF
+   266                           __CFG_PWRTE$OFF equ 0x0
+   267  0000                     global __CFG_MCLRE$OFF
+   268                           __CFG_MCLRE$OFF equ 0x0
+   269  0000                     global __CFG_BOREN$OFF
+   270                           __CFG_BOREN$OFF equ 0x0
+   271  0000                     global __CFG_CP$ON
+   272                           __CFG_CP$ON equ 0x0
+   273  0000                     global __CFG_CPD$ON
+   274                           __CFG_CPD$ON equ 0x0
+   275  0000                     	file	"C:\Users\User\AppData\Local\Temp\sia8."
+   276                           	line	#
+   277                           psect cinit,class=CODE,delta=2
+   278                           global start_initialization
+   279                           start_initialization:
+   280  03F5                     
+   281                           global __initialization
+   282                           __initialization:
+   283  03F5                     psect	bssBANK0,class=BANK0,space=1,noexec
+   284                           global __pbssBANK0
+   285                           __pbssBANK0:
+   286  0030                     _timesDown:
+   287  0030                            ds      2
+   288  0030                     
+   289                           _timesUp:
+   290  0032                            ds      2
+   291  0032                     
+   292                           _i:
+   293  0034                            ds      2
+   294  0034                     
+   295                           _UpDown:
+   296  0036                            ds      1
+   297  0036                     
+   298                           	file	"C:\Users\User\AppData\Local\Temp\sia8."
+   299                           	line	#
+   300                           ; Clear objects allocated to BANK0
+   301                           psect cinit,class=CODE,delta=2,merge=1
+   302                           	bcf	status, 5	;RP0=0, select bank0
+   303  03F5  1283               	clrf	((__pbssBANK0)+0)&07Fh
+   304  03F6  01B0               	clrf	((__pbssBANK0)+1)&07Fh
+   305  03F7  01B1               	clrf	((__pbssBANK0)+2)&07Fh
+   306  03F8  01B2               	clrf	((__pbssBANK0)+3)&07Fh
+   307  03F9  01B3               	clrf	((__pbssBANK0)+4)&07Fh
+   308  03FA  01B4               	clrf	((__pbssBANK0)+5)&07Fh
+   309  03FB  01B5               	clrf	((__pbssBANK0)+6)&07Fh
+   310  03FC  01B6               psect cinit,class=CODE,delta=2,merge=1
+   311                           global end_of_initialization,__end_of__initialization
+   312                           
+   313                           ;End of C runtime variable initialization code
+   314                           
+   315                           end_of_initialization:
+   316  03FD                     __end_of__initialization:
+   317  03FD                     clrf status
+   318  03FD  0183               ljmp _main	;jump to C main() function
+   319  03FE  2AA6               psect	cstackCOMMON,class=COMMON,space=1,noexec
+   320                           global __pcstackCOMMON
+   321                           __pcstackCOMMON:
+   322  0000                     ??_WriteEEPROM:	; 1 bytes @ 0x0
+   323  0000                     ??_up:	; 1 bytes @ 0x0
+   324  0000                     ??_down:	; 1 bytes @ 0x0
+   325  0000                     ??___wmul:	; 1 bytes @ 0x0
+   326  0000                     psect	cstackBANK0,class=BANK0,space=1,noexec
+   327                           global __pcstackBANK0
+   328                           __pcstackBANK0:
+   329  0020                     ?_ReadEEPROM:	; 1 bytes @ 0x0
+   330  0020                     ??_ReadEEPROM:	; 1 bytes @ 0x0
+   331  0020                     ?_WriteEEPROM:	; 1 bytes @ 0x0
+   332  0020                     ?_main:	; 1 bytes @ 0x0
+   333  0020                     	global	?___wmul
+   334                           ?___wmul:	; 2 bytes @ 0x0
+   335  0020                     	global	WriteEEPROM@data
+   336                           WriteEEPROM@data:	; 2 bytes @ 0x0
+   337  0020                     	global	___wmul@multiplier
+   338                           ___wmul@multiplier:	; 2 bytes @ 0x0
+   339  0020                     	ds	2
+   340  0020                     	global	WriteEEPROM@adress
+   341                           WriteEEPROM@adress:	; 2 bytes @ 0x2
+   342  0022                     	global	___wmul@multiplicand
+   343                           ___wmul@multiplicand:	; 2 bytes @ 0x2
+   344  0022                     	ds	2
+   345  0022                     	global	___wmul@product
+   346                           ___wmul@product:	; 2 bytes @ 0x4
+   347  0024                     	ds	2
+   348  0024                     ?_delay_ms:	; 1 bytes @ 0x6
+   349  0026                     	global	delay_ms@x
+   350                           delay_ms@x:	; 2 bytes @ 0x6
+   351  0026                     	ds	2
+   352  0026                     ??_delay_ms:	; 1 bytes @ 0x8
+   353  0028                     	ds	1
+   354  0028                     	global	delay_ms@i
+   355                           delay_ms@i:	; 2 bytes @ 0x9
+   356  0029                     	ds	2
+   357  0029                     ?_up:	; 1 bytes @ 0xB
+   358  002B                     ?_down:	; 1 bytes @ 0xB
+   359  002B                     	global	up@time
+   360                           up@time:	; 2 bytes @ 0xB
+   361  002B                     	global	down@time
+   362                           down@time:	; 2 bytes @ 0xB
+   363  002B                     	ds	2
+   364  002B                     ??_main:	; 1 bytes @ 0xD
+   365  002D                     	ds	3
+   366  002D                     ;!
+   367                           ;!Data Sizes:
+   368                           ;!    Strings     0
+   369                           ;!    Constant    0
+   370                           ;!    Data        0
+   371                           ;!    BSS         7
+   372                           ;!    Persistent  0
+   373                           ;!    Stack       0
+   374                           ;!
+   375                           ;!Auto Spaces:
+   376                           ;!    Space          Size  Autos    Used
+   377                           ;!    COMMON            0      0       0
+   378                           ;!    BANK0            62     16      23
+   379                           
+   380                           ;!
+   381                           ;!Pointer List with Targets:
+   382                           ;!
+   383                           ;!    None.
+   384                           
+   385                           
+   386                           ;!
+   387                           ;!Critical Paths under _main in COMMON
+   388                           ;!
+   389                           ;!    None.
+   390                           ;!
+   391                           ;!Critical Paths under _main in BANK0
+   392                           ;!
+   393                           ;!    _main->_down
+   394                           ;!    _main->_up
+   395                           ;!    _up->_delay_ms
+   396                           ;!    _down->_delay_ms
+   397                           ;!    _delay_ms->___wmul
+   398                           
+   399 ;;
+   400 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   401 ;;
+   402                           
+   403                           ;!
+   404                           ;!Call Graph Tables:
+   405                           ;!
+   406                           ;! ---------------------------------------------------------------------------------
+   407                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   408                           ;! ---------------------------------------------------------------------------------
+   409                           ;! (0) _main                                                 3     3      0    2796
+   410                           ;!                                             13 BANK0      3     3      0
+   411                           ;!                         _ReadEEPROM
+   412                           ;!                        _WriteEEPROM
+   413                           ;!                               _down
+   414                           ;!                                 _up
+   415                           ;! ---------------------------------------------------------------------------------
+   416                           ;! (1) _up                                                   2     0      2     844
+   417                           ;!                                             11 BANK0      2     0      2
+   418                           ;!                             ___wmul
+   419                           ;!                           _delay_ms
+   420                           ;! ---------------------------------------------------------------------------------
+   421                           ;! (1) _down                                                 2     0      2     844
+   422                           ;!                                             11 BANK0      2     0      2
+   423                           ;!                             ___wmul
+   424                           ;!                           _delay_ms
+   425                           ;! ---------------------------------------------------------------------------------
+   426                           ;! (2) _delay_ms                                             5     3      2     198
+   427                           ;!                                              6 BANK0      5     3      2
+   428                           ;!                             ___wmul (ARG)
+   429                           ;! ---------------------------------------------------------------------------------
+   430                           ;! (2) ___wmul                                               6     2      4     396
+   431                           ;!                                              0 BANK0      6     2      4
+   432                           ;! ---------------------------------------------------------------------------------
+   433                           ;! (1) _WriteEEPROM                                          4     0      4    1108
+   434                           ;!                                              0 BANK0      4     0      4
+   435                           ;! ---------------------------------------------------------------------------------
+   436                           ;! (1) _ReadEEPROM                                           2     2      0       0
+   437                           ;!                                              0 BANK0      2     2      0
+   438                           ;! ---------------------------------------------------------------------------------
+   439                           ;! Estimated maximum stack depth 2
+   440                           ;! ---------------------------------------------------------------------------------
+   441                           ;!
+   442                           ;! Call Graph Graphs:
+   443                           ;!
+   444                           ;! _main (ROOT)
+   445                           ;!   _ReadEEPROM
+   446                           ;!   _WriteEEPROM
+   447                           ;!   _down
+   448                           ;!     ___wmul
+   449                           ;!     _delay_ms
+   450                           ;!       ___wmul (ARG)
+   451                           ;!   _up
+   452                           ;!     ___wmul
+   453                           ;!     _delay_ms
+   454                           ;!       ___wmul (ARG)
+   455                           ;!
+   456                           
+   457                           ;! Address spaces:
+   458                           
+   459                           ;!Name               Size   Autos  Total    Cost      Usage
+   460                           ;!BITCOMMON            0      0       0       0        0.0%
+   461                           ;!EEDATA              80      0       0       0        0.0%
+   462                           ;!NULL                 0      0       0       0        0.0%
+   463                           ;!CODE                 0      0       0       0        0.0%
+   464                           ;!BITSFR0              0      0       0       1        0.0%
+   465                           ;!SFR0                 0      0       0       1        0.0%
+   466                           ;!COMMON               0      0       0       1        0.0%
+   467                           ;!BITSFR1              0      0       0       2        0.0%
+   468                           ;!SFR1                 0      0       0       2        0.0%
+   469                           ;!STACK                0      0       0       2        0.0%
+   470                           ;!BITBANK0            3E      0       0       3        0.0%
+   471                           ;!BANK0               3E     10      17       4       37.1%
+   472                           ;!ABS                  0      0      17       5        0.0%
+   473                           ;!DATA                 0      0      17       6        0.0%
+   474                           
+   475                           	global	_main
+   476                           
+   477 ;; *************** function _main *****************
+   478 ;; Defined at:
+   479 ;;		line 74 in file "Bakavoy_New.c"
+   480 ;; Parameters:    Size  Location     Type
+   481 ;;		None
+   482 ;; Auto vars:     Size  Location     Type
+   483 ;;		None
+   484 ;; Return value:  Size  Location     Type
+   485 ;;                  1    wreg      void 
+   486 ;; Registers used:
+   487 ;;		wreg, status,2, status,0, pclath, cstack
+   488 ;; Tracked objects:
+   489 ;;		On entry : B00/0
+   490 ;;		On exit  : 0/0
+   491 ;;		Unchanged: 0/0
+   492 ;; Data sizes:     COMMON   BANK0
+   493 ;;      Params:         0       0
+   494 ;;      Locals:         0       0
+   495 ;;      Temps:          0       3
+   496 ;;      Totals:         0       3
+   497 ;;Total ram usage:        3 bytes
+   498 ;; Hardware stack levels required when called:    2
+   499 ;; This function calls:
+   500 ;;		_ReadEEPROM
+   501 ;;		_WriteEEPROM
+   502 ;;		_down
+   503 ;;		_up
+   504 ;; This function is called by:
+   505 ;;		Startup code after reset
+   506 ;; This function uses a non-reentrant model
+   507 ;;
+   508                           psect	maintext,global,class=CODE,delta=2,split=1,group=0
+   509                           	file	"Bakavoy_New.c"
+   510                           	line	74
+   511                           global __pmaintext
+   512                           __pmaintext:	;psect for function _main
+   513  02A6                     psect	maintext
+   514                           	file	"Bakavoy_New.c"
+   515                           	line	74
+   516                           	global	__size_of_main
+   517                           	__size_of_main	equ	__end_of_main-_main
+   518  014F                     	
+   519                           _main:	
+   520  02A6                     ;incstack = 0
+   521                           	opt	stack 6
+   522                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   523                           	line	75
+   524                           	
+   525                           l886:	
+   526  02A6                     ;Bakavoy_New.c: 75: 
+   527                           	bcf	status, 5	;RP0=0, select bank0
+   528  02A6  1283               	bcf	(29/8),(29)&7	;volatile
+   529  02A7  1283               	line	76
+   530                           	
+   531                           l888:	
+   532  02A8                     ;Bakavoy_New.c: 76: 
+   533                           	clrf	(5)	;volatile
+   534  02A8  0185               	line	77
+   535                           	
+   536                           l890:	
+   537  02A9                     ;Bakavoy_New.c: 77: 
+   538                           	movlw	low(07h)
+   539  02A9  3007               	movwf	(25)	;volatile
+   540  02AA  0099               	line	78
+   541                           	
+   542                           l892:	
+   543  02AB                     ;Bakavoy_New.c: 78: 
+   544                           	bsf	(29/8),(29)&7	;volatile
+   545  02AB  1683               	line	79
+   546                           	
+   547                           l894:	
+   548  02AC                     ;Bakavoy_New.c: 79: 
+   549                           	movlw	low(0Ch)
+   550  02AC  300C               	bsf	status, 5	;RP0=1, select bank1
+   551  02AD  1683               	movwf	(133)^080h	;volatile
+   552  02AE  0085               	line	80
+   553                           	
+   554                           l896:	
+   555  02AF                     ;Bakavoy_New.c: 80: 
+   556                           	movlw	low(080h)
+   557  02AF  3080               	movwf	(129)^080h	;volatile
+   558  02B0  0081               	line	82
+   559                           	
+   560                           l898:	
+   561  02B1                     ;Bakavoy_New.c: 82:         while (GPIO2 == 1) {
+   562                           	clrf	(159)^080h	;volatile
+   563  02B1  019F               	line	83
+   564                           	
+   565                           l900:	
+   566  02B2                     ;Bakavoy_New.c: 83:             _delay((unsigned long)((50)*(4000000/4000.0)));
+   567                           	bcf	status, 5	;RP0=0, select bank0
+   568  02B2  1283               	bcf	(29/8),(29)&7	;volatile
+   569  02B3  1283               	line	84
+   570                           	
+   571                           l902:	
+   572  02B4                     ;Bakavoy_New.c: 84:             while (GPIO2 == 1) {
+   573                           	fcall	_ReadEEPROM
+   574  02B4  2244               	goto	l904
+   575  02B5  2AB6               	line	85
+   576                           ;Bakavoy_New.c: 85:                 _delay((unsigned long)((100)*(4000000/4000.0)));
+   577                           	
+   578                           l82:	
+   579  02B6                     	line	93
+   580                           	
+   581                           l904:	
+   582  02B6                     ;Bakavoy_New.c: 93:                     down(1);
+   583                           	bcf	status, 5	;RP0=0, select bank0
+   584  02B6  1283               	clrf	(_i)
+   585  02B7  01B4               	clrf	(_i+1)
+   586  02B8  01B5               	line	94
+   587                           ;Bakavoy_New.c: 94:                 }
+   588                           	goto	l83
+   589  02B9  2B7D               	
+   590                           l84:	
+   591  02BA                     	line	95
+   592                           	
+   593                           l906:	
+   594  02BA                     ;Bakavoy_New.c: 95:                 i++;
+   595                           	opt asmopt_push
+   596                           opt asmopt_off
+   597                           movlw	65
+   598  02BA  3041               movwf	((??_main+0)+0+1),f
+   599  02BB  00AE               	movlw	238
+   600  02BC  30EE               movwf	((??_main+0)+0),f
+   601  02BD  00AD               	u637:
+   602  02BE                     decfsz	((??_main+0)+0),f
+   603  02BE  0BAD               	goto	u637
+   604  02BF  2ABE               	decfsz	((??_main+0)+0+1),f
+   605  02C0  0BAE               	goto	u637
+   606  02C1  2ABE               	nop
+   607  02C2  0000               opt asmopt_pop
+   608                           
+   609                           	line	96
+   610                           ;Bakavoy_New.c: 96:                 if (i >= 100) {
+   611                           	goto	l950
+   612  02C3  2B77               	
+   613                           l86:	
+   614  02C4                     	line	97
+   615                           	
+   616                           l908:	
+   617  02C4                     ;Bakavoy_New.c: 97:                     while (GPIO2 == 1) {
+   618                           	opt asmopt_push
+   619                           opt asmopt_off
+   620                           movlw	130
+   621  02C4  3082               	bcf	status, 5	;RP0=0, select bank0
+   622  02C5  1283               movwf	((??_main+0)+0+1),f
+   623  02C6  00AE               	movlw	221
+   624  02C7  30DD               movwf	((??_main+0)+0),f
+   625  02C8  00AD               	u647:
+   626  02C9                     decfsz	((??_main+0)+0),f
+   627  02C9  0BAD               	goto	u647
+   628  02CA  2AC9               	decfsz	((??_main+0)+0+1),f
+   629  02CB  0BAE               	goto	u647
+   630  02CC  2AC9               	nop2
+   631  02CD  2ACE               opt asmopt_pop
+   632                           
+   633                           	line	98
+   634                           	
+   635                           l910:	
+   636  02CE                     ;Bakavoy_New.c: 98:                     }
+   637                           	bcf	status, 5	;RP0=0, select bank0
+   638  02CE  1283               	btfsc	(42/8),(42)&7	;volatile
+   639  02CF  1905               	goto	u451
+   640  02D0  2AD2               	goto	u450
+   641  02D1  2AD3               u451:
+   642  02D2                     	goto	l87
+   643  02D2  2AFA               u450:
+   644  02D3                     	
+   645                           l912:	
+   646  02D3                     	movlw	0
+   647  02D3  3000               	subwf	(_i+1),w
+   648  02D4  0235               	movlw	02h
+   649  02D5  3002               	skipnz
+   650  02D6  1903               	subwf	(_i),w
+   651  02D7  0234               	skipnc
+   652  02D8  1803               	goto	u461
+   653  02D9  2ADB               	goto	u460
+   654  02DA  2ADC               u461:
+   655  02DB                     	goto	l87
+   656  02DB  2AFA               u460:
+   657  02DC                     	
+   658                           l914:	
+   659  02DC                     		movlw	60
+   660  02DC  303C               	xorwf	((_UpDown)),w
+   661  02DD  0636               	btfss	status,2
+   662  02DE  1D03               	goto	u471
+   663  02DF  2AE1               	goto	u470
+   664  02E0  2AE2               u471:
+   665  02E1                     	goto	l87
+   666  02E1  2AFA               u470:
+   667  02E2                     	line	99
+   668                           	
+   669                           l916:	
+   670  02E2                     	movf	(_timesUp),w
+   671  02E2  0832               	addlw	low(01h)
+   672  02E3  3E01               	movwf	(_timesUp)
+   673  02E4  00B2               	movf	(_timesUp+1),w
+   674  02E5  0833               	skipnc
+   675  02E6  1803               	addlw	1
+   676  02E7  3E01               	addlw	high(01h)
+   677  02E8  3E00               	movwf	1+(_timesUp)
+   678  02E9  00B3               	line	100
+   679                           	
+   680                           l918:	
+   681  02EA                     	movf	(_timesUp+1),w
+   682  02EA  0833               	movwf	(WriteEEPROM@data+1)
+   683  02EB  00A1               	movf	(_timesUp),w
+   684  02EC  0832               	movwf	(WriteEEPROM@data)
+   685  02ED  00A0               	movlw	02h
+   686  02EE  3002               	movwf	(WriteEEPROM@adress)
+   687  02EF  00A2               	movlw	0
+   688  02F0  3000               	movwf	((WriteEEPROM@adress))+1
+   689  02F1  00A3               	fcall	_WriteEEPROM
+   690  02F2  21E3               	line	101
+   691                           	
+   692                           l920:	
+   693  02F3                     	movlw	01h
+   694  02F3  3001               	bcf	status, 5	;RP0=0, select bank0
+   695  02F4  1283               	movwf	(up@time)
+   696  02F5  00AB               	movlw	0
+   697  02F6  3000               	movwf	((up@time))+1
+   698  02F7  00AC               	fcall	_up
+   699  02F8  21CF               	line	102
+   700                           	goto	l932
+   701  02F9  2B26               	
+   702                           l87:	
+   703  02FA                     	btfsc	(42/8),(42)&7	;volatile
+   704  02FA  1905               	goto	u481
+   705  02FB  2AFD               	goto	u480
+   706  02FC  2AFE               u481:
+   707  02FD                     	goto	l932
+   708  02FD  2B26               u480:
+   709  02FE                     	
+   710                           l922:	
+   711  02FE                     	movlw	0
+   712  02FE  3000               	subwf	(_i+1),w
+   713  02FF  0235               	movlw	02h
+   714  0300  3002               	skipnz
+   715  0301  1903               	subwf	(_i),w
+   716  0302  0234               	skipnc
+   717  0303  1803               	goto	u491
+   718  0304  2B06               	goto	u490
+   719  0305  2B07               u491:
+   720  0306                     	goto	l932
+   721  0306  2B26               u490:
+   722  0307                     	
+   723                           l924:	
+   724  0307                     		movlw	50
+   725  0307  3032               	xorwf	((_UpDown)),w
+   726  0308  0636               	btfss	status,2
+   727  0309  1D03               	goto	u501
+   728  030A  2B0C               	goto	u500
+   729  030B  2B0D               u501:
+   730  030C                     	goto	l932
+   731  030C  2B26               u500:
+   732  030D                     	line	103
+   733                           	
+   734                           l926:	
+   735  030D                     	movf	(_timesDown),w
+   736  030D  0830               	addlw	low(01h)
+   737  030E  3E01               	movwf	(_timesDown)
+   738  030F  00B0               	movf	(_timesDown+1),w
+   739  0310  0831               	skipnc
+   740  0311  1803               	addlw	1
+   741  0312  3E01               	addlw	high(01h)
+   742  0313  3E00               	movwf	1+(_timesDown)
+   743  0314  00B1               	line	104
+   744                           	
+   745                           l928:	
+   746  0315                     	movf	(_timesDown+1),w
+   747  0315  0831               	movwf	(WriteEEPROM@data+1)
+   748  0316  00A1               	movf	(_timesDown),w
+   749  0317  0830               	movwf	(WriteEEPROM@data)
+   750  0318  00A0               	movlw	01h
+   751  0319  3001               	movwf	(WriteEEPROM@adress)
+   752  031A  00A2               	movlw	0
+   753  031B  3000               	movwf	((WriteEEPROM@adress))+1
+   754  031C  00A3               	fcall	_WriteEEPROM
+   755  031D  21E3               	line	105
+   756                           	
+   757                           l930:	
+   758  031E                     	movlw	01h
+   759  031E  3001               	bcf	status, 5	;RP0=0, select bank0
+   760  031F  1283               	movwf	(down@time)
+   761  0320  00AB               	movlw	0
+   762  0321  3000               	movwf	((down@time))+1
+   763  0322  00AC               	fcall	_down
+   764  0323  21BB               	goto	l932
+   765  0324  2B26               	line	106
+   766                           	
+   767                           l89:	
+   768  0325                     	goto	l932
+   769  0325  2B26               	
+   770                           l88:	
+   771  0326                     	line	107
+   772                           	
+   773                           l932:	
+   774  0326                     	movlw	01h
+   775  0326  3001               	bcf	status, 5	;RP0=0, select bank0
+   776  0327  1283               	addwf	(_i),f
+   777  0328  07B4               	skipnc
+   778  0329  1803               	incf	(_i+1),f
+   779  032A  0AB5               	movlw	0
+   780  032B  3000               	addwf	(_i+1),f
+   781  032C  07B5               	line	108
+   782                           	
+   783                           l934:	
+   784  032D                     	movlw	0
+   785  032D  3000               	subwf	(_i+1),w
+   786  032E  0235               	movlw	064h
+   787  032F  3064               	skipnz
+   788  0330  1903               	subwf	(_i),w
+   789  0331  0234               	skipc
+   790  0332  1C03               	goto	u511
+   791  0333  2B35               	goto	u510
+   792  0334  2B36               u511:
+   793  0335                     	goto	l950
+   794  0335  2B77               u510:
+   795  0336                     	goto	l91
+   796  0336  2B38               	line	109
+   797                           	
+   798                           l936:	
+   799  0337                     	goto	l91
+   800  0337  2B38               	
+   801                           l92:	
+   802  0338                     	line	110
+   803                           	
+   804                           l91:	
+   805  0338                     	line	109
+   806                           	btfsc	(42/8),(42)&7	;volatile
+   807  0338  1905               	goto	u521
+   808  0339  2B3B               	goto	u520
+   809  033A  2B3C               u521:
+   810  033B                     	goto	l91
+   811  033B  2B38               u520:
+   812  033C                     	goto	l938
+   813  033C  2B3D               	
+   814                           l93:	
+   815  033D                     	line	119
+   816                           	
+   817                           l938:	
+   818  033D                     ;Bakavoy_New.c: 119:                     timesUp = 22;
+   819                           	movlw	016h
+   820  033D  3016               	movwf	(_timesUp)
+   821  033E  00B2               	movlw	0
+   822  033F  3000               	movwf	((_timesUp))+1
+   823  0340  00B3               	line	120
+   824                           ;Bakavoy_New.c: 120:                     timesDown = 22;
+   825                           	movlw	016h
+   826  0341  3016               	movwf	(_timesDown)
+   827  0342  00B0               	movlw	0
+   828  0343  3000               	movwf	((_timesDown))+1
+   829  0344  00B1               	line	121
+   830                           ;Bakavoy_New.c: 121:                     UpDown = 50;
+   831                           	movlw	low(032h)
+   832  0345  3032               	movwf	(??_main+0)+0
+   833  0346  00AD               	movf	(??_main+0)+0,w
+   834  0347  082D               	movwf	(_UpDown)
+   835  0348  00B6               	line	122
+   836                           	
+   837                           l940:	
+   838  0349                     ;Bakavoy_New.c: 122:                     WriteEEPROM(timesUp, 0x02);
+   839                           	movf	(_timesUp+1),w
+   840  0349  0833               	movwf	(WriteEEPROM@data+1)
+   841  034A  00A1               	movf	(_timesUp),w
+   842  034B  0832               	movwf	(WriteEEPROM@data)
+   843  034C  00A0               	movlw	02h
+   844  034D  3002               	movwf	(WriteEEPROM@adress)
+   845  034E  00A2               	movlw	0
+   846  034F  3000               	movwf	((WriteEEPROM@adress))+1
+   847  0350  00A3               	fcall	_WriteEEPROM
+   848  0351  21E3               	line	123
+   849                           	
+   850                           l942:	
+   851  0352                     ;Bakavoy_New.c: 123:                     WriteEEPROM(timesDown, 0x01);
+   852                           	bcf	status, 5	;RP0=0, select bank0
+   853  0352  1283               	movf	(_timesDown+1),w
+   854  0353  0831               	movwf	(WriteEEPROM@data+1)
+   855  0354  00A1               	movf	(_timesDown),w
+   856  0355  0830               	movwf	(WriteEEPROM@data)
+   857  0356  00A0               	movlw	01h
+   858  0357  3001               	movwf	(WriteEEPROM@adress)
+   859  0358  00A2               	movlw	0
+   860  0359  3000               	movwf	((WriteEEPROM@adress))+1
+   861  035A  00A3               	fcall	_WriteEEPROM
+   862  035B  21E3               	line	124
+   863                           	
+   864                           l944:	
+   865  035C                     ;Bakavoy_New.c: 124:                     WriteEEPROM(UpDown, 0x10);
+   866                           	bcf	status, 5	;RP0=0, select bank0
+   867  035C  1283               	movf	(_UpDown),w
+   868  035D  0836               	movwf	(??_main+0)+0
+   869  035E  00AD               	clrf	(??_main+0)+0+1
+   870  035F  01AE               	movf	0+(??_main+0)+0,w
+   871  0360  082D               	movwf	(WriteEEPROM@data)
+   872  0361  00A0               	movf	1+(??_main+0)+0,w
+   873  0362  082E               	movwf	(WriteEEPROM@data+1)
+   874  0363  00A1               	movlw	010h
+   875  0364  3010               	movwf	(WriteEEPROM@adress)
+   876  0365  00A2               	movlw	0
+   877  0366  3000               	movwf	((WriteEEPROM@adress))+1
+   878  0367  00A3               	fcall	_WriteEEPROM
+   879  0368  21E3               	line	125
+   880                           	
+   881                           l946:	
+   882  0369                     ;Bakavoy_New.c: 125:                     up(timesUp);
+   883                           	bcf	status, 5	;RP0=0, select bank0
+   884  0369  1283               	movf	(_timesUp+1),w
+   885  036A  0833               	movwf	(up@time+1)
+   886  036B  00AC               	movf	(_timesUp),w
+   887  036C  0832               	movwf	(up@time)
+   888  036D  00AB               	fcall	_up
+   889  036E  21CF               	line	126
+   890                           	
+   891                           l948:	
+   892  036F                     ;Bakavoy_New.c: 126:                     down(timesDown);
+   893                           	bcf	status, 5	;RP0=0, select bank0
+   894  036F  1283               	movf	(_timesDown+1),w
+   895  0370  0831               	movwf	(down@time+1)
+   896  0371  00AC               	movf	(_timesDown),w
+   897  0372  0830               	movwf	(down@time)
+   898  0373  00AB               	fcall	_down
+   899  0374  21BB               	goto	l950
+   900  0375  2B77               	line	127
+   901                           ;Bakavoy_New.c: 127:                 }
+   902                           	
+   903                           l90:	
+   904  0376                     	goto	l950
+   905  0376  2B77               	line	128
+   906                           ;Bakavoy_New.c: 128:             }
+   907                           	
+   908                           l85:	
+   909  0377                     	line	96
+   910                           	
+   911                           l950:	
+   912  0377                     ;Bakavoy_New.c: 96:                 if (i >= 100) {
+   913                           	bcf	status, 5	;RP0=0, select bank0
+   914  0377  1283               	btfsc	(42/8),(42)&7	;volatile
+   915  0378  1905               	goto	u531
+   916  0379  2B7B               	goto	u530
+   917  037A  2B7C               u531:
+   918  037B                     	goto	l908
+   919  037B  2AC4               u530:
+   920  037C                     	goto	l83
+   921  037C  2B7D               	
+   922                           l94:	
+   923  037D                     	line	129
+   924                           ;Bakavoy_New.c: 129:         }
+   925                           	
+   926                           l83:	
+   927  037D                     	line	94
+   928                           ;Bakavoy_New.c: 94:                 }
+   929                           	btfsc	(42/8),(42)&7	;volatile
+   930  037D  1905               	goto	u541
+   931  037E  2B80               	goto	u540
+   932  037F  2B81               u541:
+   933  0380                     	goto	l906
+   934  0380  2ABA               u540:
+   935  0381                     	
+   936                           l95:	
+   937  0381                     	line	130
+   938                           ;Bakavoy_New.c: 130:         if (GPIO3 == 1 && UpDown == 50) {
+   939                           	btfss	(43/8),(43)&7	;volatile
+   940  0381  1D85               	goto	u551
+   941  0382  2B84               	goto	u550
+   942  0383  2B85               u551:
+   943  0384                     	goto	l96
+   944  0384  2BBB               u550:
+   945  0385                     	
+   946                           l952:	
+   947  0385                     		movlw	50
+   948  0385  3032               	xorwf	((_UpDown)),w
+   949  0386  0636               	btfss	status,2
+   950  0387  1D03               	goto	u561
+   951  0388  2B8A               	goto	u560
+   952  0389  2B8B               u561:
+   953  038A                     	goto	l96
+   954  038A  2BBB               u560:
+   955  038B                     	line	131
+   956                           	
+   957                           l954:	
+   958  038B                     ;Bakavoy_New.c: 131:             _delay((unsigned long)((1000)*(4000000/4000.0)));
+   959                           	opt asmopt_push
+   960                           opt asmopt_off
+   961                           movlw  6
+   962  038B  3006               movwf	((??_main+0)+0+2),f
+   963  038C  00AF               movlw	19
+   964  038D  3013               movwf	((??_main+0)+0+1),f
+   965  038E  00AE               	movlw	173
+   966  038F  30AD               movwf	((??_main+0)+0),f
+   967  0390  00AD               	u657:
+   968  0391                     decfsz	((??_main+0)+0),f
+   969  0391  0BAD               	goto	u657
+   970  0392  2B91               	decfsz	((??_main+0)+0+1),f
+   971  0393  0BAE               	goto	u657
+   972  0394  2B91               	decfsz	((??_main+0)+0+2),f
+   973  0395  0BAF               	goto	u657
+   974  0396  2B91               	nop2
+   975  0397  2B98               opt asmopt_pop
+   976                           
+   977                           	line	132
+   978                           	
+   979                           l956:	
+   980  0398                     ;Bakavoy_New.c: 132:             if (GPIO3 == 1 && UpDown == 50) {
+   981                           	bcf	status, 5	;RP0=0, select bank0
+   982  0398  1283               	btfss	(43/8),(43)&7	;volatile
+   983  0399  1D85               	goto	u571
+   984  039A  2B9C               	goto	u570
+   985  039B  2B9D               u571:
+   986  039C                     	goto	l904
+   987  039C  2AB6               u570:
+   988  039D                     	
+   989                           l958:	
+   990  039D                     		movlw	50
+   991  039D  3032               	xorwf	((_UpDown)),w
+   992  039E  0636               	btfss	status,2
+   993  039F  1D03               	goto	u581
+   994  03A0  2BA2               	goto	u580
+   995  03A1  2BA3               u581:
+   996  03A2                     	goto	l904
+   997  03A2  2AB6               u580:
+   998  03A3                     	line	133
+   999                           	
+  1000                           l960:	
+  1001  03A3                     ;Bakavoy_New.c: 133:                 up(timesUp);
+  1002                           	movf	(_timesUp+1),w
+  1003  03A3  0833               	movwf	(up@time+1)
+  1004  03A4  00AC               	movf	(_timesUp),w
+  1005  03A5  0832               	movwf	(up@time)
+  1006  03A6  00AB               	fcall	_up
+  1007  03A7  21CF               	line	134
+  1008                           	
+  1009                           l962:	
+  1010  03A8                     ;Bakavoy_New.c: 134:                 UpDown = 60;
+  1011                           	movlw	low(03Ch)
+  1012  03A8  303C               	bcf	status, 5	;RP0=0, select bank0
+  1013  03A9  1283               	movwf	(??_main+0)+0
+  1014  03AA  00AD               	movf	(??_main+0)+0,w
+  1015  03AB  082D               	movwf	(_UpDown)
+  1016  03AC  00B6               	line	135
+  1017                           	
+  1018                           l964:	
+  1019  03AD                     ;Bakavoy_New.c: 135:                 WriteEEPROM(UpDown, 0x10);
+  1020                           	movf	(_UpDown),w
+  1021  03AD  0836               	movwf	(??_main+0)+0
+  1022  03AE  00AD               	clrf	(??_main+0)+0+1
+  1023  03AF  01AE               	movf	0+(??_main+0)+0,w
+  1024  03B0  082D               	movwf	(WriteEEPROM@data)
+  1025  03B1  00A0               	movf	1+(??_main+0)+0,w
+  1026  03B2  082E               	movwf	(WriteEEPROM@data+1)
+  1027  03B3  00A1               	movlw	010h
+  1028  03B4  3010               	movwf	(WriteEEPROM@adress)
+  1029  03B5  00A2               	movlw	0
+  1030  03B6  3000               	movwf	((WriteEEPROM@adress))+1
+  1031  03B7  00A3               	fcall	_WriteEEPROM
+  1032  03B8  21E3               	goto	l904
+  1033  03B9  2AB6               	line	136
+  1034                           ;Bakavoy_New.c: 136:             }
+  1035                           	
+  1036                           l97:	
+  1037  03BA                     	line	137
+  1038                           ;Bakavoy_New.c: 137:         } else if (GPIO3 == 0 && UpDown == 60) {
+  1039                           	goto	l904
+  1040  03BA  2AB6               	
+  1041                           l96:	
+  1042  03BB                     	btfsc	(43/8),(43)&7	;volatile
+  1043  03BB  1985               	goto	u591
+  1044  03BC  2BBE               	goto	u590
+  1045  03BD  2BBF               u591:
+  1046  03BE                     	goto	l904
+  1047  03BE  2AB6               u590:
+  1048  03BF                     	
+  1049                           l966:	
+  1050  03BF                     		movlw	60
+  1051  03BF  303C               	xorwf	((_UpDown)),w
+  1052  03C0  0636               	btfss	status,2
+  1053  03C1  1D03               	goto	u601
+  1054  03C2  2BC4               	goto	u600
+  1055  03C3  2BC5               u601:
+  1056  03C4                     	goto	l904
+  1057  03C4  2AB6               u600:
+  1058  03C5                     	line	138
+  1059                           	
+  1060                           l968:	
+  1061  03C5                     ;Bakavoy_New.c: 138:             _delay((unsigned long)((100)*(4000000/4000.0)));
+  1062                           	opt asmopt_push
+  1063                           opt asmopt_off
+  1064                           movlw	130
+  1065  03C5  3082               movwf	((??_main+0)+0+1),f
+  1066  03C6  00AE               	movlw	221
+  1067  03C7  30DD               movwf	((??_main+0)+0),f
+  1068  03C8  00AD               	u667:
+  1069  03C9                     decfsz	((??_main+0)+0),f
+  1070  03C9  0BAD               	goto	u667
+  1071  03CA  2BC9               	decfsz	((??_main+0)+0+1),f
+  1072  03CB  0BAE               	goto	u667
+  1073  03CC  2BC9               	nop2
+  1074  03CD  2BCE               opt asmopt_pop
+  1075                           
+  1076                           	line	139
+  1077                           	
+  1078                           l970:	
+  1079  03CE                     ;Bakavoy_New.c: 139:             if (GPIO3 == 0 && UpDown == 60) {
+  1080                           	bcf	status, 5	;RP0=0, select bank0
+  1081  03CE  1283               	btfsc	(43/8),(43)&7	;volatile
+  1082  03CF  1985               	goto	u611
+  1083  03D0  2BD2               	goto	u610
+  1084  03D1  2BD3               u611:
+  1085  03D2                     	goto	l904
+  1086  03D2  2AB6               u610:
+  1087  03D3                     	
+  1088                           l972:	
+  1089  03D3                     		movlw	60
+  1090  03D3  303C               	xorwf	((_UpDown)),w
+  1091  03D4  0636               	btfss	status,2
+  1092  03D5  1D03               	goto	u621
+  1093  03D6  2BD8               	goto	u620
+  1094  03D7  2BD9               u621:
+  1095  03D8                     	goto	l904
+  1096  03D8  2AB6               u620:
+  1097  03D9                     	line	140
+  1098                           	
+  1099                           l974:	
+  1100  03D9                     ;Bakavoy_New.c: 140:                 down(timesDown);
+  1101                           	movf	(_timesDown+1),w
+  1102  03D9  0831               	movwf	(down@time+1)
+  1103  03DA  00AC               	movf	(_timesDown),w
+  1104  03DB  0830               	movwf	(down@time)
+  1105  03DC  00AB               	fcall	_down
+  1106  03DD  21BB               	line	141
+  1107                           	
+  1108                           l976:	
+  1109  03DE                     ;Bakavoy_New.c: 141:                 UpDown = 50;
+  1110                           	movlw	low(032h)
+  1111  03DE  3032               	bcf	status, 5	;RP0=0, select bank0
+  1112  03DF  1283               	movwf	(??_main+0)+0
+  1113  03E0  00AD               	movf	(??_main+0)+0,w
+  1114  03E1  082D               	movwf	(_UpDown)
+  1115  03E2  00B6               	line	142
+  1116                           	
+  1117                           l978:	
+  1118  03E3                     ;Bakavoy_New.c: 142:                 WriteEEPROM(UpDown, 0x10);
+  1119                           	movf	(_UpDown),w
+  1120  03E3  0836               	movwf	(??_main+0)+0
+  1121  03E4  00AD               	clrf	(??_main+0)+0+1
+  1122  03E5  01AE               	movf	0+(??_main+0)+0,w
+  1123  03E6  082D               	movwf	(WriteEEPROM@data)
+  1124  03E7  00A0               	movf	1+(??_main+0)+0,w
+  1125  03E8  082E               	movwf	(WriteEEPROM@data+1)
+  1126  03E9  00A1               	movlw	010h
+  1127  03EA  3010               	movwf	(WriteEEPROM@adress)
+  1128  03EB  00A2               	movlw	0
+  1129  03EC  3000               	movwf	((WriteEEPROM@adress))+1
+  1130  03ED  00A3               	fcall	_WriteEEPROM
+  1131  03EE  21E3               	goto	l904
+  1132  03EF  2AB6               	line	143
+  1133                           ;Bakavoy_New.c: 143:             }
+  1134                           	
+  1135                           l100:	
+  1136  03F0                     	goto	l904
+  1137  03F0  2AB6               	line	144
+  1138                           ;Bakavoy_New.c: 144:         }
+  1139                           	
+  1140                           l99:	
+  1141  03F1                     	goto	l904
+  1142  03F1  2AB6               	
+  1143                           l98:	
+  1144  03F2                     	goto	l904
+  1145  03F2  2AB6               	line	145
+  1146                           ;Bakavoy_New.c: 145:     }
+  1147                           	
+  1148                           l101:	
+  1149  03F3                     	goto	l904
+  1150  03F3  2AB6               	
+  1151                           l102:	
+  1152  03F4                     	line	147
+  1153                           ;Bakavoy_New.c: 146:     return;
+  1154                           	
+  1155                           l103:	
+  1156  03F4                     	global	start
+  1157                           	ljmp	start
+  1158  03F4  2800               	opt stack 0
+  1159                           GLOBAL	__end_of_main
+  1160                           	__end_of_main:
+  1161  03F5                     	signat	_main,89
+  1162                           	global	_up
+  1163                           
+  1164 ;; *************** function _up *****************
+  1165 ;; Defined at:
+  1166 ;;		line 62 in file "Bakavoy_New.c"
+  1167 ;; Parameters:    Size  Location     Type
+  1168 ;;  time            2   11[BANK0 ] int 
+  1169 ;; Auto vars:     Size  Location     Type
+  1170 ;;		None
+  1171 ;; Return value:  Size  Location     Type
+  1172 ;;                  1    wreg      void 
+  1173 ;; Registers used:
+  1174 ;;		wreg, status,2, status,0, pclath, cstack
+  1175 ;; Tracked objects:
+  1176 ;;		On entry : 0/0
+  1177 ;;		On exit  : 0/0
+  1178 ;;		Unchanged: 0/0
+  1179 ;; Data sizes:     COMMON   BANK0
+  1180 ;;      Params:         0       2
+  1181 ;;      Locals:         0       0
+  1182 ;;      Temps:          0       0
+  1183 ;;      Totals:         0       2
+  1184 ;;Total ram usage:        2 bytes
+  1185 ;; Hardware stack levels used:    1
+  1186 ;; Hardware stack levels required when called:    1
+  1187 ;; This function calls:
+  1188 ;;		___wmul
+  1189 ;;		_delay_ms
+  1190 ;; This function is called by:
+  1191 ;;		_main
+  1192 ;; This function uses a non-reentrant model
+  1193 ;;
+  1194                           psect	text1,local,class=CODE,delta=2,merge=1,group=0
+  1195                           	line	62
+  1196                           global __ptext1
+  1197                           __ptext1:	;psect for function _up
+  1198  01CF                     psect	text1
+  1199                           	file	"Bakavoy_New.c"
+  1200                           	line	62
+  1201                           	global	__size_of_up
+  1202                           	__size_of_up	equ	__end_of_up-_up
+  1203  0014                     	
+  1204                           _up:	
+  1205  01CF                     ;incstack = 0
+  1206                           	opt	stack 6
+  1207                           ; Regs used in _up: [wreg+status,2+status,0+pclath+cstack]
+  1208                           	line	63
+  1209                           	
+  1210                           l874:	
+  1211  01CF                     ;Bakavoy_New.c: 63:     RP0 = 0;
+  1212                           	bcf	status, 5	;RP0=0, select bank0
+  1213  01CF  1283               	bsf	(5),1	;volatile
+  1214  01D0  1485               	line	64
+  1215                           	
+  1216                           l876:	
+  1217  01D1                     ;Bakavoy_New.c: 64:     GPIO = 0b00000000;
+  1218                           	movf	(up@time+1),w
+  1219  01D1  082C               	movwf	(___wmul@multiplier+1)
+  1220  01D2  00A1               	movf	(up@time),w
+  1221  01D3  082B               	movwf	(___wmul@multiplier)
+  1222  01D4  00A0               	movlw	028h
+  1223  01D5  3028               	movwf	(___wmul@multiplicand)
+  1224  01D6  00A2               	movlw	0
+  1225  01D7  3000               	movwf	((___wmul@multiplicand))+1
+  1226  01D8  00A3               	fcall	___wmul
+  1227  01D9  221B               	bcf	status, 5	;RP0=0, select bank0
+  1228  01DA  1283               	movf	(1+(?___wmul)),w
+  1229  01DB  0821               	movwf	(delay_ms@x+1)
+  1230  01DC  00A7               	movf	(0+(?___wmul)),w
+  1231  01DD  0820               	movwf	(delay_ms@x)
+  1232  01DE  00A6               	fcall	_delay_ms
+  1233  01DF  21F8               	line	65
+  1234                           	
+  1235                           l878:	
+  1236  01E0                     ;Bakavoy_New.c: 65:     CMCON = 0b00000111;
+  1237                           	bcf	status, 5	;RP0=0, select bank0
+  1238  01E0  1283               	bcf	(5),1	;volatile
+  1239  01E1  1085               	line	66
+  1240                           	
+  1241                           l74:	
+  1242  01E2                     	return
+  1243  01E2  0008               	opt stack 0
+  1244                           GLOBAL	__end_of_up
+  1245                           	__end_of_up:
+  1246  01E3                     	signat	_up,4217
+  1247                           	global	_down
+  1248                           
+  1249 ;; *************** function _down *****************
+  1250 ;; Defined at:
+  1251 ;;		line 68 in file "Bakavoy_New.c"
+  1252 ;; Parameters:    Size  Location     Type
+  1253 ;;  time            2   11[BANK0 ] int 
+  1254 ;; Auto vars:     Size  Location     Type
+  1255 ;;		None
+  1256 ;; Return value:  Size  Location     Type
+  1257 ;;                  1    wreg      void 
+  1258 ;; Registers used:
+  1259 ;;		wreg, status,2, status,0, pclath, cstack
+  1260 ;; Tracked objects:
+  1261 ;;		On entry : 0/0
+  1262 ;;		On exit  : 0/0
+  1263 ;;		Unchanged: 0/0
+  1264 ;; Data sizes:     COMMON   BANK0
+  1265 ;;      Params:         0       2
+  1266 ;;      Locals:         0       0
+  1267 ;;      Temps:          0       0
+  1268 ;;      Totals:         0       2
+  1269 ;;Total ram usage:        2 bytes
+  1270 ;; Hardware stack levels used:    1
+  1271 ;; Hardware stack levels required when called:    1
+  1272 ;; This function calls:
+  1273 ;;		___wmul
+  1274 ;;		_delay_ms
+  1275 ;; This function is called by:
+  1276 ;;		_main
+  1277 ;; This function uses a non-reentrant model
+  1278 ;;
+  1279                           psect	text2,local,class=CODE,delta=2,merge=1,group=0
+  1280                           	line	68
+  1281                           global __ptext2
+  1282                           __ptext2:	;psect for function _down
+  1283  01BB                     psect	text2
+  1284                           	file	"Bakavoy_New.c"
+  1285                           	line	68
+  1286                           	global	__size_of_down
+  1287                           	__size_of_down	equ	__end_of_down-_down
+  1288  0014                     	
+  1289                           _down:	
+  1290  01BB                     ;incstack = 0
+  1291                           	opt	stack 6
+  1292                           ; Regs used in _down: [wreg+status,2+status,0+pclath+cstack]
+  1293                           	line	69
+  1294                           	
+  1295                           l880:	
+  1296  01BB                     ;Bakavoy_New.c: 69: 
+  1297                           	bcf	status, 5	;RP0=0, select bank0
+  1298  01BB  1283               	bsf	(5),0	;volatile
+  1299  01BC  1405               	line	70
+  1300                           	
+  1301                           l882:	
+  1302  01BD                     ;Bakavoy_New.c: 70:     ANSEL = 0b00000000;
+  1303                           	movf	(down@time+1),w
+  1304  01BD  082C               	movwf	(___wmul@multiplier+1)
+  1305  01BE  00A1               	movf	(down@time),w
+  1306  01BF  082B               	movwf	(___wmul@multiplier)
+  1307  01C0  00A0               	movlw	028h
+  1308  01C1  3028               	movwf	(___wmul@multiplicand)
+  1309  01C2  00A2               	movlw	0
+  1310  01C3  3000               	movwf	((___wmul@multiplicand))+1
+  1311  01C4  00A3               	fcall	___wmul
+  1312  01C5  221B               	bcf	status, 5	;RP0=0, select bank0
+  1313  01C6  1283               	movf	(1+(?___wmul)),w
+  1314  01C7  0821               	movwf	(delay_ms@x+1)
+  1315  01C8  00A7               	movf	(0+(?___wmul)),w
+  1316  01C9  0820               	movwf	(delay_ms@x)
+  1317  01CA  00A6               	fcall	_delay_ms
+  1318  01CB  21F8               	line	71
+  1319                           	
+  1320                           l884:	
+  1321  01CC                     ;Bakavoy_New.c: 71:     RP0 = 0;
+  1322                           	bcf	status, 5	;RP0=0, select bank0
+  1323  01CC  1283               	bcf	(5),0	;volatile
+  1324  01CD  1005               	line	72
+  1325                           	
+  1326                           l77:	
+  1327  01CE                     	return
+  1328  01CE  0008               	opt stack 0
+  1329                           GLOBAL	__end_of_down
+  1330                           	__end_of_down:
+  1331  01CF                     	signat	_down,4217
+  1332                           	global	_delay_ms
+  1333                           
+  1334 ;; *************** function _delay_ms *****************
+  1335 ;; Defined at:
+  1336 ;;		line 17 in file "Bakavoy_New.c"
+  1337 ;; Parameters:    Size  Location     Type
+  1338 ;;  x               2    6[BANK0 ] int 
+  1339 ;; Auto vars:     Size  Location     Type
+  1340 ;;  i               2    9[BANK0 ] int 
+  1341 ;; Return value:  Size  Location     Type
+  1342 ;;                  1    wreg      void 
+  1343 ;; Registers used:
+  1344 ;;		wreg, status,2
+  1345 ;; Tracked objects:
+  1346 ;;		On entry : 0/0
+  1347 ;;		On exit  : 0/0
+  1348 ;;		Unchanged: 0/0
+  1349 ;; Data sizes:     COMMON   BANK0
+  1350 ;;      Params:         0       2
+  1351 ;;      Locals:         0       2
+  1352 ;;      Temps:          0       1
+  1353 ;;      Totals:         0       5
+  1354 ;;Total ram usage:        5 bytes
+  1355 ;; Hardware stack levels used:    1
+  1356 ;; This function calls:
+  1357 ;;		Nothing
+  1358 ;; This function is called by:
+  1359 ;;		_up
+  1360 ;;		_down
+  1361 ;; This function uses a non-reentrant model
+  1362 ;;
+  1363                           psect	text3,local,class=CODE,delta=2,merge=1,group=0
+  1364                           	line	17
+  1365                           global __ptext3
+  1366                           __ptext3:	;psect for function _delay_ms
+  1367  01F8                     psect	text3
+  1368                           	file	"Bakavoy_New.c"
+  1369                           	line	17
+  1370                           	global	__size_of_delay_ms
+  1371                           	__size_of_delay_ms	equ	__end_of_delay_ms-_delay_ms
+  1372  0023                     	
+  1373                           _delay_ms:	
+  1374  01F8                     ;incstack = 0
+  1375                           	opt	stack 6
+  1376                           ; Regs used in _delay_ms: [wreg+status,2]
+  1377                           	line	18
+  1378                           	
+  1379                           l828:	
+  1380  01F8                     ;Bakavoy_New.c: 18:     }
+  1381                           	bcf	status, 5	;RP0=0, select bank0
+  1382  01F8  1283               	clrf	(delay_ms@i)
+  1383  01F9  01A9               	clrf	(delay_ms@i+1)
+  1384  01FA  01AA               	goto	l45
+  1385  01FB  2A0B               	
+  1386                           l46:	
+  1387  01FC                     	line	19
+  1388                           	
+  1389                           l830:	
+  1390  01FC                     ;Bakavoy_New.c: 19:     _delay((unsigned long)((100)*(4000000/4000.0)));
+  1391                           	opt asmopt_push
+  1392                           opt asmopt_off
+  1393                           	movlw	199
+  1394  01FC  30C7               	bcf	status, 5	;RP0=0, select bank0
+  1395  01FD  1283               movwf	((??_delay_ms+0)+0),f
+  1396  01FE  00A8               	u677:
+  1397  01FF                     	nop2
+  1398  01FF  2A00               decfsz	(??_delay_ms+0)+0,f
+  1399  0200  0BA8               	goto	u677
+  1400  0201  29FF               	nop2
+  1401  0202  2A03               	nop2
+  1402  0203  2A04               opt asmopt_pop
+  1403                           
+  1404                           	line	20
+  1405                           ;Bakavoy_New.c: 20:     EEADR = 0x01;
+  1406                           	movlw	01h
+  1407  0204  3001               	bcf	status, 5	;RP0=0, select bank0
+  1408  0205  1283               	addwf	(delay_ms@i),f
+  1409  0206  07A9               	skipnc
+  1410  0207  1803               	incf	(delay_ms@i+1),f
+  1411  0208  0AAA               	movlw	0
+  1412  0209  3000               	addwf	(delay_ms@i+1),f
+  1413  020A  07AA               	
+  1414                           l45:	
+  1415  020B                     	movf	(delay_ms@x+1),w
+  1416  020B  0827               	xorlw	80h
+  1417  020C  3A80               	movwf	(??_delay_ms+0)+0
+  1418  020D  00A8               	movf	(delay_ms@i+1),w
+  1419  020E  082A               	xorlw	80h
+  1420  020F  3A80               	subwf	(??_delay_ms+0)+0,w
+  1421  0210  0228               	skipz
+  1422  0211  1D03               	goto	u325
+  1423  0212  2A15               	movf	(delay_ms@i),w
+  1424  0213  0829               	subwf	(delay_ms@x),w
+  1425  0214  0226               u325:
+  1426  0215                     
+  1427                           	skipnc
+  1428  0215  1803               	goto	u321
+  1429  0216  2A18               	goto	u320
+  1430  0217  2A19               u321:
+  1431  0218                     	goto	l830
+  1432  0218  29FC               u320:
+  1433  0219                     	goto	l48
+  1434  0219  2A1A               	
+  1435                           l47:	
+  1436  021A                     	line	21
+  1437                           	
+  1438                           l48:	
+  1439  021A                     	return
+  1440  021A  0008               	opt stack 0
+  1441                           GLOBAL	__end_of_delay_ms
+  1442                           	__end_of_delay_ms:
+  1443  021B                     	signat	_delay_ms,4217
+  1444                           	global	___wmul
+  1445                           
+  1446 ;; *************** function ___wmul *****************
+  1447 ;; Defined at:
+  1448 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul16.c"
+  1449 ;; Parameters:    Size  Location     Type
+  1450 ;;  multiplier      2    0[BANK0 ] unsigned int 
+  1451 ;;  multiplicand    2    2[BANK0 ] unsigned int 
+  1452 ;; Auto vars:     Size  Location     Type
+  1453 ;;  product         2    4[BANK0 ] unsigned int 
+  1454 ;; Return value:  Size  Location     Type
+  1455 ;;                  2    0[BANK0 ] unsigned int 
+  1456 ;; Registers used:
+  1457 ;;		wreg, status,2, status,0
+  1458 ;; Tracked objects:
+  1459 ;;		On entry : 0/0
+  1460 ;;		On exit  : 0/0
+  1461 ;;		Unchanged: 0/0
+  1462 ;; Data sizes:     COMMON   BANK0
+  1463 ;;      Params:         0       4
+  1464 ;;      Locals:         0       2
+  1465 ;;      Temps:          0       0
+  1466 ;;      Totals:         0       6
+  1467 ;;Total ram usage:        6 bytes
+  1468 ;; Hardware stack levels used:    1
+  1469 ;; This function calls:
+  1470 ;;		Nothing
+  1471 ;; This function is called by:
+  1472 ;;		_up
+  1473 ;;		_down
+  1474 ;; This function uses a non-reentrant model
+  1475 ;;
+  1476                           psect	text4,local,class=CODE,delta=2,merge=1,group=1
+  1477                           	file	"C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul16.c"
+  1478                           	line	15
+  1479                           global __ptext4
+  1480                           __ptext4:	;psect for function ___wmul
+  1481  021B                     psect	text4
+  1482                           	file	"C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\Umul16.c"
+  1483                           	line	15
+  1484                           	global	__size_of___wmul
+  1485                           	__size_of___wmul	equ	__end_of___wmul-___wmul
+  1486  0029                     	
+  1487                           ___wmul:	
+  1488  021B                     ;incstack = 0
+  1489                           	opt	stack 6
+  1490                           ; Regs used in ___wmul: [wreg+status,2+status,0]
+  1491                           	line	43
+  1492                           	
+  1493                           l832:	
+  1494  021B                     	bcf	status, 5	;RP0=0, select bank0
+  1495  021B  1283               	clrf	(___wmul@product)
+  1496  021C  01A4               	clrf	(___wmul@product+1)
+  1497  021D  01A5               	goto	l834
+  1498  021E  2A1F               	line	44
+  1499                           	
+  1500                           l188:	
+  1501  021F                     	line	45
+  1502                           	
+  1503                           l834:	
+  1504  021F                     	btfss	(___wmul@multiplier),(0)&7
+  1505  021F  1C20               	goto	u331
+  1506  0220  2A22               	goto	u330
+  1507  0221  2A23               u331:
+  1508  0222                     	goto	l189
+  1509  0222  2A29               u330:
+  1510  0223                     	line	46
+  1511                           	
+  1512                           l836:	
+  1513  0223                     	movf	(___wmul@multiplicand),w
+  1514  0223  0822               	addwf	(___wmul@product),f
+  1515  0224  07A4               	skipnc
+  1516  0225  1803               	incf	(___wmul@product+1),f
+  1517  0226  0AA5               	movf	(___wmul@multiplicand+1),w
+  1518  0227  0823               	addwf	(___wmul@product+1),f
+  1519  0228  07A5               	
+  1520                           l189:	
+  1521  0229                     	line	47
+  1522                           	movlw	01h
+  1523  0229  3001               	
+  1524                           u345:
+  1525  022A                     	clrc
+  1526  022A  1003               	rlf	(___wmul@multiplicand),f
+  1527  022B  0DA2               	rlf	(___wmul@multiplicand+1),f
+  1528  022C  0DA3               	addlw	-1
+  1529  022D  3EFF               	skipz
+  1530  022E  1D03               	goto	u345
+  1531  022F  2A2A               	line	48
+  1532                           	
+  1533                           l838:	
+  1534  0230                     	movlw	01h
+  1535  0230  3001               	
+  1536                           u355:
+  1537  0231                     	clrc
+  1538  0231  1003               	rrf	(___wmul@multiplier+1),f
+  1539  0232  0CA1               	rrf	(___wmul@multiplier),f
+  1540  0233  0CA0               	addlw	-1
+  1541  0234  3EFF               	skipz
+  1542  0235  1D03               	goto	u355
+  1543  0236  2A31               	line	49
+  1544                           	
+  1545                           l840:	
+  1546  0237                     	movf	((___wmul@multiplier)),w
+  1547  0237  0820               iorwf	((___wmul@multiplier+1)),w
+  1548  0238  0421               	btfss	status,2
+  1549  0239  1D03               	goto	u361
+  1550  023A  2A3C               	goto	u360
+  1551  023B  2A3D               u361:
+  1552  023C                     	goto	l834
+  1553  023C  2A1F               u360:
+  1554  023D                     	goto	l842
+  1555  023D  2A3E               	
+  1556                           l190:	
+  1557  023E                     	line	52
+  1558                           	
+  1559                           l842:	
+  1560  023E                     	movf	(___wmul@product+1),w
+  1561  023E  0825               	movwf	(?___wmul+1)
+  1562  023F  00A1               	movf	(___wmul@product),w
+  1563  0240  0824               	movwf	(?___wmul)
+  1564  0241  00A0               	goto	l191
+  1565  0242  2A43               	
+  1566                           l844:	
+  1567  0243                     	line	53
+  1568                           	
+  1569                           l191:	
+  1570  0243                     	return
+  1571  0243  0008               	opt stack 0
+  1572                           GLOBAL	__end_of___wmul
+  1573                           	__end_of___wmul:
+  1574  0244                     	signat	___wmul,8314
+  1575                           	global	_WriteEEPROM
+  1576                           
+  1577 ;; *************** function _WriteEEPROM *****************
+  1578 ;; Defined at:
+  1579 ;;		line 49 in file "Bakavoy_New.c"
+  1580 ;; Parameters:    Size  Location     Type
+  1581 ;;  data            2    0[BANK0 ] int 
+  1582 ;;  adress          2    2[BANK0 ] int 
+  1583 ;; Auto vars:     Size  Location     Type
+  1584 ;;		None
+  1585 ;; Return value:  Size  Location     Type
+  1586 ;;                  1    wreg      void 
+  1587 ;; Registers used:
+  1588 ;;		wreg
+  1589 ;; Tracked objects:
+  1590 ;;		On entry : 0/0
+  1591 ;;		On exit  : 0/0
+  1592 ;;		Unchanged: 0/0
+  1593 ;; Data sizes:     COMMON   BANK0
+  1594 ;;      Params:         0       4
+  1595 ;;      Locals:         0       0
+  1596 ;;      Temps:          0       0
+  1597 ;;      Totals:         0       4
+  1598 ;;Total ram usage:        4 bytes
+  1599 ;; Hardware stack levels used:    1
+  1600 ;; This function calls:
+  1601 ;;		Nothing
+  1602 ;; This function is called by:
+  1603 ;;		_main
+  1604 ;; This function uses a non-reentrant model
+  1605 ;;
+  1606                           psect	text5,local,class=CODE,delta=2,merge=1,group=0
+  1607                           	file	"Bakavoy_New.c"
+  1608                           	line	49
+  1609                           global __ptext5
+  1610                           __ptext5:	;psect for function _WriteEEPROM
+  1611  01E3                     psect	text5
+  1612                           	file	"Bakavoy_New.c"
+  1613                           	line	49
+  1614                           	global	__size_of_WriteEEPROM
+  1615                           	__size_of_WriteEEPROM	equ	__end_of_WriteEEPROM-_WriteEEPROM
+  1616  0015                     	
+  1617                           _WriteEEPROM:	
+  1618  01E3                     ;incstack = 0
+  1619                           	opt	stack 7
+  1620                           ; Regs used in _WriteEEPROM: [wreg]
+  1621                           	line	50
+  1622                           	
+  1623                           l868:	
+  1624  01E3                     ;Bakavoy_New.c: 50: void up(int time) {
+  1625                           	bcf	status, 5	;RP0=0, select bank0
+  1626  01E3  1283               	movf	(WriteEEPROM@adress),w
+  1627  01E4  0822               	bsf	status, 5	;RP0=1, select bank1
+  1628  01E5  1683               	movwf	(155)^080h	;volatile
+  1629  01E6  009B               	line	51
+  1630                           ;Bakavoy_New.c: 51:     GPIObits.GP1 = 1;
+  1631                           	bcf	status, 5	;RP0=0, select bank0
+  1632  01E7  1283               	movf	(WriteEEPROM@data),w
+  1633  01E8  0820               	bsf	status, 5	;RP0=1, select bank1
+  1634  01E9  1683               	movwf	(154)^080h	;volatile
+  1635  01EA  009A               	line	52
+  1636                           	
+  1637                           l870:	
+  1638  01EB                     ;Bakavoy_New.c: 52:     delay_ms(time * 40);
+  1639                           	bsf	(1250/8)^080h,(1250)&7	;volsfr
+  1640  01EB  151C               	line	53
+  1641                           ;Bakavoy_New.c: 53:     GPIObits.GP1 = 0;
+  1642                           	movlw	low(055h)
+  1643  01EC  3055               	movwf	(157)^080h	;volsfr
+  1644  01ED  009D               	line	54
+  1645                           ;Bakavoy_New.c: 54: }
+  1646                           	movlw	low(0AAh)
+  1647  01EE  30AA               	movwf	(157)^080h	;volsfr
+  1648  01EF  009D               	line	55
+  1649                           	
+  1650                           l872:	
+  1651  01F0                     ;Bakavoy_New.c: 55: 
+  1652                           	bsf	(1249/8)^080h,(1249)&7	;volsfr
+  1653  01F0  149C               	line	56
+  1654                           ;Bakavoy_New.c: 56: void down(int time) {
+  1655                           	goto	l68
+  1656  01F1  29F2               	
+  1657                           l69:	
+  1658  01F2                     	line	57
+  1659                           ;Bakavoy_New.c: 57:     GPIObits.GP0 = 1;
+  1660                           	
+  1661                           l68:	
+  1662  01F2                     	line	56
+  1663                           ;Bakavoy_New.c: 56: void down(int time) {
+  1664                           	btfsc	(1249/8)^080h,(1249)&7	;volsfr
+  1665  01F2  189C               	goto	u441
+  1666  01F3  29F5               	goto	u440
+  1667  01F4  29F6               u441:
+  1668  01F5                     	goto	l68
+  1669  01F5  29F2               u440:
+  1670  01F6                     	
+  1671                           l70:	
+  1672  01F6                     	line	58
+  1673                           ;Bakavoy_New.c: 58:     delay_ms(time * 40);
+  1674                           	bcf	(1250/8)^080h,(1250)&7	;volsfr
+  1675  01F6  111C               	line	60
+  1676                           	
+  1677                           l71:	
+  1678  01F7                     	return
+  1679  01F7  0008               	opt stack 0
+  1680                           GLOBAL	__end_of_WriteEEPROM
+  1681                           	__end_of_WriteEEPROM:
+  1682  01F8                     	signat	_WriteEEPROM,8313
+  1683                           	global	_ReadEEPROM
+  1684                           
+  1685 ;; *************** function _ReadEEPROM *****************
+  1686 ;; Defined at:
+  1687 ;;		line 23 in file "Bakavoy_New.c"
+  1688 ;; Parameters:    Size  Location     Type
+  1689 ;;		None
+  1690 ;; Auto vars:     Size  Location     Type
+  1691 ;;		None
+  1692 ;; Return value:  Size  Location     Type
+  1693 ;;                  1    wreg      void 
+  1694 ;; Registers used:
+  1695 ;;		wreg, status,2, status,0
+  1696 ;; Tracked objects:
+  1697 ;;		On entry : 0/0
+  1698 ;;		On exit  : 0/0
+  1699 ;;		Unchanged: 0/0
+  1700 ;; Data sizes:     COMMON   BANK0
+  1701 ;;      Params:         0       0
+  1702 ;;      Locals:         0       0
+  1703 ;;      Temps:          0       2
+  1704 ;;      Totals:         0       2
+  1705 ;;Total ram usage:        2 bytes
+  1706 ;; Hardware stack levels used:    1
+  1707 ;; This function calls:
+  1708 ;;		Nothing
+  1709 ;; This function is called by:
+  1710 ;;		_main
+  1711 ;; This function uses a non-reentrant model
+  1712 ;;
+  1713                           psect	text6,local,class=CODE,delta=2,merge=1,group=0
+  1714                           	line	23
+  1715                           global __ptext6
+  1716                           __ptext6:	;psect for function _ReadEEPROM
+  1717  0244                     psect	text6
+  1718                           	file	"Bakavoy_New.c"
+  1719                           	line	23
+  1720                           	global	__size_of_ReadEEPROM
+  1721                           	__size_of_ReadEEPROM	equ	__end_of_ReadEEPROM-_ReadEEPROM
+  1722  0062                     	
+  1723                           _ReadEEPROM:	
+  1724  0244                     ;incstack = 0
+  1725                           	opt	stack 7
+  1726                           ; Regs used in _ReadEEPROM: [wreg+status,2+status,0]
+  1727                           	line	24
+  1728                           	
+  1729                           l846:	
+  1730  0244                     ;Bakavoy_New.c: 24:     if (EEDATA >= 20) {
+  1731                           	movlw	low(02h)
+  1732  0244  3002               	bsf	status, 5	;RP0=1, select bank1
+  1733  0245  1683               	movwf	(155)^080h	;volatile
+  1734  0246  009B               	line	25
+  1735                           	
+  1736                           l848:	
+  1737  0247                     ;Bakavoy_New.c: 25:         timesDown = EEDATA;
+  1738                           	bsf	(156)^080h,0	;volsfr
+  1739  0247  141C               	line	26
+  1740                           ;Bakavoy_New.c: 26:     }
+  1741                           	goto	l51
+  1742  0248  2A49               	
+  1743                           l52:	
+  1744  0249                     	line	27
+  1745                           ;Bakavoy_New.c: 27:     _delay((unsigned long)((100)*(4000000/4000.0)));
+  1746                           	
+  1747                           l51:	
+  1748  0249                     	line	26
+  1749                           ;Bakavoy_New.c: 26:     }
+  1750                           	btfsc	(1248/8)^080h,(1248)&7	;volsfr
+  1751  0249  181C               	goto	u371
+  1752  024A  2A4C               	goto	u370
+  1753  024B  2A4D               u371:
+  1754  024C                     	goto	l51
+  1755  024C  2A49               u370:
+  1756  024D                     	goto	l850
+  1757  024D  2A4E               	
+  1758                           l53:	
+  1759  024E                     	line	28
+  1760                           	
+  1761                           l850:	
+  1762  024E                     ;Bakavoy_New.c: 28:     EEADR = 0x10;
+  1763                           	movlw	low(014h)
+  1764  024E  3014               	subwf	(154)^080h,w	;volatile
+  1765  024F  021A               	skipc
+  1766  0250  1C03               	goto	u381
+  1767  0251  2A53               	goto	u380
+  1768  0252  2A54               u381:
+  1769  0253                     	goto	l54
+  1770  0253  2A5C               u380:
+  1771  0254                     	line	29
+  1772                           	
+  1773                           l852:	
+  1774  0254                     ;Bakavoy_New.c: 29:     EECON1bits.RD = 1;
+  1775                           	movf	(154)^080h,w	;volatile
+  1776  0254  081A               	bcf	status, 5	;RP0=0, select bank0
+  1777  0255  1283               	movwf	(??_ReadEEPROM+0)+0
+  1778  0256  00A0               	clrf	(??_ReadEEPROM+0)+0+1
+  1779  0257  01A1               	movf	0+(??_ReadEEPROM+0)+0,w
+  1780  0258  0820               	movwf	(_timesUp)
+  1781  0259  00B2               	movf	1+(??_ReadEEPROM+0)+0,w
+  1782  025A  0821               	movwf	(_timesUp+1)
+  1783  025B  00B3               	line	30
+  1784                           ;Bakavoy_New.c: 30:     while (RD) {
+  1785                           	
+  1786                           l54:	
+  1787  025C                     	line	31
+  1788                           ;Bakavoy_New.c: 31:     }
+  1789                           	opt asmopt_push
+  1790                           opt asmopt_off
+  1791                           movlw	130
+  1792  025C  3082               	bcf	status, 5	;RP0=0, select bank0
+  1793  025D  1283               movwf	((??_ReadEEPROM+0)+0+1),f
+  1794  025E  00A1               	movlw	221
+  1795  025F  30DD               movwf	((??_ReadEEPROM+0)+0),f
+  1796  0260  00A0               	u687:
+  1797  0261                     decfsz	((??_ReadEEPROM+0)+0),f
+  1798  0261  0BA0               	goto	u687
+  1799  0262  2A61               	decfsz	((??_ReadEEPROM+0)+0+1),f
+  1800  0263  0BA1               	goto	u687
+  1801  0264  2A61               	nop2
+  1802  0265  2A66               opt asmopt_pop
+  1803                           
+  1804                           	line	32
+  1805                           ;Bakavoy_New.c: 32:     if (EEDATA == 50 || EEDATA == 60) {
+  1806                           	movlw	low(01h)
+  1807  0266  3001               	bsf	status, 5	;RP0=1, select bank1
+  1808  0267  1683               	movwf	(155)^080h	;volatile
+  1809  0268  009B               	line	33
+  1810                           	
+  1811                           l854:	
+  1812  0269                     ;Bakavoy_New.c: 33:         UpDown = EEDATA;
+  1813                           	bsf	(156)^080h,0	;volsfr
+  1814  0269  141C               	line	34
+  1815                           ;Bakavoy_New.c: 34:     }
+  1816                           	goto	l55
+  1817  026A  2A6B               	
+  1818                           l56:	
+  1819  026B                     	line	35
+  1820                           ;Bakavoy_New.c: 35: }
+  1821                           	
+  1822                           l55:	
+  1823  026B                     	line	34
+  1824                           ;Bakavoy_New.c: 34:     }
+  1825                           	btfsc	(1248/8)^080h,(1248)&7	;volsfr
+  1826  026B  181C               	goto	u391
+  1827  026C  2A6E               	goto	u390
+  1828  026D  2A6F               u391:
+  1829  026E                     	goto	l55
+  1830  026E  2A6B               u390:
+  1831  026F                     	goto	l856
+  1832  026F  2A70               	
+  1833                           l57:	
+  1834  0270                     	line	36
+  1835                           	
+  1836                           l856:	
+  1837  0270                     ;Bakavoy_New.c: 36: 
+  1838                           	movlw	low(014h)
+  1839  0270  3014               	subwf	(154)^080h,w	;volatile
+  1840  0271  021A               	skipc
+  1841  0272  1C03               	goto	u401
+  1842  0273  2A75               	goto	u400
+  1843  0274  2A76               u401:
+  1844  0275                     	goto	l58
+  1845  0275  2A7E               u400:
+  1846  0276                     	line	37
+  1847                           	
+  1848                           l858:	
+  1849  0276                     ;Bakavoy_New.c: 37: void WriteEEPROM(int data, int adress) {
+  1850                           	movf	(154)^080h,w	;volatile
+  1851  0276  081A               	bcf	status, 5	;RP0=0, select bank0
+  1852  0277  1283               	movwf	(??_ReadEEPROM+0)+0
+  1853  0278  00A0               	clrf	(??_ReadEEPROM+0)+0+1
+  1854  0279  01A1               	movf	0+(??_ReadEEPROM+0)+0,w
+  1855  027A  0820               	movwf	(_timesDown)
+  1856  027B  00B0               	movf	1+(??_ReadEEPROM+0)+0,w
+  1857  027C  0821               	movwf	(_timesDown+1)
+  1858  027D  00B1               	line	38
+  1859                           ;Bakavoy_New.c: 38:     EEADR = adress;
+  1860                           	
+  1861                           l58:	
+  1862  027E                     	line	39
+  1863                           ;Bakavoy_New.c: 39:     EEDATA = data;
+  1864                           	opt asmopt_push
+  1865                           opt asmopt_off
+  1866                           movlw	130
+  1867  027E  3082               	bcf	status, 5	;RP0=0, select bank0
+  1868  027F  1283               movwf	((??_ReadEEPROM+0)+0+1),f
+  1869  0280  00A1               	movlw	221
+  1870  0281  30DD               movwf	((??_ReadEEPROM+0)+0),f
+  1871  0282  00A0               	u697:
+  1872  0283                     decfsz	((??_ReadEEPROM+0)+0),f
+  1873  0283  0BA0               	goto	u697
+  1874  0284  2A83               	decfsz	((??_ReadEEPROM+0)+0+1),f
+  1875  0285  0BA1               	goto	u697
+  1876  0286  2A83               	nop2
+  1877  0287  2A88               opt asmopt_pop
+  1878                           
+  1879                           	line	40
+  1880                           ;Bakavoy_New.c: 40:     WREN = 1;
+  1881                           	movlw	low(010h)
+  1882  0288  3010               	bsf	status, 5	;RP0=1, select bank1
+  1883  0289  1683               	movwf	(155)^080h	;volatile
+  1884  028A  009B               	line	41
+  1885                           	
+  1886                           l860:	
+  1887  028B                     ;Bakavoy_New.c: 41:     EECON2 = 0x55;
+  1888                           	bsf	(156)^080h,0	;volsfr
+  1889  028B  141C               	line	42
+  1890                           ;Bakavoy_New.c: 42:     EECON2 = 0xAA;
+  1891                           	goto	l59
+  1892  028C  2A8D               	
+  1893                           l60:	
+  1894  028D                     	line	43
+  1895                           ;Bakavoy_New.c: 43:     WR = 1;
+  1896                           	
+  1897                           l59:	
+  1898  028D                     	line	42
+  1899                           ;Bakavoy_New.c: 42:     EECON2 = 0xAA;
+  1900                           	btfsc	(1248/8)^080h,(1248)&7	;volsfr
+  1901  028D  181C               	goto	u411
+  1902  028E  2A90               	goto	u410
+  1903  028F  2A91               u411:
+  1904  0290                     	goto	l59
+  1905  0290  2A8D               u410:
+  1906  0291                     	goto	l862
+  1907  0291  2A92               	
+  1908                           l61:	
+  1909  0292                     	line	44
+  1910                           	
+  1911                           l862:	
+  1912  0292                     ;Bakavoy_New.c: 44:     while (WR) {
+  1913                           		movlw	50
+  1914  0292  3032               	xorwf	((154)^080h),w	;volatile
+  1915  0293  061A               	btfsc	status,2
+  1916  0294  1903               	goto	u421
+  1917  0295  2A97               	goto	u420
+  1918  0296  2A98               u421:
+  1919  0297                     	goto	l866
+  1920  0297  2A9F               u420:
+  1921  0298                     	
+  1922                           l864:	
+  1923  0298                     		movlw	60
+  1924  0298  303C               	xorwf	((154)^080h),w	;volatile
+  1925  0299  061A               	btfss	status,2
+  1926  029A  1D03               	goto	u431
+  1927  029B  2A9D               	goto	u430
+  1928  029C  2A9E               u431:
+  1929  029D                     	goto	l65
+  1930  029D  2AA5               u430:
+  1931  029E                     	goto	l866
+  1932  029E  2A9F               	
+  1933                           l64:	
+  1934  029F                     	line	45
+  1935                           	
+  1936                           l866:	
+  1937  029F                     ;Bakavoy_New.c: 45:     }
+  1938                           	movf	(154)^080h,w	;volatile
+  1939  029F  081A               	bcf	status, 5	;RP0=0, select bank0
+  1940  02A0  1283               	movwf	(??_ReadEEPROM+0)+0
+  1941  02A1  00A0               	movf	(??_ReadEEPROM+0)+0,w
+  1942  02A2  0820               	movwf	(_UpDown)
+  1943  02A3  00B6               	goto	l65
+  1944  02A4  2AA5               	line	46
+  1945                           ;Bakavoy_New.c: 46:     WREN = 0;
+  1946                           	
+  1947                           l62:	
+  1948  02A5                     	line	47
+  1949                           	
+  1950                           l65:	
+  1951  02A5                     	return
+  1952  02A5  0008               	opt stack 0
+  1953                           GLOBAL	__end_of_ReadEEPROM
+  1954                           	__end_of_ReadEEPROM:
+  1955  02A6                     	signat	_ReadEEPROM,89
+  1956                           global	___latbits
+  1957                           ___latbits	equ	0
+  1958  0000                     	global	btemp
+  1959                           	btemp set 05Eh
+  1960  005E                     
+  1961                           	DABS	1,94,2	;btemp
+  1962                           	global	wtemp0
+  1963                           	wtemp0 set btemp+0
+  1964  005E                     	end
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         7
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62     16      23
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_down
+    _main->_up
+    _up->_delay_ms
+    _down->_delay_ms
+    _delay_ms->___wmul
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 3     3      0    2796
+                                             13 BANK0      3     3      0
+                         _ReadEEPROM
+                        _WriteEEPROM
+                               _down
+                                 _up
+ ---------------------------------------------------------------------------------
+ (1) _up                                                   2     0      2     844
+                                             11 BANK0      2     0      2
+                             ___wmul
+                           _delay_ms
+ ---------------------------------------------------------------------------------
+ (1) _down                                                 2     0      2     844
+                                             11 BANK0      2     0      2
+                             ___wmul
+                           _delay_ms
+ ---------------------------------------------------------------------------------
+ (2) _delay_ms                                             5     3      2     198
+                                              6 BANK0      5     3      2
+                             ___wmul (ARG)
+ ---------------------------------------------------------------------------------
+ (2) ___wmul                                               6     2      4     396
+                                              0 BANK0      6     2      4
+ ---------------------------------------------------------------------------------
+ (1) _WriteEEPROM                                          4     0      4    1108
+                                              0 BANK0      4     0      4
+ ---------------------------------------------------------------------------------
+ (1) _ReadEEPROM                                           2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ReadEEPROM
+   _WriteEEPROM
+   _down
+     ___wmul
+     _delay_ms
+       ___wmul (ARG)
+   _up
+     ___wmul
+     _delay_ms
+       ___wmul (ARG)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMMON            0      0       0       0        0.0%
+EEDATA              80      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+STACK                0      0       0       2        0.0%
+BITBANK0            3E      0       0       3        0.0%
+BANK0               3E     10      17       4       37.1%
+ABS                  0      0      17       5        0.0%
+DATA                 0      0      17       6        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.00 build -1524193055 
+Symbol Table                                                                                   Mon Sep 19 18:54:57 2022
+
+   __size_of_WriteEEPROM 0015               __CFG_CP$ON 0000                        _i 0034  
+                     l51 0249                       l60 028D                       l52 0249  
+                     l61 0292                       l53 024E                       l45 020B  
+                     l62 02A5                       l54 025C                       l70 01F6  
+                     l46 01FC                       l55 026B                       l71 01F7  
+                     l47 021A                       l64 029F                       l56 026B  
+                     l48 021A                       l65 02A5                       l57 0270  
+                     l58 027E                       l74 01E2                       l90 0376  
+                     l82 02B6                       l59 028D                       l91 0338  
+                     l83 037D                       l68 01F2                       l92 0338  
+                     l84 02BA                       l69 01F2                       l77 01CE  
+                     l85 0377                       l93 033D                       l94 037D  
+                     l86 02C4                       l95 0381                       l87 02FA  
+                     l96 03BB                       l88 0326                       l97 03BA  
+                     l89 0325                       l98 03F2                       l99 03F1  
+                     _RD 04E0              __CFG_CPD$ON 0000                       _WR 04E1  
+                     _up 01CF      ___wmul@multiplicand 0022                      l100 03F0  
+                    l101 03F3                      l102 03F4                      l103 03F4  
+                    l190 023E                      l191 0243                      l188 021F  
+                    l189 0229                      ?_up 002B                      l900 02B2  
+                    l830 01FC                      l910 02CE                      l902 02B4  
+                    l840 0237                      l832 021B                      l920 02F3  
+                    l912 02D3                      l904 02B6                      l850 024E  
+                    l842 023E                      l834 021F                      l930 031E  
+                    l922 02FE                      l914 02DC                      l906 02BA  
+                    l860 028B                      l852 0254                      l844 0243  
+                    l836 0223                      l828 01F8                      l940 0349  
+                    l924 0307                      l932 0326                      l916 02E2  
+                    l908 02C4                      l862 0292                      l854 0269  
+                    l846 0244                      l870 01EB                      l838 0230  
+                    l942 0352                      l934 032D                      l926 030D  
+                    l918 02EA                      l950 0377                      l864 0298  
+                    l856 0270                      l848 0247                      l872 01F0  
+                    l880 01BB                      l960 03A3                      l952 0385  
+                    l944 035C                      l936 0337                      l928 0315  
+                    l866 029F                      l858 0276                      l882 01BD  
+                    l874 01CF                      l970 03CE                      l962 03A8  
+                    l954 038B                      l946 0369                      l938 033D  
+                    l890 02A9                      l868 01E3                      l884 01CC  
+                    l876 01D1                      l972 03D3                      l964 03AD  
+                    l956 0398                      l948 036F                      l892 02AB  
+                    l878 01E0                      l974 03D9                      l966 03BF  
+                    l958 039D                      l894 02AC                      l886 02A6  
+                    l976 03DE                      l968 03C5                      l896 02AF  
+                    l888 02A8                      l978 03E3                      l898 02B1  
+                    u400 0276                      u320 0219                      u401 0275  
+                    u321 0218                      u410 0291                      u330 0223  
+                    u411 0290                      u331 0222                      u420 0298  
+                    u500 030D                      u421 0297                      u325 0215  
+                    u501 030C                      u430 029E                      u510 0336  
+                    u431 029D                      u511 0335                      u440 01F6  
+                    u360 023D                      u600 03C5                      u520 033C  
+                    _RP0 001D                      u441 01F5                      u361 023C  
+                    u345 022A                      u601 03C4                      u521 033B  
+                    u370 024D                      u610 03D3                      u530 037C  
+                    u450 02D3                      u371 024C                      u355 0231  
+                    u611 03D2                      u531 037B                      u451 02D2  
+                    u380 0254                      u620 03D9                      u540 0381  
+                    u460 02DC                      u381 0253                      u621 03D8  
+                    u541 0380                      u461 02DB                      u390 026F  
+                    u550 0385                      u470 02E2                      u391 026E  
+                    u551 0384                      u471 02E1                      u560 038B  
+                    u480 02FE                      u561 038A                      u481 02FD  
+                    u570 039D                      u490 0307                      u571 039C  
+                    u491 0306                      u580 03A3                      u581 03A2  
+                    u637 02BE                      u590 03BF                      u591 03BE  
+                    u647 02C9                      u657 0391                      u667 03C9  
+                    u677 01FF                      u687 0261                      u697 0283  
+                   ??_up 0000                     _GPIO 0005                     _WREN 04E2  
+                   _main 02A6                     _down 01BB                     btemp 005E  
+                   start 0000                    ?_main 0020                    ?_down 002B  
+                  _EEADR 009B            __CFG_WDTE$OFF 0000                    _CMCON 0019  
+                  _ANSEL 009F                    _GPIO2 002A                    _GPIO3 002B  
+         __CFG_BOREN$OFF 0000               _ReadEEPROM 0244                    status 0003  
+                  wtemp0 005E           __CFG_MCLRE$OFF 0000          __initialization 03F5  
+           __end_of_main 03F5             __end_of_down 01CF                   ??_main 002D  
+                 ??_down 0000                   _EEDATA 009A                   _EECON2 009D  
+                 _TRISIO 0085         __end_of_delay_ms 021B           __CFG_PWRTE$OFF 0000  
+                 _UpDown 0036                   ___wmul 021B                   up@time 002B  
+            ?_ReadEEPROM 0020  __end_of__initialization 03FD           __pcstackCOMMON 0000  
+             __end_of_up 01E3               __pbssBANK0 0030            ??_WriteEEPROM 0000  
+             __pmaintext 02A6                  ?___wmul 0020      __size_of_ReadEEPROM 0062  
+              ?_delay_ms 0026          __size_of___wmul 0029      __end_of_WriteEEPROM 01F8  
+                __ptext1 01CF                  __ptext2 01BB                  __ptext3 01F8  
+                __ptext4 021B                  __ptext5 01E3                  __ptext6 0244  
+             ??_delay_ms 0028                  _timesUp 0032     end_of_initialization 03FD  
+           ??_ReadEEPROM 0020              _WriteEEPROM 01E3           __end_of___wmul 0244  
+     __end_of_ReadEEPROM 02A6      start_initialization 03F5                 ??___wmul 0000  
+              ___latbits 0000            __pcstackBANK0 0020        __size_of_delay_ms 0023  
+      WriteEEPROM@adress 0022              __size_of_up 0014           ___wmul@product 0024  
+              delay_ms@i 0029                delay_ms@x 0026                 _GPIObits 0005  
+              _timesDown 0030        ___wmul@multiplier 0020               _EECON1bits 009C  
+           ?_WriteEEPROM 0020                 _delay_ms 01F8            __size_of_main 014F  
+          __size_of_down 0014                 down@time 002B          WriteEEPROM@data 0020  
+             _OPTION_REG 0081        __CFG_FOSC$INTRCIO 0000  

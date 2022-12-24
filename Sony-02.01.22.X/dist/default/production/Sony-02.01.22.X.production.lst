@@ -1,0 +1,1748 @@
+
+
+Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
+                                                                                               Sun Jan 02 23:42:05 2022
+
+Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
+     1                           	processor	12F675
+     2                           	pagewidth 120
+     3                           	opt	flic
+     4                           	psect	idataBANK0,global,class=CODE,delta=2,noexec
+     5                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     6                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1,noexec
+     7                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1,noexec
+     8                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+     9                           	psect	maintext,global,class=CODE,split=1,delta=2
+    10                           	psect	text1,local,class=CODE,merge=1,delta=2
+    11                           	psect	text2,local,class=CODE,merge=1,delta=2
+    12                           	psect	text3,local,class=CODE,merge=1,delta=2
+    13                           	psect	text4,local,class=CODE,merge=1,delta=2
+    14                           	psect	text5,local,class=CODE,merge=1,delta=2
+    15                           	psect	text6,local,class=CODE,merge=1,delta=2
+    16                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=2,noexec
+    17                           	dabs	1,0x5E,2
+    18  0000                     
+    19                           ; Version 2.20
+    20                           ; Generated 12/02/2020 GMT
+    21                           ; 
+    22                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    23                           ; All rights reserved.
+    24                           ; 
+    25                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    26                           ; 
+    27                           ; Redistribution and use in source and binary forms, with or without modification, are
+    28                           ; permitted provided that the following conditions are met:
+    29                           ; 
+    30                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    31                           ;        conditions and the following disclaimer.
+    32                           ; 
+    33                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    34                           ;        of conditions and the following disclaimer in the documentation and/or other
+    35                           ;        materials provided with the distribution.
+    36                           ; 
+    37                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    38                           ;        software without specific prior written permission.
+    39                           ; 
+    40                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    41                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    42                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    43                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    44                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    45                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    46                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    47                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    48                           ; 
+    49                           ; 
+    50                           ; Code-generator required, PIC12F675 Definitions
+    51                           ; 
+    52                           ; SFR Addresses
+    53  0000                     	;# 
+    54  0001                     	;# 
+    55  0002                     	;# 
+    56  0003                     	;# 
+    57  0004                     	;# 
+    58  0005                     	;# 
+    59  000A                     	;# 
+    60  000B                     	;# 
+    61  000C                     	;# 
+    62  000E                     	;# 
+    63  000E                     	;# 
+    64  000F                     	;# 
+    65  0010                     	;# 
+    66  0019                     	;# 
+    67  001E                     	;# 
+    68  001F                     	;# 
+    69  0081                     	;# 
+    70  0085                     	;# 
+    71  008C                     	;# 
+    72  008E                     	;# 
+    73  0090                     	;# 
+    74  0095                     	;# 
+    75  0096                     	;# 
+    76  0096                     	;# 
+    77  0099                     	;# 
+    78  009A                     	;# 
+    79  009A                     	;# 
+    80  009B                     	;# 
+    81  009C                     	;# 
+    82  009D                     	;# 
+    83  009E                     	;# 
+    84  009F                     	;# 
+    85  0000                     	;# 
+    86  0001                     	;# 
+    87  0002                     	;# 
+    88  0003                     	;# 
+    89  0004                     	;# 
+    90  0005                     	;# 
+    91  000A                     	;# 
+    92  000B                     	;# 
+    93  000C                     	;# 
+    94  000E                     	;# 
+    95  000E                     	;# 
+    96  000F                     	;# 
+    97  0010                     	;# 
+    98  0019                     	;# 
+    99  001E                     	;# 
+   100  001F                     	;# 
+   101  0081                     	;# 
+   102  0085                     	;# 
+   103  008C                     	;# 
+   104  008E                     	;# 
+   105  0090                     	;# 
+   106  0095                     	;# 
+   107  0096                     	;# 
+   108  0096                     	;# 
+   109  0099                     	;# 
+   110  009A                     	;# 
+   111  009A                     	;# 
+   112  009B                     	;# 
+   113  009C                     	;# 
+   114  009D                     	;# 
+   115  009E                     	;# 
+   116  009F                     	;# 
+   117                           
+   118                           	psect	idataBANK0
+   119  017D                     __pidataBANK0:
+   120                           
+   121                           ;initializer for _codeAddressPlus
+   122  017D  3450               	retlw	80
+   123                           
+   124                           ;initializer for _codeAddress
+   125  017E  34B5               	retlw	181
+   126                           
+   127                           ;initializer for _codeCommand
+   128  017F  3450               	retlw	80
+   129  000B                     _INTCON	set	11
+   130  001F                     _ADCON0	set	31
+   131  0019                     _CMCON	set	25
+   132  001E                     _ADRESH	set	30
+   133  00F9                     _GO_DONE	set	249
+   134  00F8                     _ADON	set	248
+   135  002A                     _GP2	set	42
+   136  008C                     _PIE1bits	set	140
+   137  0081                     _OPTION_REG	set	129
+   138  009F                     _ANSEL	set	159
+   139  0085                     _TRISIO	set	133
+   140                           
+   141                           	psect	cinit
+   142  03F2                     start_initialization:	
+   143                           ; #config settings
+   144                           
+   145  03F2                     __initialization:
+   146                           
+   147                           ; Initialize objects allocated to BANK0
+   148  03F2  217D               	fcall	__pidataBANK0	;fetch initializer
+   149  03F3  00AB               	movwf	__pdataBANK0& (0+127)
+   150  03F4  217E               	fcall	__pidataBANK0+1	;fetch initializer
+   151  03F5  00AC               	movwf	(__pdataBANK0+1)& (0+127)
+   152  03F6  217F               	fcall	__pidataBANK0+2	;fetch initializer
+   153  03F7  00AD               	movwf	(__pdataBANK0+2)& (0+127)
+   154                           
+   155                           ; Clear objects allocated to BANK0
+   156  03F8  01A6               	clrf	__pbssBANK0& (0+127)
+   157  03F9  01A7               	clrf	(__pbssBANK0+1)& (0+127)
+   158  03FA  01A8               	clrf	(__pbssBANK0+2)& (0+127)
+   159  03FB  01A9               	clrf	(__pbssBANK0+3)& (0+127)
+   160  03FC  01AA               	clrf	(__pbssBANK0+4)& (0+127)
+   161  03FD                     end_of_initialization:	
+   162                           ;End of C runtime variable initialization code
+   163                           
+   164  03FD                     __end_of__initialization:
+   165  03FD  0183               	clrf	3
+   166  03FE  2ACC               	ljmp	_main	;jump to C main() function
+   167                           
+   168                           	psect	bssBANK0
+   169  0026                     __pbssBANK0:
+   170  0026                     _volt:
+   171  0026                     	ds	2
+   172  0028                     _i:
+   173  0028                     	ds	2
+   174  002A                     _loopBit:
+   175  002A                     	ds	1
+   176                           
+   177                           	psect	dataBANK0
+   178  002B                     __pdataBANK0:
+   179  002B                     _codeAddressPlus:
+   180  002B                     	ds	1
+   181  002C                     _codeAddress:
+   182  002C                     	ds	1
+   183  002D                     _codeCommand:
+   184  002D                     	ds	1
+   185                           
+   186                           	psect	cstackBANK0
+   187  0020                     __pcstackBANK0:
+   188  0020                     ?_ms2_4And0_6ms:
+   189  0020                     ??_ms2_4And0_6ms:	
+   190                           ; 1 bytes @ 0x0
+   191                           
+   192  0020                     ?_bit1:	
+   193                           ; 1 bytes @ 0x0
+   194                           
+   195  0020                     ??_bit1:	
+   196                           ; 1 bytes @ 0x0
+   197                           
+   198  0020                     ?_bit0:	
+   199                           ; 1 bytes @ 0x0
+   200                           
+   201  0020                     ??_bit0:	
+   202                           ; 1 bytes @ 0x0
+   203                           
+   204  0020                     ?_ADC:	
+   205                           ; 1 bytes @ 0x0
+   206                           
+   207  0020                     ??_ADC:	
+   208                           ; 1 bytes @ 0x0
+   209                           
+   210  0020                     ?_ADC1:	
+   211                           ; 1 bytes @ 0x0
+   212                           
+   213  0020                     ??_ADC1:	
+   214                           ; 1 bytes @ 0x0
+   215                           
+   216  0020                     ?_main:	
+   217                           ; 1 bytes @ 0x0
+   218                           
+   219                           
+   220                           ; 1 bytes @ 0x0
+   221  0020                     	ds	1
+   222  0021                     ?_commandd:
+   223  0021                     commandd@loopBit2:	
+   224                           ; 1 bytes @ 0x1
+   225                           
+   226                           
+   227                           ; 1 bytes @ 0x1
+   228  0021                     	ds	1
+   229  0022                     commandd@loopBit3:
+   230                           
+   231                           ; 1 bytes @ 0x2
+   232  0022                     	ds	1
+   233  0023                     ??_commandd:
+   234                           
+   235                           ; 1 bytes @ 0x3
+   236  0023                     	ds	1
+   237  0024                     commandd@loopBit1:
+   238                           
+   239                           ; 1 bytes @ 0x4
+   240  0024                     	ds	1
+   241  0025                     ??_main:
+   242                           
+   243                           ; 1 bytes @ 0x5
+   244  0025                     	ds	1
+   245                           
+   246                           	psect	maintext
+   247  02CC                     __pmaintext:	
+   248 ;;
+   249 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   250 ;;
+   251 ;; *************** function _main *****************
+   252 ;; Defined at:
+   253 ;;		line 101 in file "Sony-02.01.22.c"
+   254 ;; Parameters:    Size  Location     Type
+   255 ;;		None
+   256 ;; Auto vars:     Size  Location     Type
+   257 ;;		None
+   258 ;; Return value:  Size  Location     Type
+   259 ;;                  1    wreg      void 
+   260 ;; Registers used:
+   261 ;;		wreg, status,2, status,0, pclath, cstack
+   262 ;; Tracked objects:
+   263 ;;		On entry : B00/0
+   264 ;;		On exit  : 0/0
+   265 ;;		Unchanged: 0/0
+   266 ;; Data sizes:     COMMON   BANK0
+   267 ;;      Params:         0       0
+   268 ;;      Locals:         0       0
+   269 ;;      Temps:          0       1
+   270 ;;      Totals:         0       1
+   271 ;;Total ram usage:        1 bytes
+   272 ;; Hardware stack levels required when called:    2
+   273 ;; This function calls:
+   274 ;;		_ADC
+   275 ;;		_ADC1
+   276 ;;		_commandd
+   277 ;; This function is called by:
+   278 ;;		Startup code after reset
+   279 ;; This function uses a non-reentrant model
+   280 ;;
+   281                           
+   282                           
+   283                           ;psect for function _main
+   284  02CC                     _main:
+   285  02CC                     l958:	
+   286                           ;incstack = 0
+   287                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   288                           
+   289                           
+   290                           ;Sony-02.01.22.c: 102:             if (volt < 253 && volt > 244) {
+   291  02CC  3010               	movlw	16
+   292  02CD  1683               	bsf	3,5	;RP0=1, select bank1
+   293  02CE  0085               	movwf	5	;volatile
+   294                           
+   295                           ;Sony-02.01.22.c: 103:                 codeCommand = 0b01100010;
+   296  02CF  3007               	movlw	7
+   297  02D0  1283               	bcf	3,5	;RP0=0, select bank0
+   298  02D1  0099               	movwf	25	;volatile
+   299                           
+   300                           ;Sony-02.01.22.c: 104:                 codeAddress = 0b01000010;
+   301  02D2  300C               	movlw	12
+   302  02D3  009F               	movwf	31	;volatile
+   303                           
+   304                           ;Sony-02.01.22.c: 105:                 commandd(0, 1, 8);
+   305  02D4  3078               	movlw	120
+   306  02D5  1683               	bsf	3,5	;RP0=1, select bank1
+   307  02D6  009F               	movwf	31	;volatile
+   308                           
+   309                           ;Sony-02.01.22.c: 106:             }
+   310  02D7  3083               	movlw	131
+   311  02D8  0081               	movwf	1	;volatile
+   312                           
+   313                           ;Sony-02.01.22.c: 107:         }
+   314  02D9  3040               	movlw	64
+   315  02DA  008B               	movwf	11	;volatile
+   316  02DB                     l960:
+   317                           
+   318                           ;Sony-02.01.22.c: 108: 
+   319  02DB  170C               	bsf	12,6	;volatile
+   320  02DC                     l962:
+   321                           
+   322                           ;Sony-02.01.22.c: 111:             if (volt < 244 && volt > 236) {
+   323  02DC  2180               	fcall	_ADC1
+   324  02DD                     l964:
+   325                           
+   326                           ;Sony-02.01.22.c: 112:                 codeCommand = 0b00101100;
+   327  02DD  3000               	movlw	0
+   328  02DE  1283               	bcf	3,5	;RP0=0, select bank0
+   329  02DF  0227               	subwf	_volt+1,w
+   330  02E0  30FD               	movlw	253
+   331  02E1  1903               	skipnz
+   332  02E2  0226               	subwf	_volt,w
+   333  02E3  1803               	skipnc
+   334  02E4  2AE6               	goto	u671
+   335  02E5  2AE7               	goto	u670
+   336  02E6                     u671:
+   337  02E6  2B14               	goto	l978
+   338  02E7                     u670:
+   339  02E7                     l966:
+   340  02E7  3000               	movlw	0
+   341  02E8  0227               	subwf	_volt+1,w
+   342  02E9  30F5               	movlw	245
+   343  02EA  1903               	skipnz
+   344  02EB  0226               	subwf	_volt,w
+   345  02EC  1C03               	skipc
+   346  02ED  2AEF               	goto	u681
+   347  02EE  2AF0               	goto	u680
+   348  02EF                     u681:
+   349  02EF  2B14               	goto	l978
+   350  02F0                     u680:
+   351  02F0                     l968:
+   352                           
+   353                           ;Sony-02.01.22.c: 113:                 codeAddress = 0b01000010;
+   354  02F0  2199               	fcall	_ADC
+   355  02F1                     l970:
+   356                           
+   357                           ;Sony-02.01.22.c: 114:                 commandd(0, 1, 8);
+   358  02F1  3000               	movlw	0
+   359  02F2  1283               	bcf	3,5	;RP0=0, select bank0
+   360  02F3  0227               	subwf	_volt+1,w
+   361  02F4  30FD               	movlw	253
+   362  02F5  1903               	skipnz
+   363  02F6  0226               	subwf	_volt,w
+   364  02F7  1803               	skipnc
+   365  02F8  2AFA               	goto	u691
+   366  02F9  2AFB               	goto	u690
+   367  02FA                     u691:
+   368  02FA  2B14               	goto	l978
+   369  02FB                     u690:
+   370  02FB                     l972:
+   371  02FB  3000               	movlw	0
+   372  02FC  0227               	subwf	_volt+1,w
+   373  02FD  30F5               	movlw	245
+   374  02FE  1903               	skipnz
+   375  02FF  0226               	subwf	_volt,w
+   376  0300  1C03               	skipc
+   377  0301  2B03               	goto	u701
+   378  0302  2B04               	goto	u700
+   379  0303                     u701:
+   380  0303  2B14               	goto	l978
+   381  0304                     u700:
+   382  0304                     l974:
+   383                           
+   384                           ;Sony-02.01.22.c: 115:             }
+   385  0304  3062               	movlw	98
+   386  0305  00A5               	movwf	??_main
+   387  0306  0825               	movf	??_main,w
+   388  0307  00AD               	movwf	_codeCommand
+   389                           
+   390                           ;Sony-02.01.22.c: 116:         }
+   391  0308  3042               	movlw	66
+   392  0309  00A5               	movwf	??_main
+   393  030A  0825               	movf	??_main,w
+   394  030B  00AC               	movwf	_codeAddress
+   395  030C                     l976:
+   396                           
+   397                           ;Sony-02.01.22.c: 117: 
+   398  030C  01A1               	clrf	commandd@loopBit2
+   399  030D  0AA1               	incf	commandd@loopBit2,f
+   400  030E  3008               	movlw	8
+   401  030F  00A5               	movwf	??_main
+   402  0310  0825               	movf	??_main,w
+   403  0311  00A2               	movwf	commandd@loopBit3
+   404  0312  3000               	movlw	0
+   405  0313  223A               	fcall	_commandd
+   406  0314                     l978:
+   407                           
+   408                           ;Sony-02.01.22.c: 121:                 codeCommand = 0b01001100;
+   409  0314  3000               	movlw	0
+   410  0315  1283               	bcf	3,5	;RP0=0, select bank0
+   411  0316  0227               	subwf	_volt+1,w
+   412  0317  30F4               	movlw	244
+   413  0318  1903               	skipnz
+   414  0319  0226               	subwf	_volt,w
+   415  031A  1803               	skipnc
+   416  031B  2B1D               	goto	u711
+   417  031C  2B1E               	goto	u710
+   418  031D                     u711:
+   419  031D  2B4B               	goto	l992
+   420  031E                     u710:
+   421  031E                     l980:
+   422  031E  3000               	movlw	0
+   423  031F  0227               	subwf	_volt+1,w
+   424  0320  30ED               	movlw	237
+   425  0321  1903               	skipnz
+   426  0322  0226               	subwf	_volt,w
+   427  0323  1C03               	skipc
+   428  0324  2B26               	goto	u721
+   429  0325  2B27               	goto	u720
+   430  0326                     u721:
+   431  0326  2B4B               	goto	l992
+   432  0327                     u720:
+   433  0327                     l982:
+   434                           
+   435                           ;Sony-02.01.22.c: 122:                 codeAddress = 0b01000010;
+   436  0327  2199               	fcall	_ADC
+   437  0328                     l984:
+   438                           
+   439                           ;Sony-02.01.22.c: 123:                 commandd(0, 1, 8);
+   440  0328  3000               	movlw	0
+   441  0329  1283               	bcf	3,5	;RP0=0, select bank0
+   442  032A  0227               	subwf	_volt+1,w
+   443  032B  30F4               	movlw	244
+   444  032C  1903               	skipnz
+   445  032D  0226               	subwf	_volt,w
+   446  032E  1803               	skipnc
+   447  032F  2B31               	goto	u731
+   448  0330  2B32               	goto	u730
+   449  0331                     u731:
+   450  0331  2B4B               	goto	l992
+   451  0332                     u730:
+   452  0332                     l986:
+   453  0332  3000               	movlw	0
+   454  0333  0227               	subwf	_volt+1,w
+   455  0334  30ED               	movlw	237
+   456  0335  1903               	skipnz
+   457  0336  0226               	subwf	_volt,w
+   458  0337  1C03               	skipc
+   459  0338  2B3A               	goto	u741
+   460  0339  2B3B               	goto	u740
+   461  033A                     u741:
+   462  033A  2B4B               	goto	l992
+   463  033B                     u740:
+   464  033B                     l988:
+   465                           
+   466                           ;Sony-02.01.22.c: 124:             }
+   467  033B  302C               	movlw	44
+   468  033C  00A5               	movwf	??_main
+   469  033D  0825               	movf	??_main,w
+   470  033E  00AD               	movwf	_codeCommand
+   471                           
+   472                           ;Sony-02.01.22.c: 125:         }
+   473  033F  3042               	movlw	66
+   474  0340  00A5               	movwf	??_main
+   475  0341  0825               	movf	??_main,w
+   476  0342  00AC               	movwf	_codeAddress
+   477  0343                     l990:
+   478                           
+   479                           ;Sony-02.01.22.c: 126: 
+   480  0343  01A1               	clrf	commandd@loopBit2
+   481  0344  0AA1               	incf	commandd@loopBit2,f
+   482  0345  3008               	movlw	8
+   483  0346  00A5               	movwf	??_main
+   484  0347  0825               	movf	??_main,w
+   485  0348  00A2               	movwf	commandd@loopBit3
+   486  0349  3000               	movlw	0
+   487  034A  223A               	fcall	_commandd
+   488  034B                     l992:
+   489                           
+   490                           ;Sony-02.01.22.c: 130:                 codeCommand = 0b01001000;
+   491  034B  3000               	movlw	0
+   492  034C  1283               	bcf	3,5	;RP0=0, select bank0
+   493  034D  0227               	subwf	_volt+1,w
+   494  034E  30EC               	movlw	236
+   495  034F  1903               	skipnz
+   496  0350  0226               	subwf	_volt,w
+   497  0351  1803               	skipnc
+   498  0352  2B54               	goto	u751
+   499  0353  2B55               	goto	u750
+   500  0354                     u751:
+   501  0354  2B82               	goto	l1006
+   502  0355                     u750:
+   503  0355                     l994:
+   504  0355  3000               	movlw	0
+   505  0356  0227               	subwf	_volt+1,w
+   506  0357  30D0               	movlw	208
+   507  0358  1903               	skipnz
+   508  0359  0226               	subwf	_volt,w
+   509  035A  1C03               	skipc
+   510  035B  2B5D               	goto	u761
+   511  035C  2B5E               	goto	u760
+   512  035D                     u761:
+   513  035D  2B82               	goto	l1006
+   514  035E                     u760:
+   515  035E                     l996:
+   516                           
+   517                           ;Sony-02.01.22.c: 131:                 codeAddress = 0b01000010;
+   518  035E  2199               	fcall	_ADC
+   519  035F                     l998:
+   520                           
+   521                           ;Sony-02.01.22.c: 132:                 commandd(0, 1, 8);
+   522  035F  3000               	movlw	0
+   523  0360  1283               	bcf	3,5	;RP0=0, select bank0
+   524  0361  0227               	subwf	_volt+1,w
+   525  0362  30EC               	movlw	236
+   526  0363  1903               	skipnz
+   527  0364  0226               	subwf	_volt,w
+   528  0365  1803               	skipnc
+   529  0366  2B68               	goto	u771
+   530  0367  2B69               	goto	u770
+   531  0368                     u771:
+   532  0368  2B82               	goto	l1006
+   533  0369                     u770:
+   534  0369                     l1000:
+   535  0369  3000               	movlw	0
+   536  036A  0227               	subwf	_volt+1,w
+   537  036B  30D0               	movlw	208
+   538  036C  1903               	skipnz
+   539  036D  0226               	subwf	_volt,w
+   540  036E  1C03               	skipc
+   541  036F  2B71               	goto	u781
+   542  0370  2B72               	goto	u780
+   543  0371                     u781:
+   544  0371  2B82               	goto	l1006
+   545  0372                     u780:
+   546  0372                     l1002:
+   547                           
+   548                           ;Sony-02.01.22.c: 133:             }
+   549  0372  304C               	movlw	76
+   550  0373  00A5               	movwf	??_main
+   551  0374  0825               	movf	??_main,w
+   552  0375  00AD               	movwf	_codeCommand
+   553                           
+   554                           ;Sony-02.01.22.c: 134:         }
+   555  0376  3042               	movlw	66
+   556  0377  00A5               	movwf	??_main
+   557  0378  0825               	movf	??_main,w
+   558  0379  00AC               	movwf	_codeAddress
+   559  037A                     l1004:
+   560                           
+   561                           ;Sony-02.01.22.c: 135: 
+   562  037A  01A1               	clrf	commandd@loopBit2
+   563  037B  0AA1               	incf	commandd@loopBit2,f
+   564  037C  3008               	movlw	8
+   565  037D  00A5               	movwf	??_main
+   566  037E  0825               	movf	??_main,w
+   567  037F  00A2               	movwf	commandd@loopBit3
+   568  0380  3000               	movlw	0
+   569  0381  223A               	fcall	_commandd
+   570  0382                     l1006:
+   571                           
+   572                           ;Sony-02.01.22.c: 139:                 codeCommand = 0b11001000;
+   573  0382  3000               	movlw	0
+   574  0383  1283               	bcf	3,5	;RP0=0, select bank0
+   575  0384  0227               	subwf	_volt+1,w
+   576  0385  30CF               	movlw	207
+   577  0386  1903               	skipnz
+   578  0387  0226               	subwf	_volt,w
+   579  0388  1803               	skipnc
+   580  0389  2B8B               	goto	u791
+   581  038A  2B8C               	goto	u790
+   582  038B                     u791:
+   583  038B  2BB9               	goto	l1020
+   584  038C                     u790:
+   585  038C                     l1008:
+   586  038C  3000               	movlw	0
+   587  038D  0227               	subwf	_volt+1,w
+   588  038E  3056               	movlw	86
+   589  038F  1903               	skipnz
+   590  0390  0226               	subwf	_volt,w
+   591  0391  1C03               	skipc
+   592  0392  2B94               	goto	u801
+   593  0393  2B95               	goto	u800
+   594  0394                     u801:
+   595  0394  2BB9               	goto	l1020
+   596  0395                     u800:
+   597  0395                     l1010:
+   598                           
+   599                           ;Sony-02.01.22.c: 140:                 codeAddress = 0b01000010;
+   600  0395  2199               	fcall	_ADC
+   601  0396                     l1012:
+   602                           
+   603                           ;Sony-02.01.22.c: 141:                 commandd(0, 1, 8);
+   604  0396  3000               	movlw	0
+   605  0397  1283               	bcf	3,5	;RP0=0, select bank0
+   606  0398  0227               	subwf	_volt+1,w
+   607  0399  30CF               	movlw	207
+   608  039A  1903               	skipnz
+   609  039B  0226               	subwf	_volt,w
+   610  039C  1803               	skipnc
+   611  039D  2B9F               	goto	u811
+   612  039E  2BA0               	goto	u810
+   613  039F                     u811:
+   614  039F  2BB9               	goto	l1020
+   615  03A0                     u810:
+   616  03A0                     l1014:
+   617  03A0  3000               	movlw	0
+   618  03A1  0227               	subwf	_volt+1,w
+   619  03A2  3056               	movlw	86
+   620  03A3  1903               	skipnz
+   621  03A4  0226               	subwf	_volt,w
+   622  03A5  1C03               	skipc
+   623  03A6  2BA8               	goto	u821
+   624  03A7  2BA9               	goto	u820
+   625  03A8                     u821:
+   626  03A8  2BB9               	goto	l1020
+   627  03A9                     u820:
+   628  03A9                     l1016:
+   629                           
+   630                           ;Sony-02.01.22.c: 142:             }
+   631  03A9  3048               	movlw	72
+   632  03AA  00A5               	movwf	??_main
+   633  03AB  0825               	movf	??_main,w
+   634  03AC  00AD               	movwf	_codeCommand
+   635                           
+   636                           ;Sony-02.01.22.c: 143:         }
+   637  03AD  3042               	movlw	66
+   638  03AE  00A5               	movwf	??_main
+   639  03AF  0825               	movf	??_main,w
+   640  03B0  00AC               	movwf	_codeAddress
+   641  03B1                     l1018:
+   642                           
+   643                           ;Sony-02.01.22.c: 144:     }
+   644  03B1  01A1               	clrf	commandd@loopBit2
+   645  03B2  0AA1               	incf	commandd@loopBit2,f
+   646  03B3  3008               	movlw	8
+   647  03B4  00A5               	movwf	??_main
+   648  03B5  0825               	movf	??_main,w
+   649  03B6  00A2               	movwf	commandd@loopBit3
+   650  03B7  3000               	movlw	0
+   651  03B8  223A               	fcall	_commandd
+   652  03B9                     l1020:
+   653  03B9  3000               	movlw	0
+   654  03BA  1283               	bcf	3,5	;RP0=0, select bank0
+   655  03BB  0227               	subwf	_volt+1,w
+   656  03BC  3055               	movlw	85
+   657  03BD  1903               	skipnz
+   658  03BE  0226               	subwf	_volt,w
+   659  03BF  1803               	skipnc
+   660  03C0  2BC2               	goto	u831
+   661  03C1  2BC3               	goto	u830
+   662  03C2                     u831:
+   663  03C2  2ADC               	goto	l962
+   664  03C3                     u830:
+   665  03C3                     l1022:
+   666  03C3  3000               	movlw	0
+   667  03C4  0227               	subwf	_volt+1,w
+   668  03C5  3003               	movlw	3
+   669  03C6  1903               	skipnz
+   670  03C7  0226               	subwf	_volt,w
+   671  03C8  1C03               	skipc
+   672  03C9  2BCB               	goto	u841
+   673  03CA  2BCC               	goto	u840
+   674  03CB                     u841:
+   675  03CB  2ADC               	goto	l962
+   676  03CC                     u840:
+   677  03CC                     l1024:
+   678  03CC  2199               	fcall	_ADC
+   679  03CD                     l1026:
+   680  03CD  3000               	movlw	0
+   681  03CE  1283               	bcf	3,5	;RP0=0, select bank0
+   682  03CF  0227               	subwf	_volt+1,w
+   683  03D0  3055               	movlw	85
+   684  03D1  1903               	skipnz
+   685  03D2  0226               	subwf	_volt,w
+   686  03D3  1803               	skipnc
+   687  03D4  2BD6               	goto	u851
+   688  03D5  2BD7               	goto	u850
+   689  03D6                     u851:
+   690  03D6  2ADC               	goto	l962
+   691  03D7                     u850:
+   692  03D7                     l1028:
+   693  03D7  3000               	movlw	0
+   694  03D8  0227               	subwf	_volt+1,w
+   695  03D9  3003               	movlw	3
+   696  03DA  1903               	skipnz
+   697  03DB  0226               	subwf	_volt,w
+   698  03DC  1C03               	skipc
+   699  03DD  2BDF               	goto	u861
+   700  03DE  2BE0               	goto	u860
+   701  03DF                     u861:
+   702  03DF  2ADC               	goto	l962
+   703  03E0                     u860:
+   704  03E0                     l1030:
+   705  03E0  30C8               	movlw	200
+   706  03E1  00A5               	movwf	??_main
+   707  03E2  0825               	movf	??_main,w
+   708  03E3  00AD               	movwf	_codeCommand
+   709  03E4  3042               	movlw	66
+   710  03E5  00A5               	movwf	??_main
+   711  03E6  0825               	movf	??_main,w
+   712  03E7  00AC               	movwf	_codeAddress
+   713  03E8                     l1032:
+   714  03E8  01A1               	clrf	commandd@loopBit2
+   715  03E9  0AA1               	incf	commandd@loopBit2,f
+   716  03EA  3008               	movlw	8
+   717  03EB  00A5               	movwf	??_main
+   718  03EC  0825               	movf	??_main,w
+   719  03ED  00A2               	movwf	commandd@loopBit3
+   720  03EE  3000               	movlw	0
+   721  03EF  223A               	fcall	_commandd
+   722  03F0  2ADC               	goto	l962
+   723  03F1  2800               	ljmp	start
+   724  03F2                     __end_of_main:
+   725                           
+   726                           	psect	text1
+   727  023A                     __ptext1:	
+   728 ;; *************** function _commandd *****************
+   729 ;; Defined at:
+   730 ;;		line 49 in file "Sony-02.01.22.c"
+   731 ;; Parameters:    Size  Location     Type
+   732 ;;  loopBit1        1    wreg     unsigned char 
+   733 ;;  loopBit2        1    1[BANK0 ] unsigned char 
+   734 ;;  loopBit3        1    2[BANK0 ] unsigned char 
+   735 ;; Auto vars:     Size  Location     Type
+   736 ;;  loopBit1        1    4[BANK0 ] unsigned char 
+   737 ;; Return value:  Size  Location     Type
+   738 ;;                  1    wreg      unsigned char 
+   739 ;; Registers used:
+   740 ;;		wreg, status,2, status,0, pclath, cstack
+   741 ;; Tracked objects:
+   742 ;;		On entry : 0/0
+   743 ;;		On exit  : 0/0
+   744 ;;		Unchanged: 0/0
+   745 ;; Data sizes:     COMMON   BANK0
+   746 ;;      Params:         0       2
+   747 ;;      Locals:         0       1
+   748 ;;      Temps:          0       1
+   749 ;;      Totals:         0       4
+   750 ;;Total ram usage:        4 bytes
+   751 ;; Hardware stack levels used:    1
+   752 ;; Hardware stack levels required when called:    1
+   753 ;; This function calls:
+   754 ;;		_bit0
+   755 ;;		_bit1
+   756 ;;		_ms2_4And0_6ms
+   757 ;; This function is called by:
+   758 ;;		_main
+   759 ;; This function uses a non-reentrant model
+   760 ;;
+   761                           
+   762                           
+   763                           ;psect for function _commandd
+   764  023A                     _commandd:
+   765                           
+   766                           ;incstack = 0
+   767                           ; Regs used in _commandd: [wreg+status,2+status,0+pclath+cstack]
+   768                           ;commandd@loopBit1 stored from wreg
+   769  023A  1283               	bcf	3,5	;RP0=0, select bank0
+   770  023B  00A4               	movwf	commandd@loopBit1
+   771  023C                     l900:
+   772                           
+   773                           ;Sony-02.01.22.c: 50:     while (loopBit > loopBit2) {
+   774  023C  220F               	fcall	_ms2_4And0_6ms
+   775  023D                     l902:
+   776                           
+   777                           ;Sony-02.01.22.c: 51:         loopBit--;
+   778  023D  3008               	movlw	8
+   779  023E  1283               	bcf	3,5	;RP0=0, select bank0
+   780  023F  00A3               	movwf	??_commandd
+   781  0240  0823               	movf	??_commandd,w
+   782  0241  00AA               	movwf	_loopBit
+   783                           
+   784                           ;Sony-02.01.22.c: 52:         if (!(codeAddress & (1 << loopBit))) {
+   785  0242  2A66               	goto	l912
+   786  0243                     l904:
+   787                           
+   788                           ;Sony-02.01.22.c: 53:             bit0();
+   789  0243  3001               	movlw	1
+   790  0244  02AA               	subwf	_loopBit,f
+   791                           
+   792                           ;Sony-02.01.22.c: 54:         } else if (codeAddress & (1 << loopBit)) {
+   793  0245  3001               	movlw	1
+   794  0246  00A3               	movwf	??_commandd
+   795  0247  0A2A               	incf	_loopBit,w
+   796  0248  2A4B               	goto	u504
+   797  0249                     u505:
+   798  0249  1003               	clrc
+   799  024A  0DA3               	rlf	??_commandd,f
+   800  024B                     u504:
+   801  024B  3EFF               	addlw	-1
+   802  024C  1D03               	skipz
+   803  024D  2A49               	goto	u505
+   804  024E  0823               	movf	??_commandd,w
+   805  024F  052D               	andwf	_codeCommand,w
+   806  0250  1D03               	btfss	3,2
+   807  0251  2A53               	goto	u511
+   808  0252  2A54               	goto	u510
+   809  0253                     u511:
+   810  0253  2A56               	goto	l908
+   811  0254                     u510:
+   812  0254                     l906:
+   813                           
+   814                           ;Sony-02.01.22.c: 55:             bit1();
+   815  0254  21B9               	fcall	_bit0
+   816                           
+   817                           ;Sony-02.01.22.c: 56:         }
+   818  0255  2A66               	goto	l912
+   819  0256                     l908:
+   820  0256  3001               	movlw	1
+   821  0257  00A3               	movwf	??_commandd
+   822  0258  0A2A               	incf	_loopBit,w
+   823  0259  2A5C               	goto	u524
+   824  025A                     u525:
+   825  025A  1003               	clrc
+   826  025B  0DA3               	rlf	??_commandd,f
+   827  025C                     u524:
+   828  025C  3EFF               	addlw	-1
+   829  025D  1D03               	skipz
+   830  025E  2A5A               	goto	u525
+   831  025F  0823               	movf	??_commandd,w
+   832  0260  052D               	andwf	_codeCommand,w
+   833  0261  1903               	btfsc	3,2
+   834  0262  2A64               	goto	u531
+   835  0263  2A65               	goto	u530
+   836  0264                     u531:
+   837  0264  2A66               	goto	l912
+   838  0265                     u530:
+   839  0265                     l910:
+   840                           
+   841                           ;Sony-02.01.22.c: 57:     }
+   842  0265  21E4               	fcall	_bit1
+   843  0266                     l912:
+   844                           
+   845                           ;Sony-02.01.22.c: 52:         if (!(codeAddress & (1 << loopBit))) {
+   846  0266  1283               	bcf	3,5	;RP0=0, select bank0
+   847  0267  082A               	movf	_loopBit,w
+   848  0268  0224               	subwf	commandd@loopBit1,w
+   849  0269  1C03               	skipc
+   850  026A  2A6C               	goto	u541
+   851  026B  2A6D               	goto	u540
+   852  026C                     u541:
+   853  026C  2A43               	goto	l904
+   854  026D                     u540:
+   855  026D                     l914:
+   856                           
+   857                           ;Sony-02.01.22.c: 61:         loopBit--;
+   858  026D  3008               	movlw	8
+   859  026E  00A3               	movwf	??_commandd
+   860  026F  0823               	movf	??_commandd,w
+   861  0270  00AA               	movwf	_loopBit
+   862                           
+   863                           ;Sony-02.01.22.c: 62:         if (!(codeAddressPlus & (1 << loopBit))) {
+   864  0271  2A95               	goto	l924
+   865  0272                     l916:
+   866                           
+   867                           ;Sony-02.01.22.c: 63:             bit0();
+   868  0272  3001               	movlw	1
+   869  0273  02AA               	subwf	_loopBit,f
+   870                           
+   871                           ;Sony-02.01.22.c: 64:         } else if (codeAddressPlus & (1 << loopBit)) {
+   872  0274  3001               	movlw	1
+   873  0275  00A3               	movwf	??_commandd
+   874  0276  0A2A               	incf	_loopBit,w
+   875  0277  2A7A               	goto	u554
+   876  0278                     u555:
+   877  0278  1003               	clrc
+   878  0279  0DA3               	rlf	??_commandd,f
+   879  027A                     u554:
+   880  027A  3EFF               	addlw	-1
+   881  027B  1D03               	skipz
+   882  027C  2A78               	goto	u555
+   883  027D  0823               	movf	??_commandd,w
+   884  027E  052C               	andwf	_codeAddress,w
+   885  027F  1D03               	btfss	3,2
+   886  0280  2A82               	goto	u561
+   887  0281  2A83               	goto	u560
+   888  0282                     u561:
+   889  0282  2A85               	goto	l920
+   890  0283                     u560:
+   891  0283                     l918:
+   892                           
+   893                           ;Sony-02.01.22.c: 65:             bit1();
+   894  0283  21B9               	fcall	_bit0
+   895                           
+   896                           ;Sony-02.01.22.c: 66:         }
+   897  0284  2A95               	goto	l924
+   898  0285                     l920:
+   899  0285  3001               	movlw	1
+   900  0286  00A3               	movwf	??_commandd
+   901  0287  0A2A               	incf	_loopBit,w
+   902  0288  2A8B               	goto	u574
+   903  0289                     u575:
+   904  0289  1003               	clrc
+   905  028A  0DA3               	rlf	??_commandd,f
+   906  028B                     u574:
+   907  028B  3EFF               	addlw	-1
+   908  028C  1D03               	skipz
+   909  028D  2A89               	goto	u575
+   910  028E  0823               	movf	??_commandd,w
+   911  028F  052C               	andwf	_codeAddress,w
+   912  0290  1903               	btfsc	3,2
+   913  0291  2A93               	goto	u581
+   914  0292  2A94               	goto	u580
+   915  0293                     u581:
+   916  0293  2A95               	goto	l924
+   917  0294                     u580:
+   918  0294                     l922:
+   919                           
+   920                           ;Sony-02.01.22.c: 67:     }
+   921  0294  21E4               	fcall	_bit1
+   922  0295                     l924:
+   923                           
+   924                           ;Sony-02.01.22.c: 62:         if (!(codeAddressPlus & (1 << loopBit))) {
+   925  0295  1283               	bcf	3,5	;RP0=0, select bank0
+   926  0296  082A               	movf	_loopBit,w
+   927  0297  0221               	subwf	commandd@loopBit2,w
+   928  0298  1C03               	skipc
+   929  0299  2A9B               	goto	u591
+   930  029A  2A9C               	goto	u590
+   931  029B                     u591:
+   932  029B  2A72               	goto	l916
+   933  029C                     u590:
+   934  029C                     l926:
+   935                           
+   936                           ;Sony-02.01.22.c: 71:     ADON = 1;
+   937  029C  3008               	movlw	8
+   938  029D  00A3               	movwf	??_commandd
+   939  029E  0823               	movf	??_commandd,w
+   940  029F  00AA               	movwf	_loopBit
+   941                           
+   942                           ;Sony-02.01.22.c: 72:     _delay((unsigned long)((3)*(4000000/4000.0)));
+   943  02A0  2AC4               	goto	l936
+   944  02A1                     l928:
+   945                           
+   946                           ;Sony-02.01.22.c: 73:     _delay((unsigned long)((200)*(4000000/4000000.0)));
+   947  02A1  3001               	movlw	1
+   948  02A2  02AA               	subwf	_loopBit,f
+   949                           
+   950                           ;Sony-02.01.22.c: 74:     GO_DONE = 1;
+   951  02A3  3001               	movlw	1
+   952  02A4  00A3               	movwf	??_commandd
+   953  02A5  0A2A               	incf	_loopBit,w
+   954  02A6  2AA9               	goto	u604
+   955  02A7                     u605:
+   956  02A7  1003               	clrc
+   957  02A8  0DA3               	rlf	??_commandd,f
+   958  02A9                     u604:
+   959  02A9  3EFF               	addlw	-1
+   960  02AA  1D03               	skipz
+   961  02AB  2AA7               	goto	u605
+   962  02AC  0823               	movf	??_commandd,w
+   963  02AD  3950               	andlw	80
+   964  02AE  1D03               	btfss	3,2
+   965  02AF  2AB1               	goto	u611
+   966  02B0  2AB2               	goto	u610
+   967  02B1                     u611:
+   968  02B1  2AB4               	goto	l932
+   969  02B2                     u610:
+   970  02B2                     l930:
+   971                           
+   972                           ;Sony-02.01.22.c: 75:     while (GO_DONE);
+   973  02B2  21B9               	fcall	_bit0
+   974                           
+   975                           ;Sony-02.01.22.c: 76:     volt = ADRESH;
+   976  02B3  2AC4               	goto	l936
+   977  02B4                     l932:
+   978  02B4  3001               	movlw	1
+   979  02B5  00A3               	movwf	??_commandd
+   980  02B6  0A2A               	incf	_loopBit,w
+   981  02B7  2ABA               	goto	u624
+   982  02B8                     u625:
+   983  02B8  1003               	clrc
+   984  02B9  0DA3               	rlf	??_commandd,f
+   985  02BA                     u624:
+   986  02BA  3EFF               	addlw	-1
+   987  02BB  1D03               	skipz
+   988  02BC  2AB8               	goto	u625
+   989  02BD  0823               	movf	??_commandd,w
+   990  02BE  3950               	andlw	80
+   991  02BF  1903               	btfsc	3,2
+   992  02C0  2AC2               	goto	u631
+   993  02C1  2AC3               	goto	u630
+   994  02C2                     u631:
+   995  02C2  2AC4               	goto	l936
+   996  02C3                     u630:
+   997  02C3                     l934:
+   998                           
+   999                           ;Sony-02.01.22.c: 77:     ADON = 0;
+  1000  02C3  21E4               	fcall	_bit1
+  1001  02C4                     l936:
+  1002                           
+  1003                           ;Sony-02.01.22.c: 72:     _delay((unsigned long)((3)*(4000000/4000.0)));
+  1004  02C4  1283               	bcf	3,5	;RP0=0, select bank0
+  1005  02C5  082A               	movf	_loopBit,w
+  1006  02C6  0222               	subwf	commandd@loopBit3,w
+  1007  02C7  1C03               	skipc
+  1008  02C8  2ACA               	goto	u641
+  1009  02C9  2ACB               	goto	u640
+  1010  02CA                     u641:
+  1011  02CA  2AA1               	goto	l928
+  1012  02CB                     u640:
+  1013  02CB                     l72:
+  1014  02CB  0008               	return
+  1015  02CC                     __end_of_commandd:
+  1016                           
+  1017                           	psect	text2
+  1018  020F                     __ptext2:	
+  1019 ;; *************** function _ms2_4And0_6ms *****************
+  1020 ;; Defined at:
+  1021 ;;		line 19 in file "Sony-02.01.22.c"
+  1022 ;; Parameters:    Size  Location     Type
+  1023 ;;		None
+  1024 ;; Auto vars:     Size  Location     Type
+  1025 ;;		None
+  1026 ;; Return value:  Size  Location     Type
+  1027 ;;                  1    wreg      void 
+  1028 ;; Registers used:
+  1029 ;;		wreg, status,2
+  1030 ;; Tracked objects:
+  1031 ;;		On entry : 0/0
+  1032 ;;		On exit  : 0/0
+  1033 ;;		Unchanged: 0/0
+  1034 ;; Data sizes:     COMMON   BANK0
+  1035 ;;      Params:         0       0
+  1036 ;;      Locals:         0       0
+  1037 ;;      Temps:          0       1
+  1038 ;;      Totals:         0       1
+  1039 ;;Total ram usage:        1 bytes
+  1040 ;; Hardware stack levels used:    1
+  1041 ;; This function calls:
+  1042 ;;		Nothing
+  1043 ;; This function is called by:
+  1044 ;;		_commandd
+  1045 ;; This function uses a non-reentrant model
+  1046 ;;
+  1047                           
+  1048                           
+  1049                           ;psect for function _ms2_4And0_6ms
+  1050  020F                     _ms2_4And0_6ms:
+  1051  020F                     l864:	
+  1052                           ;incstack = 0
+  1053                           ; Regs used in _ms2_4And0_6ms: [wreg+status,2]
+  1054                           
+  1055                           
+  1056                           ;Sony-02.01.22.c: 20:         _delay((unsigned long)((12)*(4000000/4000000.0)));
+  1057  020F  1283               	bcf	3,5	;RP0=0, select bank0
+  1058  0210  01A8               	clrf	_i
+  1059  0211  01A9               	clrf	_i+1
+  1060  0212                     l866:
+  1061  0212  3000               	movlw	0
+  1062  0213  0229               	subwf	_i+1,w
+  1063  0214  3050               	movlw	80
+  1064  0215  1903               	skipnz
+  1065  0216  0228               	subwf	_i,w
+  1066  0217  1C03               	skipc
+  1067  0218  2A1A               	goto	u441
+  1068  0219  2A1B               	goto	u440
+  1069  021A                     u441:
+  1070  021A  2A1C               	goto	l39
+  1071  021B                     u440:
+  1072  021B  2A33               	goto	l40
+  1073  021C                     l39:
+  1074                           
+  1075                           ;Sony-02.01.22.c: 21:         GP2 = 0;
+  1076  021C  1505               	bsf	5,2	;volatile
+  1077  021D                     l870:
+  1078                           
+  1079                           ;Sony-02.01.22.c: 22:     }
+  1080  021D  3003               	movlw	3
+  1081  021E  00A0               	movwf	??_ms2_4And0_6ms
+  1082  021F                     u877:
+  1083  021F  0BA0               	decfsz	??_ms2_4And0_6ms,f
+  1084  0220  2A1F               	goto	u877
+  1085  0221  2A22               	nop2
+  1086  0222                     l872:
+  1087                           
+  1088                           ;Sony-02.01.22.c: 23:     GP2 = 0;
+  1089  0222  1283               	bcf	3,5	;RP0=0, select bank0
+  1090  0223  1105               	bcf	5,2	;volatile
+  1091                           
+  1092                           ;Sony-02.01.22.c: 24:     _delay((unsigned long)((600)*(4000000/4000000.0)));
+  1093  0224  3001               	movlw	1
+  1094  0225  07A8               	addwf	_i,f
+  1095  0226  1803               	skipnc
+  1096  0227  0AA9               	incf	_i+1,f
+  1097  0228  3000               	movlw	0
+  1098  0229  07A9               	addwf	_i+1,f
+  1099  022A  3000               	movlw	0
+  1100  022B  0229               	subwf	_i+1,w
+  1101  022C  3050               	movlw	80
+  1102  022D  1903               	skipnz
+  1103  022E  0228               	subwf	_i,w
+  1104  022F  1C03               	skipc
+  1105  0230  2A32               	goto	u451
+  1106  0231  2A33               	goto	u450
+  1107  0232                     u451:
+  1108  0232  2A1C               	goto	l39
+  1109  0233                     u450:
+  1110  0233                     l40:
+  1111                           
+  1112                           ;Sony-02.01.22.c: 25: }
+  1113  0233  1105               	bcf	5,2	;volatile
+  1114  0234                     l874:
+  1115                           
+  1116                           ;Sony-02.01.22.c: 26: 
+  1117  0234  30C7               	movlw	199
+  1118  0235  00A0               	movwf	??_ms2_4And0_6ms
+  1119  0236                     u887:
+  1120  0236  0BA0               	decfsz	??_ms2_4And0_6ms,f
+  1121  0237  2A36               	goto	u887
+  1122  0238  2A39               	nop2
+  1123  0239                     l41:
+  1124  0239  0008               	return
+  1125  023A                     __end_of_ms2_4And0_6ms:
+  1126                           
+  1127                           	psect	text3
+  1128  01E4                     __ptext3:	
+  1129 ;; *************** function _bit1 *****************
+  1130 ;; Defined at:
+  1131 ;;		line 29 in file "Sony-02.01.22.c"
+  1132 ;; Parameters:    Size  Location     Type
+  1133 ;;		None
+  1134 ;; Auto vars:     Size  Location     Type
+  1135 ;;		None
+  1136 ;; Return value:  Size  Location     Type
+  1137 ;;                  1    wreg      void 
+  1138 ;; Registers used:
+  1139 ;;		wreg, status,2
+  1140 ;; Tracked objects:
+  1141 ;;		On entry : 0/0
+  1142 ;;		On exit  : 0/0
+  1143 ;;		Unchanged: 0/0
+  1144 ;; Data sizes:     COMMON   BANK0
+  1145 ;;      Params:         0       0
+  1146 ;;      Locals:         0       0
+  1147 ;;      Temps:          0       1
+  1148 ;;      Totals:         0       1
+  1149 ;;Total ram usage:        1 bytes
+  1150 ;; Hardware stack levels used:    1
+  1151 ;; This function calls:
+  1152 ;;		Nothing
+  1153 ;; This function is called by:
+  1154 ;;		_commandd
+  1155 ;; This function uses a non-reentrant model
+  1156 ;;
+  1157                           
+  1158                           
+  1159                           ;psect for function _bit1
+  1160  01E4                     _bit1:
+  1161  01E4                     l876:	
+  1162                           ;incstack = 0
+  1163                           ; Regs used in _bit1: [wreg+status,2]
+  1164                           
+  1165                           
+  1166                           ;Sony-02.01.22.c: 30:         _delay((unsigned long)((12)*(4000000/4000000.0)));
+  1167  01E4  1283               	bcf	3,5	;RP0=0, select bank0
+  1168  01E5  01A8               	clrf	_i
+  1169  01E6  01A9               	clrf	_i+1
+  1170  01E7                     l878:
+  1171  01E7  3000               	movlw	0
+  1172  01E8  0229               	subwf	_i+1,w
+  1173  01E9  3028               	movlw	40
+  1174  01EA  1903               	skipnz
+  1175  01EB  0228               	subwf	_i,w
+  1176  01EC  1C03               	skipc
+  1177  01ED  29EF               	goto	u461
+  1178  01EE  29F0               	goto	u460
+  1179  01EF                     u461:
+  1180  01EF  29F1               	goto	l44
+  1181  01F0                     u460:
+  1182  01F0  2A08               	goto	l45
+  1183  01F1                     l44:
+  1184                           
+  1185                           ;Sony-02.01.22.c: 31:         GP2 = 0;
+  1186  01F1  1505               	bsf	5,2	;volatile
+  1187  01F2                     l882:
+  1188                           
+  1189                           ;Sony-02.01.22.c: 32:     }
+  1190  01F2  3003               	movlw	3
+  1191  01F3  00A0               	movwf	??_bit1
+  1192  01F4                     u897:
+  1193  01F4  0BA0               	decfsz	??_bit1,f
+  1194  01F5  29F4               	goto	u897
+  1195  01F6  29F7               	nop2
+  1196  01F7                     l884:
+  1197                           
+  1198                           ;Sony-02.01.22.c: 33:     GP2 = 0;
+  1199  01F7  1283               	bcf	3,5	;RP0=0, select bank0
+  1200  01F8  1105               	bcf	5,2	;volatile
+  1201                           
+  1202                           ;Sony-02.01.22.c: 34:     _delay((unsigned long)((600)*(4000000/4000000.0)));
+  1203  01F9  3001               	movlw	1
+  1204  01FA  07A8               	addwf	_i,f
+  1205  01FB  1803               	skipnc
+  1206  01FC  0AA9               	incf	_i+1,f
+  1207  01FD  3000               	movlw	0
+  1208  01FE  07A9               	addwf	_i+1,f
+  1209  01FF  3000               	movlw	0
+  1210  0200  0229               	subwf	_i+1,w
+  1211  0201  3028               	movlw	40
+  1212  0202  1903               	skipnz
+  1213  0203  0228               	subwf	_i,w
+  1214  0204  1C03               	skipc
+  1215  0205  2A07               	goto	u471
+  1216  0206  2A08               	goto	u470
+  1217  0207                     u471:
+  1218  0207  29F1               	goto	l44
+  1219  0208                     u470:
+  1220  0208                     l45:
+  1221                           
+  1222                           ;Sony-02.01.22.c: 35: }
+  1223  0208  1105               	bcf	5,2	;volatile
+  1224  0209                     l886:
+  1225                           
+  1226                           ;Sony-02.01.22.c: 36: 
+  1227  0209  30C7               	movlw	199
+  1228  020A  00A0               	movwf	??_bit1
+  1229  020B                     u907:
+  1230  020B  0BA0               	decfsz	??_bit1,f
+  1231  020C  2A0B               	goto	u907
+  1232  020D  2A0E               	nop2
+  1233  020E                     l46:
+  1234  020E  0008               	return
+  1235  020F                     __end_of_bit1:
+  1236                           
+  1237                           	psect	text4
+  1238  01B9                     __ptext4:	
+  1239 ;; *************** function _bit0 *****************
+  1240 ;; Defined at:
+  1241 ;;		line 39 in file "Sony-02.01.22.c"
+  1242 ;; Parameters:    Size  Location     Type
+  1243 ;;		None
+  1244 ;; Auto vars:     Size  Location     Type
+  1245 ;;		None
+  1246 ;; Return value:  Size  Location     Type
+  1247 ;;                  1    wreg      void 
+  1248 ;; Registers used:
+  1249 ;;		wreg, status,2
+  1250 ;; Tracked objects:
+  1251 ;;		On entry : 0/0
+  1252 ;;		On exit  : 0/0
+  1253 ;;		Unchanged: 0/0
+  1254 ;; Data sizes:     COMMON   BANK0
+  1255 ;;      Params:         0       0
+  1256 ;;      Locals:         0       0
+  1257 ;;      Temps:          0       1
+  1258 ;;      Totals:         0       1
+  1259 ;;Total ram usage:        1 bytes
+  1260 ;; Hardware stack levels used:    1
+  1261 ;; This function calls:
+  1262 ;;		Nothing
+  1263 ;; This function is called by:
+  1264 ;;		_commandd
+  1265 ;; This function uses a non-reentrant model
+  1266 ;;
+  1267                           
+  1268                           
+  1269                           ;psect for function _bit0
+  1270  01B9                     _bit0:
+  1271  01B9                     l888:	
+  1272                           ;incstack = 0
+  1273                           ; Regs used in _bit0: [wreg+status,2]
+  1274                           
+  1275                           
+  1276                           ;Sony-02.01.22.c: 40:     while (loopBit > loopBit1) {
+  1277  01B9  1283               	bcf	3,5	;RP0=0, select bank0
+  1278  01BA  01A8               	clrf	_i
+  1279  01BB  01A9               	clrf	_i+1
+  1280  01BC                     l890:
+  1281  01BC  3000               	movlw	0
+  1282  01BD  0229               	subwf	_i+1,w
+  1283  01BE  3014               	movlw	20
+  1284  01BF  1903               	skipnz
+  1285  01C0  0228               	subwf	_i,w
+  1286  01C1  1C03               	skipc
+  1287  01C2  29C4               	goto	u481
+  1288  01C3  29C5               	goto	u480
+  1289  01C4                     u481:
+  1290  01C4  29C6               	goto	l49
+  1291  01C5                     u480:
+  1292  01C5  29DD               	goto	l50
+  1293  01C6                     l49:
+  1294                           
+  1295                           ;Sony-02.01.22.c: 41:         loopBit--;
+  1296  01C6  1505               	bsf	5,2	;volatile
+  1297  01C7                     l894:
+  1298                           
+  1299                           ;Sony-02.01.22.c: 42:         if (!(codeCommand & (1 << loopBit))) {
+  1300  01C7  3003               	movlw	3
+  1301  01C8  00A0               	movwf	??_bit0
+  1302  01C9                     u917:
+  1303  01C9  0BA0               	decfsz	??_bit0,f
+  1304  01CA  29C9               	goto	u917
+  1305  01CB  29CC               	nop2
+  1306  01CC                     l896:
+  1307                           
+  1308                           ;Sony-02.01.22.c: 43:             bit0();
+  1309  01CC  1283               	bcf	3,5	;RP0=0, select bank0
+  1310  01CD  1105               	bcf	5,2	;volatile
+  1311                           
+  1312                           ;Sony-02.01.22.c: 44:         } else if (codeCommand & (1 << loopBit)) {
+  1313  01CE  3001               	movlw	1
+  1314  01CF  07A8               	addwf	_i,f
+  1315  01D0  1803               	skipnc
+  1316  01D1  0AA9               	incf	_i+1,f
+  1317  01D2  3000               	movlw	0
+  1318  01D3  07A9               	addwf	_i+1,f
+  1319  01D4  3000               	movlw	0
+  1320  01D5  0229               	subwf	_i+1,w
+  1321  01D6  3014               	movlw	20
+  1322  01D7  1903               	skipnz
+  1323  01D8  0228               	subwf	_i,w
+  1324  01D9  1C03               	skipc
+  1325  01DA  29DC               	goto	u491
+  1326  01DB  29DD               	goto	u490
+  1327  01DC                     u491:
+  1328  01DC  29C6               	goto	l49
+  1329  01DD                     u490:
+  1330  01DD                     l50:
+  1331                           
+  1332                           ;Sony-02.01.22.c: 45:             bit1();
+  1333  01DD  1105               	bcf	5,2	;volatile
+  1334  01DE                     l898:
+  1335                           
+  1336                           ;Sony-02.01.22.c: 46:         }
+  1337  01DE  30C7               	movlw	199
+  1338  01DF  00A0               	movwf	??_bit0
+  1339  01E0                     u927:
+  1340  01E0  0BA0               	decfsz	??_bit0,f
+  1341  01E1  29E0               	goto	u927
+  1342  01E2  29E3               	nop2
+  1343  01E3                     l51:
+  1344  01E3  0008               	return
+  1345  01E4                     __end_of_bit0:
+  1346                           
+  1347                           	psect	text5
+  1348  0180                     __ptext5:	
+  1349 ;; *************** function _ADC1 *****************
+  1350 ;; Defined at:
+  1351 ;;		line 92 in file "Sony-02.01.22.c"
+  1352 ;; Parameters:    Size  Location     Type
+  1353 ;;		None
+  1354 ;; Auto vars:     Size  Location     Type
+  1355 ;;		None
+  1356 ;; Return value:  Size  Location     Type
+  1357 ;;                  1    wreg      void 
+  1358 ;; Registers used:
+  1359 ;;		wreg
+  1360 ;; Tracked objects:
+  1361 ;;		On entry : 0/0
+  1362 ;;		On exit  : 0/0
+  1363 ;;		Unchanged: 0/0
+  1364 ;; Data sizes:     COMMON   BANK0
+  1365 ;;      Params:         0       0
+  1366 ;;      Locals:         0       0
+  1367 ;;      Temps:          0       2
+  1368 ;;      Totals:         0       2
+  1369 ;;Total ram usage:        2 bytes
+  1370 ;; Hardware stack levels used:    1
+  1371 ;; This function calls:
+  1372 ;;		Nothing
+  1373 ;; This function is called by:
+  1374 ;;		_main
+  1375 ;; This function uses a non-reentrant model
+  1376 ;;
+  1377                           
+  1378                           
+  1379                           ;psect for function _ADC1
+  1380  0180                     _ADC1:
+  1381  0180                     l948:	
+  1382                           ;incstack = 0
+  1383                           ; Regs used in _ADC1: [wreg]
+  1384                           
+  1385                           
+  1386                           ;Sony-02.01.22.c: 93:     ANSEL = 0b01111000;
+  1387  0180  1283               	bcf	3,5	;RP0=0, select bank0
+  1388  0181  141F               	bsf	31,0	;volatile
+  1389  0182                     l950:
+  1390                           
+  1391                           ;Sony-02.01.22.c: 94:     OPTION_REG = 0b10000011;
+  1392  0182  3027               	movlw	39
+  1393  0183  00A1               	movwf	??_ADC1+1
+  1394  0184  30F5               	movlw	245
+  1395  0185  00A0               	movwf	??_ADC1
+  1396  0186                     u937:
+  1397  0186  0BA0               	decfsz	??_ADC1,f
+  1398  0187  2986               	goto	u937
+  1399  0188  0BA1               	decfsz	??_ADC1+1,f
+  1400  0189  2986               	goto	u937
+  1401  018A                     l952:
+  1402                           
+  1403                           ;Sony-02.01.22.c: 95:     INTCON = 0b1000000;
+  1404  018A  1283               	bcf	3,5	;RP0=0, select bank0
+  1405  018B  149F               	bsf	31,1	;volatile
+  1406  018C                     l81:	
+  1407                           ;Sony-02.01.22.c: 96:     PIE1bits.ADIE = 1;
+  1408                           
+  1409  018C  189F               	btfsc	31,1	;volatile
+  1410  018D  298F               	goto	u661
+  1411  018E  2990               	goto	u660
+  1412  018F                     u661:
+  1413  018F  298C               	goto	l81
+  1414  0190                     u660:
+  1415  0190                     l954:
+  1416                           
+  1417                           ;Sony-02.01.22.c: 97: 
+  1418  0190  081E               	movf	30,w	;volatile
+  1419  0191  00A0               	movwf	??_ADC1
+  1420  0192  01A1               	clrf	??_ADC1+1
+  1421  0193  0820               	movf	??_ADC1,w
+  1422  0194  00A6               	movwf	_volt
+  1423  0195  0821               	movf	??_ADC1+1,w
+  1424  0196  00A7               	movwf	_volt+1
+  1425  0197                     l956:
+  1426                           
+  1427                           ;Sony-02.01.22.c: 98:     while (1) {
+  1428  0197  101F               	bcf	31,0	;volatile
+  1429  0198                     l84:
+  1430  0198  0008               	return
+  1431  0199                     __end_of_ADC1:
+  1432                           
+  1433                           	psect	text6
+  1434  0199                     __ptext6:	
+  1435 ;; *************** function _ADC *****************
+  1436 ;; Defined at:
+  1437 ;;		line 82 in file "Sony-02.01.22.c"
+  1438 ;; Parameters:    Size  Location     Type
+  1439 ;;		None
+  1440 ;; Auto vars:     Size  Location     Type
+  1441 ;;		None
+  1442 ;; Return value:  Size  Location     Type
+  1443 ;;                  1    wreg      void 
+  1444 ;; Registers used:
+  1445 ;;		wreg
+  1446 ;; Tracked objects:
+  1447 ;;		On entry : 0/0
+  1448 ;;		On exit  : 0/0
+  1449 ;;		Unchanged: 0/0
+  1450 ;; Data sizes:     COMMON   BANK0
+  1451 ;;      Params:         0       0
+  1452 ;;      Locals:         0       0
+  1453 ;;      Temps:          0       2
+  1454 ;;      Totals:         0       2
+  1455 ;;Total ram usage:        2 bytes
+  1456 ;; Hardware stack levels used:    1
+  1457 ;; This function calls:
+  1458 ;;		Nothing
+  1459 ;; This function is called by:
+  1460 ;;		_main
+  1461 ;; This function uses a non-reentrant model
+  1462 ;;
+  1463                           
+  1464                           
+  1465                           ;psect for function _ADC
+  1466  0199                     _ADC:
+  1467  0199                     l938:	
+  1468                           ;incstack = 0
+  1469                           ; Regs used in _ADC: [wreg]
+  1470                           
+  1471                           
+  1472                           ;Sony-02.01.22.c: 83:     GO_DONE = 1;
+  1473  0199  1283               	bcf	3,5	;RP0=0, select bank0
+  1474  019A  141F               	bsf	31,0	;volatile
+  1475  019B                     l940:
+  1476                           
+  1477                           ;Sony-02.01.22.c: 84:     while (GO_DONE);
+  1478  019B  3004               	movlw	4
+  1479  019C  00A1               	movwf	??_ADC+1
+  1480  019D  30E4               	movlw	228
+  1481  019E  00A0               	movwf	??_ADC
+  1482  019F                     u947:
+  1483  019F  0BA0               	decfsz	??_ADC,f
+  1484  01A0  299F               	goto	u947
+  1485  01A1  0BA1               	decfsz	??_ADC+1,f
+  1486  01A2  299F               	goto	u947
+  1487  01A3  0000               	nop
+  1488                           
+  1489                           ;Sony-02.01.22.c: 85:     volt = ADRESH;
+  1490  01A4  3042               	movlw	66
+  1491  01A5  1283               	bcf	3,5	;RP0=0, select bank0
+  1492  01A6  00A0               	movwf	??_ADC
+  1493  01A7                     u957:
+  1494  01A7  0BA0               	decfsz	??_ADC,f
+  1495  01A8  29A7               	goto	u957
+  1496  01A9  0000               	nop
+  1497  01AA                     l942:
+  1498                           
+  1499                           ;Sony-02.01.22.c: 86:     ADON = 0;
+  1500  01AA  1283               	bcf	3,5	;RP0=0, select bank0
+  1501  01AB  149F               	bsf	31,1	;volatile
+  1502  01AC                     l75:	
+  1503                           ;Sony-02.01.22.c: 87: }
+  1504                           
+  1505  01AC  189F               	btfsc	31,1	;volatile
+  1506  01AD  29AF               	goto	u651
+  1507  01AE  29B0               	goto	u650
+  1508  01AF                     u651:
+  1509  01AF  29AC               	goto	l75
+  1510  01B0                     u650:
+  1511  01B0                     l944:
+  1512                           
+  1513                           ;Sony-02.01.22.c: 88: 
+  1514  01B0  081E               	movf	30,w	;volatile
+  1515  01B1  00A0               	movwf	??_ADC
+  1516  01B2  01A1               	clrf	??_ADC+1
+  1517  01B3  0820               	movf	??_ADC,w
+  1518  01B4  00A6               	movwf	_volt
+  1519  01B5  0821               	movf	??_ADC+1,w
+  1520  01B6  00A7               	movwf	_volt+1
+  1521  01B7                     l946:
+  1522                           
+  1523                           ;Sony-02.01.22.c: 89: void main(void) {
+  1524  01B7  101F               	bcf	31,0	;volatile
+  1525  01B8                     l78:
+  1526  01B8  0008               	return
+  1527  01B9                     __end_of_ADC:
+  1528  005E                     btemp	set	94	;btemp
+  1529  005E                     wtemp0	set	94
+  1530                           
+  1531                           	psect	config
+  1532                           
+  1533                           ;Config register CONFIG @ 0x2007
+  1534                           ;	Oscillator Selection bits
+  1535                           ;	FOSC = INTRCIO, INTOSC oscillator: I/O function on GP4/OSC2/CLKOUT pin, I/O function o
+      +                          n GP5/OSC1/CLKIN
+  1536                           ;	Watchdog Timer Enable bit
+  1537                           ;	WDTE = OFF, WDT disabled
+  1538                           ;	Power-Up Timer Enable bit
+  1539                           ;	PWRTE = OFF, PWRT disabled
+  1540                           ;	GP3/MCLR pin function select
+  1541                           ;	MCLRE = OFF, GP3/MCLR pin function is digital I/O, MCLR internally tied to VDD
+  1542                           ;	Brown-out Detect Enable bit
+  1543                           ;	BOREN = OFF, BOD disabled
+  1544                           ;	Code Protection bit
+  1545                           ;	CP = ON, Program Memory code protection is enabled
+  1546                           ;	Data Code Protection bit
+  1547                           ;	CPD = ON, Data memory code protection is enabled
+  1548  2007                     	org	8199
+  1549  2007  3014               	dw	12308
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        3
+    BSS         5
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62      6      14
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_commandd
+    _commandd->_bit0
+    _commandd->_bit1
+    _commandd->_ms2_4And0_6ms
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 1     1      0     826
+                                              5 BANK0      1     1      0
+                                _ADC
+                               _ADC1
+                           _commandd
+ ---------------------------------------------------------------------------------
+ (1) _commandd                                             4     2      2     826
+                                              1 BANK0      4     2      2
+                               _bit0
+                               _bit1
+                      _ms2_4And0_6ms
+ ---------------------------------------------------------------------------------
+ (2) _ms2_4And0_6ms                                        1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (2) _bit1                                                 1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (2) _bit0                                                 1     1      0       0
+                                              0 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC1                                                 2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _ADC                                                  2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ADC
+   _ADC1
+   _commandd
+     _bit0
+     _bit1
+     _ms2_4And0_6ms
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               3E      6       E       4       22.6%
+BITBANK0            3E      0       0       3        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITCOMMON            0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0       E       6        0.0%
+ABS                  0      0       E       5        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA              80      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
+Symbol Table                                                                                   Sun Jan 02 23:42:05 2022
+
+                      _i 0028                       l40 0233                       l41 0239  
+                     l50 01DD                       l51 01E3                       l44 01F1  
+                     l45 0208                       l46 020E                       l39 021C  
+                     l72 02CB                       l81 018C                       l49 01C6  
+                     l75 01AC                       l84 0198                       l78 01B8  
+                    _ADC 0199                      l900 023C                      l910 0265  
+                    l902 023D                      l920 0285                      l904 0243  
+                    l912 0266                      l930 02B2                      l922 0294  
+                    l914 026D                      l906 0254                      l940 019B  
+                    l932 02B4                      l916 0272                      l924 0295  
+                    l908 0256                      l942 01AA                      l950 0182  
+                    l870 021D                      l934 02C3                      l926 029C  
+                    l918 0283                      l944 01B0                      l952 018A  
+                    l872 0222                      l864 020F                      l928 02A1  
+                    l936 02C4                      l960 02DB                      l946 01B7  
+                    l938 0199                      l954 0190                      l890 01BC  
+                    l882 01F2                      l874 0234                      l866 0212  
+                    l970 02F1                      l962 02DC                      l956 0197  
+                    l948 0180                      l884 01F7                      l876 01E4  
+                    l980 031E                      l972 02FB                      l964 02DD  
+                    l894 01C7                      l886 0209                      l878 01E7  
+                    l990 0343                      l982 0327                      l974 0304  
+                    l966 02E7                      l958 02CC                      _GP2 002A  
+                    l896 01CC                      l888 01B9                      l984 0328  
+                    l992 034B                      l976 030C                      l968 02F0  
+                    l898 01DE                      l994 0355                      l986 0332  
+                    l978 0314                      l996 035E                      l988 033B  
+                    l998 035F                      u510 0254                      u511 0253  
+                    u440 021B                      u504 024B                      u441 021A  
+                    u505 0249                      u450 0233                      u610 02B2  
+                    u530 0265                      u451 0232                      u611 02B1  
+                    u531 0264                      u460 01F0                      u604 02A9  
+                    u540 026D                      u524 025C                      u700 0304  
+                    u461 01EF                      u605 02A7                      u541 026C  
+                    u525 025A                      u701 0303                      u470 0208  
+                    u630 02C3                      u710 031E                      u471 0207  
+                    u631 02C2                      u711 031D                      u480 01C5  
+                    u640 02CB                      u624 02BA                      u560 0283  
+                    u800 0395                      u720 0327                      u481 01C4  
+                    u641 02CA                      u625 02B8                      u561 0282  
+                    u801 0394                      u721 0326                      u650 01B0  
+                    u490 01DD                      u554 027A                      u810 03A0  
+                    u730 0332                      u651 01AF                      u491 01DC  
+                    u555 0278                      u811 039F                      u731 0331  
+                    u660 0190                      u580 0294                      u820 03A9  
+                    u740 033B                      u661 018F                      u581 0293  
+                    u821 03A8                      u741 033A                      u590 029C  
+                    u574 028B                      u830 03C3                      u750 0355  
+                    u670 02E7                      u591 029B                      u575 0289  
+                    u831 03C2                      u751 0354                      u671 02E6  
+                    u840 03CC                      u760 035E                      u680 02F0  
+                    u841 03CB                      u761 035D                      u681 02EF  
+                    u850 03D7                      u770 0369                      u690 02FB  
+                    u907 020B                      u851 03D6                      u771 0368  
+                    u691 02FA                      u860 03E0                      u780 0372  
+                    u917 01C9                      u861 03DF                      u781 0371  
+                    u790 038C                      u927 01E0                      u791 038B  
+                    u937 0186                      u947 019F                      u957 01A7  
+                    u877 021F                      u887 0236                      u897 01F4  
+                   ?_ADC 0020                     l1000 0369                     l1010 0395  
+                   l1002 0372                     l1012 0396                     l1020 03B9  
+                   l1004 037A                     l1030 03E0                     l1022 03C3  
+                   l1014 03A0                     l1006 0382                     l1032 03E8  
+                   l1024 03CC                     l1016 03A9                     l1008 038C  
+                   l1026 03CD                     l1018 03B1                     l1028 03D7  
+                   _ADC1 0180                     _ADON 00F8                     _bit0 01B9  
+                   _bit1 01E4                     _main 02CC                     btemp 005E  
+                   _volt 0026                     start 0000                    ??_ADC 0020  
+                  ?_ADC1 0020                    ?_bit0 0020                    ?_bit1 0020  
+                  ?_main 0020                    _CMCON 0019                    _ANSEL 009F  
+                  status 0003                    wtemp0 005E             __end_of_ADC1 0199  
+        __initialization 03F2             __end_of_bit0 01E4             __end_of_bit1 020F  
+           __end_of_main 03F2                   ??_ADC1 0020                   ??_bit0 0020  
+                 ??_bit1 0020                   ??_main 0025                   _ADCON0 001F  
+                 _ADRESH 001E                   _INTCON 000B                   _TRISIO 0085  
+       __end_of_commandd 02CC         commandd@loopBit1 0024         commandd@loopBit2 0021  
+       commandd@loopBit3 0022  __end_of__initialization 03FD   __size_of_ms2_4And0_6ms 002B  
+           __pidataBANK0 017D               __pbssBANK0 0026          _codeAddressPlus 002B  
+             __pmaintext 02CC            _ms2_4And0_6ms 020F                  _GO_DONE 00F9  
+              ?_commandd 0021           ?_ms2_4And0_6ms 0020                  __ptext1 023A  
+                __ptext2 020F                  __ptext3 01E4                  __ptext4 01B9  
+                __ptext5 0180                  __ptext6 0199             __size_of_ADC 0020  
+                _loopBit 002A               ??_commandd 0023     end_of_initialization 03FD  
+        ??_ms2_4And0_6ms 0020      start_initialization 03F2              __end_of_ADC 01B9  
+            __pdataBANK0 002B                ___latbits 0000            __pcstackBANK0 0020  
+            _codeAddress 002C        __size_of_commandd 0092              _codeCommand 002D  
+               _PIE1bits 008C                 _commandd 023A            __size_of_ADC1 0019  
+          __size_of_bit0 002B            __size_of_bit1 002B            __size_of_main 0126  
+  __end_of_ms2_4And0_6ms 023A               _OPTION_REG 0081  

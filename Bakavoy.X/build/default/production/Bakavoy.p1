@@ -1,0 +1,251 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[p mainexit ]
+"797 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 797: extern volatile unsigned char TRISIO __attribute__((address(0x085)));
+[v _TRISIO `Vuc ~T0 @X0 0 e@133 ]
+"218
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 218: extern volatile unsigned char GPIO __attribute__((address(0x005)));
+[v _GPIO `Vuc ~T0 @X0 0 e@5 ]
+"1618
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1618: extern volatile __bit GPIO3 __attribute__((address(0x2B)));
+[v _GPIO3 `Vb ~T0 @X0 0 e@43 ]
+[v F537 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic.h
+[v __delay `JF537 ~T0 @X0 0 e ]
+[p i __delay ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 54: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"74
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 74: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"94
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 94: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"114
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 114: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"200
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 200: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"220
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 220: __asm("GPIO equ 05h");
+[; <" GPIO equ 05h ;# ">
+"308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 308: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 328: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 406: __asm("PIR1 equ 0Ch");
+[; <" PIR1 equ 0Ch ;# ">
+"454
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 454: __asm("TMR1 equ 0Eh");
+[; <" TMR1 equ 0Eh ;# ">
+"461
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 461: __asm("TMR1L equ 0Eh");
+[; <" TMR1L equ 0Eh ;# ">
+"481
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 481: __asm("TMR1H equ 0Fh");
+[; <" TMR1H equ 0Fh ;# ">
+"501
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 501: __asm("T1CON equ 010h");
+[; <" T1CON equ 010h ;# ">
+"566
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 566: __asm("CMCON equ 019h");
+[; <" CMCON equ 019h ;# ">
+"625
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 625: __asm("ADRESH equ 01Eh");
+[; <" ADRESH equ 01Eh ;# ">
+"645
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 645: __asm("ADCON0 equ 01Fh");
+[; <" ADCON0 equ 01Fh ;# ">
+"729
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 729: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"799
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 799: __asm("TRISIO equ 085h");
+[; <" TRISIO equ 085h ;# ">
+"849
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 849: __asm("PIE1 equ 08Ch");
+[; <" PIE1 equ 08Ch ;# ">
+"897
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 897: __asm("PCON equ 08Eh");
+[; <" PCON equ 08Eh ;# ">
+"931
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 931: __asm("OSCCAL equ 090h");
+[; <" OSCCAL equ 090h ;# ">
+"991
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 991: __asm("WPU equ 095h");
+[; <" WPU equ 095h ;# ">
+"1036
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1036: __asm("IOC equ 096h");
+[; <" IOC equ 096h ;# ">
+"1041
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1041: __asm("IOCB equ 096h");
+[; <" IOCB equ 096h ;# ">
+"1210
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1210: __asm("VRCON equ 099h");
+[; <" VRCON equ 099h ;# ">
+"1270
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1270: __asm("EEDATA equ 09Ah");
+[; <" EEDATA equ 09Ah ;# ">
+"1275
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1275: __asm("EEDAT equ 09Ah");
+[; <" EEDAT equ 09Ah ;# ">
+"1308
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1308: __asm("EEADR equ 09Bh");
+[; <" EEADR equ 09Bh ;# ">
+"1328
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1328: __asm("EECON1 equ 09Ch");
+[; <" EECON1 equ 09Ch ;# ">
+"1366
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1366: __asm("EECON2 equ 09Dh");
+[; <" EECON2 equ 09Dh ;# ">
+"1386
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1386: __asm("ADRESL equ 09Eh");
+[; <" ADRESL equ 09Eh ;# ">
+"1406
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f675.h: 1406: __asm("ANSEL equ 09Fh");
+[; <" ANSEL equ 09Fh ;# ">
+"7 Bakavoy.c
+[; ;Bakavoy.c: 7: 
+[p x FOSC = INTRCIO ]
+"8
+[; ;Bakavoy.c: 8:     while(1)
+[p x WDTE = OFF ]
+"9
+[; ;Bakavoy.c: 9:     {
+[p x PWRTE = OFF ]
+"10
+[; ;Bakavoy.c: 10:         if(GPIO3 == 1){
+[p x MCLRE = OFF ]
+"11
+[; ;Bakavoy.c: 11:             _delay((unsigned long)((2260)*(4000000/4000.0)));
+[p x BOREN = OFF ]
+"12
+[; ;Bakavoy.c: 12:             if(x==0){
+[p x CP = ON ]
+"13
+[; ;Bakavoy.c: 13:                 if(GPIO3 == 1){
+[p x CPD = ON ]
+"15
+[; ;Bakavoy.c: 15:                     _delay((unsigned long)((2220)*(4000000/4000.0)));
+[v _x `uc ~T0 @X0 1 e ]
+[i _x
+-> -> 0 `i `uc
+]
+"16
+[; ;Bakavoy.c: 16:                     GPIO = (0<<1);
+[v _y `uc ~T0 @X0 1 e ]
+[i _y
+-> -> 1 `i `uc
+]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"19
+[; ;Bakavoy.c: 19:             }
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"20
+[; ;Bakavoy.c: 20: 
+[e = _TRISIO -> -> 8 `i `uc ]
+"21
+[; ;Bakavoy.c: 21:             }
+[e = _GPIO -> -> 0 `i `uc ]
+"23
+[; ;Bakavoy.c: 23: 
+[e :U 83 ]
+"24
+[; ;Bakavoy.c: 24:         }
+{
+"25
+[; ;Bakavoy.c: 25:         else{
+[e $ ! == -> _GPIO3 `i -> 1 `i 85  ]
+{
+"26
+[; ;Bakavoy.c: 26:             _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2260 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"27
+[; ;Bakavoy.c: 27:             if(y==0){
+[e $ ! == -> _x `i -> 0 `i 86  ]
+{
+"28
+[; ;Bakavoy.c: 28:                 if(GPIO3 == 0){
+[e $ ! == -> _GPIO3 `i -> 1 `i 87  ]
+{
+"29
+[; ;Bakavoy.c: 29:                     GPIO = (1<<0);
+[e = _GPIO -> << -> 1 `i -> 1 `i `uc ]
+"30
+[; ;Bakavoy.c: 30:                     _delay((unsigned long)((2220)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2220 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"31
+[; ;Bakavoy.c: 31:                     GPIO = (0<<0);
+[e = _GPIO -> << -> 0 `i -> 1 `i `uc ]
+"32
+[; ;Bakavoy.c: 32:                     y=1;
+[e = _x -> -> 1 `i `uc ]
+"33
+[; ;Bakavoy.c: 33:                     x=0;
+[e = _y -> -> 0 `i `uc ]
+"34
+[; ;Bakavoy.c: 34:             }
+}
+[e :U 87 ]
+"36
+[; ;Bakavoy.c: 36:             }
+}
+[e :U 86 ]
+"39
+[; ;Bakavoy.c: 39: 
+}
+[e $U 88  ]
+"40
+[; ;Bakavoy.c: 40: 
+[e :U 85 ]
+{
+"41
+[; ;Bakavoy.c: 41: 
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"42
+[; ;Bakavoy.c: 42: 
+[e $ ! == -> _y `i -> 0 `i 89  ]
+{
+"43
+[; ;Bakavoy.c: 43:     }
+[e $ ! == -> _GPIO3 `i -> 0 `i 90  ]
+{
+"44
+[; ;Bakavoy.c: 44:     return;
+[e = _GPIO -> << -> 1 `i -> 0 `i `uc ]
+"45
+[; ;Bakavoy.c: 45: }
+[e ( __delay (1 -> * -> -> 2220 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"46
+[e = _GPIO -> << -> 0 `i -> 0 `i `uc ]
+"47
+[e = _y -> -> 1 `i `uc ]
+"48
+[e = _x -> -> 0 `i `uc ]
+"49
+}
+[e :U 90 ]
+"51
+}
+[e :U 89 ]
+"53
+}
+[e :U 88 ]
+"58
+}
+[e :U 82 ]
+[e $U 83  ]
+[e :U 84 ]
+"59
+[e $UE 81  ]
+"60
+[e :UE 81 ]
+}

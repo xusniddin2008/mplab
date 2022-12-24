@@ -1,0 +1,108 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Tue Apr 09 03:00:18 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000636
+                   .cinit    romdata   0x00031b    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/KENCR.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00031c      
+                            0x002007    0x002007      
+            798 out of 1158 program addresses used, program memory utilization is 68%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BD_Loop94   0x000097    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                Big_delay   0x000095    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 D_Loop36   0x00009d    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                      LED   0x00004c    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 Mainloop   0x000037    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               Send0_Loop   0x0002be    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              Send0_Loopp   0x0002db    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             Send0_Loopp1   0x0002f7    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               Send1_Loop   0x0002a1    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                   Send_0   0x0002bc    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                   Send_1   0x00029f    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 UMessen1   0x00003a    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_0048   0x000048    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_004A   0x00004a    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_0317   0x000317    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_0319   0x000319    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                      att   0x000072    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    cmatt   0x0000da    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                  cmpower   0x000114    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+            cmstrelkachap   0x00014e    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              cmstrelkaon   0x000188    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             cmstrelkapas   0x0000a0    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+            cmstrelkatepa   0x000236    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               cmvolumpas   0x0001c2    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              cmvolumtepa   0x0001fc    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    delay   0x00009c    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              delayy4.5ms   0x000312    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                delayy9ms   0x0002d9    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                     loop   0x00003b    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    power   0x000077    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              strelkachap   0x00007c    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                strelkaon   0x000081    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               strelkapas   0x00006d    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              strelkatepa   0x000090    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 volumpas   0x000086    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                volumtepa   0x00008b    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    yarmi   0x000270    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Init   0x000001    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 Mainloop   0x000037    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 UMessen1   0x00003a    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                     loop   0x00003b    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_0048   0x000048    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_004A   0x00004a    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                      LED   0x00004c    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               strelkapas   0x00006d    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                      att   0x000072    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    power   0x000077    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              strelkachap   0x00007c    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                strelkaon   0x000081    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 volumpas   0x000086    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                volumtepa   0x00008b    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              strelkatepa   0x000090    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                Big_delay   0x000095    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                BD_Loop94   0x000097    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    delay   0x00009c    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                 D_Loop36   0x00009d    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             cmstrelkapas   0x0000a0    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    cmatt   0x0000da    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                  cmpower   0x000114    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+            cmstrelkachap   0x00014e    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              cmstrelkaon   0x000188    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               cmvolumpas   0x0001c2    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              cmvolumtepa   0x0001fc    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+            cmstrelkatepa   0x000236    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                    yarmi   0x000270    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                   Send_1   0x00029f    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               Send1_Loop   0x0002a1    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                   Send_0   0x0002bc    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+               Send0_Loop   0x0002be    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+                delayy9ms   0x0002d9    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              Send0_Loopp   0x0002db    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             Send0_Loopp1   0x0002f7    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+              delayy4.5ms   0x000312    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_0317   0x000317    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+             _.org_0_0319   0x000319    program     static C:\Users\Xusniddin\Desktop\mplab\KenCr.X\KenCr.asm
+
+

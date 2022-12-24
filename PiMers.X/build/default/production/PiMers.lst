@@ -1,0 +1,1146 @@
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list p=12f675
+                      00002         #include <P12f675.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC12F675 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00367         LIST
+                      00003         ERRORLEVEL      -302            
+2007   0054           00004         __CONFIG  00054H
+                      00005         ;__CONFIG       _MCLRE_OFF & _PWRTE_OFF & _WDT_OFF & _INTRC_OSC_NOCLKOUT & _BODEN_OFF
+                      00006         #define   IR_LED    GPIO,2 ; ???????????? ?????????
+  00000020            00007 count           equ     0x20    
+  00000023            00008 f0              equ     0x23    
+  00000024            00009 f1              equ     0x24     
+  00000025            00010 strelkapasmax   equ     0x25    
+  00000026            00011 strelkapasmin   equ     0x26    
+  00000027            00012 qizilmax        equ     0x27
+  00000028            00013 qizilmin        equ     0x28
+  00000029            00014 powermax        equ     0x29
+  0000002A            00015 powermin        equ     0x2A
+  0000002B            00016 strelkachapmax  equ     0x2B
+  0000002C            00017 strelkachapmin  equ     0x2C
+  0000002D            00018 strelkaonmax    equ     0x2D
+  0000002E            00019 strelkaonmin    equ     0x2E
+  00000032            00020 Reg_1           equ     0x32            
+  00000033            00021 Reg_2           equ     0x33
+  00000034            00022 Reg_3           equ     0x34
+  00000038            00023 volumpasmax     equ     0x38
+  00000039            00024 volumpasmin     equ     0x39
+  0000003A            00025 volumtepamax    equ     0x3A
+  0000003B            00026 volumtepamin    equ     0x3B
+  0000003C            00027 strelkatepamax  equ     0x3C
+  0000003D            00028 strelkatepamin  equ     0x3D
+  0000003E            00029 fCOUNTER        equ     0x3E
+  0000003F            00030 fCOUNTER2       equ     0x3F 
+  00000040            00031 yashilmax       equ     0x40
+  00000041            00032 yashilmin       equ     0x41
+                      00033         
+                      00034                 org     0x00
+0000   2???           00035                 goto    Init            
+                      00036 ;***********************************************************************
+0001   1283           00037 Init        bcf     STATUS, RP0         ; Bank 0
+0002   0185           00038             clrf    GPIO                        ; aus!
+0003   3007           00039             movlw   b'00000111'
+0004   0099           00040             movwf   CMCON                       ; Comparator aus
+0005   1683           00041             bsf     STATUS, RP0         ; Bank 1
+0006   1105           00042             bcf     TRISIO,2
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0007   1605           00043             bsf     TRISIO,4
+0008   1683           00044             bsf     STATUS, RP0         ; Bank 1
+0009   23FF           00045             call    0x3FF
+000A   0090           00046             movwf   OSCCAL                      ; 4-MHz-Kalibrierung
+000B   1283           00047             bcf     STATUS, RP0         ; Bank 0
+000C   138B           00048             bcf     INTCON, GIE         ; Int deaktiviert          
+                      00049 ;******************************************************************************
+000D   141F           00050             BSF     ADCON0, ADON        ; ADON=1
+000E   159F           00051             BSF     ADCON0, CHS1        ; ADCHS1=0
+000F   151F           00052             BSF     ADCON0, CHS0        ; ADCHS0=0
+0010   1683           00053             BSF     STATUS,RP0  ; Bank1
+0011   019F           00054             clrf    ANSEL          
+0012   161F           00055             BSF     ANSEL, ADCS0        ; ADCS0=1 Fosc/8
+0013   159F           00056             BSF     ANSEL, ANS3
+0014   1283           00057             BCF     STATUS,RP0  ; Bank0
+0015   131F           00058             BCF     ADCON0, VCFG        ; RA2=digital
+0016   139F           00059             BCF     ADCON0, ADFM        ; ADFM=1 linksb?ndig
+                      00060             
+0017   30FC           00061             movlw   0xFC                ;4.85V      
+0018   00A5           00062             movwf   strelkapasmax
+0019   30EB           00063             movlw   0xEB                ;4.45V
+001A   00A6           00064             movwf   strelkapasmin
+001B   30EB           00065             movlw   0xEB                ; 4.45V
+001C   00A7           00066             movwf   qizilmax
+001D   30D2           00067             movlw   0xD2                ; 3.97V
+001E   00A8           00068             movwf   qizilmin
+001F   30D2           00069             movlw   0xD2                ; 3.97V
+0020   00C0           00070             movwf   yashilmax
+0021   30C8           00071             movlw   0xC8                ; 3.80V
+0022   00C1           00072             movwf   yashilmin
+0023   30C8           00073             movlw   0xC8                ; 3.80V
+0024   00A9           00074             movwf   powermax
+0025   30BD           00075             movlw   0xBD                ; 3.55V
+0026   00AA           00076             movwf   powermin
+0027   30BD           00077             movlw   0xBD                ; 3.55V
+0028   00AB           00078             movwf   strelkachapmax
+0029   30AF           00079             movlw   0xAF                ; 3.32V
+002A   00AC           00080             movwf   strelkachapmin
+002B   30AF           00081             movlw   0xAF                ; 3.32V
+002C   00AD           00082             movwf   strelkaonmax
+002D   30A3           00083             movlw   0xA3                ; 3.08V
+002E   00AE           00084             movwf   strelkaonmin
+002F   30A3           00085             movlw   0xA3                ; 3.08V
+0030   00B8           00086             movwf   volumpasmax
+0031   3094           00087             movlw   0x94                ; 2.85V
+0032   00B9           00088             movwf   volumpasmin
+0033   3094           00089             movlw   0x94                ; 2.85V
+0034   00BA           00090             movwf   volumtepamax            
+0035   3046           00091             movlw   0x46                ; 1.32V
+0036   00BB           00092             movwf   volumtepamin            
+0037   3046           00093             movlw   0x46                ; 1.32V
+0038   00BC           00094             movwf   strelkatepamax
+0039   3001           00095             movlw   0x01                ; 0.00V
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003A   00BD           00096             movwf   strelkatepamin
+                      00097 ;***********************************************************************
+003B   2???           00098 Mainloop    call        UMessen1        ; AN0 nach f1,f0  (f1 is entscheidend)
+003C   2???           00099             call        LED             ; LED ein-/ausschalten
+003D   2???           00100             goto        Mainloop
+                      00101 ;***********************************************************************
+003E   149F           00102 UMessen1    BSF     ADCON0, 1   ; ADC starten       
+003F   189F           00103 loop        BTFSC   ADCON0, 1   ; ist der ADC fertig?
+0040   2???           00104             GOTO    loop                ; nein, weiter warten       
+0041   081E           00105             movfw   ADRESH              ; obere  8 Bit auslesen
+0042   00A4           00106             movwf   f1          ; obere  8-Bit nach f1
+0043   1683           00107             bsf     STATUS,RP0  ; Bank1
+0044   081E           00108             movfw   ADRESL              ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+0045   1283           00109             bcf     STATUS,RP0  ; Bank0
+0046   00A3           00110             movwf   f0          ; untere 2-Bit nach f0
+0047   307D           00111             movlw       .125
+0048   00B2           00112             movwf       Reg_1
+0049   3007           00113             movlw       .7
+004A   00B3           00114             movwf       Reg_2
+004B   0BB2           00115             decfsz      Reg_1,F
+004C   2???           00116             goto        $-1
+004D   0BB3           00117             decfsz      Reg_2,F
+004E   2???           00118             goto        $-3
+004F   0008           00119             return
+                      00120 ;***********************************************************************
+0050   0825           00121 LED         MOVFW       strelkapasmax
+0051   0224           00122             subwf       f1, w           ; w:=f1-w 
+0052   1C03           00123             btfss       STATUS, C
+0053   2???           00124             call        strelkapas              ; LED an
+                      00125 
+0054   0827           00126             MOVFW       qizilmax
+0055   0224           00127             subwf       f1, w           ; w:=f1-w 
+0056   1C03           00128             btfss       STATUS, C
+0057   2???           00129             call        qizil           ; LED an
+                      00130             
+0058   0840           00131             MOVFW       yashilmax
+0059   0224           00132             subwf       f1, w           ; w:=f1-w 
+005A   1C03           00133             btfss       STATUS, C
+005B   2???           00134             call        yashil          ; LED an
+                      00135 
+005C   0829           00136             MOVFW       powermax
+005D   0224           00137             subwf       f1, w           ; w:=f1-w 
+005E   1C03           00138             btfss       STATUS, C
+005F   2???           00139             call        power           ; LED an
+                      00140 
+0060   082B           00141             MOVFW       strelkachapmax
+0061   0224           00142             subwf       f1, w           ; w:=f1-w 
+0062   1C03           00143             btfss       STATUS, C
+0063   2???           00144             call        strelkachap     ; LED an
+                      00145 
+0064   082D           00146             MOVFW       strelkaonmax
+0065   0224           00147             subwf       f1, w           ; w:=f1-w 
+0066   1C03           00148             btfss       STATUS, C
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0067   2???           00149             call        strelkaon       ; LED an
+                      00150 
+0068   0838           00151             MOVFW       volumpasmax
+0069   0224           00152             subwf       f1, w           ; w:=f1-w 
+006A   1C03           00153             btfss       STATUS, C
+006B   2???           00154             call        volumpas        ; LED an
+                      00155 
+006C   083A           00156             MOVFW       volumtepamax
+006D   0224           00157             subwf       f1, w           ; w:=f1-w 
+006E   1C03           00158             btfss       STATUS, C
+006F   2???           00159             call        volumtepa       ; LED an
+                      00160 
+0070   083C           00161             MOVFW       strelkatepamax
+0071   0224           00162             subwf       f1, w           ; w:=f1-w 
+0072   1C03           00163             btfss       STATUS, C
+0073   2???           00164             call        strelkatepa     ; LED an
+0074   0008           00165             return
+                      00166 ;***********************************************************************
+0075   0826           00167 strelkapas  MOVFW       strelkapasmin
+0076   0224           00168             subwf       f1, w           ; w:=f1-w 
+0077   1803           00169             btfsc       STATUS, C
+0078   2???           00170             call        cmstrelkapas
+0079   0008           00171             return
+007A   0828           00172 qizil       MOVFW       qizilmin
+007B   0224           00173             subwf       f1, w           ; w:=f1-w 
+007C   1803           00174             btfsc       STATUS, C
+007D   2???           00175             call        qiziluderjat
+007E   0008           00176             return
+007F   0841           00177 yashil      MOVFW       yashilmin
+0080   0224           00178             subwf       f1, w           ; w:=f1-w 
+0081   1803           00179             btfsc       STATUS, C
+0082   2???           00180             call        yashiluderjat
+0083   0008           00181             return          
+0084   082A           00182 power       MOVFW       powermin
+0085   0224           00183             subwf       f1, w           ; w:=f1-w 
+0086   1803           00184             btfsc       STATUS, C
+0087   2???           00185             call        cmpower
+0088   0008           00186             return
+0089   082C           00187 strelkachap MOVFW       strelkachapmin
+008A   0224           00188             subwf       f1, w           ; w:=f1-w 
+008B   1803           00189             btfsc       STATUS, C
+008C   2???           00190             call        cmstrelkachap
+008D   0008           00191             return      
+008E   082E           00192 strelkaon   MOVFW       strelkaonmin
+008F   0224           00193             subwf       f1, w           ; w:=f1-w 
+0090   1803           00194             btfsc       STATUS, C
+0091   2???           00195             call        cmstrelkaon
+0092   0008           00196             return      
+0093   0839           00197 volumpas    MOVFW       volumpasmin
+0094   0224           00198             subwf       f1, w           ; w:=f1-w 
+0095   1803           00199             btfsc       STATUS, C
+0096   2???           00200             call        cmvolumpas
+0097   0008           00201             return      
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0098   083B           00202 volumtepa   MOVFW       volumtepamin
+0099   0224           00203             subwf       f1, w           ; w:=f1-w 
+009A   1803           00204             btfsc       STATUS, C
+009B   2???           00205             call        cmvolumtepa
+009C   0008           00206             return      
+009D   083D           00207 strelkatepa MOVFW       strelkatepamin
+009E   0224           00208             subwf       f1, w           ; w:=f1-w 
+009F   1803           00209             btfsc       STATUS, C
+00A0   2???           00210             call        cmstrelkatepa
+00A1   0008           00211             return      
+                      00212 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+00A2                  00213 Big_delay ;=770*x+1     x=(delay-5)/770 ???????? ?????????? call ? return.
+00A2   00BF           00214         movwf   fCOUNTER2
+00A3   01BE           00215         clrf    fCOUNTER
+00A4                  00216 BD_Loop94
+00A4   0BBE           00217         decfsz  fCOUNTER,1
+00A5   2???           00218         goto    BD_Loop94
+00A6   0BBF           00219         decfsz  fCOUNTER2,1
+00A7   2???           00220         goto    BD_Loop94
+00A8   0008           00221         return
+                      00222 ;-----------------------------------------------------------------------------
+00A9   2???           00223 qiziluderjat    call    cmqizil
+00AA   2???           00224                 call    delay29ms
+00AB   2???           00225                 call    cmmute
+                      00226                 ;call   cmatt
+00AC   0008           00227                 return
+                      00228 ;-----------------------------------------------------------------------------
+00AD   2???           00229 yashiluderjat   call    cmyashil
+00AE   2???           00230                 call    delay29ms
+00AF   2???           00231                 call    cmpause         
+00B0   0008           00232                 return          
+                      00233 ;-----------------------------------------------------------------------------  
+00B1   2???           00234 cmstrelkapas    call    delayy9ms
+00B2   2???           00235                 call    delayy4.5ms
+00B3   2???           00236                 call    yarmi
+00B4   2???           00237                 call    metka101000
+00B5   2???           00238                 call    metka10101010101000
+00B6   2???           00239                 call    metka10101000
+00B7   2???           00240                 call    metka1000
+00B8   2???           00241                 call    metka1000
+00B9   2???           00242                 call    metka1000
+00BA   2???           00243                 call    metka1000
+00BB   2???           00244                 call    metka101000
+00BC   2???           00245                 call    Send_1;      // 43
+00BD   2???           00246                 call    Send_0;      // 43              
+00BE   0008           00247                 return
+                      00248 
+00BF   2???           00249 cmqizil         call    bt
+00C0   2???           00250                 call    delayy9ms
+00C1   2???           00251                 call    delayy4.5ms
+00C2   2???           00252                 call    metka1000
+00C3   2???           00253                 call    metka1000
+00C4   2???           00254                 call    metka1000
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C5   2???           00255                 call    metka1000
+00C6   2???           00256                 call    metka101000
+00C7   2???           00257                 call    metka101000
+00C8   2???           00258                 call    metka101010101000
+00C9   2???           00259                 call    metka101000
+00CA   2???           00260                 call    metka101000
+00CB   2???           00261                 call    metka1000
+00CC   2???           00262                 call    metka10101000
+00CD   2???           00263                 call    metka1000
+00CE   2???           00264                 call    metka101010101000
+00CF   2???           00265                 call    metka1000
+00D0   2???           00266                 call    metka10101000
+00D1   2???           00267                 call    metka1000
+00D2   2???           00268                 call    Send_1;      // 88
+00D3   2???           00269                 call    Send_0;      // 89                              
+00D4   0008           00270                 return
+                      00271                 
+00D5   2???           00272 cmmute          call    cmmute1
+00D6   2???           00273                 call    delayy9ms
+00D7   2???           00274                 call    delayy4.5ms
+00D8   2???           00275                 call    metka1000
+00D9   2???           00276                 call    metka1000
+00DA   2???           00277                 call    metka1000
+00DB   2???           00278                 call    metka1000
+00DC   2???           00279                 call    metka101000
+00DD   2???           00280                 call    metka101000
+00DE   2???           00281                 call    metka101010101000
+00DF   2???           00282                 call    metka101000
+00E0   2???           00283                 call    metka10101010101000
+00E1   2???           00284                 call    metka1000
+00E2   2???           00285                 call    metka10101000
+00E3   2???           00286                 call    metka1000
+00E4   2???           00287                 call    metka1000
+00E5   2???           00288                 call    metka1000
+00E6   2???           00289                 call    metka10101000
+00E7   2???           00290                 call    metka1000
+00E8   2???           00291                 call    Send_1;      // 88
+00E9   2???           00292                 call    Send_0;      // 89              
+00EA   0008           00293                 return          
+                      00294 
+00EB   2???           00295 cmatt           call    delayy9ms
+00EC   2???           00296                 call    delayy4.5ms
+00ED   2???           00297                 call    yarmi
+00EE   2???           00298                 call    Send_1;      // 38
+00EF   2???           00299                 call    Send_0;      // 39
+00F0   2???           00300                 call    Send_1;      // 40
+00F1   2???           00301                 call    Send_0;      // 41
+00F2   2???           00302                 call    Send_1;      // 42
+00F3   2???           00303                 call    Send_0;      // 43
+00F4   2???           00304                 call    Send_1;      // 35
+00F5   2???           00305                 call    Send_0;      // 36
+00F6   2???           00306                 call    Send_0;      // 37
+00F7   2???           00307                 call    Send_0;      // 38
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00F8   2???           00308                 call    Send_1;      // 39
+00F9   2???           00309                 call    Send_0;      // 40
+00FA   2???           00310                 call    Send_0;      // 41
+00FB   2???           00311                 call    Send_0;      // 42
+00FC   2???           00312                 call    Send_1;      // 43
+00FD   2???           00313                 call    Send_0;      // 43
+00FE   2???           00314                 call    Send_1;      // 43
+00FF   2???           00315                 call    Send_0;      // 43
+0100   2???           00316                 call    Send_1;      // 43
+0101   2???           00317                 call    Send_0;      // 43
+0102   2???           00318                 call    Send_1;      // 43
+0103   2???           00319                 call    Send_0;      // 43
+0104   2???           00320                 call    Send_1;      // 43
+0105   2???           00321                 call    Send_0;      // 43
+0106   2???           00322                 call    Send_0;      // 43
+0107   2???           00323                 call    Send_0;      // 43
+0108   2???           00324                 call    Send_1;      // 43
+0109   2???           00325                 call    Send_0;      // 43
+010A   2???           00326                 call    Send_0;      // 43
+010B   2???           00327                 call    Send_0;      // 43
+010C   2???           00328                 call    Send_1;      // 43
+010D   2???           00329                 call    Send_0;      // 43
+010E   2???           00330                 call    Send_1;      // 43
+010F   2???           00331                 call    Send_0;      // 43
+0110   2???           00332                 call    Send_1;      // 43
+0111   2???           00333                 call    Send_0;      // 43
+0112   2???           00334                 call    Send_0;      // 43
+0113   2???           00335                 call    Send_0;      // 43
+0114   2???           00336                 call    Send_1;      // 43
+0115   2???           00337                 call    Send_0;      // 43
+0116   2???           00338                 call    Send_0;      // 43
+0117   2???           00339                 call    Send_0;      // 43
+0118   2???           00340                 call    Send_1;      // 43
+0119   2???           00341                 call    Send_0;      // 43
+011A   2???           00342                 call    Send_0;      // 43
+011B   2???           00343                 call    Send_0;      // 43
+011C   2???           00344                 call    Send_1;      // 43
+011D   2???           00345                 call    Send_0;      // 43
+011E   2???           00346                 call    Send_0;      // 43
+011F   2???           00347                 call    Send_0;      // 43
+0120   2???           00348                 call    Send_1;      // 43
+0121   2???           00349                 call    Send_0;      // 43              
+0122   0008           00350                 return
+                      00351                 
+0123   2???           00352 cmyashil        call    bt
+0124   2???           00353                 call    delayy9ms
+0125   2???           00354                 call    delayy4.5ms
+0126   2???           00355                 call    metka1000
+0127   2???           00356                 call    metka1000
+0128   2???           00357                 call    metka1000
+0129   2???           00358                 call    metka1000
+012A   2???           00359                 call    metka101000
+012B   2???           00360                 call    metka101000
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+012C   2???           00361                 call    metka101010101000
+012D   2???           00362                 call    metka101000
+012E   2???           00363                 call    metka10101000
+012F   2???           00364                 call    metka10101000
+0130   2???           00365                 call    metka1000
+0131   2???           00366                 call    metka10101000
+0132   2???           00367                 call    metka101000
+0133   2???           00368                 call    metka1000
+0134   2???           00369                 call    metka10101000
+0135   2???           00370                 call    metka1000
+0136   2???           00371                 call    Send_1;      // 88
+0137   2???           00372                 call    Send_0;      // 89              
+0138   0008           00373                 return
+                      00374                 
+0139   2???           00375 metka2          call    delayy9ms
+013A   2???           00376                 call    delayy4.5ms
+013B   2???           00377                 call    metka1000
+013C   2???           00378                 call    metka1000
+013D   2???           00379                 call    metka1000
+013E   2???           00380                 call    metka1000
+013F   2???           00381                 call    metka101000
+0140   2???           00382                 call    metka101000
+0141   2???           00383                 call    metka101010101000
+0142   2???           00384                 call    metka101000     
+0143   2???           00385                 call    metka10101000
+0144   2???           00386                 call    metka10101000
+0145   2???           00387                 call    metka1000
+0146   2???           00388                 call    metka10101000
+0147   2???           00389                 call    metka101000
+0148   2???           00390                 call    metka1000
+0149   2???           00391                 call    metka10101000
+014A   2???           00392                 call    metka1000
+014B   2???           00393                 call    Send_1;      // 43
+014C   2???           00394                 call    Send_0;      // 43              
+014D   0008           00395                 return  
+                      00396                 
+014E   2???           00397 cmpause         call    delayy9ms
+014F   2???           00398                 call    delayy4.5ms
+0150   2???           00399                 call    yarmi
+0151   2???           00400                 call    metka101010101000
+0152   2???           00401                 call    metka1000
+0153   2???           00402                 call    metka101000     
+0154   2???           00403                 call    metka101000     
+0155   2???           00404                 call    metka1000
+0156   2???           00405                 call    metka1000
+0157   2???           00406                 call    metka10101000
+0158   2???           00407                 call    metka101000
+0159   2???           00408                 call    Send_1;      // 88
+015A   2???           00409                 call    Send_0;      // 89              
+015B   0008           00410                 return
+                      00411         
+015C   2???           00412 cmpower         call    delayy9ms
+015D   2???           00413                 call    delayy4.5ms
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+015E   2???           00414                 call    yarmi
+015F   2???           00415                 call    metka10101000
+0160   2???           00416                 call    metka101000
+0161   2???           00417                 call    metka1000
+0162   2???           00418                 call    metka1010101000
+0163   2???           00419                 call    metka101000
+0164   2???           00420                 call    metka10101000
+0165   2???           00421                 call    metka1000
+0166   2???           00422                 call    metka1000
+0167   2???           00423                 call    Send_1;      // 43
+0168   2???           00424                 call    Send_0;      // 43              
+0169   0008           00425                 return
+                      00426 
+016A   2???           00427 cmstrelkachap   call    delayy9ms
+016B   2???           00428                 call    delayy4.5ms
+016C   2???           00429                 call    yarmi
+016D   2???           00430                 call    metka10101000
+016E   2???           00431                 call    metka101010101000
+016F   2???           00432                 call    metka101000     
+0170   2???           00433                 call    metka101000     
+0171   2???           00434                 call    metka1000
+0172   2???           00435                 call    metka1000
+0173   2???           00436                 call    metka1000
+0174   2???           00437                 call    metka101000
+0175   2???           00438                 call    Send_1;      // 89
+0176   2???           00439                 call    Send_0;      // 90              
+0177   0008           00440                 return
+0178   2???           00441 cmstrelkaon     call    delayy9ms
+0179   2???           00442                 call    delayy4.5ms
+017A   2???           00443                 call    yarmi
+017B   2???           00444                 call    metka101000
+017C   2???           00445                 call    metka1000
+017D   2???           00446                 call    metka101010101000
+017E   2???           00447                 call    metka1010101000
+017F   2???           00448                 call    metka1000
+0180   2???           00449                 call    metka1000
+0181   2???           00450                 call    metka1000
+0182   2???           00451                 call    metka101000     
+0183   2???           00452                 call    Send_1;      // 89
+0184   2???           00453                 call    Send_0;      // 90              
+0185   0008           00454                 return
+0186   2???           00455 cmvolumpas      call    delayy9ms
+0187   2???           00456                 call    delayy4.5ms
+0188   2???           00457                 call    yarmi
+0189   2???           00458                 call    metka101000     
+018A   2???           00459                 call    metka1000
+018B   2???           00460                 call    metka101000     
+018C   2???           00461                 call    metka1010101010101000
+018D   2???           00462                 call    metka101000
+018E   2???           00463                 call    metka1000
+018F   2???           00464                 call    metka1000
+0190   2???           00465                 call    metka1000
+0191   2???           00466                 call    Send_1;      // 89
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0192   2???           00467                 call    Send_0;      // 90              
+0193   0008           00468                 return
+                      00469                 
+0194   2???           00470 cmvolumtepa     call    delayy9ms
+0195   2???           00471                 call    delayy4.5ms
+0196   2???           00472                 call    yarmi
+0197   2???           00473                 call    metka10101000
+0198   2???           00474                 call    metka101000
+0199   2???           00475                 call    metka101010101000
+019A   2???           00476                 call    metka101000
+019B   2???           00477                 call    metka101000
+019C   2???           00478                 call    metka1000
+019D   2???           00479                 call    metka1000
+019E   2???           00480                 call    metka1000
+019F   2???           00481                 call    Send_1;      // 89
+01A0   2???           00482                 call    Send_0;      // 90              
+01A1   0008           00483                 return
+01A2                  00484 cmstrelkatepa
+01A2   2???           00485                 call    delayy9ms
+01A3   2???           00486                 call    delayy4.5ms
+01A4   2???           00487                 call    yarmi
+01A5   2???           00488                 call    metka101010101010101000
+01A6   2???           00489                 call    metka101000
+01A7   2???           00490                 call    metka1000
+01A8   2???           00491                 call    metka1000
+01A9   2???           00492                 call    metka1000
+01AA   2???           00493                 call    metka1000
+01AB   2???           00494                 call    metka1000
+01AC   2???           00495                 call    metka101000
+01AD   2???           00496                 call    Send_1;      // 88
+01AE   2???           00497                 call    Send_0;      // 89              
+01AF   0008           00498                 return
+                      00499                 
+01B0   2???           00500 yarmi           call    metka1000
+01B1   2???           00501                 call    metka101000
+01B2   2???           00502                 call    metka1000
+01B3   2???           00503                 call    metka101000             
+01B4   2???           00504                 call    metka101000
+01B5   2???           00505                 call    metka101000
+01B6   2???           00506                 call    metka10101000
+01B7   2???           00507                 call    metka101000             
+01B8   0008           00508                 return
+                      00509 
+01B9   2???           00510 bt              call    delayy9ms
+01BA   2???           00511                 call    delayy4.5ms
+01BB   2???           00512                 call    yarmi
+01BC   2???           00513                 call    metka101000
+01BD   2???           00514                 call    metka1000
+01BE   2???           00515                 call    metka1000
+01BF   2???           00516                 call    metka101000
+01C0   2???           00517                 call    metka10101000
+01C1   2???           00518                 call    metka1010101000
+01C2   2???           00519                 call    metka101000
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01C3   2???           00520                 call    metka1000
+01C4   2???           00521                 call    Send_1;      // 43
+01C5   2???           00522                 call    Send_0;      // 43
+01C6   2???           00523                 call    Send_1;      // 43
+01C7   2???           00524                 call    Send_0;      // 43
+01C8   3020           00525                 movlw   d'32'
+01C9   2???           00526                 call    Big_delay
+01CA   0008           00527                 return
+                      00528                 
+01CB   2???           00529 cmmute1         call    delayy9ms
+01CC   2???           00530                 call    delayy4.5ms
+01CD   2???           00531                 call    yarmi
+01CE   2???           00532                 call    metka101000
+01CF   2???           00533                 call    metka10101000
+01D0   2???           00534                 call    metka1000
+01D1   2???           00535                 call    metka101010101000
+01D2   2???           00536                 call    metka1000
+01D3   2???           00537                 call    metka10101000
+01D4   2???           00538                 call    metka1000
+01D5   2???           00539                 call    metka1000
+01D6   2???           00540                 call    Send_1;      // 43
+01D7   2???           00541                 call    Send_0;      // 43
+01D8   3020           00542                 movlw   d'32'
+01D9   2???           00543                 call    Big_delay
+01DA   0008           00544                 return
+                      00545                 
+01DB                  00546 metka101010101010101000 
+01DB   2???           00547                 call    Send_1;      // 43
+01DC   2???           00548                 call    Send_0;      // 43              
+01DD                  00549 metka1010101010101000   
+01DD   2???           00550                 call    Send_1;      // 43
+01DE   2???           00551                 call    Send_0;      // 43              
+01DF                  00552 metka10101010101000     
+01DF   2???           00553                 call    Send_1;      // 43
+01E0   2???           00554                 call    Send_0;      // 43              
+01E1                  00555 metka101010101000       
+01E1   2???           00556                 call    Send_1;      // 43
+01E2   2???           00557                 call    Send_0;      // 43              
+01E3   2???           00558 metka1010101000 call    Send_1;      // 43
+01E4   2???           00559                 call    Send_0;      // 43              
+01E5   2???           00560 metka10101000   call    Send_1;      // 43
+01E6   2???           00561                 call    Send_0;      // 43
+01E7   2???           00562 metka101000     call    Send_1;      // 43
+01E8   2???           00563                 call    Send_0;      // 43
+01E9   2???           00564 metka1000       call    Send_1;      // 43
+01EA   2???           00565                 call    Send_0;      // 43
+01EB   2???           00566                 call    Send_0;      // 43
+01EC   2???           00567                 call    Send_0;      // 43              
+01ED   0008           00568                 return
+                      00569                 
+01EE   3013           00570 Send_1          movlw   d'19'       ; 527 millisekund
+01EF   00B2           00571                 movwf   Reg_1
+01F0   1505           00572 Send1_Loop      bsf     IR_LED
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01F1   0000           00573                 nop
+01F2   0000           00574                 nop
+01F3   0000           00575                 nop
+01F4   0000           00576                 nop
+01F5   0000           00577                 nop
+01F6   0000           00578                 nop
+01F7   0000           00579                 nop
+01F8   0000           00580                 nop
+01F9   0000           00581                 nop
+01FA   0000           00582                 nop
+01FB   0000           00583                 nop
+01FC   0000           00584                 nop
+01FD   1105           00585                 bcf     IR_LED
+01FE   0000           00586                 nop
+01FF   0000           00587                 nop
+0200   0000           00588                 nop
+0201   0000           00589                 nop
+0202   0000           00590                 nop
+0203   0000           00591                 nop
+0204   0000           00592                 nop
+0205   0000           00593                 nop
+0206   0000           00594                 nop
+0207   0000           00595                 nop
+0208   0BB2           00596                 decfsz  Reg_1,1
+0209   2???           00597                 goto    Send1_Loop
+020A   0008           00598                 return
+                      00599 ;-----------------------------------------------------------------------------          
+020B   3013           00600 Send_0          movlw   d'19'   ;527 millisekund
+020C   00B2           00601                 movwf   Reg_1
+020D   1105           00602 Send0_Loop      bcf     IR_LED
+020E   0000           00603                 nop
+020F   0000           00604                 nop
+0210   0000           00605                 nop
+0211   0000           00606                 nop
+0212   0000           00607                 nop
+0213   0000           00608                 nop
+0214   0000           00609                 nop
+0215   0000           00610                 nop
+0216   0000           00611                 nop
+0217   0000           00612                 nop
+0218   0000           00613                 nop
+0219   0000           00614                 nop
+021A   1105           00615                 bcf     IR_LED
+021B   0000           00616                 nop
+021C   0000           00617                 nop
+021D   0000           00618                 nop
+021E   0000           00619                 nop
+021F   0000           00620                 nop
+0220   0000           00621                 nop
+0221   0000           00622                 nop
+0222   0000           00623                 nop
+0223   0000           00624                 nop
+0224   0000           00625                 nop
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0225   0BB2           00626                 decfsz  Reg_1,1
+0226   2???           00627                 goto    Send0_Loop
+0227   0008           00628                 return
+                      00629 ;-----------------------------------------------------------------------------
+0228   30B9           00630 delayy9ms       movlw   d'185'
+0229   00B2           00631                 movwf   Reg_1
+022A   1505           00632 Send0_Loopp     bsf     IR_LED
+022B   0000           00633                 nop
+022C   0000           00634                 nop
+022D   0000           00635                 nop
+022E   0000           00636                 nop
+022F   0000           00637                 nop
+0230   0000           00638                 nop
+0231   0000           00639                 nop
+0232   0000           00640                 nop
+0233   0000           00641                 nop
+0234   0000           00642                 nop
+0235   0000           00643                 nop
+0236   0000           00644                 nop
+0237   1105           00645                 bcf     IR_LED
+0238   0000           00646                 nop
+0239   0000           00647                 nop
+023A   0000           00648                 nop
+023B   0000           00649                 nop
+023C   0000           00650                 nop
+023D   0000           00651                 nop
+023E   0000           00652                 nop
+023F   0000           00653                 nop
+0240   0000           00654                 nop
+0241   0000           00655                 nop
+0242   0BB2           00656                 decfsz  Reg_1,1
+0243   2???           00657                 goto    Send0_Loopp
+0244   3084           00658                 movlw   d'132'
+0245   00B2           00659                 movwf   Reg_1
+0246   1505           00660 Send0_Loopp1    bsf     IR_LED
+0247   0000           00661                 nop
+0248   0000           00662                 nop
+0249   0000           00663                 nop
+024A   0000           00664                 nop
+024B   0000           00665                 nop
+024C   0000           00666                 nop
+024D   0000           00667                 nop
+024E   0000           00668                 nop
+024F   0000           00669                 nop
+0250   0000           00670                 nop
+0251   0000           00671                 nop
+0252   0000           00672                 nop
+0253   1105           00673                 bcf     IR_LED
+0254   0000           00674                 nop
+0255   0000           00675                 nop
+0256   0000           00676                 nop
+0257   0000           00677                 nop
+0258   0000           00678                 nop
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0259   0000           00679                 nop
+025A   0000           00680                 nop
+025B   0000           00681                 nop
+025C   0000           00682                 nop
+025D   0000           00683                 nop
+025E   0BB2           00684                 decfsz  Reg_1,1
+025F   2???           00685                 goto    Send0_Loopp1
+0260   0008           00686                 return
+0261   30AA           00687 delayy4.5ms     movlw       .170
+0262   00B2           00688                 movwf       Reg_1
+0263   3006           00689                 movlw       .6
+0264   00B3           00690                 movwf       Reg_2
+0265   0BB2           00691                 decfsz      Reg_1,F
+0266   2???           00692                 goto        $-1
+0267   0BB3           00693                 decfsz      Reg_2,F
+0268   2???           00694                 goto        $-3
+0269   0008           00695                 return
+                      00696 
+026A   30A9           00697 delay250ms      movlw       .169
+026B   00B2           00698                 movwf       Reg_1
+026C   3045           00699                 movlw       .69
+026D   00B3           00700                 movwf       Reg_2
+026E   3002           00701                 movlw       .2
+026F   00B4           00702                 movwf       Reg_3
+0270   0BB2           00703                 decfsz      Reg_1,F
+0271   2???           00704                 goto        $-1
+0272   0BB3           00705                 decfsz      Reg_2,F
+0273   2???           00706                 goto        $-3
+0274   0BB4           00707                 decfsz      Reg_3,F
+0275   2???           00708                 goto        $-5
+0276   0000           00709                 nop
+0277   0000           00710                 nop
+                      00711 
+0278   0008           00712                 return
+                      00713                 
+                      00714                 
+0279   30A8           00715 delay29ms       movlw       .168
+027A   00B2           00716                 movwf       Reg_1
+027B   3026           00717                 movlw       .38
+027C   00B3           00718                 movwf       Reg_2
+027D   0BB2           00719                 decfsz      Reg_1,F
+027E   2???           00720                 goto        $-1
+027F   0BB3           00721                 decfsz      Reg_2,F
+0280   2???           00722                 goto        $-3
+0281   0000           00723                 nop
+                      00724 
+                      00725 
+0282   0008           00726                 return
+                      00727                 
+                      00728 ;-----------------------------------------------------------------------------  
+0054                  00729                 end
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+BD_Loop94                         000000A4
+Big_delay                         000000A2
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+IR_LED                            GPIO,2
+Init                              00000001
+LED                               00000050
+Mainloop                          0000003B
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PS2                               00000002
+PSA                               00000003
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+Reg_1                             00000032
+Reg_2                             00000033
+Reg_3                             00000034
+STATUS                            00000003
+Send0_Loop                        0000020D
+Send0_Loopp                       0000022A
+Send0_Loopp1                      00000246
+Send1_Loop                        000001F0
+Send_0                            0000020B
+Send_1                            000001EE
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+UMessen1                          0000003E
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+W                                 00000000
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_0_004C                      0000004C
+_.org_0_004E                      0000004E
+_.org_0_0266                      00000266
+_.org_0_0268                      00000268
+_.org_0_0271                      00000271
+_.org_0_0273                      00000273
+_.org_0_0275                      00000275
+_.org_0_027E                      0000027E
+_.org_0_0280                      00000280
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F675                          00000001
+bt                                000001B9
+cmatt                             000000EB
+cmmute                            000000D5
+cmmute1                           000001CB
+cmpause                           0000014E
+cmpower                           0000015C
+cmqizil                           000000BF
+cmstrelkachap                     0000016A
+cmstrelkaon                       00000178
+cmstrelkapas                      000000B1
+cmstrelkatepa                     000001A2
+cmvolumpas                        00000186
+cmvolumtepa                       00000194
+cmyashil                          00000123
+count                             00000020
+delay250ms                        0000026A
+delay29ms                         00000279
+delayy4.5ms                       00000261
+delayy9ms                         00000228
+f0                                00000023
+f1                                00000024
+fCOUNTER                          0000003E
+fCOUNTER2                         0000003F
+loop                              0000003F
+metka1000                         000001E9
+metka101000                       000001E7
+metka10101000                     000001E5
+metka1010101000                   000001E3
+metka101010101000                 000001E1
+metka10101010101000               000001DF
+metka1010101010101000             000001DD
+metka101010101010101000           000001DB
+metka2                            00000139
+power                             00000084
+powermax                          00000029
+powermin                          0000002A
+qizil                             0000007A
+qizilmax                          00000027
+qizilmin                          00000028
+qiziluderjat                      000000A9
+strelkachap                       00000089
+strelkachapmax                    0000002B
+strelkachapmin                    0000002C
+strelkaon                         0000008E
+strelkaonmax                      0000002D
+strelkaonmin                      0000002E
+strelkapas                        00000075
+strelkapasmax                     00000025
+MPASM 5.87                        PIMERS.ASM   3-24-2021  23:27:40         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+strelkapasmin                     00000026
+strelkatepa                       0000009D
+strelkatepamax                    0000003C
+strelkatepamin                    0000003D
+volumpas                          00000093
+volumpasmax                       00000038
+volumpasmin                       00000039
+volumtepa                         00000098
+volumtepamax                      0000003A
+volumtepamin                      0000003B
+yarmi                             000001B0
+yashil                            0000007F
+yashilmax                         00000040
+yashilmin                         00000041
+yashiluderjat                     000000AD
+
+Errors   :     0
+Warnings :     1 reported,     0 suppressed
+Messages :     0 reported,     7 suppressed
+
+

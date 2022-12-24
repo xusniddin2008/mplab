@@ -1,0 +1,1189 @@
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list p=12f675
+                      00002         #include <P12f675.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Jan 06 2020
+                      00005 ;  MPASM PIC12F675 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2020 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00367         LIST
+                      00003         ERRORLEVEL      -302            
+2007   0054           00004         __CONFIG  00054H
+                      00005         ;__CONFIG       _MCLRE_OFF & _PWRTE_OFF & _WDT_OFF & _INTRC_OSC_NOCLKOUT & _BODEN_OFF
+                      00006         #define   IR_LED    GPIO,2 ; ???????????? ?????????
+  00000020            00007 count           equ     0x20    
+  00000023            00008 f0              equ     0x23    
+  00000024            00009 f1              equ     0x24     
+  00000025            00010 strelkapasmax   equ     0x25    
+  00000026            00011 strelkapasmin   equ     0x26    
+  00000027            00012 qizilmax        equ     0x27
+  00000028            00013 qizilmin        equ     0x28
+  00000029            00014 powermax        equ     0x29
+  0000002A            00015 powermin        equ     0x2A
+  0000002B            00016 strelkachapmax  equ     0x2B
+  0000002C            00017 strelkachapmin  equ     0x2C
+  0000002D            00018 strelkaonmax    equ     0x2D
+  0000002E            00019 strelkaonmin    equ     0x2E
+  00000032            00020 Reg_1           equ     0x32            
+  00000033            00021 Reg_2           equ     0x33
+  00000034            00022 Reg_3           equ     0x34
+  00000038            00023 volumpasmax     equ     0x38
+  00000039            00024 volumpasmin     equ     0x39
+  0000003A            00025 volumtepamax    equ     0x3A
+  0000003B            00026 volumtepamin    equ     0x3B
+  0000003C            00027 strelkatepamax  equ     0x3C
+  0000003D            00028 strelkatepamin  equ     0x3D
+  0000003E            00029 fCOUNTER        equ     0x3E
+  0000003F            00030 fCOUNTER2       equ     0x3F 
+  00000040            00031 yashilmax       equ     0x40
+  00000041            00032 yashilmin       equ     0x41
+                      00033         
+                      00034                 org     0x00
+0000   2???           00035                 goto    Init            
+                      00036 ;***********************************************************************
+0001   1283           00037 Init        bcf     STATUS, RP0         ; Bank 0
+0002   0185           00038             clrf    GPIO                        ; aus!
+0003   3007           00039             movlw   b'00000111'
+0004   0099           00040             movwf   CMCON                       ; Comparator aus
+0005   1683           00041             bsf     STATUS, RP0         ; Bank 1
+0006   1105           00042             bcf     TRISIO,2
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0007   1605           00043             bsf     TRISIO,4
+0008   1683           00044             bsf     STATUS, RP0         ; Bank 1
+0009   23FF           00045             call    0x3FF
+000A   0090           00046             movwf   OSCCAL                      ; 4-MHz-Kalibrierung
+000B   1283           00047             bcf     STATUS, RP0         ; Bank 0
+000C   138B           00048             bcf     INTCON, GIE         ; Int deaktiviert          
+                      00049 ;******************************************************************************
+000D   141F           00050             BSF     ADCON0, ADON        ; ADON=1
+000E   159F           00051             BSF     ADCON0, CHS1        ; ADCHS1=0
+000F   151F           00052             BSF     ADCON0, CHS0        ; ADCHS0=0
+0010   1683           00053             BSF     STATUS,RP0  ; Bank1
+0011   019F           00054             clrf    ANSEL          
+0012   161F           00055             BSF     ANSEL, ADCS0        ; ADCS0=1 Fosc/8
+0013   159F           00056             BSF     ANSEL, ANS3
+0014   1283           00057             BCF     STATUS,RP0  ; Bank0
+0015   131F           00058             BCF     ADCON0, VCFG        ; RA2=digital
+0016   139F           00059             BCF     ADCON0, ADFM        ; ADFM=1 linksb?ndig
+                      00060             
+0017   30FB           00061             movlw   0xFB                ;4.85V      
+0018   00A5           00062             movwf   strelkapasmax
+0019   30E4           00063             movlw   0xE4                ;4.45V
+001A   00A6           00064             movwf   strelkapasmin
+001B   30E4           00065             movlw   0xE4                ; 4.45V
+001C   00A7           00066             movwf   qizilmax
+001D   30CF           00067             movlw   0xCF                ; 3.97V
+001E   00A8           00068             movwf   qizilmin
+001F   30CF           00069             movlw   0xCF                ; 3.97V
+0020   00C0           00070             movwf   yashilmax
+0021   30C5           00071             movlw   0xC5                ; 3.80V
+0022   00C1           00072             movwf   yashilmin
+0023   30C5           00073             movlw   0xC5                ; 3.80V
+0024   00A9           00074             movwf   powermax
+0025   30BE           00075             movlw   0xBE                ; 3.55V
+0026   00AA           00076             movwf   powermin
+0027   30BE           00077             movlw   0xBE                ; 3.55V
+0028   00AB           00078             movwf   strelkachapmax
+0029   30AE           00079             movlw   0xAE                ; 3.32V
+002A   00AC           00080             movwf   strelkachapmin
+002B   30AE           00081             movlw   0xAE                ; 3.32V
+002C   00AD           00082             movwf   strelkaonmax
+002D   309F           00083             movlw   0x9F                ; 3.08V
+002E   00AE           00084             movwf   strelkaonmin
+002F   309F           00085             movlw   0x9F                ; 3.08V
+0030   00B8           00086             movwf   volumpasmax
+0031   3092           00087             movlw   0x92                ; 2.85V
+0032   00B9           00088             movwf   volumpasmin
+0033   3092           00089             movlw   0x92                ; 2.85V
+0034   00BA           00090             movwf   volumtepamax            
+0035   3044           00091             movlw   0x44                ; 1.32V
+0036   00BB           00092             movwf   volumtepamin            
+0037   3044           00093             movlw   0x44                ; 1.32V
+0038   00BC           00094             movwf   strelkatepamax
+0039   3001           00095             movlw   0x01                ; 0.00V
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003A   00BD           00096             movwf   strelkatepamin
+                      00097 ;***********************************************************************
+003B   2???           00098 Mainloop    call        UMessen1        ; AN0 nach f1,f0  (f1 is entscheidend)
+003C   0825           00099             MOVFW       strelkapasmax
+003D   0224           00100             subwf       f1, w           ; w:=f1-w 
+003E   1C03           00101             btfss       STATUS, C          
+003F   2???           00102             call        LED             ; LED ein-/ausschalten
+0040   2???           00103             goto        Mainloop
+                      00104 ;***********************************************************************
+0041   149F           00105 UMessen1    BSF     ADCON0, 1   ; ADC starten       
+0042   189F           00106 loop        BTFSC   ADCON0, 1   ; ist der ADC fertig?
+0043   2???           00107             GOTO    loop                ; nein, weiter warten       
+0044   304B           00108             movlw       .75
+0045   00B2           00109             movwf       Reg_1
+0046   300D           00110             movlw       .13
+0047   00B3           00111             movwf       Reg_2
+0048   0BB2           00112             decfsz      Reg_1,F
+0049   2???           00113             goto        $-1
+004A   0BB3           00114             decfsz      Reg_2,F
+004B   2???           00115             goto        $-3
+004C   0000           00116             nop
+004D   0000           00117             nop
+004E   081E           00118             movfw   ADRESH              ; obere  8 Bit auslesen
+004F   00A4           00119             movwf   f1          ; obere  8-Bit nach f1
+0050   1683           00120             bsf     STATUS,RP0  ; Bank1
+0051   081E           00121             movfw   ADRESL              ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+0052   1283           00122             bcf     STATUS,RP0  ; Bank0
+0053   00A3           00123             movwf   f0          ; untere 2-Bit nach f0
+0054   109F           00124             BCF     ADCON0, 1
+0055   0008           00125             return
+                      00126 ;***********************************************************************
+0056                  00127 UMessen2    
+0056   149F           00128             BSF     ADCON0, 1   ; ADC starten       
+0057   189F           00129 loop2       BTFSC   ADCON0, 1   ; ist der ADC fertig?
+0058   2???           00130             GOTO    loop2               ; nein, weiter warten       
+0059   304B           00131             movlw       .75
+005A   00B2           00132             movwf       Reg_1
+005B   300D           00133             movlw       .13
+005C   00B3           00134             movwf       Reg_2
+005D   0BB2           00135             decfsz      Reg_1,F
+005E   2???           00136             goto        $-1
+005F   0BB3           00137             decfsz      Reg_2,F
+0060   2???           00138             goto        $-3
+0061   0000           00139             nop
+0062   0000           00140             nop
+0063   081E           00141             movfw   ADRESH              ; obere  8 Bit auslesen
+0064   00A4           00142             movwf   f1          ; obere  8-Bit nach f1
+0065   1683           00143             bsf     STATUS,RP0  ; Bank1
+0066   081E           00144             movfw   ADRESL              ; untere 2 Bit auslesen, werden aber  nicht ben?tigt
+0067   1283           00145             bcf     STATUS,RP0  ; Bank0
+0068   00A3           00146             movwf   f0          ; untere 2-Bit nach f0
+0069   109F           00147             BCF     ADCON0, 1
+006A   0008           00148             return          
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00149 ;***********************************************************************
+006B   2???           00150 LED         call        UMessen2        ; AN0 nach f1,f0  (f1 is entscheidend)
+                      00151             
+006C   0825           00152             MOVFW       strelkapasmax
+006D   0224           00153             subwf       f1, w           ; w:=f1-w 
+006E   1C03           00154             btfss       STATUS, C
+006F   2???           00155             call        strelkapas              ; LED an
+                      00156 
+0070   0827           00157             MOVFW       qizilmax
+0071   0224           00158             subwf       f1, w           ; w:=f1-w 
+0072   1C03           00159             btfss       STATUS, C
+0073   2???           00160             call        qizil           ; LED an
+                      00161             
+0074   0840           00162             MOVFW       yashilmax
+0075   0224           00163             subwf       f1, w           ; w:=f1-w 
+0076   1C03           00164             btfss       STATUS, C
+0077   2???           00165             call        yashil          ; LED an
+                      00166 
+0078   0829           00167             MOVFW       powermax
+0079   0224           00168             subwf       f1, w           ; w:=f1-w 
+007A   1C03           00169             btfss       STATUS, C
+007B   2???           00170             call        power           ; LED an
+                      00171 
+007C   082B           00172             MOVFW       strelkachapmax
+007D   0224           00173             subwf       f1, w           ; w:=f1-w 
+007E   1C03           00174             btfss       STATUS, C
+007F   2???           00175             call        strelkachap     ; LED an
+                      00176 
+0080   082D           00177             MOVFW       strelkaonmax
+0081   0224           00178             subwf       f1, w           ; w:=f1-w 
+0082   1C03           00179             btfss       STATUS, C
+0083   2???           00180             call        strelkaon       ; LED an
+                      00181 
+0084   0838           00182             MOVFW       volumpasmax
+0085   0224           00183             subwf       f1, w           ; w:=f1-w 
+0086   1C03           00184             btfss       STATUS, C
+0087   2???           00185             call        volumpas        ; LED an
+                      00186 
+0088   083A           00187             MOVFW       volumtepamax
+0089   0224           00188             subwf       f1, w           ; w:=f1-w 
+008A   1C03           00189             btfss       STATUS, C
+008B   2???           00190             call        volumtepa       ; LED an
+                      00191 
+008C   083C           00192             MOVFW       strelkatepamax
+008D   0224           00193             subwf       f1, w           ; w:=f1-w 
+008E   1C03           00194             btfss       STATUS, C
+008F   2???           00195             call        strelkatepa     ; LED an
+0090   0008           00196             return
+                      00197 ;***********************************************************************
+0091   0826           00198 strelkapas  MOVFW       strelkapasmin
+0092   0224           00199             subwf       f1, w           ; w:=f1-w 
+0093   1803           00200             btfsc       STATUS, C
+0094   2???           00201             call        cmstrelkapas
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0095   0008           00202             return
+0096   0828           00203 qizil       MOVFW       qizilmin
+0097   0224           00204             subwf       f1, w           ; w:=f1-w 
+0098   1803           00205             btfsc       STATUS, C
+0099   2???           00206             call        qiziluderjat
+009A   0008           00207             return
+009B   0841           00208 yashil      MOVFW       yashilmin
+009C   0224           00209             subwf       f1, w           ; w:=f1-w 
+009D   1803           00210             btfsc       STATUS, C
+009E   2???           00211             call        yashiluderjat
+009F   0008           00212             return          
+00A0   082A           00213 power       MOVFW       powermin
+00A1   0224           00214             subwf       f1, w           ; w:=f1-w 
+00A2   1803           00215             btfsc       STATUS, C
+00A3   2???           00216             call        cmpower
+00A4   0008           00217             return
+00A5   082C           00218 strelkachap MOVFW       strelkachapmin
+00A6   0224           00219             subwf       f1, w           ; w:=f1-w 
+00A7   1803           00220             btfsc       STATUS, C
+00A8   2???           00221             call        cmstrelkachap
+00A9   0008           00222             return      
+00AA   082E           00223 strelkaon   MOVFW       strelkaonmin
+00AB   0224           00224             subwf       f1, w           ; w:=f1-w 
+00AC   1803           00225             btfsc       STATUS, C
+00AD   2???           00226             call        cmstrelkaon
+00AE   0008           00227             return      
+00AF   0839           00228 volumpas    MOVFW       volumpasmin
+00B0   0224           00229             subwf       f1, w           ; w:=f1-w 
+00B1   1803           00230             btfsc       STATUS, C
+00B2   2???           00231             call        cmvolumpas
+00B3   0008           00232             return      
+00B4   083B           00233 volumtepa   MOVFW       volumtepamin
+00B5   0224           00234             subwf       f1, w           ; w:=f1-w 
+00B6   1803           00235             btfsc       STATUS, C
+00B7   2???           00236             call        cmvolumtepa
+00B8   0008           00237             return      
+00B9   083D           00238 strelkatepa MOVFW       strelkatepamin
+00BA   0224           00239             subwf       f1, w           ; w:=f1-w 
+00BB   1803           00240             btfsc       STATUS, C
+00BC   2???           00241             call        cmstrelkatepa
+00BD   0008           00242             return      
+                      00243 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+00BE                  00244 Big_delay ;=770*x+1     x=(delay-5)/770 ???????? ?????????? call ? return.
+00BE   00BF           00245         movwf   fCOUNTER2
+00BF   01BE           00246         clrf    fCOUNTER
+00C0                  00247 BD_Loop94
+00C0   0BBE           00248         decfsz  fCOUNTER,1
+00C1   2???           00249         goto    BD_Loop94
+00C2   0BBF           00250         decfsz  fCOUNTER2,1
+00C3   2???           00251         goto    BD_Loop94
+00C4   0008           00252         return
+                      00253 ;-----------------------------------------------------------------------------
+00C5   2???           00254 qiziluderjat    call    cmqizil
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C6   2???           00255                 call    delay29ms
+00C7   2???           00256                 call    cmmute
+                      00257                 ;call   cmatt
+00C8   0008           00258                 return
+                      00259 ;-----------------------------------------------------------------------------
+00C9   2???           00260 yashiluderjat   call    cmyashil
+00CA   2???           00261                 call    delay29ms
+00CB   2???           00262                 call    cmpause         
+00CC   0008           00263                 return          
+                      00264 ;-----------------------------------------------------------------------------  
+00CD   2???           00265 cmstrelkapas    call    delayy9ms
+00CE   2???           00266                 call    delayy4.5ms
+00CF   2???           00267                 call    yarmi
+00D0   2???           00268                 call    metka101000
+00D1   2???           00269                 call    metka10101010101000
+00D2   2???           00270                 call    metka10101000
+00D3   2???           00271                 call    metka1000
+00D4   2???           00272                 call    metka1000
+00D5   2???           00273                 call    metka1000
+00D6   2???           00274                 call    metka1000
+00D7   2???           00275                 call    metka101000
+00D8   2???           00276                 call    Send_1;      // 43
+00D9   2???           00277                 call    Send_0;      // 43              
+00DA   0008           00278                 return
+                      00279 
+00DB   2???           00280 cmqizil         call    bt
+00DC   2???           00281                 call    delayy9ms
+00DD   2???           00282                 call    delayy4.5ms
+00DE   2???           00283                 call    metka1000
+00DF   2???           00284                 call    metka1000
+00E0   2???           00285                 call    metka1000
+00E1   2???           00286                 call    metka1000
+00E2   2???           00287                 call    metka101000
+00E3   2???           00288                 call    metka101000
+00E4   2???           00289                 call    metka101010101000
+00E5   2???           00290                 call    metka101000
+00E6   2???           00291                 call    metka101000
+00E7   2???           00292                 call    metka1000
+00E8   2???           00293                 call    metka10101000
+00E9   2???           00294                 call    metka1000
+00EA   2???           00295                 call    metka101010101000
+00EB   2???           00296                 call    metka1000
+00EC   2???           00297                 call    metka10101000
+00ED   2???           00298                 call    metka1000
+00EE   2???           00299                 call    Send_1;      // 88
+00EF   2???           00300                 call    Send_0;      // 89                              
+00F0   0008           00301                 return
+                      00302                 
+00F1   2???           00303 cmmute          call    cmmute1
+00F2   2???           00304                 call    delayy9ms
+00F3   2???           00305                 call    delayy4.5ms
+00F4   2???           00306                 call    metka1000
+00F5   2???           00307                 call    metka1000
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00F6   2???           00308                 call    metka1000
+00F7   2???           00309                 call    metka1000
+00F8   2???           00310                 call    metka101000
+00F9   2???           00311                 call    metka101000
+00FA   2???           00312                 call    metka101010101000
+00FB   2???           00313                 call    metka101000
+00FC   2???           00314                 call    metka10101010101000
+00FD   2???           00315                 call    metka1000
+00FE   2???           00316                 call    metka10101000
+00FF   2???           00317                 call    metka1000
+0100   2???           00318                 call    metka1000
+0101   2???           00319                 call    metka1000
+0102   2???           00320                 call    metka10101000
+0103   2???           00321                 call    metka1000
+0104   2???           00322                 call    Send_1;      // 88
+0105   2???           00323                 call    Send_0;      // 89              
+0106   0008           00324                 return          
+                      00325 
+0107   2???           00326 cmatt           call    delayy9ms
+0108   2???           00327                 call    delayy4.5ms
+0109   2???           00328                 call    yarmi
+010A   2???           00329                 call    Send_1;      // 38
+010B   2???           00330                 call    Send_0;      // 39
+010C   2???           00331                 call    Send_1;      // 40
+010D   2???           00332                 call    Send_0;      // 41
+010E   2???           00333                 call    Send_1;      // 42
+010F   2???           00334                 call    Send_0;      // 43
+0110   2???           00335                 call    Send_1;      // 35
+0111   2???           00336                 call    Send_0;      // 36
+0112   2???           00337                 call    Send_0;      // 37
+0113   2???           00338                 call    Send_0;      // 38
+0114   2???           00339                 call    Send_1;      // 39
+0115   2???           00340                 call    Send_0;      // 40
+0116   2???           00341                 call    Send_0;      // 41
+0117   2???           00342                 call    Send_0;      // 42
+0118   2???           00343                 call    Send_1;      // 43
+0119   2???           00344                 call    Send_0;      // 43
+011A   2???           00345                 call    Send_1;      // 43
+011B   2???           00346                 call    Send_0;      // 43
+011C   2???           00347                 call    Send_1;      // 43
+011D   2???           00348                 call    Send_0;      // 43
+011E   2???           00349                 call    Send_1;      // 43
+011F   2???           00350                 call    Send_0;      // 43
+0120   2???           00351                 call    Send_1;      // 43
+0121   2???           00352                 call    Send_0;      // 43
+0122   2???           00353                 call    Send_0;      // 43
+0123   2???           00354                 call    Send_0;      // 43
+0124   2???           00355                 call    Send_1;      // 43
+0125   2???           00356                 call    Send_0;      // 43
+0126   2???           00357                 call    Send_0;      // 43
+0127   2???           00358                 call    Send_0;      // 43
+0128   2???           00359                 call    Send_1;      // 43
+0129   2???           00360                 call    Send_0;      // 43
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+012A   2???           00361                 call    Send_1;      // 43
+012B   2???           00362                 call    Send_0;      // 43
+012C   2???           00363                 call    Send_1;      // 43
+012D   2???           00364                 call    Send_0;      // 43
+012E   2???           00365                 call    Send_0;      // 43
+012F   2???           00366                 call    Send_0;      // 43
+0130   2???           00367                 call    Send_1;      // 43
+0131   2???           00368                 call    Send_0;      // 43
+0132   2???           00369                 call    Send_0;      // 43
+0133   2???           00370                 call    Send_0;      // 43
+0134   2???           00371                 call    Send_1;      // 43
+0135   2???           00372                 call    Send_0;      // 43
+0136   2???           00373                 call    Send_0;      // 43
+0137   2???           00374                 call    Send_0;      // 43
+0138   2???           00375                 call    Send_1;      // 43
+0139   2???           00376                 call    Send_0;      // 43
+013A   2???           00377                 call    Send_0;      // 43
+013B   2???           00378                 call    Send_0;      // 43
+013C   2???           00379                 call    Send_1;      // 43
+013D   2???           00380                 call    Send_0;      // 43              
+013E   0008           00381                 return
+                      00382                 
+013F   2???           00383 cmyashil        call    bt
+0140   2???           00384                 call    delayy9ms
+0141   2???           00385                 call    delayy4.5ms
+0142   2???           00386                 call    metka1000
+0143   2???           00387                 call    metka1000
+0144   2???           00388                 call    metka1000
+0145   2???           00389                 call    metka1000
+0146   2???           00390                 call    metka101000
+0147   2???           00391                 call    metka101000
+0148   2???           00392                 call    metka101010101000
+0149   2???           00393                 call    metka101000
+014A   2???           00394                 call    metka10101000
+014B   2???           00395                 call    metka10101000
+014C   2???           00396                 call    metka1000
+014D   2???           00397                 call    metka10101000
+014E   2???           00398                 call    metka101000
+014F   2???           00399                 call    metka1000
+0150   2???           00400                 call    metka10101000
+0151   2???           00401                 call    metka1000
+0152   2???           00402                 call    Send_1;      // 88
+0153   2???           00403                 call    Send_0;      // 89              
+0154   0008           00404                 return
+                      00405                 
+0155   2???           00406 metka2          call    delayy9ms
+0156   2???           00407                 call    delayy4.5ms
+0157   2???           00408                 call    metka1000
+0158   2???           00409                 call    metka1000
+0159   2???           00410                 call    metka1000
+015A   2???           00411                 call    metka1000
+015B   2???           00412                 call    metka101000
+015C   2???           00413                 call    metka101000
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+015D   2???           00414                 call    metka101010101000
+015E   2???           00415                 call    metka101000     
+015F   2???           00416                 call    metka10101000
+0160   2???           00417                 call    metka10101000
+0161   2???           00418                 call    metka1000
+0162   2???           00419                 call    metka10101000
+0163   2???           00420                 call    metka101000
+0164   2???           00421                 call    metka1000
+0165   2???           00422                 call    metka10101000
+0166   2???           00423                 call    metka1000
+0167   2???           00424                 call    Send_1;      // 43
+0168   2???           00425                 call    Send_0;      // 43              
+0169   0008           00426                 return  
+                      00427                 
+016A   2???           00428 cmpause         call    delayy9ms
+016B   2???           00429                 call    delayy4.5ms
+016C   2???           00430                 call    yarmi
+016D   2???           00431                 call    metka101010101000
+016E   2???           00432                 call    metka1000
+016F   2???           00433                 call    metka101000     
+0170   2???           00434                 call    metka101000     
+0171   2???           00435                 call    metka1000
+0172   2???           00436                 call    metka1000
+0173   2???           00437                 call    metka10101000
+0174   2???           00438                 call    metka101000
+0175   2???           00439                 call    Send_1;      // 88
+0176   2???           00440                 call    Send_0;      // 89              
+0177   0008           00441                 return
+                      00442         
+0178   2???           00443 cmpower         call    delayy9ms
+0179   2???           00444                 call    delayy4.5ms
+017A   2???           00445                 call    yarmi
+017B   2???           00446                 call    metka10101000
+017C   2???           00447                 call    metka101000
+017D   2???           00448                 call    metka1000
+017E   2???           00449                 call    metka1010101000
+017F   2???           00450                 call    metka101000
+0180   2???           00451                 call    metka10101000
+0181   2???           00452                 call    metka1000
+0182   2???           00453                 call    metka1000
+0183   2???           00454                 call    Send_1;      // 43
+0184   2???           00455                 call    Send_0;      // 43              
+0185   0008           00456                 return
+                      00457 
+0186   2???           00458 cmstrelkachap   call    delayy9ms
+0187   2???           00459                 call    delayy4.5ms
+0188   2???           00460                 call    yarmi
+0189   2???           00461                 call    metka10101000
+018A   2???           00462                 call    metka101010101000
+018B   2???           00463                 call    metka101000     
+018C   2???           00464                 call    metka101000     
+018D   2???           00465                 call    metka1000
+018E   2???           00466                 call    metka1000
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+018F   2???           00467                 call    metka1000
+0190   2???           00468                 call    metka101000
+0191   2???           00469                 call    Send_1;      // 89
+0192   2???           00470                 call    Send_0;      // 90              
+0193   0008           00471                 return
+0194   2???           00472 cmstrelkaon     call    delayy9ms
+0195   2???           00473                 call    delayy4.5ms
+0196   2???           00474                 call    yarmi
+0197   2???           00475                 call    metka101000
+0198   2???           00476                 call    metka1000
+0199   2???           00477                 call    metka101010101000
+019A   2???           00478                 call    metka1010101000
+019B   2???           00479                 call    metka1000
+019C   2???           00480                 call    metka1000
+019D   2???           00481                 call    metka1000
+019E   2???           00482                 call    metka101000     
+019F   2???           00483                 call    Send_1;      // 89
+01A0   2???           00484                 call    Send_0;      // 90              
+01A1   0008           00485                 return
+01A2   2???           00486 cmvolumpas      call    delayy9ms
+01A3   2???           00487                 call    delayy4.5ms
+01A4   2???           00488                 call    yarmi
+01A5   2???           00489                 call    metka101000     
+01A6   2???           00490                 call    metka1000
+01A7   2???           00491                 call    metka101000     
+01A8   2???           00492                 call    metka1010101010101000
+01A9   2???           00493                 call    metka101000
+01AA   2???           00494                 call    metka1000
+01AB   2???           00495                 call    metka1000
+01AC   2???           00496                 call    metka1000
+01AD   2???           00497                 call    Send_1;      // 89
+01AE   2???           00498                 call    Send_0;      // 90              
+01AF   0008           00499                 return
+                      00500                 
+01B0   2???           00501 cmvolumtepa     call    delayy9ms
+01B1   2???           00502                 call    delayy4.5ms
+01B2   2???           00503                 call    yarmi
+01B3   2???           00504                 call    metka10101000
+01B4   2???           00505                 call    metka101000
+01B5   2???           00506                 call    metka101010101000
+01B6   2???           00507                 call    metka101000
+01B7   2???           00508                 call    metka101000
+01B8   2???           00509                 call    metka1000
+01B9   2???           00510                 call    metka1000
+01BA   2???           00511                 call    metka1000
+01BB   2???           00512                 call    Send_1;      // 89
+01BC   2???           00513                 call    Send_0;      // 90              
+01BD   0008           00514                 return
+01BE                  00515 cmstrelkatepa
+01BE   2???           00516                 call    delayy9ms
+01BF   2???           00517                 call    delayy4.5ms
+01C0   2???           00518                 call    yarmi
+01C1   2???           00519                 call    metka101010101010101000
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01C2   2???           00520                 call    metka101000
+01C3   2???           00521                 call    metka1000
+01C4   2???           00522                 call    metka1000
+01C5   2???           00523                 call    metka1000
+01C6   2???           00524                 call    metka1000
+01C7   2???           00525                 call    metka1000
+01C8   2???           00526                 call    metka101000
+01C9   2???           00527                 call    Send_1;      // 88
+01CA   2???           00528                 call    Send_0;      // 89              
+01CB   0008           00529                 return
+                      00530                 
+01CC   2???           00531 yarmi           call    metka1000
+01CD   2???           00532                 call    metka101000
+01CE   2???           00533                 call    metka1000
+01CF   2???           00534                 call    metka101000             
+01D0   2???           00535                 call    metka101000
+01D1   2???           00536                 call    metka101000
+01D2   2???           00537                 call    metka10101000
+01D3   2???           00538                 call    metka101000             
+01D4   0008           00539                 return
+                      00540 
+01D5   2???           00541 bt              call    delayy9ms
+01D6   2???           00542                 call    delayy4.5ms
+01D7   2???           00543                 call    yarmi
+01D8   2???           00544                 call    metka101000
+01D9   2???           00545                 call    metka1000
+01DA   2???           00546                 call    metka1000
+01DB   2???           00547                 call    metka101000
+01DC   2???           00548                 call    metka10101000
+01DD   2???           00549                 call    metka1010101000
+01DE   2???           00550                 call    metka101000
+01DF   2???           00551                 call    metka1000
+01E0   2???           00552                 call    Send_1;      // 43
+01E1   2???           00553                 call    Send_0;      // 43
+01E2   2???           00554                 call    Send_1;      // 43
+01E3   2???           00555                 call    Send_0;      // 43
+01E4   3020           00556                 movlw   d'32'
+01E5   2???           00557                 call    Big_delay
+01E6   0008           00558                 return
+                      00559                 
+01E7   2???           00560 cmmute1         call    delayy9ms
+01E8   2???           00561                 call    delayy4.5ms
+01E9   2???           00562                 call    yarmi
+01EA   2???           00563                 call    metka101000
+01EB   2???           00564                 call    metka10101000
+01EC   2???           00565                 call    metka1000
+01ED   2???           00566                 call    metka101010101000
+01EE   2???           00567                 call    metka1000
+01EF   2???           00568                 call    metka10101000
+01F0   2???           00569                 call    metka1000
+01F1   2???           00570                 call    metka1000
+01F2   2???           00571                 call    Send_1;      // 43
+01F3   2???           00572                 call    Send_0;      // 43
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01F4   3020           00573                 movlw   d'32'
+01F5   2???           00574                 call    Big_delay
+01F6   0008           00575                 return
+                      00576                 
+01F7                  00577 metka101010101010101000 
+01F7   2???           00578                 call    Send_1;      // 43
+01F8   2???           00579                 call    Send_0;      // 43              
+01F9                  00580 metka1010101010101000   
+01F9   2???           00581                 call    Send_1;      // 43
+01FA   2???           00582                 call    Send_0;      // 43              
+01FB                  00583 metka10101010101000     
+01FB   2???           00584                 call    Send_1;      // 43
+01FC   2???           00585                 call    Send_0;      // 43              
+01FD                  00586 metka101010101000       
+01FD   2???           00587                 call    Send_1;      // 43
+01FE   2???           00588                 call    Send_0;      // 43              
+01FF   2???           00589 metka1010101000 call    Send_1;      // 43
+0200   2???           00590                 call    Send_0;      // 43              
+0201   2???           00591 metka10101000   call    Send_1;      // 43
+0202   2???           00592                 call    Send_0;      // 43
+0203   2???           00593 metka101000     call    Send_1;      // 43
+0204   2???           00594                 call    Send_0;      // 43
+0205   2???           00595 metka1000       call    Send_1;      // 43
+0206   2???           00596                 call    Send_0;      // 43
+0207   2???           00597                 call    Send_0;      // 43
+0208   2???           00598                 call    Send_0;      // 43              
+0209   0008           00599                 return
+                      00600                 
+020A   3013           00601 Send_1          movlw   d'19'       ; 527 millisekund
+020B   00B2           00602                 movwf   Reg_1
+020C   1505           00603 Send1_Loop      bsf     IR_LED
+020D   0000           00604                 nop
+020E   0000           00605                 nop
+020F   0000           00606                 nop
+0210   0000           00607                 nop
+0211   0000           00608                 nop
+0212   0000           00609                 nop
+0213   0000           00610                 nop
+0214   0000           00611                 nop
+0215   0000           00612                 nop
+0216   0000           00613                 nop
+0217   0000           00614                 nop
+0218   0000           00615                 nop
+0219   1105           00616                 bcf     IR_LED
+021A   0000           00617                 nop
+021B   0000           00618                 nop
+021C   0000           00619                 nop
+021D   0000           00620                 nop
+021E   0000           00621                 nop
+021F   0000           00622                 nop
+0220   0000           00623                 nop
+0221   0000           00624                 nop
+0222   0000           00625                 nop
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0223   0000           00626                 nop
+0224   0BB2           00627                 decfsz  Reg_1,1
+0225   2???           00628                 goto    Send1_Loop
+0226   0008           00629                 return
+                      00630 ;-----------------------------------------------------------------------------          
+0227   3013           00631 Send_0          movlw   d'19'   ;527 millisekund
+0228   00B2           00632                 movwf   Reg_1
+0229   1105           00633 Send0_Loop      bcf     IR_LED
+022A   0000           00634                 nop
+022B   0000           00635                 nop
+022C   0000           00636                 nop
+022D   0000           00637                 nop
+022E   0000           00638                 nop
+022F   0000           00639                 nop
+0230   0000           00640                 nop
+0231   0000           00641                 nop
+0232   0000           00642                 nop
+0233   0000           00643                 nop
+0234   0000           00644                 nop
+0235   0000           00645                 nop
+0236   1105           00646                 bcf     IR_LED
+0237   0000           00647                 nop
+0238   0000           00648                 nop
+0239   0000           00649                 nop
+023A   0000           00650                 nop
+023B   0000           00651                 nop
+023C   0000           00652                 nop
+023D   0000           00653                 nop
+023E   0000           00654                 nop
+023F   0000           00655                 nop
+0240   0000           00656                 nop
+0241   0BB2           00657                 decfsz  Reg_1,1
+0242   2???           00658                 goto    Send0_Loop
+0243   0008           00659                 return
+                      00660 ;-----------------------------------------------------------------------------
+0244   30B9           00661 delayy9ms       movlw   d'185'
+0245   00B2           00662                 movwf   Reg_1
+0246   1505           00663 Send0_Loopp     bsf     IR_LED
+0247   0000           00664                 nop
+0248   0000           00665                 nop
+0249   0000           00666                 nop
+024A   0000           00667                 nop
+024B   0000           00668                 nop
+024C   0000           00669                 nop
+024D   0000           00670                 nop
+024E   0000           00671                 nop
+024F   0000           00672                 nop
+0250   0000           00673                 nop
+0251   0000           00674                 nop
+0252   0000           00675                 nop
+0253   1105           00676                 bcf     IR_LED
+0254   0000           00677                 nop
+0255   0000           00678                 nop
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0256   0000           00679                 nop
+0257   0000           00680                 nop
+0258   0000           00681                 nop
+0259   0000           00682                 nop
+025A   0000           00683                 nop
+025B   0000           00684                 nop
+025C   0000           00685                 nop
+025D   0000           00686                 nop
+025E   0BB2           00687                 decfsz  Reg_1,1
+025F   2???           00688                 goto    Send0_Loopp
+0260   3084           00689                 movlw   d'132'
+0261   00B2           00690                 movwf   Reg_1
+0262   1505           00691 Send0_Loopp1    bsf     IR_LED
+0263   0000           00692                 nop
+0264   0000           00693                 nop
+0265   0000           00694                 nop
+0266   0000           00695                 nop
+0267   0000           00696                 nop
+0268   0000           00697                 nop
+0269   0000           00698                 nop
+026A   0000           00699                 nop
+026B   0000           00700                 nop
+026C   0000           00701                 nop
+026D   0000           00702                 nop
+026E   0000           00703                 nop
+026F   1105           00704                 bcf     IR_LED
+0270   0000           00705                 nop
+0271   0000           00706                 nop
+0272   0000           00707                 nop
+0273   0000           00708                 nop
+0274   0000           00709                 nop
+0275   0000           00710                 nop
+0276   0000           00711                 nop
+0277   0000           00712                 nop
+0278   0000           00713                 nop
+0279   0000           00714                 nop
+027A   0BB2           00715                 decfsz  Reg_1,1
+027B   2???           00716                 goto    Send0_Loopp1
+027C   0008           00717                 return
+027D   30AA           00718 delayy4.5ms     movlw       .170
+027E   00B2           00719                 movwf       Reg_1
+027F   3006           00720                 movlw       .6
+0280   00B3           00721                 movwf       Reg_2
+0281   0BB2           00722                 decfsz      Reg_1,F
+0282   2???           00723                 goto        $-1
+0283   0BB3           00724                 decfsz      Reg_2,F
+0284   2???           00725                 goto        $-3
+0285   0008           00726                 return
+                      00727 
+0286   30A9           00728 delay250ms      movlw       .169
+0287   00B2           00729                 movwf       Reg_1
+0288   3045           00730                 movlw       .69
+0289   00B3           00731                 movwf       Reg_2
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+028A   3002           00732                 movlw       .2
+028B   00B4           00733                 movwf       Reg_3
+028C   0BB2           00734                 decfsz      Reg_1,F
+028D   2???           00735                 goto        $-1
+028E   0BB3           00736                 decfsz      Reg_2,F
+028F   2???           00737                 goto        $-3
+0290   0BB4           00738                 decfsz      Reg_3,F
+0291   2???           00739                 goto        $-5
+0292   0000           00740                 nop
+0293   0000           00741                 nop
+                      00742 
+0294   0008           00743                 return
+                      00744                 
+                      00745                 
+0295   30A8           00746 delay29ms       movlw       .168
+0296   00B2           00747                 movwf       Reg_1
+0297   3026           00748                 movlw       .38
+0298   00B3           00749                 movwf       Reg_2
+0299   0BB2           00750                 decfsz      Reg_1,F
+029A   2???           00751                 goto        $-1
+029B   0BB3           00752                 decfsz      Reg_2,F
+029C   2???           00753                 goto        $-3
+029D   0000           00754                 nop
+                      00755 
+                      00756 
+029E   0008           00757                 return
+                      00758                 
+                      00759 ;-----------------------------------------------------------------------------  
+0054                  00760                 end
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+BD_Loop94                         000000C0
+Big_delay                         000000BE
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+IR_LED                            GPIO,2
+Init                              00000001
+LED                               0000006B
+Mainloop                          0000003B
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PS2                               00000002
+PSA                               00000003
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+Reg_1                             00000032
+Reg_2                             00000033
+Reg_3                             00000034
+STATUS                            00000003
+Send0_Loop                        00000229
+Send0_Loopp                       00000246
+Send0_Loopp1                      00000262
+Send1_Loop                        0000020C
+Send_0                            00000227
+Send_1                            0000020A
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+UMessen1                          00000041
+UMessen2                          00000056
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+W                                 00000000
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_0_0049                      00000049
+_.org_0_004B                      0000004B
+_.org_0_005E                      0000005E
+_.org_0_0060                      00000060
+_.org_0_0282                      00000282
+_.org_0_0284                      00000284
+_.org_0_028D                      0000028D
+_.org_0_028F                      0000028F
+_.org_0_0291                      00000291
+_.org_0_029A                      0000029A
+_.org_0_029C                      0000029C
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F675                          00000001
+__DEBUG                           
+__MPLAB_DEBUGGER_SIMULATOR        1
+bt                                000001D5
+cmatt                             00000107
+cmmute                            000000F1
+cmmute1                           000001E7
+cmpause                           0000016A
+cmpower                           00000178
+cmqizil                           000000DB
+cmstrelkachap                     00000186
+cmstrelkaon                       00000194
+cmstrelkapas                      000000CD
+cmstrelkatepa                     000001BE
+cmvolumpas                        000001A2
+cmvolumtepa                       000001B0
+cmyashil                          0000013F
+count                             00000020
+delay250ms                        00000286
+delay29ms                         00000295
+delayy4.5ms                       0000027D
+delayy9ms                         00000244
+f0                                00000023
+f1                                00000024
+fCOUNTER                          0000003E
+fCOUNTER2                         0000003F
+loop                              00000042
+loop2                             00000057
+metka1000                         00000205
+metka101000                       00000203
+metka10101000                     00000201
+metka1010101000                   000001FF
+metka101010101000                 000001FD
+metka10101010101000               000001FB
+metka1010101010101000             000001F9
+metka101010101010101000           000001F7
+metka2                            00000155
+power                             000000A0
+powermax                          00000029
+powermin                          0000002A
+qizil                             00000096
+qizilmax                          00000027
+qizilmin                          00000028
+qiziluderjat                      000000C5
+strelkachap                       000000A5
+strelkachapmax                    0000002B
+MPASM 5.87                   PICRBTORIGN.ASM   4-23-2020  20:14:45         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+strelkachapmin                    0000002C
+strelkaon                         000000AA
+strelkaonmax                      0000002D
+strelkaonmin                      0000002E
+strelkapas                        00000091
+strelkapasmax                     00000025
+strelkapasmin                     00000026
+strelkatepa                       000000B9
+strelkatepamax                    0000003C
+strelkatepamin                    0000003D
+volumpas                          000000AF
+volumpasmax                       00000038
+volumpasmin                       00000039
+volumtepa                         000000B4
+volumtepamax                      0000003A
+volumtepamin                      0000003B
+yarmi                             000001CC
+yashil                            0000009B
+yashilmax                         00000040
+yashilmin                         00000041
+yashiluderjat                     000000C9
+
+Errors   :     0
+Warnings :     1 reported,     0 suppressed
+Messages :     0 reported,     8 suppressed
+
+

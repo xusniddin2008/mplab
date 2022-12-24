@@ -1,0 +1,68 @@
+[p LITE_MODE AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F1822 ]
+[d frameptr 6 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"83 C:\Users\User\Desktop\mplab\Encoder test.X\Encoder test.c
+[v _down down `(v  1 e 1 0 ]
+"114
+[v _isr isr `II(v  1 e 1 0 ]
+"127
+[v _main main `(v  1 e 1 0 ]
+"351 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\include\pic12f1822.h
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"429
+[v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"1242
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"1645
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1826
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"2632
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"4335
+[v _IOCAP IOCAP `VEuc  1 e 1 @913 ]
+"5483
+[v _IOCAF4 IOCAF4 `VEb  1 e 0 @7324 ]
+"5738
+[v _RA0 RA0 `VEb  1 e 0 @96 ]
+"5741
+[v _RA1 RA1 `VEb  1 e 0 @97 ]
+"40 C:\Users\User\Desktop\mplab\Encoder test.X\Encoder test.c
+[v _time time `uc  1 e 1 0 ]
+"41
+[v _qqq qqq `uc  1 e 1 0 ]
+"42
+[v _www www `uc  1 e 1 0 ]
+"43
+[v _www1 www1 `uc  1 e 1 0 ]
+"44
+[v _qqq1 qqq1 `uc  1 e 1 0 ]
+"45
+[v _sek sek `uc  1 e 1 0 ]
+"46
+[v _intr intr `uc  1 e 1 0 ]
+"127
+[v _main main `(v  1 e 1 0 ]
+{
+"177
+} 0
+"114
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"125
+} 0
+"83
+[v _down down `(v  1 e 1 0 ]
+{
+"93
+} 0
